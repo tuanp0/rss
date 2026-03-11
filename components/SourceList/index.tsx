@@ -1,6 +1,5 @@
 import { useLayerContext } from '@/context/LayerContext'
-
-import Container from '@/components/Container'
+import SouceItem from '@/components/SourceItem'
 
 import styles from './SourceList.module.scss'
 
@@ -10,14 +9,13 @@ const index = () => {
   return (
     <section
       className={`
-        ${styles.sources}
+        ${styles.source}
         ${currentStep === 2 ? styles.active : ''}
       `}
     >
-        <Container>
-          Toutes les sources
-          
-        </Container>
+      <div className={styles.sourceList}>
+        <SouceItem name={'Toutes les sources'} icon={'star'}/>
+      </div>
     </section>
   )
 }

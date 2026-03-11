@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react'
 import { initDB, getGroups } from '@/db/groups'
 import { useLayerContext } from '@/context/LayerContext'
-import Container from '@/components/Container'
 import GroupItem from '@/components/GroupItem'
 import styles from './GroupList.module.scss'
 
@@ -18,8 +17,8 @@ interface GroupsTypes {
 const GroupList = ({ onReady }: GroupsTypes) => {
   const { currentStep, showAddLayer } = useLayerContext()
   const [groups, setGroups] = useState<Group[]>([])
-  const [db, setDb] = useState<IDBDatabase | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
+  const [db, setDb] = useState<IDBDatabase | null>(null)
 
   const fetchGroups = (dbInstance: IDBDatabase) => {
     getGroups(dbInstance)
@@ -54,7 +53,13 @@ const GroupList = ({ onReady }: GroupsTypes) => {
         {!loading && groups.length > 0 && (
           <div className={styles.groupList}>
             {groups.map((group) => (
-              <GroupItem text={group.title} key={group.id} itemCount={2} />
+              <GroupItem
+                text={group.title}
+                key={group.id}
+                id={group.id}
+                itemCount={2}
+                onDelete={() => db && fetchGroups(db)}
+              />
             ))}
           </div>
         )}

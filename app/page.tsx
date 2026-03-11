@@ -4,8 +4,7 @@ import { useLayerContext } from '@/context/LayerContext'
 
 import GroupList from '@/components/GroupList'
 import SourceList from '@/components/SourceList'
-import Lists from '@/components/Lists'
-import News from '@/components/News'
+import NewsList from '@/components/NewsList'
 
 
 export default function Home() {
@@ -20,8 +19,8 @@ export default function Home() {
         onReady={(refresh) => setRefreshGroups(() => refresh)}
       />
       <SourceList />
-      {/* <Lists />
-      <News /> */}
+      {/*
+      <NewsList /> */}
       {/*
         <LayerParameters
           showParametersLayer={showParametersLayer}

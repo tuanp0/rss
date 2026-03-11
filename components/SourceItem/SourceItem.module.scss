@@ -1,0 +1,41 @@
+.sourceItem {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: .75rem var(--padding);
+    cursor: pointer;
+    background: transparent;
+    transition: all .1s ease-in-out;
+
+    &:hover {
+        background: var(--hover);
+    }
+
+    &Icon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        background: var(--white);
+        border: 2px solid var(--grey);
+
+        &Svg {
+            width: calc(100% - 8px);
+            height: calc(100% - 8px);
+            display: block;
+
+            path {
+                // fill: var(--white);
+            }
+        }
+    }
+
+    &Name {
+        font-weight: bold;
+        font-size: 1.125rem;
+        text-align: center;
+        color: var(--text);
+        padding-left: 1rem;
+    }
+}

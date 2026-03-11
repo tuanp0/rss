@@ -1,6 +1,6 @@
 import Container from '@/components/Container'
 
-import styles from './News.module.scss'
+import styles from './NewsList.module.scss'
 
 const index = () => {
   return (

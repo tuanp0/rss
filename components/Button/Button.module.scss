@@ -7,6 +7,14 @@
     border: none;
     transition: all .2s ease-in-out;
 
+    &:hover {
+        cursor: pointer;
+
+        @media screen and (min-width: 992px) {
+            opacity: .6;
+        }
+    }
+
     &Icon {
         position: relative;
         display: flex;
@@ -19,6 +27,10 @@
             width: 100%;
             height: 100%;
             display: block;
+
+            path {
+                fill: var(--text);
+            }
         }
     }
 
@@ -70,16 +82,19 @@
         }
     }
 
+    &Delete {
+        width: 28px;
+        height: 28px;
+        .buttonIconSvg {
+            path {
+                stroke: var(--text);
+                fill: transparent;
+            }
+        }
+    }
+
     &Text {
         color: var(--text);
         font-size: 1.25rem;
-    }
-
-    &:hover {
-        cursor: pointer;
-
-        @media screen and (min-width: 992px) {
-            opacity: .6;
-        }
     }
 }

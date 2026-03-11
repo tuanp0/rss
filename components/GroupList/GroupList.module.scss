@@ -2,7 +2,7 @@
     width: 100%;
     height: 100vh;
     height: 100dvh;
-    padding-top: 150px;
+    padding: 150px 0;
     background-color: var(--background);
     background-image: url('/noise.png');
     background-repeat: repeat;
@@ -10,6 +10,7 @@
     background-size: 500px 500px;
     transform: translateX(-50%);
     transition: border-radius .2s ease-in-out, transform .4s ease-in-out;
+    overflow-y: auto;
 
     // @media screen and (min-width:768px) {
     //     width: 20%;
@@ -30,28 +31,8 @@
         overflow: hidden;
     }
 
-    &Header {
-        position: sticky;
-        top: 0;
-        background: var(--header);
-        box-shadow: 0 0 12px 0 var(--black);
-        z-index: 1;
-
-        &Container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        &Title {
-            font-weight: bold;
-            font-size: 1.75rem;
-            color: var(--text);
-        }
-    }
-
     &Content {
-
+            overflow-y: auto;
         &Text {
             text-align: center;
             font-size: 1.375rem;

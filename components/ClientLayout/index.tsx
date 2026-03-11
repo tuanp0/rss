@@ -2,10 +2,11 @@
 import { LayerProvider, useLayerContext } from '@/context/LayerContext'
 import Header from '@/components/Header'
 import LayerAddGroup from '@/components/LayerAddGroup'
+import LayerDeleteGroup from '@/components/LayerDeleteGroup'
 import Footer from '@/components/Footer'
 
 function LayoutInner({ children }: { children: React.ReactNode }) {
-  const { showAddLayer, setShowAddLayer, refreshGroups } = useLayerContext()
+  const { showAddLayer, setShowAddLayer, showDeleteLayer, setShowDeleteLayer, refreshGroups } = useLayerContext()
 
   return (
     <>
@@ -15,6 +16,9 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
         showAddLayer={showAddLayer}
         setShowAddLayer={setShowAddLayer}
         onGroupAdded={() => refreshGroups && refreshGroups()}
+      />
+      <LayerDeleteGroup
+        onGroupDeleted={() => refreshGroups && refreshGroups()}
       />
       <Footer />
     </>

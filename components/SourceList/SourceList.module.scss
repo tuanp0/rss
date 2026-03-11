@@ -1,4 +1,4 @@
-.sources {
+.source {
     position: absolute;
     top: 0;
     left: 0;
@@ -24,4 +24,39 @@
         width: 350px;
         transform: translate(0);
     }
+
+    &List {
+
+    }
+
+    &Item {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        padding: .75rem var(--padding);
+        cursor: pointer;
+        background: transparent;
+        transition: all .1s ease-in-out;
+
+        &:hover {
+            background: var(--hover);
+        }
+
+        &Icon {
+            width: 24px;
+            height: 24px;
+            background: var(--black);
+            border: 2px solid var(--grey);
+        }
+
+        &Name {
+            font-weight: bold;
+            font-size: 1.125rem;
+            text-align: center;
+            color: var(--text);
+            padding-left: 1rem;
+        }
+    }
+
+    
 }

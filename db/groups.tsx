@@ -76,3 +76,14 @@ export const addGroup = (db: IDBDatabase, title: string): Promise<void> => {
     getAllRequest.onerror = () => reject(getAllRequest.error);
   });
 };
+
+export const deleteGroup = (db: IDBDatabase, id: number): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction('group', 'readwrite');
+    const store = transaction.objectStore('group');
+    const deleteRequest = store.delete(id);
+
+    deleteRequest.onsuccess = () => resolve();
+    deleteRequest.onerror = () => reject(deleteRequest.error);
+  });
+};
