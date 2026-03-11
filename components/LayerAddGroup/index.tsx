@@ -37,8 +37,14 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
         }
     };
 
+    const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target === e.currentTarget) {
+            setShowAddLayer(false)
+        }
+    }
+
     return (
-        <div className={`${styles.layer} ${showAddLayer ? styles.active : ''}`}>
+        <div className={`${styles.layer} ${showAddLayer ? styles.active : ''}`} onClick={handleOverlayClick}>
             <div className={styles.layerInner}>
                 <div className={styles.layerHeader}>
                     <Container>

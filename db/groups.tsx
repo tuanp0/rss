@@ -1,4 +1,4 @@
-const DB_NAME = 'groupsDB';
+const DB_NAME = 'tprssDB';
 const DB_VERSION = 1;
 
 export const initDB = (): Promise<IDBDatabase> => {
@@ -13,9 +13,9 @@ export const initDB = (): Promise<IDBDatabase> => {
     request.onupgradeneeded = (event) => {
       const db = (event.target as IDBOpenDBRequest).result;
 
-      if (!db.objectStoreNames.contains('groups')) {
-        const groupsStore = db.createObjectStore('groups', { keyPath: 'id', autoIncrement: true });
-        groupsStore.createIndex('title', 'title', { unique: false });
+      if (!db.objectStoreNames.contains('group')) {
+        const groupsStore = db.createObjectStore('group', { keyPath: 'id', autoIncrement: true });
+        groupsStore.createIndex('category', 'title', { unique: false });
       }
     };
 
@@ -31,8 +31,8 @@ export const initDB = (): Promise<IDBDatabase> => {
 
 export const getGroupsCount = (db: IDBDatabase): Promise<number> => {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction('groups', 'readonly');
-    const store = transaction.objectStore('groups');
+    const transaction = db.transaction('group', 'readonly');
+    const store = transaction.objectStore('group');
     const countRequest = store.count();
 
     countRequest.onsuccess = () => resolve(countRequest.result);
@@ -42,8 +42,8 @@ export const getGroupsCount = (db: IDBDatabase): Promise<number> => {
 
 export const getGroups = (db: IDBDatabase): Promise<{id: number, title: string}[]> => {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction('groups', 'readonly');
-    const store = transaction.objectStore('groups');
+    const transaction = db.transaction('group', 'readonly');
+    const store = transaction.objectStore('group');
     const getAllRequest = store.getAll();
 
     getAllRequest.onsuccess = () => resolve(getAllRequest.result);
@@ -53,8 +53,8 @@ export const getGroups = (db: IDBDatabase): Promise<{id: number, title: string}[
 
 export const addGroup = (db: IDBDatabase, title: string): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction('groups', 'readwrite');
-    const store = transaction.objectStore('groups');
+    const transaction = db.transaction('group', 'readwrite');
+    const store = transaction.objectStore('group');
     const getAllRequest = store.getAll();
 
     getAllRequest.onsuccess = () => {

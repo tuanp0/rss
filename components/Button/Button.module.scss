@@ -12,9 +12,17 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 56px;
-        height: 56px;
+        width: 38px;
+        height: 38px;
 
+        svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    }
+
+    &Add {
         &Line {
             position: absolute;
             width: 24px;
@@ -26,7 +34,7 @@
             background: var(--text);
             transition: transform .2s ease-in-out, width .2s ease-in-out;
 
-            &+.buttonIconLine {
+            &+.buttonAddLine {
                 transform: translate(-50%, -50%) rotate(90deg);
             }
         }
@@ -38,6 +46,26 @@
 
             path {
                 fill: var(--text);
+            }
+        }
+    }
+
+    &Prev {
+        &Line {
+            position: absolute;
+            width: 16px;
+            height: 4px;
+            bottom: 54%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            transform-origin: center;
+            background: var(--text);
+            transition: transform .2s ease-in-out, width .2s ease-in-out;
+
+            &+.buttonPrevLine {
+                top: 54%;
+                bottom: auto;
+                transform: translate(-50%, -50%) rotate(45deg);
             }
         }
     }

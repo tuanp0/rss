@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import Footer from '@/components/Footer'
+import type { Metadata } from "next"
+import ClientLayout from '@/components/ClientLayout'
 
 import '../styles/global.scss'
 
@@ -14,10 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="fr">
       <body>
-        {children}
-        <Footer />
+        <ClientLayout>
+          {children}
+        </ClientLayout>
       </body>
     </html>
   );

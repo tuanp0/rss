@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: var(--black);
   overflow: hidden;
+
+  @media screen and (min-width:992px) {
+    display: flex;
+  }
 }
 
 * {

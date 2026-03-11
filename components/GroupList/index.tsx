@@ -1,9 +1,9 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { initDB, getGroups } from '@/db/groups'
+import { useLayerContext } from '@/context/LayerContext'
 import Container from '@/components/Container'
 import GroupItem from '@/components/GroupItem'
-import Button from '@/components/Button'
 import styles from './GroupList.module.scss'
 
 interface Group {
@@ -12,12 +12,11 @@ interface Group {
 }
 
 interface GroupsTypes {
-  showAddLayer: boolean;
-  setShowAddLayer: (value: boolean) => void;
   onReady: (refresh: () => void) => void;
 }
 
-const index = ({ showAddLayer, setShowAddLayer, onReady }: GroupsTypes) => {
+const GroupList = ({ onReady }: GroupsTypes) => {
+  const { currentStep, showAddLayer } = useLayerContext()
   const [groups, setGroups] = useState<Group[]>([])
   const [db, setDb] = useState<IDBDatabase | null>(null)
   const [loading, setLoading] = useState<boolean>(true)
@@ -36,21 +35,19 @@ const index = ({ showAddLayer, setShowAddLayer, onReady }: GroupsTypes) => {
       .then((dbInstance) => {
         setDb(dbInstance)
         fetchGroups(dbInstance)
-        onReady(() => fetchGroups(dbInstance)) // expose refresh to parent
+        onReady(() => fetchGroups(dbInstance))
       })
       .catch(console.error)
   }, [])
 
   return (
-    <section className={`${styles.group} ${showAddLayer ? styles.secondary : ''}`}>
-      <div className={styles.groupHeader}>
-        <Container className={styles.groupHeaderContainer}>
-          <Button text="Ajouter un groupe" action={() => setShowAddLayer(true)} icon={'parameter'} />
-          <p className={styles.groupHeaderTitle}>TP RSS</p>
-          <Button text="Ajouter un groupe" action={() => setShowAddLayer(true)} icon={'add'} />
-        </Container>
-      </div>
-
+    <section
+      className={`
+        ${styles.group}
+        ${showAddLayer ? styles.secondary : ''}
+        ${currentStep === 1 ? styles.active : ''}
+      `}
+    >
       <div className={styles.groupContent}>
         {loading && <p className={styles.groupContentText}>Chargement...</p>}
         {!loading && groups.length === 0 && <p className={styles.groupContentText}>Aucun groupe</p>}
@@ -61,11 +58,9 @@ const index = ({ showAddLayer, setShowAddLayer, onReady }: GroupsTypes) => {
             ))}
           </div>
         )}
-
-        
       </div>
     </section>
   )
 }
 
-export default index
+export default GroupList

@@ -1,0 +1,23 @@
+.header {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: var(--header);
+    background-image: url('/noise.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-size: 500px 500px;
+    z-index: 1;
+
+    &Container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &Title {
+        font-weight: bold;
+        font-size: 1.75rem;
+        color: var(--text);
+    }
+}

@@ -1,3 +1,5 @@
+import { useLayerContext } from '@/context/LayerContext'
+
 import styles from './Button.module.scss'
 
 interface Button {
@@ -7,18 +9,28 @@ interface Button {
 }
 
 const index = ({text, action, icon}: Button) => {
+  const { setCurrentStep } = useLayerContext()
+
   return (
     <button className={styles.button} onClick={action}>
         {icon === 'add' &&
-          <div className={styles.buttonIcon}>
-            <span className={styles.buttonIconLine}></span>
-            <span className={styles.buttonIconLine}></span>
+          <div className={`${styles.buttonAdd} ${styles.buttonIcon}`}>
+            <span className={styles.buttonAddLine}></span>
+          <span className={styles.buttonAddLine}></span>
           </div>
         }
+
+        {icon === 'previous' &&
+          <div className={`${styles.buttonPrev} ${styles.buttonIcon}`} onClick={() => setCurrentStep(1)}>
+            <span className={styles.buttonPrevLine}></span>
+            <span className={styles.buttonPrevLine}></span>
+          </div>
+        }
+
         {icon === 'parameter' &&
           <div className={styles.buttonIcon}>
             <svg width="800px" height="800px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.buttonIconSvg}>
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M5 3C2.23858 3 0 5.23858 0 8C0 10.7614 2.23858 13 5 13H11C13.7614 13 16 10.7614 16 8C16 5.23858 13.7614 3 11 3H5ZM5 5C3.34315 5 2 6.34315 2 8C2 9.65685 3.34315 11 5 11C6.65685 11 8 9.65685 8 8C8 6.34315 6.65685 5 5 5Z" fill="#000000"/>
+              <path fillRule="evenodd" clipRule="evenodd" d="M5 3C2.23858 3 0 5.23858 0 8C0 10.7614 2.23858 13 5 13H11C13.7614 13 16 10.7614 16 8C16 5.23858 13.7614 3 11 3H5ZM5 5C3.34315 5 2 6.34315 2 8C2 9.65685 3.34315 11 5 11C6.65685 11 8 9.65685 8 8C8 6.34315 6.65685 5 5 5Z" fill="#000000"/>
             </svg>
           </div>
         }

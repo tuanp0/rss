@@ -21,6 +21,7 @@
     "paths": {
       "@/*": ["./*"],
       "@/components": ["./components"],
+      "@/context": ["./context"],
       "@/db": ["./db"],
       "@/types": ["./types"]
     }
