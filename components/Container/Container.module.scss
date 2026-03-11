@@ -1,0 +1,9 @@
+.container {
+    max-width: var(--max-width);
+    padding: 2rem var(--padding);
+    margin: 0 auto;
+
+    @media screen and (min-width:768px) {
+
+    }
+}

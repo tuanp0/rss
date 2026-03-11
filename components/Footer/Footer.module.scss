@@ -1,0 +1,57 @@
+.footer {
+    position: fixed;
+    bottom: 2rem;
+    width: 100%;
+    padding: 0 var(--padding);
+    text-align: center;
+
+    &Inner {
+        display: inline-flex;
+        justify-content: space-between;
+        gap: 1rem;
+        margin: 0 auto;
+        max-width: 500px;
+        padding: 0.25rem 1.5rem;
+        background-color: var(--footerbg);
+        background-image: url('/noise.png');
+        background-repeat: repeat;
+        background-attachment: fixed;
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+        border-radius: 30px;
+    }
+
+    &Item {
+        min-width: 62px;
+        padding: .5rem;
+        text-align: center;
+        background: transparent;
+        border: none;
+        display: block;
+        cursor: pointer;
+        border-radius: 20px;
+
+        &:hover {
+            background: var(--hover);
+        }
+
+        &Svg {
+            width: 32px;
+            height: auto;
+            display: block;
+            margin: 0 auto 0.25rem auto;
+
+            path {
+                fill: var(--text);
+            }
+        }
+
+        &Text {
+            font-size: .875rem;
+            color: var(--text);
+            width: 100%;
+            display: inline-block;
+        }
+    }
+
+}

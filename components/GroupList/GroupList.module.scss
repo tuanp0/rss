@@ -1,0 +1,56 @@
+.group {
+    width: 100%;
+    height: 100vh;
+    height: 100dvh;
+    // border: 1px solid white;
+    background-color: var(--background);
+    background-image: url('/noise.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-size: 300px 300px;
+    transition: border-radius .2s ease-in-out, transform .2s ease-in-out;
+
+    // @media screen and (min-width:768px) {
+    //     width: 33.33%;
+    // }
+
+    // @media screen and (min-width:992px) {
+
+    // }
+
+    &.secondary {
+        transform: scale(.95);
+        border-radius: 20px;
+        overflow: hidden;
+    }
+
+    &Header {
+        position: sticky;
+        top: 0;
+        background: var(--header);
+        box-shadow: 0 0 12px 0 var(--black);
+        z-index: 1;
+
+        &Container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        &Title {
+            font-weight: bold;
+            font-size: 1.75rem;
+            color: var(--text);
+        }
+    }
+
+    &Content {
+        padding: 3rem 0;
+
+        &Text {
+            text-align: center;
+            font-size: 1.375rem;
+            color: var(--text);
+        }
+    }
+}

@@ -1,0 +1,97 @@
+@use './font.scss' as *;
+
+@mixin wysiwyg() {
+    h1 {
+
+    }
+
+    h2 {
+        @include museo();
+        font-size: 2.5rem;
+        color: var(--black);
+        line-height: 1.25;
+        margin: 0 auto 2.5rem auto;
+        text-align: center;
+        position: relative;
+        display: inline-block;
+
+        &::before {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            right: 0;
+            background: var(--black);
+        }
+
+        @media screen and (min-width:768px) {
+            position: relative;
+            font-size: 2.75rem;
+            padding: 1rem 2rem 0.75rem 2rem;
+        }
+
+        @media screen and (min-width:992px) {
+            &::before {
+                width: 50%;
+                height: 2px;
+            }
+
+            &::after {
+                position: absolute;
+                content: '';
+                width: 2px;
+                height: 50%;
+                bottom: 0;
+                right: 0;
+                background: var(--black);
+            }
+        }
+    }
+
+    h3 {
+    }
+
+    h4 {
+
+    }
+
+    p {
+        @include qsand();
+        font-size: 1.125rem;
+        color: var(--black);
+        line-height: 1.25;
+        margin-bottom: 1rem;
+
+        @media screen and (min-width:768px) {
+            font-size: 1.375rem;
+        }
+    }
+
+    a {
+
+    }
+
+    ul,
+    ol {
+        li {
+
+        }
+    }
+
+    ul {
+        li {
+
+        }
+    }
+
+    ol {
+        li {
+
+        }
+    }
+
+    blockquote {
+        
+    }
+}

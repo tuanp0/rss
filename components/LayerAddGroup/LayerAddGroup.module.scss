@@ -1,0 +1,109 @@
+.layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: 0;
+    opacity: 1;
+    transition: background .4s ease-in-out, backdrop-filter .4s ease-in-out;
+    pointer-events: none;
+    z-index: 10;
+
+    &.active {
+        background: var(--black10);
+        -webkit-backdrop-filter: blur(3px);
+        backdrop-filter: blur(3px);
+        pointer-events: auto;
+
+        .layerInner {
+            transform: translateY(0%);
+        }
+    }
+
+    &Inner {
+        position: absolute;
+        width: 100%;
+        min-height: 60%;
+        bottom: 0;
+        padding-bottom: 6rem;
+        border-radius: 24px 24px 0 0;
+        background: var(--background);
+        box-shadow: 0 0 4px 0 var(--black);
+        transform: translateY(100%);
+        transition: transform .4s ease-in-out;
+        z-index: 11;
+    }
+
+    &Header {
+        background: var(--header);
+        border-radius: 24px 24px 0 0;
+    }
+
+    &Title {
+        font-size: 1.5rem;
+        color: var(--text);
+    }
+
+    &Close {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        top: 1rem;
+        right: 1rem;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            opacity: .6;
+        }
+
+        &Line {
+            position: absolute;
+            width: 24px;
+            height: 4px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            transform-origin: center;
+            background: var(--text);
+            transition: transform .2s ease-in-out, width .2s ease-in-out;
+
+            &+.layerCloseLine {
+                transform: translate(-50%, -50%) rotate(135deg);
+            }
+        }
+    }
+
+    &Input {
+        font-size: 1rem;
+        padding: .5em .75rem;
+        width: 100%;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+    }
+
+    &Error {
+        font-size: 1.125rem;
+        text-align: center;
+        color: var(--error);
+        margin-bottom: 2rem;
+    }
+
+    &Submit {
+        font-size: 1rem;
+        color: var(--text);
+        background: var(--background);
+        border: 2px solid var(--text);
+        padding: .75rem;
+        margin: 1rem auto 0 auto;
+        display: block;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+            opacity: .6;
+        }
+    }
+}
