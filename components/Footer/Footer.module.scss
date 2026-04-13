@@ -23,7 +23,7 @@
 
     &Item {
         min-width: 62px;
-        padding: .5rem;
+        padding: .5rem .75rem;
         text-align: center;
         background: transparent;
         border: none;
@@ -36,7 +36,7 @@
         }
 
         &Svg {
-            width: 32px;
+            width: 28px;
             height: auto;
             display: block;
             margin: 0 auto 0.25rem auto;

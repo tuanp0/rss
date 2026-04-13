@@ -1,4 +1,4 @@
-.news {
+.postItem {
     position: absolute;
     top: 0;
     left: 0;
@@ -6,8 +6,7 @@
     height: calc(100vh - 102px);
     height: calc(100dvh - 102px);
     margin-top: 102px;
-    padding-top: 1rem;
-    padding-bottom: 8rem;
+    padding: 1rem var(--padding) 8rem var(--padding);
     background-color: var(--background);
     background-image: url('/noise.png');
     background-repeat: repeat;
@@ -22,17 +21,32 @@
         transform: translate(0);
     }
 
-    &.past {
-        transform: translateX(-50%);
-
-        @media screen and (min-width:992px) {
-            transform: translate(0);
-        }
-    }
-
     @media screen and (min-width:992px) {
         position: relative;
-        width: 320px;
+        width: calc(100% - 960px);
+        padding: 3rem var(--padding) 8rem var(--padding);
         transform: translate(0);
+    }
+
+    &Source {
+        font-size: .75rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: var(--text);
+        opacity: 0.6;
+        margin-bottom: 0.25rem;
+    }
+
+    &Title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: var(--text);
+        margin-bottom: 1rem;
+    }
+
+    &Text {
+        font-size: 1rem;
+        color: var(--text);
     }
 }

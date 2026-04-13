@@ -15,6 +15,7 @@ const Header = () => {
           {currentStep === 1 && <Button text="Accéder aux paramètres" action={() => setShowAddLayer(true)} icon={'parameter'} />}
           {currentStep === 2 && <Button text="Accéder aux catégories" action={() => setCurrentStep(1)} icon={'previous'} />}
           {currentStep === 3 && <Button text="Accéder aux sources" action={() => setCurrentStep(2)} icon={'previous'} />}
+          {currentStep === 4 && <Button text="Accéder aux news" action={() => setCurrentStep(3)} icon={'previous'} />}
           <p className={styles.headerTitle}>PostReeder</p>
           <Button text="Ajouter une catégorie" action={() => setShowAddLayer(true)} icon={'add'} />
         </Container>

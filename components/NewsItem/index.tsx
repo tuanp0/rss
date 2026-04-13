@@ -13,8 +13,12 @@ interface NewsItemTypes {
 const index = ({image, title, shortDesc}:NewsItemTypes) => {
   const { setCurrentStep, setShowDeleteLayer, setSelectedGroupId, setSelectedGroupName } = useLayerContext()
 
+  const handleNextStep = () => {
+    setCurrentStep(4)
+  }
+
   return (
-    <div className={styles.newsItem}>
+    <div className={styles.newsItem} onClick={handleNextStep}>
       <Container className={styles.container}>
         <div className={styles.newsItemThumbnail}>
             <img src={image}  className={styles.newsItemThumbnailImg}/>

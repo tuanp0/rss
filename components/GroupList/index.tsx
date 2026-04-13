@@ -45,6 +45,7 @@ const GroupList = ({ onReady }: GroupsTypes) => {
         ${styles.group}
         ${showAddLayer ? styles.secondary : ''}
         ${currentStep === 1 ? styles.active : ''}
+        ${currentStep >= 2 ? styles.past : ''}
       `}
     >
       <div className={styles.groupContent}>

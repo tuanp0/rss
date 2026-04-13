@@ -11,6 +11,7 @@ const index = () => {
       className={`
         ${styles.source}
         ${currentStep === 2 ? styles.active : ''}
+        ${currentStep >= 3 ? styles.past : ''}
       `}
     >
       <div className={styles.sourceList}>
