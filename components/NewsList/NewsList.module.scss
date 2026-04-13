@@ -1,13 +1,27 @@
 .news {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    background: var(--background);
-    border: 1px solid white;
+    height: 100vh;
+    height: 100dvh;
+    padding-top: 130px;
+    background-color: var(--background);
+    background-image: url('/noise.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-size: 300px 300px;
+    transform: translateX(calc(100% + 10px));
+    transition: transform .4s ease-in-out;
+    box-shadow: 0 0 10px 0 var(--black10);
 
-    // @media screen and (min-width:768px) {
-    //     width: 33.33%;
-    // }
+    &.active {
+        transform: translate(0);
+    }
 
-    // @media screen and (min-width:992px) {
-
-    // }
+    @media screen and (min-width:992px) {
+        position: relative;
+        width: 330px;
+        transform: translate(0);
+    }
 }

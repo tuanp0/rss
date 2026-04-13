@@ -19,8 +19,8 @@ export default function Home() {
         onReady={(refresh) => setRefreshGroups(() => refresh)}
       />
       <SourceList />
-      {/*
-      <NewsList /> */}
+      
+      <NewsList />
       {/*
         <LayerParameters
           showParametersLayer={showParametersLayer}

@@ -1,0 +1,49 @@
+.newsItem {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    padding: .75rem var(--padding);
+    cursor: pointer;
+    background: transparent;
+    transition: all .1s ease-in-out;
+
+    @media screen and (min-width:768px) {
+        padding: .75rem calc(var(--padding)/2);
+    }
+
+    &:hover {
+        background: var(--hover);
+    }
+
+    .container {
+        display: flex;
+        align-items: flex-start;
+        padding: 0.5rem;
+    }
+
+    &Thumbnail {
+        width: 50px;
+        height: auto;
+        display: block;
+
+        &Img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    }
+
+    &Content {
+        width: calc(100% - 50px);
+        padding-left: 1rem;
+
+        &Title {
+            font-size: 1.25rem;
+            margin-bottom: .25rem;
+        }
+
+        &Desc {
+            font-size: .75rem;
+        }
+    }
+}

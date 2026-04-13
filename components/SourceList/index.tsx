@@ -15,6 +15,11 @@ const index = () => {
     >
       <div className={styles.sourceList}>
         <SouceItem name={'Toutes les sources'} icon={'star'}/>
+        <SouceItem name={'Source 1'} />
+        <SouceItem name={'Source 2'} />
+        <SouceItem name={'Source 3'} />
+        <SouceItem name={'Source 4'} />
+        <SouceItem name={'Source 5'} />
       </div>
     </section>
   )

@@ -2,7 +2,7 @@
     width: 100%;
     height: 100vh;
     height: 100dvh;
-    padding: 150px 0;
+    padding-top: 130px;
     background-color: var(--background);
     background-image: url('/noise.png');
     background-repeat: repeat;
@@ -12,12 +12,8 @@
     transition: border-radius .2s ease-in-out, transform .4s ease-in-out;
     overflow-y: auto;
 
-    // @media screen and (min-width:768px) {
-    //     width: 20%;
-    // }
-
     @media screen and (min-width:992px) {
-        width: 350px;
+        width: 330px;
         transform: translateX(0);
     }
 
