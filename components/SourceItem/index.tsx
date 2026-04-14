@@ -1,22 +1,32 @@
 import React from 'react'
 import { useLayerContext } from '@/context/LayerContext'
+import Button from '@/components/Button'
 
 import styles from './SourceItem.module.scss'
 
 interface SourceItemTypes {
     name: string
     icon?: string
+    sourceId: number
+    onDelete: () => void
 }
 
-const index = ({name, icon}:SourceItemTypes) => {
-  const { setCurrentStep, setShowDeleteLayer, setSelectedGroupId, setSelectedGroupName } = useLayerContext()
+const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
+  const { setCurrentStep, setCurrentSource, setShowDeleteLayer, setSelectedSourceId, setSelectedSourceName } = useLayerContext()
 
-  const handleNextStep = () => {
+  const handleNextStep = (sourceId: number) => {
     setCurrentStep(3)
+    setCurrentSource(sourceId)
+  }
+
+  const handleDeleteSource = () => {
+    setSelectedSourceId(sourceId)
+    setSelectedSourceName(name)
+    setShowDeleteLayer(true)
   }
   
   return (
-    <div className={styles.sourceItem} onClick={handleNextStep}>
+    <div className={styles.sourceItem} onClick={() => handleNextStep(sourceId)}>
       <span className={styles.sourceItemIcon}>
         {icon === 'star' ?
           <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"  className={styles.sourceItemIconSvg}>
@@ -28,6 +38,15 @@ const index = ({name, icon}:SourceItemTypes) => {
         }
       </span>
       <p className={styles.sourceItemName}>{name}</p>
+      {name !== "Toutes les sources" &&
+        <div className={styles.groupItemDelete} onClick={(e) => e.stopPropagation()}>
+          <Button
+            text="Supprimer la catégorie"
+            action={() => handleDeleteSource()}
+            icon={'delete'}
+          />
+        </div>
+      }
     </div>
   )
 }

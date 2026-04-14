@@ -3,9 +3,9 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh - 102px);
-    height: calc(100dvh - 102px);
-    margin-top: 102px;
+    height: calc(100vh - var(--headerTop));
+    height: calc(100dvh - var(--headerTop));
+    margin-top: var(--headerTop);
     padding-top: 1rem;
     padding-bottom: 8rem;
     background-color: var(--background);
@@ -34,6 +34,27 @@
         position: relative;
         width: 320px;
         transform: translate(0);
+    }
+
+    &Content {
+        overflow-y: auto;
+
+        &Text {
+            text-align: center;
+            font-size: 1.375rem;
+            color: var(--text);
+            margin-top: 1rem;
+        }
+
+        &Count {
+            font-size: .875rem;
+            font-style: italic;
+            color: var(--text);
+            display: block;
+            padding: 1rem;
+            text-align: center;
+            opacity: 0.5;
+        }
     }
 
     &List {

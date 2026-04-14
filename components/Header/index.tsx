@@ -17,7 +17,8 @@ const Header = () => {
           {currentStep === 3 && <Button text="Accéder aux sources" action={() => setCurrentStep(2)} icon={'previous'} />}
           {currentStep === 4 && <Button text="Accéder aux news" action={() => setCurrentStep(3)} icon={'previous'} />}
           <p className={styles.headerTitle}>PostReeder</p>
-          <Button text="Ajouter une catégorie" action={() => setShowAddLayer(true)} icon={'add'} />
+          {currentStep === 1 && <Button text="Ajouter une catégorie" action={() => setShowAddLayer(true)} icon={'add'} />}
+          {currentStep === 2 && <Button text="Ajouter une source" action={()=> setShowAddLayer(true)} icon={'add'} />}
         </Container>
       </div>
     </header>

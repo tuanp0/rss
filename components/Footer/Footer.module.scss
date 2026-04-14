@@ -1,6 +1,6 @@
 .footer {
     position: fixed;
-    bottom: 2rem;
+    bottom: 1.25rem;
     width: 100%;
     padding: 0 var(--padding);
     text-align: center;
@@ -16,8 +16,8 @@
         background-image: url('/noise.png');
         background-repeat: repeat;
         background-attachment: fixed;
-        -webkit-backdrop-filter: blur(6px);
-        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
         border-radius: 30px;
     }
 

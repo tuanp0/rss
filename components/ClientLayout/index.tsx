@@ -6,7 +6,7 @@ import LayerDeleteGroup from '@/components/LayerDeleteGroup'
 import Footer from '@/components/Footer'
 
 function LayoutInner({ children }: { children: React.ReactNode }) {
-  const { showAddLayer, setShowAddLayer, showDeleteLayer, setShowDeleteLayer, refreshGroups } = useLayerContext()
+  const { showAddLayer, setShowAddLayer, showDeleteLayer, setShowDeleteLayer, refreshGroups, refreshSources } = useLayerContext()
 
   return (
     <>
@@ -15,10 +15,20 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
       <LayerAddGroup
         showAddLayer={showAddLayer}
         setShowAddLayer={setShowAddLayer}
-        onGroupAdded={() => refreshGroups && refreshGroups()}
+        onGroupAdded={() => {
+          refreshGroups && refreshGroups()
+          refreshSources && refreshSources()
+        }}
       />
       <LayerDeleteGroup
-        onGroupDeleted={() => refreshGroups && refreshGroups()}
+        onGroupDeleted={() => {
+          refreshGroups && refreshGroups()
+          refreshSources && refreshSources()
+        }}
+        onSourceDeleted={() => {
+          refreshGroups && refreshGroups()
+          refreshSources && refreshSources()
+        }}
       />
       <Footer />
     </>

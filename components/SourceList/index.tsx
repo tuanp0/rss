@@ -1,10 +1,55 @@
+'use client'
+import { useEffect, useState } from 'react'
+import { initDB, getSourcesByGroup } from '@/db/groups'
 import { useLayerContext } from '@/context/LayerContext'
-import SouceItem from '@/components/SourceItem'
+import SourceItem from '@/components/SourceItem'
 
 import styles from './SourceList.module.scss'
 
-const index = () => {
-  const { currentStep } = useLayerContext()
+interface Source {
+  id: number
+  groupId: number
+  name: string
+}
+
+interface SourcesTypes {
+  onReady: (refresh: () => void) => void;
+}
+
+const SourceList = ({ onReady }: SourcesTypes) => {
+  const { currentStep, currentGroup } = useLayerContext()
+  const [sources, setSources] = useState<Source[]>([])
+  const [loading, setLoading] = useState<boolean>(true)
+  const [db, setDb] = useState<IDBDatabase | null>(null)
+
+  const fetchSources = (dbInstance: IDBDatabase) => {
+    getSourcesByGroup(dbInstance, currentGroup)
+      .then((sources) => {
+        setSources(sources)
+        setLoading(false)
+      })
+      .catch(console.error)
+  }
+
+  useEffect(() => {
+    initDB()
+      .then((dbInstance) => {
+        setDb(dbInstance)
+        fetchSources(dbInstance)
+        onReady(() => fetchSources(dbInstance))
+      })
+      .catch(console.error)
+  }, [currentGroup])
+
+  useEffect(() => {
+    initDB()
+      .then((dbInstance) => {
+        setDb(dbInstance)
+        fetchSources(dbInstance)
+        onReady(() => fetchSources(dbInstance))
+      })
+      .catch(console.error)
+  }, [])
 
   return (
     <section
@@ -14,16 +59,21 @@ const index = () => {
         ${currentStep >= 3 ? styles.past : ''}
       `}
     >
-      <div className={styles.sourceList}>
-        <SouceItem name={'Toutes les sources'} icon={'star'}/>
-        <SouceItem name={'Source 1'} />
-        <SouceItem name={'Source 2'} />
-        <SouceItem name={'Source 3'} />
-        <SouceItem name={'Source 4'} />
-        <SouceItem name={'Source 5'} />
+      <div className={styles.sourceContent}>
+        {loading && <p className={styles.sourceContentText}>Chargement...</p>}
+        {!loading && sources.length === 0 && <p className={styles.sourceContentText}>Aucune source</p>}
+        {!loading && sources.length > 0 && (
+          <div className={styles.sourceList}>
+            <SourceItem name={'Toutes les sources'} icon={'star'} sourceId={0} onDelete={() => db && fetchSources(db)}/>
+            {sources.map((source, key) => (
+              <SourceItem name={source.name} key={key} sourceId={source.id} onDelete={() => db && fetchSources(db)} />
+            ))}
+            <span className={styles.sourceContentCount}>{sources.length} {sources.length <= 1 ? 'source' : 'sources'}</span>
+          </div>
+        )}
       </div>
     </section>
   )
 }
 
-export default index
+export default SourceList

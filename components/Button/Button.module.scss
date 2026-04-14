@@ -37,7 +37,7 @@
     &Add {
         &Line {
             position: absolute;
-            width: 24px;
+            width: 20px;
             height: 4px;
             top: 50%;
             left: 50%;
@@ -65,7 +65,7 @@
     &Prev {
         &Line {
             position: absolute;
-            width: 16px;
+            width: 15px;
             height: 4px;
             bottom: 54%;
             left: 50%;
@@ -75,7 +75,7 @@
             transition: transform .2s ease-in-out, width .2s ease-in-out;
 
             &+.buttonPrevLine {
-                top: 54%;
+                top: calc(54% + 2px);
                 bottom: auto;
                 transform: translate(-50%, -50%) rotate(45deg);
             }
@@ -83,14 +83,20 @@
     }
 
     &Delete {
-        width: 28px;
-        height: 28px;
+        width: 24px;
+        height: 24px;
+
         .buttonIconSvg {
             path {
                 stroke: var(--text);
                 fill: transparent;
             }
         }
+    }
+
+    &Parameter {
+        width: 32px;
+        height: 32px;
     }
 
     &Text {

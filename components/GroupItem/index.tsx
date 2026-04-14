@@ -4,27 +4,28 @@ import Button from '@/components/Button'
 import styles from './GroupItem.module.scss'
 
 interface GroupItemTypes {
-    id: number
+    groupId: number
     text: string
     itemCount: number
     onDelete: () => void
 }
 
-const GroupItem = ({ id, text, itemCount, onDelete }: GroupItemTypes) => {
-  const { setCurrentStep, setShowDeleteLayer, setSelectedGroupId, setSelectedGroupName } = useLayerContext()
+const GroupItem = ({ groupId, text, itemCount, onDelete }: GroupItemTypes) => {
+  const { setCurrentStep, setCurrentGroup, setShowDeleteLayer, setSelectedGroupId, setSelectedGroupName } = useLayerContext()
 
-  const handleNextStep = () => {
+  const handleNextStep = (groupId: number) => {
     setCurrentStep(2)
+    setCurrentGroup(groupId)
   }
   
-  const handleDeleteGroup = (id: number, name: string) => {
-    setSelectedGroupId(id)
+  const handleDeleteGroup = (groupId: number, name: string) => {
+    setSelectedGroupId(groupId)
     setSelectedGroupName(name)
     setShowDeleteLayer(true)
   }
 
   return (
-    <div className={styles.groupItem} onClick={handleNextStep}>
+    <div className={styles.groupItem} onClick={() => handleNextStep(groupId)}>
         <div className={styles.groupItemIcon}>
             <svg 
               width="24px" 
@@ -38,12 +39,12 @@ const GroupItem = ({ id, text, itemCount, onDelete }: GroupItemTypes) => {
         </div>
         <div className={styles.groupItemContent}>
             <p className={styles.groupItemText}>{text}</p>
-            <p className={styles.groupItemCount}>{itemCount} item(s)</p>
+            <p className={styles.groupItemCount}>{itemCount} {itemCount <= 1 ? 'item' : 'items'}</p>
         </div>
         <div className={styles.groupItemDelete} onClick={(e) => e.stopPropagation()}>
             <Button
                 text="Supprimer la catégorie"
-                action={() => handleDeleteGroup(id, text)}
+                action={() => handleDeleteGroup(groupId, text)}
                 icon={'delete'}
             />
         </div>

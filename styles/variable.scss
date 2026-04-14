@@ -4,7 +4,7 @@
   --header: rgba(240, 240, 240, 1);
   --footerbg: rgba(200, 200, 200, .3);
   --error: rgba(255, 20, 20, 1);
-  --hover: rgba(0, 0, 0, .2);
+  --hover: #00000033;
   --grey: rgba(123,123,123, 1);
   
   --paper: rgb(245, 244, 237);
@@ -15,6 +15,7 @@
 
   --padding: 1rem;
   --max-width: 1440px;
+  --headerTop: 78px;
 
   @media screen and (min-width:768px) {
     --padding: 2rem;

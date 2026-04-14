@@ -3,9 +3,9 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh - 102px);
-    height: calc(100dvh - 102px);
-    margin-top: 102px;
+    height: calc(100vh - var(--headerTop));
+    height: calc(100dvh - var(--headerTop));
+    margin-top: var(--headerTop);
     padding-top: 1rem;
     padding-bottom: 8rem;
     background-color: var(--background);
