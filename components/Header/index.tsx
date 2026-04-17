@@ -16,9 +16,11 @@ const Header = () => {
           {currentStep === 2 && <Button text="Accéder aux catégories" action={() => setCurrentStep(1)} icon={'previous'} />}
           {currentStep === 3 && <Button text="Accéder aux sources" action={() => setCurrentStep(2)} icon={'previous'} />}
           {currentStep === 4 && <Button text="Accéder aux news" action={() => setCurrentStep(3)} icon={'previous'} />}
-          <p className={styles.headerTitle}>PostReeder</p>
+          <p className={styles.headerTitle}>TP Reader</p>
           {currentStep === 1 && <Button text="Ajouter une catégorie" action={() => setShowAddLayer(true)} icon={'add'} />}
           {currentStep === 2 && <Button text="Ajouter une source" action={()=> setShowAddLayer(true)} icon={'add'} />}
+          {/* {currentStep === 3 && <Button text="Rafraîchir la liste" action={() => setShowAddLayer(true)} icon={'refresh'} />}
+          {currentStep === 4 && <Button text="Sauvegarder ce post" action={() => setShowAddLayer(true)} icon={'save'} />} */}
         </Container>
       </div>
     </header>

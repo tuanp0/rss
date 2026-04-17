@@ -15,7 +15,7 @@
     background-size: 300px 300px;
     transform: translateX(calc(100% + 10px));
     transition: transform .4s ease-in-out;
-    box-shadow: 0 0 10px 0 var(--black10);
+    box-shadow: 0 0 10px 0 var(--black20);
     overflow-y: auto;
 
     &.active {
@@ -37,8 +37,6 @@
     }
 
     &Content {
-        overflow-y: auto;
-
         &Text {
             text-align: center;
             font-size: 1.375rem;

@@ -8,11 +8,17 @@
     transition: all .1s ease-in-out;
 
     @media screen and (min-width:768px) {
-        padding: .75rem calc(var(--padding)/2);
+        padding: .625rem calc(var(--padding)/2);
     }
 
     &:hover {
         background: var(--hover);
+
+        .sourceItemName {
+            &:after {
+                background: var(--hover);
+            }
+        }
     }
 
     &Icon {
@@ -32,11 +38,16 @@
     }
 
     &Name {
+        position: relative;
         font-weight: bold;
-        font-size: 1.125rem;
+        font-size: 1em;
         text-align: left;
         color: var(--text);
         padding-left: 1rem;
-        width: calc(100% - 52px);
+        padding-right: 1rem;
+        margin-right: 1rem;
+        width: calc(100% - 68px);
+        white-space: nowrap;
+        overflow: hidden;
     }
 }

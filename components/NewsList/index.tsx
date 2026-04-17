@@ -9,6 +9,7 @@ const index = () => {
   return (
     <section className={`
       ${styles.news}
+      ${currentStep <= 2 ? styles.next : ''}
       ${currentStep === 3 ? styles.active : ''}
       ${currentStep >= 4 ? styles.past : ''}
     `}>

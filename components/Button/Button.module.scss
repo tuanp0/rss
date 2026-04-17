@@ -63,6 +63,9 @@
     }
 
     &Prev {
+        width: 38px;
+        height: 38px;
+
         &Line {
             position: absolute;
             width: 15px;
@@ -95,8 +98,34 @@
     }
 
     &Parameter {
-        width: 32px;
-        height: 32px;
+        width: 38px;
+        height: 38px;
+        padding: .125rem;
+    }
+
+    &Refresh {
+        width: 38px;
+        height: 38px;
+        padding: 0.25rem;
+
+        .buttonIconSvg {
+            path {
+                stroke: var(--text);
+                fill: transparent;
+            }
+        }
+    }
+
+    &Save {
+        width: 38px;
+        height: 38px;
+        padding: 0.25rem;
+
+        .buttonIconSvg {
+            path {
+                stroke: var(--text);
+            }
+        }
     }
 
     &Text {

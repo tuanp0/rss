@@ -15,18 +15,25 @@
     background-size: 300px 300px;
     transform: translateX(calc(100% + 10px));
     transition: transform .4s ease-in-out;
-    box-shadow: 0 0 10px 0 var(--black10);
-    overflow-y: auto;
+    box-shadow: 0 0 10px 0 var(--black20);
 
     &.active {
         transform: translate(0);
+        overflow-y: auto;
     }
 
     &.past {
         transform: translateX(-50%);
+        overflow-y: auto;
 
         @media screen and (min-width:992px) {
             transform: translate(0);
+        }
+    }
+
+    &.next {
+        &>div {
+            opacity: 0;
         }
     }
 
