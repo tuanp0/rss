@@ -10,7 +10,7 @@ interface LayerTypes {
 }
 
 const index = ({onGroupDeleted, onSourceDeleted}:LayerTypes) => {
-    const { currentStep, showDeleteLayer, setShowDeleteLayer, selectedGroupId, selectedGroupName, selectedSourceId, selectedSourceName } = useLayerContext()
+    const { currentStep, showDeleteLayer, setShowDeleteLayer, isGroup, isSource, selectedGroupId, selectedGroupName, selectedSourceId, selectedSourceName } = useLayerContext()
 
     const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget) {
@@ -40,15 +40,15 @@ const index = ({onGroupDeleted, onSourceDeleted}:LayerTypes) => {
                 <div className={styles.layerHeader}>
                     <Container>
                         <div className={styles.layerTitle}>
-                            {currentStep === 1 && `Supprimer le groupe : ${selectedGroupName}`}
-                            {currentStep === 2 && `Supprimer la source : ${selectedSourceName}`}
+                            {isGroup && `Supprimer le groupe : ${selectedGroupName}`}
+                            {isSource && `Supprimer la source : ${selectedSourceName}`}
                         </div>
                     </Container>
                 </div>
                 <div className={styles.layerContent}>
                     <Container>
-                        {currentStep === 1 && <button type={'button'} className={styles.layerSubmit} onClick={() => handleDeleteGroup()}>Supprimer</button>}
-                        {currentStep === 2 && <button type={'button'} className={styles.layerSubmit} onClick={() => handleDeleteSource()}>Supprimer</button>}
+                        {isGroup && <button type={'button'} className={styles.layerSubmit} onClick={() => handleDeleteGroup()}>Supprimer</button>}
+                        {isSource && <button type={'button'} className={styles.layerSubmit} onClick={() => handleDeleteSource()}>Supprimer</button>}
                     </Container>
                 </div>
             </div>

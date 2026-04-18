@@ -52,13 +52,16 @@ export async function GET(req: NextRequest) {
       const shortDesc = $(el).find("description").first().html()?.trim() ?? "";
 
       const rawEl = $.html(el);
-      const content =
-        getRawAttr(rawEl, "content\\:encoded", "")
-          ? (() => {
-              const inner = rawEl.match(/<content:encoded[^>]*>([\s\S]*?)<\/content:encoded>/i);
-              return inner ? inner[1].replace(/^<!\[CDATA\[|\]\]>$/g, "").trim() : shortDesc;
-            })()
-          : shortDesc;
+
+      // Extract content:encoded via regex (cheerio struggles with namespaced tags)
+      const contentEncoded = (() => {
+        const match = rawEl.match(/<content:encoded[^>]*>([\s\S]*?)<\/content:encoded>/i);
+        return match ? match[1].replace(/^<!\[CDATA\[|\]\]>$/g, "").trim() : "";
+      })();
+
+      const bodyContent = $(el).find("body").first().html()?.trim() ?? "";
+
+      const content = contentEncoded || bodyContent || shortDesc;
 
       const thumbnail =
         getRawAttr(rawEl, "media:thumbnail", "url") ||

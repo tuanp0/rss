@@ -7,7 +7,7 @@
 
     h2 {
         font-size: 2.5rem;
-        color: var(--black);
+        color: var(--text);
         line-height: 1.25;
         margin: 0 auto 2.5rem auto;
         text-align: center;
@@ -21,7 +21,7 @@
             height: 2px;
             bottom: 0;
             right: 0;
-            background: var(--black);
+            background: var(--text);
         }
 
         @media screen and (min-width:768px) {
@@ -43,12 +43,13 @@
                 height: 50%;
                 bottom: 0;
                 right: 0;
-                background: var(--black);
+                background: var(--text);
             }
         }
     }
 
     h3 {
+
     }
 
     h4 {
@@ -56,14 +57,13 @@
     }
 
     p {
-
-        font-size: 1.125rem;
-        color: var(--black);
+        font-size: 1rem;
+        color: var(--text);
         line-height: 1.25;
         margin-bottom: 1rem;
 
         @media screen and (min-width:768px) {
-            font-size: 1.375rem;
+            font-size: 1rem;
         }
     }
 
@@ -92,5 +92,19 @@
 
     blockquote {
         
+    }
+
+    figcaption {
+        font-size: .875rem;
+        text-align: center;
+        margin-top: .125rem;
+        margin-bottom: .125rem;
+        opacity: .5;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
     }
 }

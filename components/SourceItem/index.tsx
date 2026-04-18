@@ -12,7 +12,7 @@ interface SourceItemTypes {
 }
 
 const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
-  const { setCurrentStep, setCurrentSource, setShowDeleteLayer, setSelectedSourceId, setSelectedSourceName } = useLayerContext()
+  const { setCurrentStep, setCurrentSource, setShowDeleteLayer, setIsGroup, setIsSource, setSelectedSourceId, setSelectedSourceName } = useLayerContext()
 
   const handleNextStep = (sourceId: number) => {
     setCurrentStep(3)
@@ -22,6 +22,8 @@ const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
   const handleDeleteSource = () => {
     setSelectedSourceId(sourceId)
     setSelectedSourceName(name)
+    setIsGroup(false)
+    setIsSource(true)
     setShowDeleteLayer(true)
   }
   

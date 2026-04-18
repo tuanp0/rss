@@ -11,7 +11,7 @@ interface GroupItemTypes {
 }
 
 const GroupItem = ({ groupId, text, itemCount, onDelete }: GroupItemTypes) => {
-  const { setCurrentStep, setCurrentGroup, setShowDeleteLayer, setSelectedGroupId, setSelectedGroupName } = useLayerContext()
+  const { setCurrentStep, setCurrentGroup, setShowDeleteLayer, setIsGroup, setIsSource, setSelectedGroupId, setSelectedGroupName } = useLayerContext()
 
   const handleNextStep = (groupId: number) => {
     setCurrentStep(2)
@@ -21,6 +21,8 @@ const GroupItem = ({ groupId, text, itemCount, onDelete }: GroupItemTypes) => {
   const handleDeleteGroup = (groupId: number, name: string) => {
     setSelectedGroupId(groupId)
     setSelectedGroupName(name)
+    setIsGroup(true)
+    setIsSource(false)
     setShowDeleteLayer(true)
   }
 

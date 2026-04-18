@@ -117,24 +117,36 @@ export const addGroup = (db: IDBDatabase, title: string): Promise<void> => {
 
 export const deleteGroup = (db: IDBDatabase, id: number): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction(['group', 'source'], 'readwrite');
+    const transaction = db.transaction(['group', 'source', 'post'], 'readwrite');
     const groupStore = transaction.objectStore('group');
     const sourceStore = transaction.objectStore('source');
-    const index = sourceStore.index('urls');
+    const postStore = transaction.objectStore('post');
 
-    const getSourcesRequest = index.getAll(id);
+    const sourceIndex = sourceStore.index('urls');
+    const getSourcesRequest = sourceIndex.getAll(id);
 
     getSourcesRequest.onsuccess = () => {
       const sources: { id: number }[] = getSourcesRequest.result;
+
       for (const source of sources) {
+        // Delete all posts linked to this source
+        const postIndex = postStore.index('sourceId');
+        const getPostsRequest = postIndex.getAll(source.id);
+        getPostsRequest.onsuccess = () => {
+          const posts: Post[] = getPostsRequest.result;
+          for (const post of posts) {
+            postStore.delete(post.id);
+          }
+        };
+
         sourceStore.delete(source.id);
       }
+
       const deleteRequest = groupStore.delete(id);
       deleteRequest.onerror = () => reject(deleteRequest.error);
     };
 
     getSourcesRequest.onerror = () => reject(getSourcesRequest.error);
-
     transaction.oncomplete = () => resolve();
     transaction.onerror = () => reject(transaction.error);
   });
@@ -195,12 +207,27 @@ export const addSource = (
 
 export const deleteSource = (db: IDBDatabase, id: number): Promise<void> => {
   return new Promise((resolve, reject) => {
-    const transaction = db.transaction('source', 'readwrite');
-    const store = transaction.objectStore('source');
-    const deleteRequest = store.delete(id);
+    const transaction = db.transaction(['source', 'post'], 'readwrite');
+    const sourceStore = transaction.objectStore('source');
+    const postStore = transaction.objectStore('post');
 
-    deleteRequest.onsuccess = () => resolve();
-    deleteRequest.onerror = () => reject(deleteRequest.error);
+    const postIndex = postStore.index('sourceId');
+    const getPostsRequest = postIndex.getAll(id);
+
+    getPostsRequest.onsuccess = () => {
+      const posts: Post[] = getPostsRequest.result;
+      for (const post of posts) {
+        postStore.delete(post.id);
+      }
+
+      const deleteRequest = sourceStore.delete(id);
+      deleteRequest.onsuccess = () => resolve();
+      deleteRequest.onerror = () => reject(deleteRequest.error);
+    };
+
+    getPostsRequest.onerror = () => reject(getPostsRequest.error);
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = () => reject(transaction.error);
   });
 };
 

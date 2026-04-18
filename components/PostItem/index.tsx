@@ -24,9 +24,6 @@ const index = () => {
       ${currentStep === 4 ? styles.active : ''}
     `}>
       <div className={styles.postItemInner}>
-        {currentNews.thumbnail && (
-          <img src={currentNews.thumbnail} alt={currentNews.title} className={styles.postItemThumbnail} />
-        )}
         <div className={styles.postItemSource}>{getSiteName(currentNews.url)}</div>
         <div className={styles.postItemTitle}>
           <a href={currentNews.url} target="_blank" rel="noreferrer">{currentNews.title}</a>
@@ -38,6 +35,9 @@ const index = () => {
             year: 'numeric'
           })}
         </time>
+        {currentNews.thumbnail && (
+          <img src={currentNews.thumbnail} alt={currentNews.title} className={styles.postItemThumbnail} />
+        )}
         <div
           className={styles.postItemContent}
           dangerouslySetInnerHTML={{ __html: currentNews.content }}
