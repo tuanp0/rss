@@ -259,6 +259,33 @@ export const updateSource = (
   });
 };
 
+export const refreshSource = async (db: IDBDatabase, sourceId: number, groupId: number): Promise<void> => {
+  const { parseRSSFeed } = await import('@/lib/parse-rss')
+
+  const DAYS_LIMIT = 180
+
+  const sources = await getSourcesByGroup(db, groupId)
+  const source = sources.find(s => s.id === sourceId)
+  if (!source) throw new Error('Source introuvable')
+
+  const { posts } = await parseRSSFeed(source.url)
+
+  const cutoff = new Date()
+  cutoff.setDate(cutoff.getDate() - DAYS_LIMIT)
+
+  for (const post of posts) {
+    const publishedDate = post.publishedAt ? new Date(post.publishedAt) : null
+    if (!publishedDate || isNaN(publishedDate.getTime())) continue
+    if (publishedDate < cutoff) continue
+
+    try {
+      await addPost(db, groupId, sourceId, post.title, post.postUrl, post.shortDesc, post.content, post.thumbnail, publishedDate.toISOString())
+    } catch {
+      // silently skip duplicates
+    }
+  }
+}
+
 // ─── Posts ───────────────────────────────────────────────────────────────────
 
 export interface Post {

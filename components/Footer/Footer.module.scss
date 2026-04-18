@@ -11,11 +11,9 @@
         gap: 1rem;
         margin: 0 auto;
         max-width: 500px;
-        padding: 0.25rem 1.5rem;
-        background-color: var(--footerbg);
+        padding: .25rem 1.25rem .25rem 1.5rem;
+        background-color: var(--glass);
         // background-image: url('/noise.png');
-        background-repeat: repeat;
-        background-attachment: fixed;
         -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
         border-radius: 30px;

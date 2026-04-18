@@ -13,25 +13,27 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
-      {children}
-      <LayerAddGroup
-        showAddLayer={showAddLayer}
-        setShowAddLayer={setShowAddLayer}
-        onGroupAdded={() => {
-          refreshGroups && refreshGroups()
-          refreshSources && refreshSources()
-        }}
-      />
-      <LayerDeleteGroup
-        onGroupDeleted={() => {
-          refreshGroups && refreshGroups()
-          refreshSources && refreshSources()
-        }}
-        onSourceDeleted={() => {
-          refreshGroups && refreshGroups()
-          refreshSources && refreshSources()
-        }}
-      />
+      <div className={styles.main}>
+        {children}
+        <LayerAddGroup
+          showAddLayer={showAddLayer}
+          setShowAddLayer={setShowAddLayer}
+          onGroupAdded={() => {
+            refreshGroups && refreshGroups()
+            refreshSources && refreshSources()
+          }}
+        />
+        <LayerDeleteGroup
+          onGroupDeleted={() => {
+            refreshGroups && refreshGroups()
+            refreshSources && refreshSources()
+          }}
+          onSourceDeleted={() => {
+            refreshGroups && refreshGroups()
+            refreshSources && refreshSources()
+          }}
+        />
+      </div>
       <Footer />
     </>
   )
@@ -41,9 +43,7 @@ export default function ClientLayout({ children }: { children: React.ReactNode }
   return (
     <LayerProvider>
       <LayoutInner>
-        <div className={styles.main}>
-          {children}
-        </div>
+        {children}
       </LayoutInner>
     </LayerProvider>
   )

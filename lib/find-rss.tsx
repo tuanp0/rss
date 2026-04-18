@@ -1,6 +1,7 @@
 import * as cheerio from "cheerio";
 
-const CORS_PROXY = "https://corsproxy.io/?";
+const CORS_PROXY = "https://api.codetabs.com/v1/proxy?quest=";
+// const CORS_PROXY = "";
 
 export type RSSFeed = {
     href: string
@@ -12,7 +13,10 @@ export async function findRSSFeeds(url: string): Promise<RSSFeed[]> {
     const feeds: RSSFeed[] = [];
 
     // Fetch the page HTML via CORS proxy
+    console.log(`${CORS_PROXY}${encodeURIComponent(url)}`)
+
     const res = await fetch(`${CORS_PROXY}${encodeURIComponent(url)}`);
+    
     if (!res.ok) throw new Error(`Failed to fetch page: ${res.status} ${res.statusText}`);
 
     const html = await res.text();

@@ -31,6 +31,9 @@ interface LayerContextType {
   setRefreshGroups: (fn: (() => void) | null) => void
   refreshSources: (() => void) | null
   setRefreshSources: (fn: (() => void) | null) => void
+  refreshTrigger: number
+  setRefreshTrigger: (val: number) => void
+  triggerRefresh: () => void
 }
 
 const LayerContext = createContext<LayerContextType | null>(null)
@@ -50,6 +53,8 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
   const [isSource, setIsSource] = useState<boolean>(false)
   const [refreshGroups, setRefreshGroups] = useState<(() => void) | null>(null)
   const [refreshSources, setRefreshSources] = useState<(() => void) | null>(null)
+  const [refreshTrigger, setRefreshTrigger] = useState<number>(0)
+  const triggerRefresh = () => setRefreshTrigger(n => n + 1)
 
   return (
     <LayerContext.Provider
@@ -81,7 +86,10 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
         refreshGroups,
         setRefreshGroups,
         refreshSources,
-        setRefreshSources
+        setRefreshSources,
+        refreshTrigger,
+        setRefreshTrigger,
+        triggerRefresh
       }}
     >
       {children}

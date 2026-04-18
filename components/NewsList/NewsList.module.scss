@@ -3,10 +3,9 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: calc(100vh - var(--headerTop));
-    height: calc(100dvh - var(--headerTop));
-    margin-top: var(--headerTop);
-    padding-top: 1rem;
+    height: 100vh;
+    height: 100dvh;
+    padding-top: calc(var(--headerTop) + 1rem);
     padding-bottom: 8rem;
     background-color: var(--background);
     background-image: url('/noise.png');

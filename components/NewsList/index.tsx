@@ -6,7 +6,7 @@ import NewsItem from '@/components/NewsItem'
 import styles from './NewsList.module.scss'
 
 const index = () => {
-  const { currentStep, currentGroup, currentSource } = useLayerContext()
+  const { currentStep, currentGroup, currentSource, refreshTrigger } = useLayerContext()
 
   const [posts, setPosts] = useState<Post[]>([])
   const [db, setDb] = useState<IDBDatabase | null>(null)
@@ -21,19 +21,19 @@ const index = () => {
     if (!db) return
 
     if (currentSource) {
-  getPostsBySource(db, currentSource)
-    .then((posts) => setPosts([...posts].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())))
-    .catch(console.error)
-} else if (currentGroup) {
-  getPostsByGroup(db, currentGroup)
-    .then((posts) => setPosts([...posts].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())))
-    .catch(console.error)
-} else {
-  getPosts(db)
-    .then((posts) => setPosts([...posts].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())))
-    .catch(console.error)
-}
-  }, [db, currentGroup, currentSource])
+      getPostsBySource(db, currentSource)
+        .then((posts) => setPosts([...posts].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())))
+        .catch(console.error)
+    } else if (currentGroup) {
+      getPostsByGroup(db, currentGroup)
+        .then((posts) => setPosts([...posts].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())))
+        .catch(console.error)
+    } else {
+      getPosts(db)
+        .then((posts) => setPosts([...posts].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime())))
+        .catch(console.error)
+    }
+  }, [db, currentGroup, currentSource, refreshTrigger])
 
   return (
     <section className={`

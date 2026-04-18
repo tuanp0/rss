@@ -9,10 +9,6 @@
 
     &:hover {
         cursor: pointer;
-
-        @media screen and (min-width: 992px) {
-            opacity: .6;
-        }
     }
 
     &Icon {
@@ -20,8 +16,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 38px;
-        height: 38px;
+        width: 42px;
+        height: 42px;
 
         svg {
             width: 100%;
@@ -35,9 +31,16 @@
     }
 
     &Add {
+        background-color: var(--glass);
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+        border-radius: 100%;
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
+        
         &Line {
             position: absolute;
-            width: 20px;
+            width: 18px;
             height: 4px;
             top: 50%;
             left: 50%;
@@ -63,15 +66,19 @@
     }
 
     &Prev {
-        width: 38px;
-        height: 38px;
+        background-color: var(--glass);
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+        border-radius: 100%;
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
 
         &Line {
             position: absolute;
-            width: 15px;
+            width: 13px;
             height: 4px;
-            bottom: 54%;
-            left: 50%;
+            bottom: 47%;
+            left: 45%;
             transform: translate(-50%, -50%) rotate(-45deg);
             transform-origin: center;
             background: var(--text);
@@ -101,12 +108,24 @@
         width: 38px;
         height: 38px;
         padding: .125rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
     }
 
     &Refresh {
-        width: 38px;
-        height: 38px;
-        padding: 0.25rem;
+        width: 42px;
+        height: 42px;
+        padding: 0.5rem;
+        background-color: var(--glass);
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+        border-radius: 100%;
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
+
+        &.refreshing {
+            animation: rotate 4s linear infinite;
+        }
 
         .buttonIconSvg {
             path {

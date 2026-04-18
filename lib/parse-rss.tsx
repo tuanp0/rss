@@ -1,6 +1,8 @@
 import * as cheerio from "cheerio";
 
-const CORS_PROXY = "https://corsproxy.io/?";
+const CORS_PROXY = "https://api.codetabs.com/v1/proxy?quest=";
+// const CORS_PROXY = "";
+
 
 const extractFirstImage = (html: string): string => {
   const $ = cheerio.load(html);

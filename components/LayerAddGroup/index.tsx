@@ -185,7 +185,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                                                         disabled={loading}
                                                     >
                                                         <span className={styles.layerFeedTitle}>{feed.title}</span>
-                                                        <span className={styles.feedHref}>{feed.href}</span>
+                                                        {/* <span className={styles.feedHref}>{feed.href}</span> */}
                                                     </button>
                                                 </li>
                                             ))}
