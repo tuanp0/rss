@@ -1,4 +1,3 @@
-// lib/find-rss.ts
 import * as cheerio from "cheerio";
 
 const CORS_PROXY = "https://corsproxy.io/?";

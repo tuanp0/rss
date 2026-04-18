@@ -13,7 +13,7 @@
         max-width: 500px;
         padding: 0.25rem 1.5rem;
         background-color: var(--footerbg);
-        background-image: url('/noise.png');
+        // background-image: url('/noise.png');
         background-repeat: repeat;
         background-attachment: fixed;
         -webkit-backdrop-filter: blur(4px);
@@ -36,7 +36,7 @@
         }
 
         &Svg {
-            width: 24px;
+            width: 22px;
             height: auto;
             display: block;
             margin: 0 auto 0.25rem auto;
@@ -47,7 +47,7 @@
         }
 
         &Text {
-            font-size: .75rem;
+            font-size: .875rem;
             color: var(--text);
             width: 100%;
             display: inline-block;
