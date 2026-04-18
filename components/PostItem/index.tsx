@@ -16,8 +16,6 @@ const index = () => {
     }
   }
 
-  console.log(currentNews)
-
   return (
     <section className={`
       ${styles.postItem}
@@ -35,9 +33,9 @@ const index = () => {
             year: 'numeric'
           })}
         </time>
-        {currentNews.thumbnail && (
+        {/* {currentNews.thumbnail && (
           <img src={currentNews.thumbnail} alt={currentNews.title} className={styles.postItemThumbnail} />
-        )}
+        )} */}
         <div
           className={styles.postItemContent}
           dangerouslySetInnerHTML={{ __html: currentNews.content }}
