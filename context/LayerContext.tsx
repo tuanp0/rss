@@ -1,5 +1,6 @@
 'use client'
 import { createContext, useContext, useState } from 'react'
+import { Post } from '@/db/groups'
 
 interface LayerContextType {
   selectedGroupId: number
@@ -16,6 +17,8 @@ interface LayerContextType {
   setCurrentGroup: (val: number) => void
   currentSource: number
   setCurrentSource: (val: number) => void
+  currentNews: Post | null
+  setCurrentNews: (value: Post | null) => void
   showAddLayer: boolean
   setShowAddLayer: (val: boolean) => void
   showDeleteLayer: boolean
@@ -36,6 +39,7 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
   const [currentStep, setCurrentStep] = useState<number>(1)
   const [currentGroup, setCurrentGroup] = useState<number>(0)
   const [currentSource, setCurrentSource] = useState<number>(0)
+  const [currentNews, setCurrentNews] = useState<Post | null>(null)
   const [showAddLayer, setShowAddLayer] = useState<boolean>(false)
   const [showDeleteLayer, setShowDeleteLayer] = useState<boolean>(false)
   const [refreshGroups, setRefreshGroups] = useState<(() => void) | null>(null)
@@ -50,6 +54,8 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
         setCurrentGroup,
         currentSource,
         setCurrentSource,
+        currentNews,
+        setCurrentNews,
         showAddLayer,
         setShowAddLayer,
         showDeleteLayer,

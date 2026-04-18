@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { initDB, addGroup, addSource } from '@/db/groups'
+import { initDB, addGroup, addSource, getSourcesByGroup, addPost } from '@/db/groups'
 import { useLayerContext } from '@/context/LayerContext'
 import Container from '@/components/Container'
 
@@ -16,6 +16,8 @@ interface LayerTypes {
     setShowAddLayer: (value: boolean) => void
     onGroupAdded: () => void
 }
+
+const DAYS_LIMIT = 30
 
 const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
     const { currentStep, currentGroup } = useLayerContext()
@@ -77,16 +79,75 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
         }
     }
 
+    // const confirmFeed = async (feed: Feed) => {
+    //     if (!db) return
+    //     try {
+    //         await addSource(db, currentGroup, feed.title, feed.href)
+    //         setUrlInput('')
+    //         setAvailableFeeds([])
+    //         onGroupAdded()
+    //         setShowAddLayer(false)
+    //     } catch (err: unknown) {
+    //         if (err instanceof Error) setError(err.message)
+    //     }
+    // }
+
     const confirmFeed = async (feed: Feed) => {
         if (!db) return
+
+        setLoading(true)
+        setError(null)
+
         try {
+            // 1. Save the source and retrieve its generated id
             await addSource(db, currentGroup, feed.title, feed.href)
+            const sources = await getSourcesByGroup(db, currentGroup)
+            const savedSource = sources.find((s) => s.url === feed.href)
+            if (!savedSource) throw new Error("Source introuvable après ajout.")
+
+            // 2. Fetch and parse the feed posts
+            const res = await fetch(`/api/parse-rss?url=${encodeURIComponent(feed.href)}`)
+            const data = await res.json()
+            if (data.error) throw new Error(data.error)
+
+            // 3. Filter posts within the last 30 days and store them
+            const cutoff = new Date()
+            cutoff.setDate(cutoff.getDate() - DAYS_LIMIT)
+
+            const posts: { title: string; postUrl: string; publishedAt: string; shortDesc: string; content: string; thumbnail: string}[] = data.posts
+
+            for (const post of posts) {
+                const publishedDate = post.publishedAt ? new Date(post.publishedAt) : null
+
+                // Skip posts outside the date range or with an unparseable date
+                if (!publishedDate || isNaN(publishedDate.getTime())) continue
+                if (publishedDate < cutoff) continue
+
+                try {
+                    await addPost(
+                        db,
+                        currentGroup,
+                        savedSource.id,
+                        post.title,
+                        post.postUrl,
+                        post.shortDesc,
+                        post.content,
+                        post.thumbnail,
+                        publishedDate.toISOString()
+                    )
+                } catch {
+                    // Silently skip duplicate posts (same URL already stored)
+                }
+            }
+
             setUrlInput('')
             setAvailableFeeds([])
             onGroupAdded()
             setShowAddLayer(false)
         } catch (err: unknown) {
             if (err instanceof Error) setError(err.message)
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -95,6 +156,83 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
             setShowAddLayer(false)
         }
     }
+
+    // return (
+    //     <div className={`${styles.layer} ${showAddLayer ? styles.active : ''}`} onClick={handleOverlayClick}>
+    //         <div className={styles.layerInner}>
+    //             <div className={styles.layerHeader}>
+    //                 <Container>
+    //                     <button className={styles.layerClose} onClick={() => setShowAddLayer(false)}>
+    //                         <span className={styles.layerCloseLine}></span>
+    //                         <span className={styles.layerCloseLine}></span>
+    //                     </button>
+    //                     <div className={styles.layerTitle}>
+    //                         {currentStep === 1 && "Ajouter un groupe"}
+    //                         {currentStep === 2 && "Ajouter une source"}
+    //                     </div>
+    //                 </Container>
+    //             </div>
+    //             <div className={styles.layerContent}>
+    //                 <Container>
+    //                     {currentStep === 1 && 
+    //                         <input
+    //                             type={'text'}
+    //                             className={styles.layerInput}
+    //                             value={nameInput}
+    //                             placeholder={'Nom du groupe'}
+    //                             onChange={(e) => {
+    //                                 setNameInput(e.target.value)
+    //                                 setError(null)
+    //                             }}
+    //                         />
+    //                     }
+
+    //                     {currentStep === 2 && (
+    //                         <>
+    //                             <input
+    //                                 type="text"
+    //                                 id={`urlInput`}
+    //                                 className={styles.layerInput}
+    //                                 value={urlInput}
+    //                                 placeholder="URL de la source"
+    //                                 onChange={(e) => { setUrlInput(e.target.value); setError(null); setAvailableFeeds([]) }}
+    //                             />
+
+    //                             {availableFeeds.length > 1 && (
+    //                                 <>
+    //                                     <p className={styles.layerFeedText}>Quel feed utiliser ?</p>
+    //                                     <ul className={styles.layerFeedList}>
+    //                                         {availableFeeds.map((feed) => (
+    //                                             <li key={feed.href} className={styles.layerFeedItem}>
+    //                                                 <button
+    //                                                     type="button"
+    //                                                     className={styles.layerFeedButton}
+    //                                                     onClick={() => confirmFeed(feed)}
+    //                                                 >
+    //                                                     <span className={styles.layerFeedTitle}>{feed.title}</span>
+    //                                                     {/* <span className={styles.feedHref}>{feed.href}</span> */}
+    //                                                 </button>
+    //                                             </li>
+    //                                         ))}
+    //                                     </ul>
+    //                                 </>
+    //                             )}
+    //                         </>
+    //                     )}
+
+    //                     {error && <p className={styles.layerError}>{error}</p>}
+    //                     {currentStep === 1 && <button type={'button'} className={styles.layerSubmit} onClick={handleAddGroup}>Ajouter</button>}
+    //                     {/* {currentStep === 2 && <button type={'button'} className={styles.layerSubmit} onClick={handleAddSource}>Vérifier l'URL</button>} */}
+    //                     {currentStep === 2 && availableFeeds.length === 0 &&
+    //                         <button type="button" className={styles.layerSubmit} onClick={handleAddSource} disabled={loading}>
+    //                             {loading ? "Recherche..." : "Ajouter"}
+    //                         </button>
+    //                     }
+    //                 </Container>
+    //             </div>
+    //         </div>
+    //     </div>
+    // )
 
     return (
         <div className={`${styles.layer} ${showAddLayer ? styles.active : ''}`} onClick={handleOverlayClick}>
@@ -113,16 +251,13 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                 </div>
                 <div className={styles.layerContent}>
                     <Container>
-                        {currentStep === 1 && 
+                        {currentStep === 1 &&
                             <input
-                                type={'text'}
+                                type="text"
                                 className={styles.layerInput}
                                 value={nameInput}
-                                placeholder={'Nom du groupe'}
-                                onChange={(e) => {
-                                    setNameInput(e.target.value)
-                                    setError(null)
-                                }}
+                                placeholder="Nom du groupe"
+                                onChange={(e) => { setNameInput(e.target.value); setError(null) }}
                             />
                         }
 
@@ -137,31 +272,44 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                                 />
 
                                 {availableFeeds.length > 1 && (
-                                    <ul className={styles.feedList}>
-                                        {availableFeeds.map((feed) => (
-                                            <li key={feed.href} className={styles.feedItem}>
-                                                <button
-                                                    type="button"
-                                                    className={styles.feedButton}
-                                                    onClick={() => confirmFeed(feed)}
-                                                >
-                                                    <span className={styles.feedTitle}>{feed.title}</span>
-                                                    <span className={styles.feedHref}>{feed.href}</span>
-                                                </button>
-                                            </li>
-                                        ))}
-                                    </ul>
+                                    <>
+                                        <p className={styles.layerFeedText}>Quel feed utiliser ?</p>
+                                        <ul className={styles.layerFeedList}>
+                                            {availableFeeds.map((feed) => (
+                                                <li key={feed.href} className={styles.layerFeedItem}>
+                                                    <button
+                                                        type="button"
+                                                        className={styles.layerFeedButton}
+                                                        onClick={() => confirmFeed(feed)}
+                                                        disabled={loading}
+                                                    >
+                                                        <span className={styles.layerFeedTitle}>{feed.title}</span>
+                                                        <span className={styles.feedHref}>{feed.href}</span>
+                                                    </button>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </>
                                 )}
                             </>
                         )}
 
                         {error && <p className={styles.layerError}>{error}</p>}
-                        {currentStep === 1 && <button type={'button'} className={styles.layerSubmit} onClick={handleAddGroup}>Ajouter</button>}
-                        {/* {currentStep === 2 && <button type={'button'} className={styles.layerSubmit} onClick={handleAddSource}>Vérifier l'URL</button>} */}
+
+                        {currentStep === 1 &&
+                            <button type="button" className={styles.layerSubmit} onClick={handleAddGroup}>
+                                Ajouter
+                            </button>
+                        }
+
                         {currentStep === 2 && availableFeeds.length === 0 &&
                             <button type="button" className={styles.layerSubmit} onClick={handleAddSource} disabled={loading}>
                                 {loading ? "Recherche..." : "Ajouter"}
                             </button>
+                        }
+
+                        {currentStep === 2 && availableFeeds.length > 0 && loading &&
+                            <p className={styles.layerFeedText}>Récupération des articles...</p>
                         }
                     </Container>
                 </div>

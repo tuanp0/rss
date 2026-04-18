@@ -1,5 +1,5 @@
 const DB_NAME = 'tprssDB';
-const DB_VERSION = 3;
+const DB_VERSION = 2;
 
 export const initDB = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
@@ -21,13 +21,6 @@ export const initDB = (): Promise<IDBDatabase> => {
       if (!db.objectStoreNames.contains('source')) {
         const sourcesStore = db.createObjectStore('source', { keyPath: 'id', autoIncrement: true });
         sourcesStore.createIndex('urls', 'groupId', { unique: false });
-      }
-
-      if (!db.objectStoreNames.contains('post')) {
-        const postsStore = db.createObjectStore('post', { keyPath: 'id', autoIncrement: true });
-        postsStore.createIndex('groupId', 'groupId', { unique: false });
-        postsStore.createIndex('sourceId', 'sourceId', { unique: false });
-        postsStore.createIndex('url', 'url', { unique: true }); // prevents duplicate posts
       }
     };
 
@@ -229,138 +222,5 @@ export const updateSource = (
     };
 
     getRequest.onerror = () => reject(getRequest.error);
-  });
-};
-
-// ─── Posts ───────────────────────────────────────────────────────────────────
-
-export interface Post {
-  id: number
-  groupId: number
-  sourceId: number
-  title: string
-  url: string
-  shortDesc: string
-  content: string
-  thumbnail: string
-  publishedAt: Date | string
-}
-
-export const getPosts = (db: IDBDatabase): Promise<Post[]> => {
-  return new Promise((resolve, reject) => {
-    const transaction = db.transaction('post', 'readonly');
-    const store = transaction.objectStore('post');
-    const getAllRequest = store.getAll();
-
-    getAllRequest.onsuccess = () => resolve(getAllRequest.result);
-    getAllRequest.onerror = () => reject(getAllRequest.error);
-  });
-};
-
-export const getPostsByGroup = (db: IDBDatabase, groupId: number): Promise<Post[]> => {
-  return new Promise((resolve, reject) => {
-    const transaction = db.transaction('post', 'readonly');
-    const store = transaction.objectStore('post');
-    const index = store.index('groupId');
-    const getRequest = index.getAll(groupId);
-
-    getRequest.onsuccess = () => resolve(getRequest.result);
-    getRequest.onerror = () => reject(getRequest.error);
-  });
-};
-
-export const getPostsBySource = (db: IDBDatabase, sourceId: number): Promise<Post[]> => {
-  return new Promise((resolve, reject) => {
-    const transaction = db.transaction('post', 'readonly');
-    const store = transaction.objectStore('post');
-    const index = store.index('sourceId');
-    const getRequest = index.getAll(sourceId);
-
-    getRequest.onsuccess = () => resolve(getRequest.result);
-    getRequest.onerror = () => reject(getRequest.error);
-  });
-};
-
-export const addPost = (
-  db: IDBDatabase,
-  groupId: number,
-  sourceId: number,
-  title: string,
-  url: string,
-  shortDesc: string,
-  content: string,
-  thumbnail: string,
-  publishedAt: Date | string
-): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const transaction = db.transaction('post', 'readwrite');
-    const store = transaction.objectStore('post');
-    const index = store.index('url');
-
-    const getExistingRequest = index.get(url);
-    getExistingRequest.onsuccess = () => {
-      if (getExistingRequest.result) {
-        reject(new Error('Un post avec cette URL existe déjà'));
-        return;
-      }
-
-      const addRequest = store.add({ groupId, sourceId, title, url, shortDesc, content, thumbnail, publishedAt });
-
-      addRequest.onsuccess = () => resolve();
-      addRequest.onerror = () => reject(addRequest.error);
-    };
-
-    getExistingRequest.onerror = () => reject(getExistingRequest.error);
-  });
-};
-
-export const deletePost = (db: IDBDatabase, id: number): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const transaction = db.transaction('post', 'readwrite');
-    const store = transaction.objectStore('post');
-    const deleteRequest = store.delete(id);
-
-    deleteRequest.onsuccess = () => resolve();
-    deleteRequest.onerror = () => reject(deleteRequest.error);
-  });
-};
-
-export const deletePostsBySource = (db: IDBDatabase, sourceId: number): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const transaction = db.transaction('post', 'readwrite');
-    const store = transaction.objectStore('post');
-    const index = store.index('sourceId');
-
-    const getRequest = index.getAll(sourceId);
-    getRequest.onsuccess = () => {
-      const posts: Post[] = getRequest.result;
-      for (const post of posts) {
-        store.delete(post.id);
-      }
-    };
-
-    getRequest.onerror = () => reject(getRequest.error);
-    transaction.oncomplete = () => resolve();
-    transaction.onerror = () => reject(transaction.error);
-  });
-};
-
-export const deletePostsByGroup = (db: IDBDatabase, groupId: number): Promise<void> => {
-  return new Promise((resolve, reject) => {
-    const transaction = db.transaction('post', 'readwrite');
-    const store = transaction.objectStore('post');
-    const index = store.index('groupId');
-
-    const getRequest = index.getAll(groupId);
-    getRequest.onsuccess = () => {
-      const posts: Post[] = getRequest.result;
-      for (const post of posts) {
-        store.delete(post.id);
-      }
-    };
-
-    getRequest.onerror = () => reject(getRequest.error);
-    transaction.oncomplete = () => resolve();
-    transaction.onerror = () => reject(transaction.error);
   });
 };

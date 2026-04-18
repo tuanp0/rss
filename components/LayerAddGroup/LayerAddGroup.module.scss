@@ -80,7 +80,38 @@
         padding: .5em .75rem;
         width: 100%;
         border-radius: 8px;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    &Feed {
+        &Text {
+            color: var(--text);
+            margin-bottom: .75rem;
+        }
+
+        &Item {
+            list-style-type: none;
+        }
+
+        &Button {
+            font-size: 1rem;
+            color: var(--text);
+            text-align-last: left;
+            padding: 0.5rem;
+            border: 1px solid var(--text);
+            border-radius: 8px;
+            background: transparent;
+            margin-bottom: .375rem;
+            cursor: pointer;
+
+            &:hover {
+                background: var(--hover);
+            }
+        }
+
+        &Title {
+            font-weight: bold;
+        }
     }
 
     &Error {

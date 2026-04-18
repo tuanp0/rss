@@ -1,6 +1,6 @@
 .footer {
     position: fixed;
-    bottom: 1.25rem;
+    bottom: 1rem;
     width: 100%;
     padding: 0 var(--padding);
     text-align: center;
@@ -23,7 +23,7 @@
 
     &Item {
         min-width: 62px;
-        padding: .5rem .75rem;
+        padding: .25rem .75rem;
         text-align: center;
         background: transparent;
         border: none;
@@ -36,7 +36,7 @@
         }
 
         &Svg {
-            width: 28px;
+            width: 24px;
             height: auto;
             display: block;
             margin: 0 auto 0.25rem auto;
@@ -47,7 +47,7 @@
         }
 
         &Text {
-            font-size: .875rem;
+            font-size: .75rem;
             color: var(--text);
             width: 100%;
             display: inline-block;
