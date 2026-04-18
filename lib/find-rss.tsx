@@ -13,8 +13,6 @@ export async function findRSSFeeds(url: string): Promise<RSSFeed[]> {
     const feeds: RSSFeed[] = [];
 
     // Fetch the page HTML via CORS proxy
-    console.log(`${CORS_PROXY}${encodeURIComponent(url)}`)
-
     const res = await fetch(`${CORS_PROXY}${encodeURIComponent(url)}`);
     
     if (!res.ok) throw new Error(`Failed to fetch page: ${res.status} ${res.statusText}`);
@@ -48,10 +46,12 @@ export async function findRSSFeeds(url: string): Promise<RSSFeed[]> {
     const commonPaths = ["/feed", "/rss", "/atom.xml", "/feed.xml", "/rss.xml", "/index.xml"];
     await Promise.allSettled(
         commonPaths.map(async (path) => {
+            
             const candidate = new URL(path, url).href;
             if (feeds.find((f) => f.href === candidate)) return;
             const r = await fetch(`${CORS_PROXY}${encodeURIComponent(candidate)}`, { method: "HEAD" });
             const ct = r.headers.get("content-type") || "";
+
             if (r.ok && /xml|rss|atom|feed/i.test(ct)) {
                 feeds.push({ href: candidate, title: path, type: ct });
             }
