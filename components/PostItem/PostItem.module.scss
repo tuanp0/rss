@@ -6,13 +6,12 @@
     left: 0;
     width: 100%;
     height: 100vh;
-    height: 100dvh;
+    // height: 100dvh;
     padding: calc(var(--headerTop) + 1rem) var(--padding) 8rem var(--padding);
     background-color: var(--background);
     background-image: url('/noise.png');
     background-repeat: repeat;
-    background-attachment: fixed;
-    background-size: 200px 200px;
+    background-size: 250px 250px;
     transform: translateX(calc(100% + 10px));
     transition: transform .4s ease-in-out;
     box-shadow: 0 0 10px 0 var(--black20);
@@ -45,13 +44,26 @@
     }
     
     &Source {
+        position: relative;
         font-size: .75rem;
         font-weight: bold;
         letter-spacing: 1px;
         text-transform: uppercase;
         color: var(--text);
-        opacity: 0.6;
         margin-bottom: 0.25rem;
+        padding-left: 1rem;
+        opacity: 0.6;
+
+        &::before {
+            position: absolute;
+            content: '';
+            width: 10px;
+            height: 10px;
+            left: 0;
+            top: 2px;
+            background: var(--text);
+            opacity: 0.6;
+        }
     }
 
     &Title {
@@ -67,7 +79,7 @@
         font-style: italic;
         color: var(--text);
         opacity: .5;
-        margin-bottom: 1rem;
+        margin-bottom: 2.5rem;
         display: block;
     }
 

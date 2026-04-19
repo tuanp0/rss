@@ -32,7 +32,7 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.headerContent}>
         <Container className={styles.headerContainer}>
-          {currentStep === 1 && <Button text="Accéder aux paramètres" action={() => setShowAddLayer(true)} icon={'parameter'} />}
+          {currentStep === 1 && <Button text="Accéder aux paramètres" action={() => {}} icon={'parameter'} />}
           {currentStep === 2 && <Button text="Accéder aux catégories" action={() => setCurrentStep(1)} icon={'previous'} />}
           {currentStep === 3 && <Button text="Accéder aux sources" action={() => setCurrentStep(2)} icon={'previous'} />}
           {currentStep === 4 && <Button text="Accéder aux news" action={() => setCurrentStep(3)} icon={'previous'} />}

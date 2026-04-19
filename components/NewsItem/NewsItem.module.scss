@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
-    padding: .75rem var(--padding);
+    padding: .5rem var(--padding);
     cursor: pointer;
     background: transparent;
     transition: all .2s ease-in-out;
@@ -19,7 +19,7 @@
         display: flex;
         align-items: flex-start;
         width: 100%;
-        padding: 0.5rem;
+        padding: 0;
     }
 
     &Thumbnail {
@@ -36,11 +36,10 @@
 
     &Content {
         width: calc(100% - 50px);
-        // width: 100%;
         padding-left: 1rem;
 
         &Title {
-            font-size: 1.25rem;
+            font-size: 1rem;
             color: var(--text);
             margin-bottom: .25rem;
         }
