@@ -38,11 +38,15 @@ const index = ({onGroupDeleted, onSourceDeleted}:LayerTypes) => {
         <div className={`${styles.layer} ${showDeleteLayer ? styles.active : ''}`} onClick={handleOverlayClick}>
             <div className={styles.layerInner}>
                 <div className={styles.layerHeader}>
-                    <Container>
-                        <div className={styles.layerTitle}>
-                            {isGroup && `Supprimer le groupe : ${selectedGroupName}`}
-                            {isSource && `Supprimer la source : ${selectedSourceName}`}
-                        </div>
+                    <Container className={styles.container}>
+                        <p className={styles.layerTitle}>
+                            {isGroup && (<>Supprimer le groupe "{selectedGroupName}"</>)}
+                            {isSource && (<>Supprimer la source "{selectedSourceName}"</>)}
+                        </p>
+                        <button className={styles.layerClose} onClick={() => setShowDeleteLayer(false)}>
+                            <span className={styles.layerCloseLine}></span>
+                            <span className={styles.layerCloseLine}></span>
+                        </button>
                     </Container>
                 </div>
                 <div className={styles.layerContent}>

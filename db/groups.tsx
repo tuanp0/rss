@@ -286,6 +286,28 @@ export const refreshSource = async (db: IDBDatabase, sourceId: number, groupId: 
   }
 }
 
+export const refreshAllSources = async (
+  db: IDBDatabase,
+  groupId: number
+): Promise<void> => {
+  const sources = await getSourcesByGroup(db, groupId)
+
+  // for (const source of sources) {
+  //   try {
+  //     await refreshSource(db, source.id, groupId)
+  //   } catch (err) {
+  //     console.error(`Error refreshing source ${source.id}`, err)
+  //   }
+  // }
+  await Promise.all(
+    sources.map(source =>
+      refreshSource(db, source.id, groupId).catch(err =>
+        console.error(`Error refreshing source ${source.id}`, err)
+      )
+    )
+  )
+}
+
 // ─── Posts ───────────────────────────────────────────────────────────────────
 
 export interface Post {

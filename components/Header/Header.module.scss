@@ -7,20 +7,29 @@
     &Container {
         display: flex;
         justify-content: flex-start;
-        align-items: center;
+        align-items: start;
         padding: 0 var(--padding);
+    }
+
+    &Button {
+        width: 42px;
+    }
+
+    &Action {
+        width: 42px;
     }
 
     &Title {
         font-weight: bold;
-        font-size: 1.275rem;
+        font-size: 1.25rem;
         text-align: center;
         color: var(--text);
         width: calc(100% - 76px);
+        margin-top: .75rem;
 
         &Span {
             display: inline-block;
-            padding: .625rem 3rem;
+            padding: .5rem 2rem;
             background-color: var(--glass);
             -webkit-backdrop-filter: blur(4px);
             backdrop-filter: blur(4px);

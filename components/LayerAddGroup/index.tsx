@@ -82,10 +82,11 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
 
         setLoading(true)
         setError(null)
-
+        
         try {
             // 1. Save the source and retrieve its generated id
-            await addSource(db, currentGroup, feed.title, feed.href)
+            let title = feed.title.split("»")[0].trim()
+            await addSource(db, currentGroup, title, feed.href)
             const sources = await getSourcesByGroup(db, currentGroup)
             const savedSource = sources.find((s) => s.url === feed.href)
             if (!savedSource) throw new Error("Source introuvable après ajout.")
@@ -139,15 +140,15 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
         <div className={`${styles.layer} ${showAddLayer ? styles.active : ''}`} onClick={handleOverlayClick}>
             <div className={styles.layerInner}>
                 <div className={styles.layerHeader}>
-                    <Container>
+                    <Container className={styles.container}>
+                        <p className={styles.layerTitle}>
+                            {currentStep === 1 && "Ajouter un groupe"}
+                            {currentStep === 2 && "Ajouter une source"}
+                        </p>
                         <button className={styles.layerClose} onClick={() => setShowAddLayer(false)}>
                             <span className={styles.layerCloseLine}></span>
                             <span className={styles.layerCloseLine}></span>
                         </button>
-                        <div className={styles.layerTitle}>
-                            {currentStep === 1 && "Ajouter un groupe"}
-                            {currentStep === 2 && "Ajouter une source"}
-                        </div>
                     </Container>
                 </div>
                 <div className={styles.layerContent}>

@@ -1,7 +1,7 @@
 'use client'
 import React, {useState} from 'react'
 import { useLayerContext } from '@/context/LayerContext'
-import { initDB, refreshSource } from '@/db/groups'
+import { initDB, refreshSource, refreshAllSources } from '@/db/groups'
 import Container from '@/components/Container'
 import Button from '@/components/Button'
 
@@ -19,7 +19,14 @@ const Header = () => {
     setRefreshing(true)
 
     try {
-      await refreshSource(db, currentSource, currentGroup)
+      if (currentSource === null || currentSource === 0) {
+        // refresh ALL sources
+        await refreshAllSources(db, currentGroup)
+      } else {
+        // refresh ONE source
+        await refreshSource(db, currentSource, currentGroup)
+      }
+      
       triggerRefresh()
     } catch (err) {
       console.error(err)
@@ -32,15 +39,19 @@ const Header = () => {
     <header className={styles.header}>
       <div className={styles.headerContent}>
         <Container className={styles.headerContainer}>
-          {currentStep === 1 && <Button text="Accéder aux paramètres" action={() => {}} icon={'parameter'} />}
-          {currentStep === 2 && <Button text="Accéder aux catégories" action={() => setCurrentStep(1)} icon={'previous'} />}
-          {currentStep === 3 && <Button text="Accéder aux sources" action={() => setCurrentStep(2)} icon={'previous'} />}
-          {currentStep === 4 && <Button text="Accéder aux news" action={() => setCurrentStep(3)} icon={'previous'} />}
+          <div className={styles.headerButton}>
+            {currentStep === 1 && <Button text="Accéder aux paramètres" action={() => {}} icon={'parameter'} />}
+            {currentStep === 2 && <Button text="Accéder aux catégories" action={() => setCurrentStep(1)} icon={'previous'} />}
+            {currentStep === 3 && <Button text="Accéder aux sources" action={() => setCurrentStep(2)} icon={'previous'} />}
+            {currentStep === 4 && <Button text="Accéder aux news" action={() => setCurrentStep(3)} icon={'previous'} />}
+          </div>
           <p className={styles.headerTitle}><span className={styles.headerTitleSpan}>TP Reader</span></p>
-          {currentStep === 1 && <Button text="Ajouter une catégorie" action={() => setShowAddLayer(true)} icon={'add'} />}
-          {currentStep === 2 && <Button text="Ajouter une source" action={()=> setShowAddLayer(true)} icon={'add'} />}
-          {currentStep === 3 && <Button text="Rafraîchir la liste" action={handleRefresh} icon={'refresh'} isRefreshing={refreshing} />}
-          {/* {currentStep === 4 && <Button text="Sauvegarder ce post" action={() => setShowAddLayer(true)} icon={'save'} />} */}
+          <div className={styles.headerAction}>
+            {currentStep === 1 && <Button text="Ajouter une catégorie" action={() => setShowAddLayer(true)} icon={'add'} />}
+            {currentStep === 2 && <Button text="Ajouter une source" action={()=> setShowAddLayer(true)} icon={'add'} />}
+            {currentStep === 3 && <Button text="Rafraîchir la liste" action={handleRefresh} icon={'refresh'} isRefreshing={refreshing} />}
+            {/* {currentStep === 4 && <Button text="Sauvegarder ce post" action={() => setShowAddLayer(true)} icon={'save'} />} */}
+          </div>
         </Container>
       </div>
     </header>

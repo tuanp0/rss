@@ -6,7 +6,7 @@ import styles from './PostItem.module.scss'
 const index = () => {
   const { currentStep, currentNews } = useLayerContext()
 
-  if (!currentNews) return null
+  // if (!currentNews) return null
 
   const getSiteName = (url: string): string => {
     try {
@@ -22,23 +22,27 @@ const index = () => {
       ${currentStep === 4 ? styles.active : ''}
     `}>
       <div className={styles.postItemInner}>
-        <div className={styles.postItemSource}>{getSiteName(currentNews.url)}</div>
+        <div className={styles.postItemSource}>{getSiteName(currentNews ? currentNews.url : '')}</div>
         <div className={styles.postItemTitle}>
-          <a href={currentNews.url} target="_blank" rel="noreferrer">{currentNews.title}</a>
+          <a href={currentNews ? currentNews.url : ''} target="_blank" rel="noreferrer">{currentNews ? currentNews.title : ''}</a>
         </div>
-        <time className={styles.postItemDate} dateTime={new Date(currentNews.publishedAt).toISOString()}>
-          {new Date(currentNews.publishedAt).toLocaleDateString('fr-FR', {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-          })}
+        <time className={styles.postItemDate} dateTime={currentNews ? new Date(currentNews.publishedAt).toISOString() : ''}>
+          {currentNews ?
+            new Date(currentNews.publishedAt).toLocaleDateString('fr-FR', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric'
+            })
+          :
+            ''
+          }
         </time>
         {/* {currentNews.thumbnail && (
           <img src={currentNews.thumbnail} alt={currentNews.title} className={styles.postItemThumbnail} />
         )} */}
         <div
           className={styles.postItemContent}
-          dangerouslySetInnerHTML={{ __html: currentNews.content }}
+          dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.content.replace(']]>', '').trim() : '' }}
         />
       </div>
     </section>

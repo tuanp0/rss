@@ -139,9 +139,12 @@
         width: 38px;
         height: 38px;
         padding: 0.25rem;
+        margin-top: 1.25rem;
+        margin-bottom: 1.25rem;
 
         .buttonIconSvg {
             path {
+                fill: transparent;
                 stroke: var(--text);
             }
         }
