@@ -40,6 +40,11 @@ const NewsItem = ({
     ?.replace('<![CDATA[', '')
     ?.replace(']]>', '')
 
+  const firstCharTitle = title.startsWith('『') || title.startsWith('"')  || title.startsWith('“')?
+    title.slice(1, 2)
+  :
+    title.slice(0, 1)
+
   return (
     <div className={styles.newsItem} onClick={handleNextStep}>
       <Container className={styles.container}>
@@ -52,7 +57,7 @@ const NewsItem = ({
             />
           ) : (
             <p className={styles.newsItemThumbnailText}>
-              {title.slice(0, 1)}
+              {firstCharTitle}
             </p>
           )}
         </div>

@@ -16,6 +16,19 @@ const index = () => {
     }
   }
 
+  const formattedTime = currentNews ?
+    new Date(currentNews.publishedAt).toLocaleDateString('fr-FR', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    }) +
+    ' - ' +
+    new Date(currentNews.publishedAt).toLocaleTimeString('fr-FR', {
+      hour: '2-digit',
+      minute: '2-digit'
+    })
+  : ''
+
   return (
     <section className={`
       ${styles.postItem}
@@ -27,15 +40,7 @@ const index = () => {
           <a href={currentNews ? currentNews.url : ''} target="_blank" rel="noreferrer">{currentNews ? currentNews.title : ''}</a>
         </div>
         <time className={styles.postItemDate} dateTime={currentNews ? new Date(currentNews.publishedAt).toISOString() : ''}>
-          {currentNews ?
-            new Date(currentNews.publishedAt).toLocaleDateString('fr-FR', {
-              day: 'numeric',
-              month: 'long',
-              year: 'numeric'
-            })
-          :
-            ''
-          }
+          {formattedTime}
         </time>
         {/* {currentNews.thumbnail && (
           <img src={currentNews.thumbnail} alt={currentNews.title} className={styles.postItemThumbnail} />

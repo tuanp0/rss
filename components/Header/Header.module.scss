@@ -11,20 +11,12 @@
         padding: 0 var(--padding);
     }
 
-    &Button {
-        width: 42px;
-    }
-
-    &Action {
-        width: 42px;
-    }
-
     &Title {
         font-weight: bold;
         font-size: 1.25rem;
         text-align: center;
         color: var(--text);
-        width: calc(100% - 76px);
+        width: 100%;
         margin-top: .75rem;
 
         &Span {

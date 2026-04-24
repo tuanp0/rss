@@ -29,6 +29,7 @@
         height: 28px;
         background: var(--white);
         border: 2px solid var(--grey);
+        pointer-events: none;
 
         &Svg {
             width: calc(100% - 8px);
@@ -49,5 +50,6 @@
         width: calc(100% - 68px);
         white-space: nowrap;
         overflow: hidden;
+        pointer-events: none;
     }
 }

@@ -1,21 +1,35 @@
 .footer {
     position: fixed;
-    bottom: 1.25rem;
+    bottom: 1.5rem;
     width: 100%;
-    padding: 0 var(--padding);
     text-align: center;
 
     @media screen and (min-width:992px) {
-        bottom: 1rem;
+        bottom: 1.25rem;
     }
 
-    &Inner {
+    &Container {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0 var(--padding);
+    }
+
+    &Button {
+        width: 42px;
+    }
+
+    &Action {
+        width: 42px;
+    }
+
+    &Content {
         display: inline-flex;
         justify-content: space-between;
-        gap: 1rem;
+        gap: .5rem;
         margin: 0 auto;
         max-width: 500px;
-        padding: .25rem 1.25rem .25rem 1.5rem;
+        padding: .25rem 1rem .25rem 1.25rem;
         background-color: var(--glass);
         -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
@@ -32,12 +46,14 @@
         cursor: pointer;
         border-radius: 20px;
 
-        &:hover {
-            background: var(--hover);
+        @media screen and (min-width:992px) {
+            &:hover {
+                background: var(--hover);
+            }
         }
 
         &Svg {
-            width: 22px;
+            width: 20px;
             height: auto;
             display: block;
             margin: 0 auto 0.25rem auto;
@@ -48,7 +64,7 @@
         }
 
         &Text {
-            font-size: .875rem;
+            font-size: .75rem;
             color: var(--text);
             width: 100%;
             display: inline-block;
