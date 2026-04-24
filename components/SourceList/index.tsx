@@ -18,7 +18,7 @@ interface SourcesTypes {
 }
 
 const SourceList = ({ onReady }: SourcesTypes) => {
-  const { currentStep, currentGroup } = useLayerContext()
+  const { currentStep, currentGroup, showAddLayer } = useLayerContext()
   const [sources, setSources] = useState<Source[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [db, setDb] = useState<IDBDatabase | null>(null)
@@ -64,6 +64,7 @@ const SourceList = ({ onReady }: SourcesTypes) => {
     <section
       className={`
         ${styles.source}
+        ${showAddLayer ? styles.secondary : ''}
         ${currentStep === 2 ? styles.active : ''}
         ${currentStep >= 3 ? styles.past : ''}
       `}

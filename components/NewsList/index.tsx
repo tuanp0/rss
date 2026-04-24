@@ -11,14 +11,12 @@ const NewsList = () => {
   const [posts, setPosts] = useState<Post[]>([])
   const [db, setDb] = useState<IDBDatabase | null>(null)
 
-  // Init DB
   useEffect(() => {
     initDB()
       .then((database) => setDb(database))
       .catch(console.error)
   }, [])
 
-  // Sort helper
   const sortPosts = (posts: Post[]) =>
     [...posts].sort(
       (a, b) =>
@@ -26,7 +24,6 @@ const NewsList = () => {
         new Date(a.publishedAt).getTime()
     )
 
-  // Fetch posts
   useEffect(() => {
     if (!db) return
 
@@ -51,7 +48,6 @@ const NewsList = () => {
     fetchData()
   }, [db, currentGroup, currentSource, refreshTrigger])
 
-  // Group posts by date
   const groupPostsByDate = (posts: Post[]) => {
     return posts.reduce((groups: Record<string, Post[]>, post) => {
       const dateKey = new Date(post.publishedAt).toLocaleDateString('fr-FR', {
@@ -70,12 +66,11 @@ const NewsList = () => {
   }
 
   const groupedPosts = groupPostsByDate(posts)
-  console.log(groupedPosts)
+
   return (
     <section
       className={`
         ${styles.news}
-        ${currentStep <= 2 ? styles.next : ''}
         ${currentStep === 3 ? styles.active : ''}
         ${currentStep >= 4 ? styles.past : ''}
       `}

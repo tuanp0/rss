@@ -8,31 +8,40 @@
     padding-top: var(--headerTop);
     padding-bottom: 6rem;
     background-color: var(--background);
-    background-image: url('/noise.png');
+    // background-image: url('/noise.png');
     background-repeat: repeat;
     background-attachment: fixed;
     background-size: 200px 200px;
     transform: translateX(calc(100% + 10px));
     transition: transform .4s ease-in-out;
-    box-shadow: 0 0 10px 0 var(--black20);
+
+    &>div {
+        margin-top: 50px;
+        opacity: 0;
+        transition: margin-top .7s ease-in-out, opacity 1s ease-in-out;
+    }
 
     &.active {
-        transform: translate(0);
+        transform: translateX(0);
         overflow-y: auto;
+
+        &>div {
+            margin-top: 0;
+            opacity: 1;
+        }
     }
 
     &.past {
         transform: translateX(-50%);
         overflow-y: auto;
 
+        &>div {
+            margin-top: 0;
+            opacity: 1;
+        }
+
         @media screen and (min-width:992px) {
             transform: translate(0);
-        }
-    }
-
-    &.next {
-        &>div {
-            opacity: 0;
         }
     }
 
@@ -40,6 +49,7 @@
         position: relative;
         width: 320px;
         transform: translate(0);
+        box-shadow: 0 0 10px 0 var(--black20);
     }
 
     &Content {

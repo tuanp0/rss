@@ -22,7 +22,7 @@ const index = ({text, action, icon, isRefreshing}: Button) => {
         }
 
         {icon === 'previous' &&
-          <div className={`${styles.buttonPrev} ${styles.buttonIcon}`} onClick={() => setCurrentStep(1)}>
+          <div className={`${styles.buttonPrev} ${styles.buttonIcon}`}>
             <span className={styles.buttonPrevLine}></span>
             <span className={styles.buttonPrevLine}></span>
           </div>

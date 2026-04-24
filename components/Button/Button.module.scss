@@ -1,3 +1,5 @@
+@use '../../styles/animation.scss' as *;
+
 .button {
     display: flex;
     align-items: center;
@@ -119,7 +121,7 @@
         border-radius: 100%;
 
         &.refreshing {
-            animation: rotate 4s linear infinite;
+            animation: rotate 1.5s linear infinite;
         }
 
         .buttonIconSvg {
