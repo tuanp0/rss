@@ -64,7 +64,7 @@ const NewsItem = ({
 
         <div className={styles.newsItemContent}>
           <h2 className={styles.newsItemContentTitle}>
-            {title.length > 60 ? title.slice(0, 60) + '...' : title}
+            {title.length > 65 ? title.slice(0, 65) + '...' : title}
           </h2>
 
           <time
