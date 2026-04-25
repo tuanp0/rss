@@ -90,6 +90,17 @@
         max-width: 600px;
     }
 
+    &Desc {
+        @include wysiwyg();
+        font-family: 'Times New Roman', sans-serif;
+        font-size: 1rem;
+        color: var(--text);
+        text-align: justify;
+        opacity: .7;
+        font-style: italic;
+        margin-bottom: 2rem;
+    }
+
     &Content {
         @include wysiwyg();
         font-family: 'Times New Roman', sans-serif;

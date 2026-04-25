@@ -84,17 +84,18 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
         setError(null)
         
         try {
-            // 1. Save the source and retrieve its generated id
+            const { posts } = await parseRSSFeed(feed.href)
+
+            if (posts.length === 0) {
+                throw new Error("Aucun article trouvé dans ce flux RSS.")
+            }
+
             let title = feed.title.split("»")[0].trim()
             await addSource(db, currentGroup, title, feed.href)
             const sources = await getSourcesByGroup(db, currentGroup)
             const savedSource = sources.find((s) => s.url === feed.href)
             if (!savedSource) throw new Error("Source introuvable après ajout.")
 
-            // 2. Fetch and parse the feed posts
-            const { posts } = await parseRSSFeed(feed.href)
-
-            // 3. Filter posts within the last 30 days and store them
             const cutoff = new Date()
             cutoff.setDate(cutoff.getDate() - DAYS_LIMIT)
 

@@ -91,7 +91,6 @@ export async function findRSSFeeds(url: string): Promise<RSSFeed[]> {
 
     // Fetch the page HTML via CORS proxy
     const res = await fetch(`${CORS_PROXY}${encodeURIComponent(url)}`);
-    
     if (!res.ok) throw new Error(`Failed to fetch page: ${res.status} ${res.statusText}`);
 
     const html = await res.text();
@@ -102,6 +101,7 @@ export async function findRSSFeeds(url: string): Promise<RSSFeed[]> {
         const href = $(el).attr("href");
         const title = $(el).attr("title") || "Untitled Feed";
         const type = $(el).attr("type") || "";
+        console.log(href)
         if (href) {
             const absolute = href.startsWith("http") ? href : new URL(href, url).href;
             feeds.push({ href: absolute, title, type });

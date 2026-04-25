@@ -5,7 +5,6 @@ import styles from './PostItem.module.scss'
 
 const index = () => {
   const { currentStep, currentNews } = useLayerContext()
-
   // if (!currentNews) return null
 
   const getSiteName = (url: string): string => {
@@ -45,6 +44,10 @@ const index = () => {
         {/* {currentNews.thumbnail && (
           <img src={currentNews.thumbnail} alt={currentNews.title} className={styles.postItemThumbnail} />
         )} */}
+        <div
+          className={styles.postItemDesc}
+          dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.shortDesc.replace(']]>', '').trim() : '' }}
+        />
         <div
           className={styles.postItemContent}
           dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.content.replace(']]>', '').trim() : '' }}

@@ -365,7 +365,7 @@ export const addPost = (
   url: string,
   shortDesc: string,
   content: string,
-  thumbnail: string,
+  thumbnail: string | null,
   publishedAt: Date | string
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
