@@ -13,9 +13,10 @@ interface GroupItemTypes {
 const GroupItem = ({ groupId, text, itemCount, onDelete }: GroupItemTypes) => {
   const { setCurrentStep, setCurrentGroup, setShowDeleteLayer, setIsGroup, setIsSource, setSelectedGroupId, setSelectedGroupName } = useLayerContext()
 
-  const handleNextStep = (groupId: number) => {
+  const handleNextStep = (groupId: number, name: string) => {
     setCurrentStep(2)
     setCurrentGroup(groupId)
+    setSelectedGroupName(name)
   }
   
   const handleDeleteGroup = (groupId: number, name: string) => {
@@ -27,7 +28,7 @@ const GroupItem = ({ groupId, text, itemCount, onDelete }: GroupItemTypes) => {
   }
 
   return (
-    <div className={styles.groupItem} onClick={() => handleNextStep(groupId)}>
+    <div className={styles.groupItem} onClick={() => handleNextStep(groupId, text)}>
         <div className={styles.groupItemIcon}>
             <svg 
               width="24px" 

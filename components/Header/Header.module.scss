@@ -13,19 +13,22 @@
 
     &Title {
         font-weight: bold;
-        font-size: 1.25rem;
+        font-size: 1.125rem;
         text-align: center;
         color: var(--text);
         width: 100%;
         margin-top: .75rem;
 
         &Span {
+            width: auto;
+            max-width: calc(100% - 80px);
             display: inline-block;
             padding: .5rem 2rem;
             background-color: var(--glass);
             -webkit-backdrop-filter: blur(4px);
             backdrop-filter: blur(4px);
             border-radius: 2rem;
+            transition: width .4s ease-in-out;
         }
     }
 }

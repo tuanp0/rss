@@ -4,6 +4,7 @@
     width: 100%;
     text-align: center;
     padding: 0 1rem;
+    pointer-events: none;
 
     @media screen and (min-width:992px) {
         bottom: 1.25rem;
@@ -18,10 +19,12 @@
 
     &Button {
         width: 42px;
+        pointer-events: auto;
     }
 
     &Action {
         width: 42px;
+        pointer-events: auto;
     }
 
     &Content {
@@ -35,6 +38,7 @@
         -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
         border-radius: 30px;
+        pointer-events: auto;
     }
 
     &Item {

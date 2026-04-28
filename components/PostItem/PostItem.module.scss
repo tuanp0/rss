@@ -32,11 +32,13 @@
         margin-top: 300px;
         opacity: 0;
         padding: 0 1rem;
+        pointer-events: none;
         transition: margin-top .7s ease-in-out, opacity 1s ease-in-out;
 
         .active & {
             margin-top: 0;
             opacity: 1;
+            pointer-events: auto;
         }
     }
     

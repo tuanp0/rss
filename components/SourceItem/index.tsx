@@ -17,6 +17,7 @@ const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
   const handleNextStep = (sourceId: number) => {
     setCurrentStep(3)
     setCurrentSource(sourceId)
+    setSelectedSourceName(name)
   }
 
   const handleDeleteSource = () => {

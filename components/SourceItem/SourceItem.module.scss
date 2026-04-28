@@ -41,7 +41,8 @@
     &Name {
         position: relative;
         font-weight: bold;
-        font-size: 1em;
+        font-size: 1rem;
+        line-height: 1;
         text-align: left;
         color: var(--text);
         padding-left: 1rem;
