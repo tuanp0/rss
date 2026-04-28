@@ -75,7 +75,9 @@ const SourceList = ({ onReady }: SourcesTypes) => {
         {!loading && sources.length === 0 && <p className={styles.sourceContentText}>Aucune source</p>}
         {!loading && sources.length > 0 && (
           <div className={styles.sourceList}>
-            <SourceItem name={'Toutes les sources'} icon={'star'} sourceId={0} onDelete={() => db && fetchSources(db)}/>
+            <div className={styles.sourceListAll}>
+              <SourceItem name={'Toutes les sources'} icon={'star'} sourceId={0} onDelete={() => db && fetchSources(db)}/>
+            </div>
             {sources.map((source, key) => (
               <SourceItem icon={source.favicon} name={getSiteName(source.name)} key={key} sourceId={source.id} onDelete={() => db && fetchSources(db)} />
             ))}

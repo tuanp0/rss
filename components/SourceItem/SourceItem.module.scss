@@ -2,13 +2,13 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: .75rem var(--padding);
+    padding: .375rem var(--padding);
     cursor: pointer;
     background: transparent;
     transition: all .1s ease-in-out;
 
     @media screen and (min-width:768px) {
-        padding: .625rem calc(var(--padding)/2);
+        padding: .5rem calc(var(--padding)/2);
     }
 
     &:hover {
@@ -49,7 +49,7 @@
     &Name {
         position: relative;
         font-weight: bold;
-        font-size: .875rem;
+        font-size: 1rem;
         line-height: 1;
         text-align: left;
         color: var(--text);

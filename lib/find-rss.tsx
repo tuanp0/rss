@@ -58,7 +58,7 @@ export async function findRSSFeeds(url: string): Promise<RSSFeed[]> {
     // 1. Find <link> tags in <head>
     $('link[type="application/rss+xml"], link[type="application/atom+xml"], link[type="application/feed+json"]').each((_, el) => {
         const href = $(el).attr("href");
-        const title = $(el).attr("title") || "Untitled Feed";
+        const title = $("title").text()|| $(el).attr("title") || "Untitled Feed";
         const type = $(el).attr("type") || "";
 
         if (href) {
