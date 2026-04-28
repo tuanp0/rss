@@ -159,6 +159,7 @@ export interface Source {
   groupId: number;
   name: string;
   url: string;
+  favicon: string
 }
 
 export const getSourcesByGroup = (db: IDBDatabase, groupId: number): Promise<Source[]> => {
@@ -177,7 +178,8 @@ export const addSource = (
   db: IDBDatabase,
   groupId: number,
   name: string,
-  url: string
+  url: string,
+  favicon: string,
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction('source', 'readwrite');
@@ -196,7 +198,7 @@ export const addSource = (
         return;
       }
 
-      const addRequest = store.add({ groupId, name, url });
+      const addRequest = store.add({ groupId, name, url, favicon });
       addRequest.onsuccess = () => resolve();
       addRequest.onerror = () => reject(addRequest.error);
     };

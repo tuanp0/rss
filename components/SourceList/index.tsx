@@ -11,6 +11,7 @@ interface Source {
   groupId: number
   name: string
   url: string
+  favicon: string  
 }
 
 interface SourcesTypes {
@@ -76,7 +77,7 @@ const SourceList = ({ onReady }: SourcesTypes) => {
           <div className={styles.sourceList}>
             <SourceItem name={'Toutes les sources'} icon={'star'} sourceId={0} onDelete={() => db && fetchSources(db)}/>
             {sources.map((source, key) => (
-              <SourceItem name={getSiteName(source.name)} key={key} sourceId={source.id} onDelete={() => db && fetchSources(db)} />
+              <SourceItem icon={source.favicon} name={getSiteName(source.name)} key={key} sourceId={source.id} onDelete={() => db && fetchSources(db)} />
             ))}
             <span className={styles.sourceContentCount}>{sources.length} {sources.length <= 1 ? 'source' : 'sources'}</span>
           </div>

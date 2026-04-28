@@ -11,6 +11,7 @@ interface Feed {
     href: string
     title: string
     type: string
+    favicon: string
 }
 
 interface LayerTypes {
@@ -84,13 +85,13 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
         
         try {
             const { posts } = await parseRSSFeed(feed.href)
-
+            console.log(feed)
             if (posts.length === 0) {
                 throw new Error("Aucun article trouvé dans ce flux RSS.")
             }
 
             let title = feed.title.split("»")[0].trim()
-            await addSource(db, currentGroup, title, feed.href)
+            await addSource(db, currentGroup, title, feed.href, feed.favicon)
             const sources = await getSourcesByGroup(db, currentGroup)
             const savedSource = sources.find((s) => s.url === feed.href)
             if (!savedSource) throw new Error("Source introuvable après ajout.")
