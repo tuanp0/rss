@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { initDB, deleteGroup, deleteSource } from '@/db/groups'
 import { useLayerContext } from '@/context/LayerContext'
 import Container from '@/components/Container'
+
 import styles from './LayerDeleteGroup.module.scss'
 
 interface LayerTypes {
@@ -10,7 +11,7 @@ interface LayerTypes {
 }
 
 const index = ({onGroupDeleted, onSourceDeleted}:LayerTypes) => {
-    const { currentStep, showDeleteLayer, setShowDeleteLayer, isGroup, isSource, selectedGroupId, selectedGroupName, selectedSourceId, selectedSourceName } = useLayerContext()
+    const { showDeleteLayer, setShowDeleteLayer, isGroup, isSource, selectedGroupId, selectedGroupName, selectedSourceId, selectedSourceName } = useLayerContext()
 
     const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target === e.currentTarget) {

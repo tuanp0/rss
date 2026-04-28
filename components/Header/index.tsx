@@ -7,7 +7,6 @@ import styles from './Header.module.scss'
 
 const Header = () => {
   const { currentStep, selectedGroupName, selectedSourceName } = useLayerContext()
-  console.log(currentStep)
 
   return (
     <header className={styles.header}>

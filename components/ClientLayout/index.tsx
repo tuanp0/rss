@@ -3,6 +3,7 @@ import { LayerProvider, useLayerContext } from '@/context/LayerContext'
 import Header from '@/components/Header'
 import LayerAddGroup from '@/components/LayerAddGroup'
 import LayerDeleteGroup from '@/components/LayerDeleteGroup'
+import LayerInformations from '@/components/LayerInformations'
 import Footer from '@/components/Footer'
 
 import styles from './ClientLayout.module.scss'
@@ -33,6 +34,7 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
             refreshSources && refreshSources()
           }}
         />
+        <LayerInformations />
       </div>
       <Footer />
     </>

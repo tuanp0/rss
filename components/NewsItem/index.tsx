@@ -40,7 +40,7 @@ const NewsItem = ({
     ?.replace('<![CDATA[', '')
     ?.replace(']]>', '')
 
-  const firstCharTitle = title.startsWith('『') || title.startsWith('"')  || title.startsWith('“')?
+  const firstCharTitle = title.startsWith('『') || title.startsWith('"')  || title.startsWith('“') || title.startsWith('【') ?
     title.slice(1, 2)
   :
     title.slice(0, 1)

@@ -61,10 +61,9 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
         setAvailableFeeds([])
 
         try {
-            const feeds = await findRSSFeeds(urlInput.trim())
+            const feeds = await findRSSFeeds(urlInput.trim().toLowerCase())
 
             if (feeds.length === 0) throw new Error("Aucun flux RSS trouvé pour cette URL.")
-
             if (feeds.length === 1) {
                 await confirmFeed(feeds[0])
             } else {
@@ -167,7 +166,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                         {currentStep === 2 && (
                             <>
                                 <input
-                                    type="text"
+                                    type="url"
                                     className={styles.layerInput}
                                     value={urlInput}
                                     placeholder="URL de la source"
