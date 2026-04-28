@@ -72,7 +72,6 @@ const index = () => {
             <button
               className={styles.footerItem}
               onClick={() => {
-                console.log("first")
                 setShowInformationsLayer(true)
                 setShowAddLayer(false)
                 setShowDeleteLayer(false)

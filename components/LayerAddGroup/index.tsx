@@ -63,7 +63,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
         try {
             const feeds = await findRSSFeeds(urlInput.trim().toLowerCase())
 
-            if (feeds.length === 0) throw new Error("Aucun flux RSS trouvé pour cette URL.")
+            if (feeds.length === 0) throw new Error("Aucun flux RSS trouvé pour cette URLsss.")
             if (feeds.length === 1) {
                 await confirmFeed(feeds[0])
             } else {
@@ -186,7 +186,8 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                                                         disabled={loading}
                                                     >
                                                         <span className={styles.layerFeedTitle}>{feed.title}</span>
-                                                        {/* <span className={styles.feedHref}>{feed.href}</span> */}
+                                                        <br/>
+                                                        <span className={styles.layerFeedHref}>{feed.href}</span>
                                                     </button>
                                                 </li>
                                             ))}
