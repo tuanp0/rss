@@ -1,7 +1,7 @@
 import * as cheerio from "cheerio";
 
 const CORS_PROXY = "https://api.codetabs.com/v1/proxy?quest=";
-// const CORS_PROXY = "";
+// const CORS_PROXY = "https://api.rss2json.com/v1/api.json?rss_url=";
 
 export type RSSFeed = {
     href: string
@@ -11,7 +11,7 @@ export type RSSFeed = {
 }
 
 async function imageUrlToBase64(imageUrl: string): Promise<string> {
-    const res = await fetch(imageUrl);
+    const res = await fetch(`${CORS_PROXY}${encodeURIComponent(imageUrl)}`);
 
     if (!res.ok) {
         throw new Error(`Failed to fetch image: ${res.status}`);
@@ -27,9 +27,10 @@ async function imageUrlToBase64(imageUrl: string): Promise<string> {
 
 async function extractFaviconBase64($: cheerio.CheerioAPI, baseUrl: string): Promise<string> {
     const icon =
+        $('link[rel="icon"][sizes="48x48"]').attr("href") ||
         $('link[rel="icon"]').attr("href") ||
         $('link[rel="shortcut icon"]').attr("href") ||
-        $('link[rel="apple-touch-icon"]').attr("href") ||
+        $('link[rel="apple-touch-icon"][sizes="152x152"]').attr("href") ||
         "/favicon.ico";
 
     const absolute = icon.startsWith("http")
@@ -78,34 +79,34 @@ export async function findRSSFeeds(url: string): Promise<RSSFeed[]> {
     });
 
     // 3. Try common well-known paths
-    const commonPaths = ["/feed", "/rss", "/atom.xml", "/feed.xml", "/rss.xml", "/index.xml"];
+    // const commonPaths = ["/feed", "/rss", "/atom.xml", "/feed.xml", "/rss.xml", "/index.xml"];
 
-    const normalizedUrl = url.replace(/\/$/, "");
-    const urlAlreadyHasCommonPath = commonPaths.some((path) =>
-        new URL(normalizedUrl).pathname.endsWith(path)
-    );
+    // const normalizedUrl = url.replace(/\/$/, "");
+    // const urlAlreadyHasCommonPath = commonPaths.some((path) =>
+    //     new URL(normalizedUrl).pathname.endsWith(path)
+    // );
 
-    if (urlAlreadyHasCommonPath) {
-        const r = await fetch(`${CORS_PROXY}${encodeURIComponent(normalizedUrl)}`);
-        const ct = r.headers.get("content-type") || "";
+    // if (urlAlreadyHasCommonPath) {
+    //     const r = await fetch(`${CORS_PROXY}${encodeURIComponent(normalizedUrl)}`);
+    //     const ct = r.headers.get("content-type") || "";
 
-        if (r.ok && /xml|rss|atom|feed/i.test(ct)) {
-            feeds.push({ href: normalizedUrl, title: new URL(normalizedUrl).pathname, type: ct, favicon });
-        }
-    } else {
-        await Promise.allSettled(
-            commonPaths.map(async (path) => {
-                const candidate = new URL(path, normalizedUrl).href;
-                if (feeds.find((f) => f.href === candidate)) return;
-                const r = await fetch(`${CORS_PROXY}${encodeURIComponent(candidate)}`);
-                const ct = r.headers.get("content-type") || "";
+    //     if (r.ok && /xml|rss|atom|feed/i.test(ct)) {
+    //         feeds.push({ href: normalizedUrl, title: new URL(normalizedUrl).pathname, type: ct, favicon });
+    //     }
+    // } else {
+    //     await Promise.allSettled(
+    //         commonPaths.map(async (path) => {
+    //             const candidate = new URL(path, normalizedUrl).href;
+    //             if (feeds.find((f) => f.href === candidate)) return;
+    //             const r = await fetch(`${CORS_PROXY}${encodeURIComponent(candidate)}`);
+    //             const ct = r.headers.get("content-type") || "";
 
-                if (r.ok && /xml|rss|atom|feed/i.test(ct)) {
-                    feeds.push({ href: candidate, title: path, type: ct, favicon });
-                }
-            })
-        );
-    }
+    //             if (r.ok && /xml|rss|atom|feed/i.test(ct)) {
+    //                 feeds.push({ href: candidate, title: path, type: ct, favicon });
+    //             }
+    //         })
+    //     );
+    // }
 
     if (feeds.length === 0) throw new Error("Aucun flux RSS trouvé pour cette URL.");
     return feeds;

@@ -70,11 +70,8 @@ const xmlParser = new XMLParser({
 // ─── Proxies ──────────────────────────────────────────────────────────────────
 
 const CORS_PROXIES = [
-  (url: string) =>
-    `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-
-  (url: string) =>
-    `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`,
+  (url: string) =>`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+  (url: string) =>`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`,
 ];
 
 // ─── Feed types ───────────────────────────────────────────────────────────────
@@ -97,7 +94,7 @@ async function fetchBestFeed(url: string): Promise<FeedResult> {
 
   await Promise.all(
     CORS_PROXIES.map(async (proxy) => {
-      console.log(proxy(url))
+
       try {
         const res = await fetch(proxy(url));
         if (!res.ok) return;
@@ -110,7 +107,7 @@ async function fetchBestFeed(url: string): Promise<FeedResult> {
 
           const items = Array.isArray(json?.items) ? json.items : [];
           const count = items.length;
-          console.log(count)
+
           results.push({
             type: "json",
             data: json,
@@ -126,7 +123,7 @@ async function fetchBestFeed(url: string): Promise<FeedResult> {
 
         const items = toArray(channel?.item);
         const count = items.length;
-        console.log(count)
+
         results.push({
           type: "xml",
           data: text,
@@ -137,7 +134,6 @@ async function fetchBestFeed(url: string): Promise<FeedResult> {
       }
     })
   );
-  console.log(results.length)
 
   if (!results.length) {
     throw new Error("All RSS proxies failed or returned invalid data");
@@ -151,23 +147,50 @@ async function fetchBestFeed(url: string): Promise<FeedResult> {
 // ─── Normalize feed ───────────────────────────────────────────────────────────
 
 function normalizeFeed(result: FeedResult): RSSPost[] {
-  // ─── JSON SOURCE ───────────────────────────────────────────
-  if (result.type === "json") {
-    const items = Array.isArray(result.data?.items)
-      ? result.data.items
-      : [];
 
-    return items.map((item: any): RSSPost => ({
+  // ─── JSON SOURCE ───────────────────────────────────────────
+  // if (result.type === "json") {
+  //   const items = Array.isArray(result.data?.items)
+  //     ? result.data.items
+  //     : [];
+
+  //   return items.map((item: any): RSSPost => ({
+  //     title: item.title ?? "",
+  //     postUrl: item.link ?? "",
+  //     publishedAt: new Date(
+  //       item.pubDate ?? item.isoDate ?? Date.now()
+  //     ).toISOString(),
+  //     shortDesc: item.description ?? "",
+  //     content: item.content ?? item.description ?? "",
+  //     thumbnail: item.thumbnail ?? item.enclosure?.link ?? "",
+  //   }));
+  // }
+
+  if (result.type === "json") {
+  const items = Array.isArray(result.data?.items) ? result.data.items : [];
+
+  return items.map((item: any): RSSPost => {
+    const content = item.content ?? item.description ?? "";
+
+    const thumbnail =
+      item.thumbnail ||
+      item.enclosure?.link ||
+      extractFirstImage(content) ||
+      extractFirstImage(item.description ?? "") ||
+      "";
+
+    return {
       title: item.title ?? "",
       postUrl: item.link ?? "",
       publishedAt: new Date(
         item.pubDate ?? item.isoDate ?? Date.now()
       ).toISOString(),
       shortDesc: item.description ?? "",
-      content: item.content ?? item.description ?? "",
-      thumbnail: item.thumbnail ?? item.enclosure?.link ?? "",
-    }));
-  }
+      content,
+      thumbnail,
+    };
+  });
+}
 
   // ─── XML SOURCE ────────────────────────────────────────────
   const parsed = xmlParser.parse(result.data);
@@ -202,14 +225,14 @@ export async function parseRSSFeed(
 
 // ─── MULTI-FEED SUPPORT ───────────────────────────────────────────────────────
 
-export async function parseMultipleRSSFeeds(
-  urls: string[]
-): Promise<{ posts: RSSPost[] }[]> {
-  const results = await Promise.allSettled(urls.map(parseRSSFeed));
+// export async function parseMultipleRSSFeeds(
+//   urls: string[]
+// ): Promise<{ posts: RSSPost[] }[]> {
+//   const results = await Promise.allSettled(urls.map(parseRSSFeed));
 
-  return results.map((r) =>
-    r.status === "fulfilled"
-      ? r.value
-      : { posts: [] }
-  );
-}
+//   return results.map((r) =>
+//     r.status === "fulfilled"
+//       ? r.value
+//       : { posts: [] }
+//   );
+// }

@@ -27,7 +27,7 @@
         align-items: center;
         width: 28px;
         height: 28px;
-        // background: var(--white);
+        background: var(--white);
         pointer-events: none;
 
         &Svg {
@@ -40,8 +40,8 @@
         }
 
         &Img {
-            width: calc(100% - .25rem);
-            height: calc(100% - .25rem);
+            width: 100%;
+            height: 100%;
             display: block;
         }
     }
@@ -49,7 +49,7 @@
     &Name {
         position: relative;
         font-weight: bold;
-        font-size: 1rem;
+        font-size: .875rem;
         line-height: 1;
         text-align: left;
         color: var(--text);

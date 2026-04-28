@@ -85,7 +85,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
         
         try {
             const { posts } = await parseRSSFeed(feed.href)
-            console.log(feed)
+
             if (posts.length === 0) {
                 throw new Error("Aucun article trouvé dans ce flux RSS.")
             }
