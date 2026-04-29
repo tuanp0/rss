@@ -48,10 +48,12 @@ const index = () => {
           className={styles.postItemDesc}
           dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.shortDesc.replace(']]>', '').trim() : '' }}
         />
-        <div
-          className={styles.postItemContent}
-          dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.content.replace(']]>', '').trim() : '' }}
-        />
+        {currentNews && (currentNews.shortDesc !== currentNews.content) &&
+          <div
+            className={styles.postItemContent}
+            dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.content.replace(']]>', '').trim() : '' }}
+          />
+        }
       </div>
     </section>
   )

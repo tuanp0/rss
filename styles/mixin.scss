@@ -42,7 +42,7 @@
         margin-bottom: 1rem;
 
         @media screen and (min-width:768px) {
-            font-size: 1rem;
+            font-size: 1.125rem;
         }
     }
 
@@ -87,7 +87,7 @@
     img {
         max-width: 100%;
         height: auto;
-        margin: 0 auto;
+        margin: 0 auto .5rem 0;
         display: block;
     }
 }

@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { initDB, getSourcesByGroup } from '@/db/groups'
 import { useLayerContext } from '@/context/LayerContext'
 import SourceItem from '@/components/SourceItem'

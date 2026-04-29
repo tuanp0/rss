@@ -9,11 +9,11 @@
     background-repeat: repeat;
     background-attachment: fixed;
     background-size: 250px 250px;
-    transition: border-radius .2s ease-in-out, transform .4s ease-in-out;
+    transition: border-radius .2s ease-in-out, transform .4s cubic-bezier(0.4, 0, 0.3, 1);
     overflow-y: auto;
     
     @media screen and (min-width:992px) {
-        width: 320px;
+        width: 300px;
         transform: translateX(0);
         box-shadow: 0 0 10px 0 var(--black20);
     }

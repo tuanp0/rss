@@ -18,11 +18,12 @@
     &.active {
         transform: translate(0);
         overflow-y: auto;
+        transition: transform .4s ease-in-out;
     }
 
     @media screen and (min-width:992px) {
         position: relative;
-        width: calc(100% - 960px);
+        width: calc(100% - 900px);
         padding: 6rem var(--padding) 8rem var(--padding);
         transform: translate(0);
         box-shadow: 0 0 10px 0 var(--black20);
@@ -33,7 +34,7 @@
         opacity: 0;
         padding: 0 1rem;
         pointer-events: none;
-        transition: margin-top .7s ease-in-out, opacity 1s ease-in-out;
+        transition: margin-top .7s cubic-bezier(0.4, 0, 0.3, 1) .4s, opacity 1s cubic-bezier(0.4, 0, 0.3, 1) .4s;
 
         .active & {
             margin-top: 0;
@@ -101,6 +102,10 @@
         opacity: .7;
         font-style: italic;
         margin-bottom: 2rem;
+
+        @media screen and (min-width:768px) {
+            font-size: 1.125rem;
+        }
     }
 
     &Content {

@@ -87,5 +87,13 @@
 
     &Content {
         @include wysiwyg();
+        
+        h2 {
+            font-size: 1rem;
+        }
+        
+        p {
+            font-size: .75rem;
+        }
     }
 }

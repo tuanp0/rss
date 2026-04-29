@@ -32,11 +32,15 @@ const index = () => {
         </div>
         <div className={styles.layerContent}>
           <Container>
-            <p>Une <strong>application web légère et pratique</strong> pour rassembler tous vos flux RSS en un seul endroit.<br/>
-              Plus besoin de visiter chaque site un par un, retrouvez les derniers articles de vos sources préférées directement sur votre écran, à tout moment.</p>
-            <p><strong>Aucune donnée personelle n'est collectée</strong>. Les flux RSS sont sauvegardés sur le device utilisé de l'utilisateur.</p>
-            <p>Une version offline sera prochainement mise en place pour pouvoir consulter les articles déjà chargés sans connexion internet.</p>
-            <p>C'est votre espace de lecture personnel. Rapide, privé, et à jour lorsque vous le souhaitez.</p>
+            <p>
+              Une <strong>application web légère et pratique</strong> pour rassembler tous vos flux RSS en un seul endroit.<br/>
+              Plus besoin de visiter chaque site un par un, retrouvez les articles de vos sources préférées directement sur votre écran, à tout moment.</p>
+            <p>
+              <strong>Aucune donnée personelle n'est collectée</strong>. Les flux RSS et articles sont sauvegardés sur le device utilisé.<br/>
+              C'est votre espace de lecture personnel. Rapide, privé, et à jour lorsque vous le souhaitez.
+            </p>
+
+            <p><i>Une version offline sera prochainement mise en place pour pouvoir consulter les articles déjà chargés sans connexion internet.</i></p>
             <h2>Tuan Phung</h2>
             <p>
               Site internet : <Link href={`https://tuanphung.com/`}target={`_blank`}>https://tuanphung.com/</Link><br/>
