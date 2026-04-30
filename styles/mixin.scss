@@ -1,5 +1,12 @@
 @use './font.scss' as *;
 
+@mixin background() {
+    background-color: var(--background);
+    background-image: url('/noise.png');
+    background-repeat: repeat;
+    background-size: 250px 250px;
+}
+
 @mixin wysiwyg() {
     h1 {
         font-size: 2rem;

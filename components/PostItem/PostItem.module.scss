@@ -1,6 +1,7 @@
 @use '../../styles/mixin.scss' as *;
 
 .postItem {
+    @include background();
     position: absolute;
     top: 0;
     left: 0;
@@ -8,10 +9,6 @@
     height: 100vh;
     height: 100dvh;
     padding: calc(var(--headerTop) + 2rem) var(--padding) 8rem var(--padding);
-    background-color: var(--background);
-    background-image: url('/noise.png');
-    background-repeat: repeat;
-    background-size: 250px 250px;
     transform: translateX(calc(100% + 10px));
     transition: transform .4s ease-in-out;
     

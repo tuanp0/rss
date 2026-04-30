@@ -5,7 +5,7 @@
     padding: .375rem var(--padding);
     cursor: pointer;
     background: transparent;
-    transition: all .2s ease-in-out;
+    transition: background .2s ease-in-out;
 
     @media screen and (min-width:768px) {
         padding: .5rem calc(var(--padding)/2);

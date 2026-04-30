@@ -18,7 +18,7 @@
         text-align: center;
         color: var(--text);
         width: 100%;
-        height: 37px;
+        height: 45px;
         margin: .75rem auto 0 auto;
         overflow: hidden;
 
@@ -32,20 +32,31 @@
             -webkit-backdrop-filter: blur(4px);
             backdrop-filter: blur(4px);
             border-radius: 2rem;
-            transition: left .4s cubic-bezier(0.4, 0, 0.3, 1), transform .4s cubic-bezier(0.4, 0, 0.3, 1);
+            transform: translateX(-50%);
+            transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), opacity .2s cubic-bezier(0.4, 0, 0.3, 1);
             white-space: nowrap;
+            opacity: 1;
 
             &.past {
-                left: -100vw;
+                transform: translateX(-100vw);
+                opacity: 0;
+
+                @media screen and (min-width:768px) {
+                    transform: translateX(-100vw);
+                }
             }
 
             &.active {
-                left: 50%;
                 transform: translateX(-50%);
             }
 
             &.next {
-                left: 100vw;
+                transform: translateX(100vw);
+                opacity: 0;
+
+                @media screen and (min-width:768px) {
+                    transform: translateX(100vw);
+                }
             }
         }
     }

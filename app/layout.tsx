@@ -55,6 +55,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
+      <head>
+        <meta name="theme-color" content="#0a0a1a" />
+      </head>
       <body>
           <ClientLayout>
             {children}

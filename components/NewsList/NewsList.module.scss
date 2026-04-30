@@ -1,4 +1,7 @@
+@use '../../styles/mixin.scss' as *;
+
 .news {
+    @include background();
     position: absolute;
     top: 0;
     left: 0;
@@ -7,11 +10,6 @@
     height: 100dvh;
     padding-top: var(--headerTop);
     padding-bottom: 6rem;
-    background-color: var(--background);
-    background-image: url('/noise.png');
-    background-repeat: repeat;
-    background-attachment: fixed;
-    background-size: 250px 250px;
     transform: translateX(calc(100% + 10px));
     transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1);
 

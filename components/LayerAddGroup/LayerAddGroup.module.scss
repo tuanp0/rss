@@ -22,7 +22,6 @@
     &Inner {
         position: absolute;
         width: 100%;
-        // min-height: 60%;
         bottom: 0;
         padding-bottom: 2rem;
         border-radius: 24px 24px 0 0;
@@ -63,7 +62,7 @@
         background: transparent;
         border: none;
         cursor: pointer;
-        transition: all .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
 
         &:hover {
             opacity: .6;
@@ -149,7 +148,7 @@
         display: block;
         border-radius: 8px;
         cursor: pointer;
-        transition: all .2s ease-in-out;
+        transition: opacity .2s ease-in-out;
 
         &:hover {
             opacity: .6;
