@@ -280,9 +280,22 @@ function extractText(val: unknown): string {
   return "";
 }
 
+const NON_IMAGE_URL_PATTERNS = [
+  /youtu\.be/i,
+  /youtube\.com/i,
+  /vimeo\.com/i,
+  /dailymotion\.com/i,
+];
+
+function isValidImageUrl(url: string): boolean {
+  if (!url) return false;
+  return !NON_IMAGE_URL_PATTERNS.some((pattern) => pattern.test(url));
+}
+
 function extractFirstImage(html: string): string | null {
   const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
-  return match?.[1] ?? null;
+  const url = match?.[1] ?? null;
+  return url && isValidImageUrl(url) ? url : null;
 }
 
 function getThumbnail(raw: Record<string, unknown>, content: string): string {
@@ -290,13 +303,14 @@ function getThumbnail(raw: Record<string, unknown>, content: string): string {
   const mediaContent = raw["media:content"] as { "@_url"?: string } | undefined;
   const mediaThumb = raw["media:thumbnail"] as { "@_url"?: string } | undefined;
 
-  return (
-    enclosure?.["@_url"] ??
-    mediaContent?.["@_url"] ??
-    mediaThumb?.["@_url"] ??
-    extractFirstImage(content) ??
-    ""
-  );
+  const candidates = [
+    enclosure?.["@_url"],
+    mediaContent?.["@_url"],
+    mediaThumb?.["@_url"],
+    extractFirstImage(content),
+  ];
+
+  return candidates.find((url) => url && isValidImageUrl(url)) ?? "";
 }
 
 // ─── Readability extraction ───────────────────────────────────────────────────
@@ -317,7 +331,6 @@ async function extractWithReadability(
   siteName: string;
 }> {
   const empty = { content: "", textContent: "", thumbnail: "", byline: "", siteName: "" };
-  console.log(postUrl, encodeURIComponent(postUrl))
 
   try {
     const proxied = `${corsProxy}${encodeURIComponent(postUrl)}`;
@@ -408,9 +421,6 @@ async function fetchBestFeed(url: string): Promise<FeedResult> {
         const channel = parsed?.rss?.channel;
         const items = toArray(channel?.item);
 
-        console.log("RAW PARSED:", JSON.stringify(parsed, null, 2));
-        console.log("CHANNEL:", channel);
-  console.log("ITEMS:", toArray(channel?.item));
         results.push({ type: "xml", data: text, itemCount: items.length });
       } catch (err) {
         console.warn("Proxy failed:", err);
@@ -448,11 +458,12 @@ function extractRawPosts(result: FeedResult): RawPost[] {
         publishedAt: new Date(item.pubDate ?? item.isoDate ?? Date.now()).toISOString(),
         shortDesc: desc,
         fallbackThumbnail:
-          item.thumbnail ||
-          item.enclosure?.link ||
-          extractFirstImage(item.content ?? "") ||
-          extractFirstImage(desc) ||
-          "",
+          [
+            item.thumbnail,
+            item.enclosure?.link,
+            extractFirstImage(item.content ?? ""),
+            extractFirstImage(desc),
+          ].find((url) => url && isValidImageUrl(url)) ?? "",
       };
     });
   }

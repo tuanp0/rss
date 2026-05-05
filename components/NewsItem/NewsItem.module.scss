@@ -51,6 +51,31 @@
         width: calc(100% - 50px);
         padding-left: 1rem;
 
+        &Info {
+            display: flex;
+            justify-content: flex-end;
+            width: 100%;
+            margin-bottom: 0.125rem;
+        }
+
+        &Site {
+            font-size: .625rem;
+            color: var(--text);
+            text-transform: uppercase;
+            width: calc(100% - 32px);
+            opacity: .5;
+            display: inline-block;
+        }
+        
+        &Date {
+            font-size: .625rem;
+            color: var(--text);
+            text-align: right;
+            width: 32px;
+            opacity: .5;
+            display: inline-block;
+        }
+
         &Title {
             font-size: .875rem;
             color: var(--text);
@@ -60,14 +85,6 @@
         &Desc {
             font-size: .75rem;
             color: var(--text);
-        }
-
-        &Date {
-            font-size: .75rem;
-            color: var(--text);
-            opacity: .5;
-            text-align: right;
-            display: block;
         }
     }
 }

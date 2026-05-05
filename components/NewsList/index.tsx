@@ -7,9 +7,17 @@ import styles from './NewsList.module.scss'
 
 const NewsList = () => {
   const { currentStep, currentGroup, currentSource, refreshTrigger } = useLayerContext()
-
+console.log(currentSource)
   const [posts, setPosts] = useState<Post[]>([])
   const [db, setDb] = useState<IDBDatabase | null>(null)
+
+  const getSiteName = (url: string): string => {
+    try {
+      return new URL(url).hostname;
+    } catch {
+      return url;
+    }
+  }
 
   useEffect(() => {
     initDB()
@@ -88,7 +96,7 @@ const NewsList = () => {
                 title={post.title}
                 shortDesc={post.shortDesc}
                 content={post.content}
-                url={post.url}
+                url={getSiteName(post.url)}
                 thumbnail={post.thumbnail}
                 publishedAt={post.publishedAt}
                 post={post}

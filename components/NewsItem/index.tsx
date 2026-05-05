@@ -18,12 +18,13 @@ interface NewsItemTypes {
 const NewsItem = ({
   title,
   content,
+  url,
   shortDesc,
   publishedAt,
   thumbnail,
   post
 }: NewsItemTypes) => {
-  const { setCurrentStep, setCurrentNews } = useLayerContext()
+  const { setCurrentStep, currentSource, setCurrentNews } = useLayerContext()
 
   const handleNextStep = () => {
     setCurrentStep(4)
@@ -63,16 +64,18 @@ const NewsItem = ({
         </div>
 
         <div className={styles.newsItemContent}>
+          <div className={styles.newsItemContentInfo}>
+            {currentSource === 0 && <span className={styles.newsItemContentSite}>{url}</span>}
+            <time
+              className={styles.newsItemContentDate}
+              dateTime={new Date(publishedAt).toISOString()}
+            >
+              {formattedTime}
+            </time>
+          </div>
           <h2 className={styles.newsItemContentTitle}>
-            {title.length > 65 ? title.slice(0, 65) + '...' : title}
+            {title.length > 50 ? title.slice(0, 50) + '...' : title}
           </h2>
-
-          <time
-            className={styles.newsItemContentDate}
-            dateTime={new Date(publishedAt).toISOString()}
-          >
-            {formattedTime}
-          </time>
         </div>
       </Container>
     </div>
