@@ -7,7 +7,6 @@ import styles from './NewsList.module.scss'
 
 const NewsList = () => {
   const { currentStep, currentGroup, currentSource, refreshTrigger } = useLayerContext()
-console.log(currentSource)
   const [posts, setPosts] = useState<Post[]>([])
   const [db, setDb] = useState<IDBDatabase | null>(null)
 
