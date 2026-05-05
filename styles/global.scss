@@ -1,13 +1,13 @@
 @use 'variable' as *;
 @use 'font' as *;
+@use 'mixin' as *;
 @use 'animation' as *;
 
 body {
+  @include background();
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--background);
-  transition: background-color 2s ease-in-out;
 
   @media screen and (min-width:992px) {
     display: flex;

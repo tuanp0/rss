@@ -21,15 +21,15 @@ const getTimeOfDay = (): TimeOfDay => {
   if (hour < 6)  return "night"
   if (hour < 12) return "morning"
   if (hour < 14) return "day"
-  if (hour < 17) return "afternoon"
+  if (hour < 21) return "afternoon"
   return "night"
 }
 
 const TIME_COLORS: Record<TimeOfDay, string> = {
-  "night":         "#0a0a1a",
-  "morning":       "#f4a261",
-  "day":           "#87ceeb",
-  "afternoon":     "#f0c040",
+  "night":         "#222222",
+  "morning":       "#F1F2E4",
+  "day":           "#ffffff",
+  "afternoon":     "#FFF8E2",
 }
 
 const useTimeOfDay = (): TimeOfDay | null => {
@@ -64,12 +64,20 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
 
     // 👇 Update the theme-color meta tag
     let meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
+    let meta2 = document.querySelector<HTMLMetaElement>('meta[name="apple-mobile-web-app-status-bar-style"]')
+
     if (!meta) {
       meta = document.createElement('meta')
       meta.name = 'theme-color'
       document.head.appendChild(meta)
     }
+    if (!meta2) {
+      meta2 = document.createElement('meta')
+      meta2.name = 'apple-mobile-web-app-status-bar-style'
+      document.head.appendChild(meta2)
+    }
     meta.content = TIME_COLORS[timeOfDay]
+    meta2.content = TIME_COLORS[timeOfDay]
   }, [timeOfDay])
 
   return (

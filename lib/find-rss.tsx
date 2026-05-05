@@ -62,6 +62,7 @@ export async function findRSSFeeds(url: string): Promise<RSSFeed[]> {
         const type = $(el).attr("type") || "";
 
         if (href) {
+            console.log(href)
             const absolute = href.startsWith("http") ? href : new URL(href, url).href;
             feeds.push({ href: absolute, title, type, favicon });
         }
@@ -107,7 +108,7 @@ export async function findRSSFeeds(url: string): Promise<RSSFeed[]> {
     //         })
     //     );
     // }
-
+    console.log(feeds)
     if (feeds.length === 0) throw new Error("Aucun flux RSS trouvé pour cette URL.");
     return feeds;
 }

@@ -37,6 +37,7 @@
   --text: rgba(230, 230, 230, 1);
   --hover: rgba(255, 255, 255, .2);
   --glass: rgba(255, 255, 255, .2);
+  --header: rgba(40, 40, 40, 1);
 }
 
 .light {
@@ -44,29 +45,34 @@
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
   --glass: rgba(170, 170, 170, .4);
+  --header: rgba(240, 240, 240, 1);
 }
 
 .night {
-  --background: rgba(34, 34, 34, 1);
+  --background: #222222;
   --text: rgba(230, 230, 230, 1);
   --hover: rgba(255, 255, 255, .2);
   --glass: rgba(255, 255, 255, .2);
+  --header: rgba(40, 40, 40, 1);
 }
 .morning {
-  --background: #dee9f4;
+  --background: #F1F2E4;
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
-  --glass: rgba(62, 39, 39, 0.4);
+  --glass: rgba(255, 255, 255, .2);
+  --header: rgba(240, 240, 240, 1);
 }
 .day {
-  --background: rgba(255, 255, 255, 1);
+  --background: #ffffff;
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
   --glass: rgba(170, 170, 170, .4);
+  --header: rgba(240, 240, 240, 1);
 }
 .afternoon {
-  --background: #F4F2E4;
+  --background: #FFF8E2;
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
-  --glass: rgba(170, 170, 170, .4);
+  --glass: rgba(255, 255, 255, .2);
+  --header: rgba(240, 240, 240, 1);
 }
