@@ -98,21 +98,25 @@
         display: block;
     }
 
-    figure[class*='is-type-video'] {
+    figure {
         position: relative;
         max-width: 100%;
         width: 100%;
-        overflow: hidden;
-        padding-top: 56.25%;
+
+        a[href^="https://play.google.com/"],
+        a[href^="https://apps.apple.com/"] {
+            display: none;
+        }
 
         iframe {
-            position: absolute;
             top: 0;
             left: 0;
             bottom: 0;
             right: 0;
             width: 100%;
-            height: 100%;
+            height: 56.25vw;
+            max-height: 600px;
+            border: none;
         }
     }
 }
