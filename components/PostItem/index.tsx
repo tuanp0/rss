@@ -1,10 +1,11 @@
-import React from 'react'
+import React, {useEffect, useRef} from 'react'
 import { useLayerContext } from '@/context/LayerContext'
 
 import styles from './PostItem.module.scss'
 
 const index = () => {
   const { currentStep, currentNews } = useLayerContext()
+  const postRef = useRef<HTMLDivElement>(null);
   // if (!currentNews) return null
 
   const getSiteName = (url: string): string => {
@@ -28,11 +29,19 @@ const index = () => {
     })
   : ''
 
+  useEffect(() => {
+    console.log('first')
+    postRef.current?.scrollTo(0,0)
+  }, [currentNews])
+
   return (
-    <section className={`
-      ${styles.postItem}
-      ${currentStep === 4 ? styles.active : ''}
-    `}>
+    <section
+      className={`
+        ${styles.postItem}
+        ${currentStep === 4 ? styles.active : ''}
+      `}
+     ref={postRef}
+    >
       <div className={styles.postItemInner}>
         <div className={styles.postItemSource}>{getSiteName(currentNews ? currentNews.url : '')}</div>
         <div className={styles.postItemTitle}>

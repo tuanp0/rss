@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { initDB, getPosts, getPostsByGroup, getPostsBySource, Post } from '@/db/groups'
 import { useLayerContext } from '@/context/LayerContext'
 import NewsItem from '@/components/NewsItem'
@@ -9,6 +9,7 @@ const NewsList = () => {
   const { currentStep, currentGroup, currentSource, refreshTrigger } = useLayerContext()
   const [posts, setPosts] = useState<Post[]>([])
   const [db, setDb] = useState<IDBDatabase | null>(null)
+  const newsRef = useRef<HTMLDivElement>(null);
 
   const getSiteName = (url: string): string => {
     try {
@@ -17,6 +18,10 @@ const NewsList = () => {
       return url;
     }
   }
+
+  useEffect(() => {
+    newsRef.current?.scrollTo(0,0)
+  }, [currentSource])
 
   useEffect(() => {
     initDB()
@@ -81,6 +86,7 @@ const NewsList = () => {
         ${currentStep === 3 ? styles.active : ''}
         ${currentStep >= 4 ? styles.past : ''}
       `}
+      ref={newsRef}
     >
       {posts.length === 0 ? (
         <p className={styles.newsContentText}>Aucun article à afficher.</p>
