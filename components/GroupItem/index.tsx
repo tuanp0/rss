@@ -42,7 +42,7 @@ const GroupItem = ({ groupId, text, itemCount, onDelete }: GroupItemTypes) => {
         </div>
         <div className={styles.groupItemContent}>
             <p className={styles.groupItemText}>{text}</p>
-            <p className={styles.groupItemCount}>{itemCount} {itemCount <= 1 ? 'item' : 'items'}</p>
+            <p className={styles.groupItemCount}>{itemCount} {itemCount <= 1 ? 'source' : 'sources'}</p>
         </div>
         <div className={styles.groupItemDelete} onClick={(e) => e.stopPropagation()}>
             <Button

@@ -18,6 +18,7 @@ const Header = () => {
               ${currentStep === 1 || currentStep === 4 ? styles.active : ''}
               ${currentStep === 2 || currentStep === 3 ? styles.past : ''}
             `}>
+              <img src={`./tpreader-logo.png`} className={styles.headerTitleLogo}/>
               TP Reader
             </span>
             <span className={`

@@ -2,9 +2,9 @@
 
 @mixin background() {
     background-color: var(--background);
-    background-image: url('/noise.png');
+    // background-image: url('/noise.png');
     background-repeat: repeat;
-    background-size: 250px 250px;
+    background-size: 270px 270px;
 }
 
 @mixin wysiwyg() {
@@ -79,8 +79,19 @@
         }
     }
 
+    hr {
+        background: var(--grey);
+    }
+
     blockquote {
         
+    }
+    
+    img {
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto .75rem 0;
+        display: block;
     }
 
     figcaption {
@@ -89,13 +100,6 @@
         margin-top: .125rem;
         margin-bottom: .5rem;
         opacity: .5;
-    }
-
-    img {
-        max-width: 100%;
-        height: auto;
-        margin: 0 auto .5rem 0;
-        display: block;
     }
 
     figure {
