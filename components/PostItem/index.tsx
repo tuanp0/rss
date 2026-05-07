@@ -30,7 +30,6 @@ const index = () => {
   : ''
 
   useEffect(() => {
-    console.log('first')
     postRef.current?.scrollTo(0,0)
   }, [currentNews])
 

@@ -23,6 +23,8 @@ interface LayerContextType {
   setShowAddLayer: (val: boolean) => void
   showDeleteLayer: boolean
   setShowDeleteLayer: (val: boolean) => void
+  showParametersLayer: boolean
+  setShowParametersLayer: (val: boolean) => void
   showInformationsLayer: boolean
   setShowInformationsLayer: (val: boolean) => void
   isGroup: boolean
@@ -51,6 +53,7 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
   const [currentNews, setCurrentNews] = useState<Post | null>(null)
   const [showAddLayer, setShowAddLayer] = useState<boolean>(false)
   const [showDeleteLayer, setShowDeleteLayer] = useState<boolean>(false)
+  const [showParametersLayer, setShowParametersLayer] = useState<boolean>(false)
   const [showInformationsLayer, setShowInformationsLayer] = useState<boolean>(false)
   const [isGroup, setIsGroup] = useState<boolean>(false)
   const [isSource, setIsSource] = useState<boolean>(false)
@@ -74,6 +77,8 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
         setShowAddLayer,
         showDeleteLayer,
         setShowDeleteLayer,
+        showParametersLayer,
+        setShowParametersLayer,
         showInformationsLayer,
         setShowInformationsLayer,
         isGroup,

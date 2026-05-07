@@ -2,7 +2,7 @@
 
 @mixin background() {
     background-color: var(--background);
-    // background-image: url('/noise.png');
+    background-image: url('/noise.png');
     background-repeat: repeat;
     background-size: 270px 270px;
 }
@@ -49,7 +49,7 @@
         margin-bottom: 1rem;
 
         @media screen and (min-width:768px) {
-            font-size: 1.125rem;
+            font-size: 1rem;
         }
     }
 

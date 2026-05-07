@@ -92,7 +92,7 @@ const NewsList = () => {
         <p className={styles.newsContentText}>Aucun article à afficher.</p>
       ) : (
         Object.entries(groupedPosts).map(([date, posts]) => (
-          <React.Fragment key={date}>
+          <div key={date}>
             <div className={styles.newsContentDay}><p>{date}</p></div>
 
             {posts.map((post) => (
@@ -107,7 +107,7 @@ const NewsList = () => {
                 post={post}
               />
             ))}
-          </React.Fragment>
+          </div>
         ))
       )}
     </section>

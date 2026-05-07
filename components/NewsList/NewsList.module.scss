@@ -11,13 +11,13 @@
     padding-top: var(--headerTop);
     padding-bottom: 6rem;
     transform: translateX(calc(100% + 10px));
-    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1);
+    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color 1s ease-in-out;
 
     &>div {
-        margin-top: 50px;
+        margin-top: 100px;
         opacity: 0;
         pointer-events: none;
-        transition: margin-top .6s ease-in-out, opacity 1s ease-in-out;
+        transition: margin-top .5s ease-in-out .3s, opacity .8s ease-in-out .3s;
         
         &>div {
             transition: none;

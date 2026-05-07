@@ -19,7 +19,7 @@ interface SourcesTypes {
 }
 
 const SourceList = ({ onReady }: SourcesTypes) => {
-  const { currentStep, currentGroup, showAddLayer } = useLayerContext()
+  const { currentStep, currentGroup, showAddLayer, showInformationsLayer } = useLayerContext()
   const [sources, setSources] = useState<Source[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [db, setDb] = useState<IDBDatabase | null>(null)

@@ -16,7 +16,7 @@
     &Title {
         position: relative;
         font-weight: bold;
-        font-size: 1.5rem;
+        font-size: 1.25rem;
         // text-align: center;
         color: var(--text);
         width: 100%;
@@ -25,7 +25,7 @@
         overflow: hidden;
 
         &Logo {
-            width: 48px;
+            width: 46px;
             height: auto;
             display: inline-block;
             margin-right: 0.75rem;
@@ -34,19 +34,19 @@
         &Span {
             position: absolute;
             width: auto;
-            max-width: calc(100% - 80px);
+            max-width: calc(100% - 40px);
             display: inline-block;
             padding: .5rem 2.25rem .5rem 1rem;
             background-color: var(--glass);
             -webkit-backdrop-filter: blur(3px);
             backdrop-filter: blur(3px);
             border-radius: 0 2rem 2rem 0;
-            // transform: translateX(-50%);
-            transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), opacity .2s cubic-bezier(0.4, 0, 0.3, 1);
+            transition: transform .7s cubic-bezier(0.4, 0, 0.3, 1), opacity .3s cubic-bezier(0.4, 0, 0.3, 1);
             white-space: nowrap;
             opacity: 1;
             display: flex;
             align-items: center;
+            overflow: hidden;
 
             &.past {
                 transform: translateX(-100vw);
@@ -57,16 +57,12 @@
                 }
             }
 
-            &.active {
-                // transform: translateX(-50%);
-            }
-
             &.next {
-                transform: translateX(100vw);
+                transform: translateX(-100vw);
                 opacity: 0;
 
                 @media screen and (min-width:768px) {
-                    transform: translateX(100vw);
+                    transform: translateX(-100vw);
                 }
             }
         }

@@ -4,6 +4,7 @@ import { LayerProvider, useLayerContext } from '@/context/LayerContext'
 import Header from '@/components/Header'
 import LayerAddGroup from '@/components/LayerAddGroup'
 import LayerDeleteGroup from '@/components/LayerDeleteGroup'
+import LayerParameters from '@/components/LayerParameters'
 import LayerInformations from '@/components/LayerInformations'
 import Footer from '@/components/Footer'
 
@@ -26,7 +27,7 @@ const getTimeOfDay = (): TimeOfDay => {
 }
 
 const TIME_COLORS: Record<TimeOfDay, string> = {
-  "night":         "#222222",
+  "night":         "#2a2a2a;",
   "morning":       "#F1F2E4",
   "day":           "#ffffff",
   "afternoon":     "#FFF8E2",
@@ -103,6 +104,7 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
             refreshSources && refreshSources()
           }}
         />
+        <LayerParameters />
         <LayerInformations />
       </div>
       <Footer />

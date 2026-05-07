@@ -28,7 +28,7 @@ const Header = () => {
               ${currentStep > 2 ? styles.past : ''}
             `}>
               {selectedGroupName ? 
-                selectedGroupName.length > 16 ? selectedGroupName.slice(0, 16) + '...' : selectedGroupName
+                selectedGroupName.length > 18 ? selectedGroupName.slice(0, 18) + '...' : selectedGroupName
                 : 'TP Reader'
               }
             </span>
