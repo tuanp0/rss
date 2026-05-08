@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { LayerProvider, useLayerContext } from '@/context/LayerContext'
 import Header from '@/components/Header'
 import LayerAddGroup from '@/components/LayerAddGroup'
@@ -7,15 +7,15 @@ import LayerDeleteGroup from '@/components/LayerDeleteGroup'
 import LayerParameters from '@/components/LayerParameters'
 import LayerInformations from '@/components/LayerInformations'
 import Footer from '@/components/Footer'
+import { initDB, getTheme, Theme } from '@/db/groups'
 
 import styles from './ClientLayout.module.scss'
 
-const TIME_CLASSES = [
-  "night", "morning",
-  "day", "afternoon"
-] as const
-
+const TIME_CLASSES = ["night", "morning", "day", "afternoon"] as const
 type TimeOfDay = typeof TIME_CLASSES[number]
+
+const COLOR_CLASSES = ["auto", "light", "night", "morning", "afternoon", "dark"] as const
+const FONT_CLASSES = ["font-default", "font-sansserif", "font-monospace", "font-handwritten"] as const
 
 const getTimeOfDay = (): TimeOfDay => {
   const hour = new Date().getHours()
@@ -27,10 +27,10 @@ const getTimeOfDay = (): TimeOfDay => {
 }
 
 const TIME_COLORS: Record<TimeOfDay, string> = {
-  "night":         "#2a2a2a;",
-  "morning":       "#F1F2E4",
-  "day":           "#ffffff",
-  "afternoon":     "#FFF8E2",
+  "night":     "#2a2a2a",
+  "morning":   "#F1F2E4",
+  "day":       "#ffffff",
+  "afternoon": "#FFF8E2",
 }
 
 const useTimeOfDay = (): TimeOfDay | null => {
@@ -45,41 +45,59 @@ const useTimeOfDay = (): TimeOfDay | null => {
   return timeOfDay
 }
 
+function applyThemeToBody(theme: Theme | null, timeOfDay: TimeOfDay | null) {
+  document.body.classList.remove(...COLOR_CLASSES, ...TIME_CLASSES)
+
+  const color = theme?.color_theme
+  if (!color || color === 'auto') {
+    if (timeOfDay) document.body.classList.add(timeOfDay)
+  } else {
+    document.body.classList.add(color)
+  }
+
+  // document.body.classList.remove(...FONT_CLASSES)
+  // const font = theme?.font_theme
+  // if (font && font !== 'default') {
+  //   document.body.classList.add(`font-${font}`)
+  // }
+
+  const size = theme?.size_theme
+  if (size) {
+    document.body.style.setProperty('--font-size-base', `${size}px`)
+  }
+}
+
 function LayoutInner({ children }: { children: React.ReactNode }) {
   const { showAddLayer, setShowAddLayer, refreshGroups, refreshSources } = useLayerContext()
-
   const timeOfDay = useTimeOfDay()
+  const [theme, setTheme] = useState<Theme | null>(null)
 
   useEffect(() => {
-    if (!timeOfDay) return
-    document.body.classList.remove(...TIME_CLASSES)
-    document.body.classList.add(timeOfDay)
-  }, [timeOfDay])
+    initDB()
+      .then(db => getTheme(db))
+      .then(t => setTheme(t))
+      .catch(console.error)
+  }, [])
 
   useEffect(() => {
-    if (!timeOfDay) return
+    applyThemeToBody(theme, timeOfDay)
+  }, [theme, timeOfDay])
 
-    // Existing class swap
-    document.body.classList.remove(...TIME_CLASSES)
-    document.body.classList.add(timeOfDay)
+  useEffect(() => {
+    const color = theme?.color_theme
+    const isAuto = !color || color === 'auto'
+    const activeTime = isAuto ? timeOfDay : null
 
-    // 👇 Update the theme-color meta tag
-    let meta = document.querySelector<HTMLMetaElement>('meta[name="theme-color"]')
-    let meta2 = document.querySelector<HTMLMetaElement>('meta[name="apple-mobile-web-app-status-bar-style"]')
+    let metaColor = '#ffffff'
+    if (activeTime) metaColor = TIME_COLORS[activeTime]
 
-    if (!meta) {
-      meta = document.createElement('meta')
-      meta.name = 'theme-color'
-      document.head.appendChild(meta)
+    for (const meta of [
+      document.querySelector<HTMLMetaElement>('meta[name="theme-color"]'),
+      document.querySelector<HTMLMetaElement>('meta[name="apple-mobile-web-app-status-bar-style"]'),
+    ]) {
+      if (meta) meta.content = metaColor
     }
-    if (!meta2) {
-      meta2 = document.createElement('meta')
-      meta2.name = 'apple-mobile-web-app-status-bar-style'
-      document.head.appendChild(meta2)
-    }
-    meta.content = TIME_COLORS[timeOfDay]
-    meta2.content = TIME_COLORS[timeOfDay]
-  }, [timeOfDay])
+  }, [theme, timeOfDay])
 
   return (
     <>
@@ -104,7 +122,7 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
             refreshSources && refreshSources()
           }}
         />
-        <LayerParameters />
+        <LayerParameters onThemeChange={setTheme} />
         <LayerInformations />
       </div>
       <Footer />

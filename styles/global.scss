@@ -25,3 +25,20 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.font-serif {
+  font-family: 'Times New Roman', Arial, sans-serif;
+}
+
+.font-sansserif {
+  @include roboto();
+  line-height: 1.125;
+}
+
+.font-monospace {
+  @include ggsc();
+}
+
+.font-handwritten {
+  @include caveat();
+}

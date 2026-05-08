@@ -43,14 +43,14 @@
     }
 
     p {
-        font-size: 1rem;
+        // font-size: 1rem;
         color: var(--text);
         line-height: 1.25;
         margin-bottom: 1rem;
 
-        @media screen and (min-width:768px) {
-            font-size: 1rem;
-        }
+        // @media screen and (min-width:768px) {
+        //     font-size: 1rem;
+        // }
     }
 
     a {

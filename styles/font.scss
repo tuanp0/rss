@@ -1,12 +1,51 @@
-// @font-face {
-//     font-family: 'Quicksand';
-//     src: url('./fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
-//     font-weight: 100 900;
-//     font-style: normal;
-//     font-display: swap;
-// }
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
 
-// @mixin qsand($weight:400) {
-//     font-family: 'Quicksand', Arial, sans-serif;
-//     font-weight: $weight;
-// }
+@font-face {
+    font-family: 'Roboto';
+    src: url('fonts/Roboto-VariableFont_wdth,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GoogleSansCode';
+    src: url('fonts/GoogleSansCode-Italic-VariableFont_MONO,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'GoogleSansCode';
+    src: url('fonts/GoogleSansCode-VariableFont_MONO,wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Caveat';
+    src: url('fonts/Caveat-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@mixin roboto($weight:400) {
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+@mixin ggsc($weight:400) {
+    font-family: 'GoogleSansCode', Arial, sans-serif;
+}
+
+@mixin caveat($weight:400) {
+    font-family: 'Caveat', Arial, sans-serif;
+}

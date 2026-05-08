@@ -4,7 +4,7 @@ import { useLayerContext } from '@/context/LayerContext'
 import styles from './PostItem.module.scss'
 
 const index = () => {
-  const { currentStep, currentNews } = useLayerContext()
+  const { currentStep, currentNews, activeFont } = useLayerContext()
   const postRef = useRef<HTMLDivElement>(null);
   // if (!currentNews) return null
 
@@ -43,7 +43,14 @@ const index = () => {
     >
       <div className={styles.postItemInner}>
         <div className={styles.postItemSource}>{getSiteName(currentNews ? currentNews.url : '')}</div>
-        <div className={styles.postItemTitle}>
+        <div
+          className={`
+            ${styles.postItemTitle}
+            ${activeFont === 'sansserif' ? `font-sansserif` : ''}
+            ${activeFont === 'monospace' ? `font-monospace` : ''}
+            ${activeFont === 'handwritten' ? `font-handwritten` : ''}
+          `}
+        >
           <a href={currentNews ? currentNews.url : ''} target="_blank" rel="noreferrer">{currentNews ? currentNews.title : ''}</a>
         </div>
         <time className={styles.postItemDate} dateTime={currentNews ? new Date(currentNews.publishedAt).toISOString() : ''}>
@@ -53,12 +60,22 @@ const index = () => {
           <img src={currentNews.thumbnail} alt={currentNews.title} className={styles.postItemThumbnail} />
         )} */}
         <div
-          className={styles.postItemDesc}
+          className={`
+            ${styles.postItemDesc}
+            ${activeFont === 'sansserif' ? `font-sansserif` : ''}
+            ${activeFont === 'monospace' ? `font-monospace` : ''}
+            ${activeFont === 'handwritten' ? `font-handwritten` : ''}
+          `}
           dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.shortDesc.replace(']]>', '').trim() : '' }}
         />
         {currentNews && (currentNews.shortDesc !== currentNews.content) &&
           <div
-            className={styles.postItemContent}
+            className={`
+              ${styles.postItemContent}
+              ${activeFont === 'sansserif' ? `font-sansserif` : ''}
+              ${activeFont === 'monospace' ? `font-monospace` : ''}
+              ${activeFont === 'handwritten' ? `font-handwritten` : ''}
+            `}
             dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.content.replace(']]>', '').trim() : '' }}
           />
         }

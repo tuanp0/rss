@@ -29,6 +29,10 @@ export const initDB = (): Promise<IDBDatabase> => {
         postsStore.createIndex('sourceId', 'sourceId', { unique: false });
         postsStore.createIndex('url', 'url', { unique: true }); // prevents duplicate posts
       }
+
+      if (!db.objectStoreNames.contains('theme')) {
+        db.createObjectStore('theme', { keyPath: 'id' });
+      }
     };
 
     request.onsuccess = (event) => {
@@ -129,7 +133,7 @@ export const deleteGroup = (db: IDBDatabase, id: number): Promise<void> => {
       const sources: { id: number }[] = getSourcesRequest.result;
 
       for (const source of sources) {
-        // Delete all posts linked to this source
+
         const postIndex = postStore.index('sourceId');
         const getPostsRequest = postIndex.getAll(source.id);
         getPostsRequest.onsuccess = () => {
@@ -282,9 +286,7 @@ export const refreshSource = async (db: IDBDatabase, sourceId: number, groupId: 
 
     try {
       await addPost(db, groupId, sourceId, post.title, post.postUrl, post.shortDesc, post.content, post.thumbnail, publishedDate.toISOString())
-    } catch {
-      // silently skip duplicates
-    }
+    } catch {}
   }
 }
 
@@ -294,13 +296,6 @@ export const refreshAllSources = async (
 ): Promise<void> => {
   const sources = await getSourcesByGroup(db, groupId)
 
-  // for (const source of sources) {
-  //   try {
-  //     await refreshSource(db, source.id, groupId)
-  //   } catch (err) {
-  //     console.error(`Error refreshing source ${source.id}`, err)
-  //   }
-  // }
   await Promise.all(
     sources.map(source =>
       refreshSource(db, source.id, groupId).catch(err =>
@@ -440,5 +435,48 @@ export const deletePostsByGroup = (db: IDBDatabase, groupId: number): Promise<vo
     getRequest.onerror = () => reject(getRequest.error);
     transaction.oncomplete = () => resolve();
     transaction.onerror = () => reject(transaction.error);
+  });
+};
+
+// ─── Theme ───────────────────────────────────────────────────────────────────
+
+export interface Theme {
+  id: 1;
+  color_theme: string;
+  font_theme: string;
+  size_theme: number;
+}
+
+const THEME_ID = 1;
+
+export const getTheme = (db: IDBDatabase): Promise<Theme | null> => {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction('theme', 'readonly');
+    const store = transaction.objectStore('theme');
+    const getRequest = store.get(THEME_ID);
+
+    getRequest.onsuccess = () => resolve(getRequest.result ?? null);
+    getRequest.onerror = () => reject(getRequest.error);
+  });
+};
+
+export const setTheme = (
+  db: IDBDatabase,
+  values: Partial<Omit<Theme, 'id'>>
+): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction('theme', 'readwrite');
+    const store = transaction.objectStore('theme');
+    const getRequest = store.get(THEME_ID);
+
+    getRequest.onsuccess = () => {
+      const existing: Theme = getRequest.result ?? { id: THEME_ID, color_theme: '', font_theme: '', size_theme: 16 };
+      const putRequest = store.put({ ...existing, ...values });
+
+      putRequest.onsuccess = () => resolve();
+      putRequest.onerror = () => reject(putRequest.error);
+    };
+
+    getRequest.onerror = () => reject(getRequest.error);
   });
 };

@@ -38,6 +38,12 @@ interface LayerContextType {
   refreshTrigger: number
   setRefreshTrigger: (val: number) => void
   triggerRefresh: () => void
+  activeColor: string | null
+  setActiveColor: (name: string) => void
+  activeFont: string | null
+  setActiveFont: (name: string) => void
+  activeSize: number
+  setActiveSize: (val: number) => void
 }
 
 const LayerContext = createContext<LayerContextType | null>(null)
@@ -61,6 +67,10 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
   const [refreshSources, setRefreshSources] = useState<(() => void) | null>(null)
   const [refreshTrigger, setRefreshTrigger] = useState<number>(0)
   const triggerRefresh = () => setRefreshTrigger(n => n + 1)
+  const [activeColor, setActiveColor] = useState<string>('auto')
+  const [activeFont, setActiveFont] = useState<string>('default')
+  const [activeSize, setActiveSize] = useState<number>(16)
+  
 
   return (
     <LayerContext.Provider
@@ -99,7 +109,13 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
         setRefreshSources,
         refreshTrigger,
         setRefreshTrigger,
-        triggerRefresh
+        triggerRefresh,
+        activeColor,
+        setActiveColor,
+        activeFont,
+        setActiveFont,
+        activeSize,
+        setActiveSize
       }}
     >
       {children}

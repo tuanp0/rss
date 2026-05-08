@@ -1,18 +1,56 @@
-import React from 'react'
-import Link from 'next/link'
+import React, { useState, useEffect } from 'react'
+import { initDB, getTheme, setTheme, Theme } from '@/db/groups'
 import { useLayerContext } from '@/context/LayerContext'
 import Container from '@/components/Container'
 
 import styles from './LayerParameters.module.scss'
 
-const index = () => {
-  const { showParametersLayer, setShowParametersLayer } = useLayerContext()
+type Props = { onThemeChange?: (theme: Theme) => void }
+
+
+const index = ({ onThemeChange }: Props) => {
+  const { showParametersLayer, setShowParametersLayer, activeColor, setActiveColor, activeFont, setActiveFont, activeSize, setActiveSize } = useLayerContext()
+  const [db, setDb] = useState<IDBDatabase | null>(null)
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === e.currentTarget) {
           setShowParametersLayer(false)
       }
   }
+
+  const handleTheme = async (key: 'color' | 'font' | 'size', val: string) => {
+    if (!db) return
+
+    if (key === 'color') {
+      setActiveColor(val)
+      await setTheme(db, { color_theme: val })
+    }
+    if (key === 'font') {
+      setActiveFont(val)
+      await setTheme(db, { font_theme: val })
+    }
+    if (key === 'size') {
+      const newSize = val === 'more' ? Math.min(activeSize + 2, 32) : Math.max(activeSize - 2, 10)
+      setActiveSize(newSize)
+      await setTheme(db, { size_theme: newSize })
+    }
+
+    // Notify parent with the fresh theme
+    const updated = await getTheme(db)
+    if (updated) onThemeChange?.(updated)
+  }
+
+  useEffect(() => {
+    initDB()
+      .then(async (database) => {
+        setDb(database)
+        const theme = await getTheme(database)
+        if (theme?.size_theme) setActiveSize(theme.size_theme)
+        if (theme?.color_theme) setActiveColor(theme.color_theme)
+        if (theme?.font_theme) setActiveFont(theme.font_theme)
+      })
+    .catch(console.error)
+  }, [])
 
   return (
     <div className={`${styles.layer} ${showParametersLayer ? styles.active : ''}`} onClick={handleOverlayClick}>
@@ -30,54 +68,58 @@ const index = () => {
           <Container>
             <h2>Couleur de fond</h2>
             <div className={styles.layerContentParameter}>
-              <div className={styles.layerContentParameterItem}>
+              <div className={`${styles.layerContentParameterItem} ${activeColor === 'auto' ? styles.active : ''}`} onClick={() => handleTheme('color', 'auto')}>
+                <span className={`${styles.layerContentParameterStyle}`}></span>
+                <span className={styles.layerContentParameterText}>Auto</span>
+              </div>
+              <div className={`${styles.layerContentParameterItem} ${activeColor === 'light' ? styles.active : ''}`} onClick={() => handleTheme('color', 'light')}>
                 <span className={`${styles.layerContentParameterStyle} light`}></span>
                 <span className={styles.layerContentParameterText}>Light</span>
               </div>
-              <div className={styles.layerContentParameterItem}>
+              <div className={`${styles.layerContentParameterItem} ${activeColor === 'night' ? styles.active : ''}`} onClick={() => handleTheme('color', 'night')}>
                 <span className={`${styles.layerContentParameterStyle} night`}></span>
                 <span className={styles.layerContentParameterText}>Night</span>
               </div>
-              <div className={styles.layerContentParameterItem}>
+              <div className={`${styles.layerContentParameterItem} ${activeColor === 'morning' ? styles.active : ''}`} onClick={() => handleTheme('color', 'morning')}>
                 <span className={`${styles.layerContentParameterStyle} morning`}></span>
                 <span className={styles.layerContentParameterText}>Morning</span>
               </div>
-              <div className={styles.layerContentParameterItem}>
+              <div className={`${styles.layerContentParameterItem} ${activeColor === 'afternoon' ? styles.active : ''}`} onClick={() => handleTheme('color', 'afternoon')}>
                 <span className={`${styles.layerContentParameterStyle} afternoon`}></span>
                 <span className={styles.layerContentParameterText}>Afternoon</span>
               </div>
-              <div className={styles.layerContentParameterItem}>
+              <div className={`${styles.layerContentParameterItem} ${activeColor === 'dark' ? styles.active : ''}`} onClick={() => handleTheme('color', 'dark')}>
                 <span className={`${styles.layerContentParameterStyle} dark`}></span>
                 <span className={styles.layerContentParameterText}>Dark</span>
               </div>
             </div>
             <h2>Police de texte</h2>
             <div className={styles.layerContentParameter}>
-              <div className={styles.layerContentParameterItem}>
-                <span className={styles.layerContentParameterStyle}>Aa</span>
-                <span className={styles.layerContentParameterText}>Serif</span>
+              <div className={`${styles.layerContentParameterItem} ${activeFont === 'default' ? styles.active : ''}`} onClick={() => handleTheme('font', 'default')}>
+                <span className={`${styles.layerContentParameterStyle} font-serif`}>Aa</span>
+                <span className={styles.layerContentParameterText}>Defaut</span>
               </div>
-              <div className={styles.layerContentParameterItem}>
-                <span className={styles.layerContentParameterStyle}>Aa</span>
+              <div className={`${styles.layerContentParameterItem} ${activeFont === 'sansserif' ? styles.active : ''}`} onClick={() => handleTheme('font', 'sansserif')}>
+                <span className={`${styles.layerContentParameterStyle} font-sansserif`}>Aa</span>
                 <span className={styles.layerContentParameterText}>Sans-Serif</span>
               </div>
-              <div className={styles.layerContentParameterItem}>
-                <span className={styles.layerContentParameterStyle}>Aa</span>
+              <div className={`${styles.layerContentParameterItem} ${activeFont === 'monospace' ? styles.active : ''}`} onClick={() => handleTheme('font', 'monospace')}>
+                <span className={`${styles.layerContentParameterStyle} font-monospace`}>Aa</span>
                 <span className={styles.layerContentParameterText}>Monospace</span>
               </div>
-              <div className={styles.layerContentParameterItem}>
-                <span className={styles.layerContentParameterStyle}>Aa</span>
+              <div className={`${styles.layerContentParameterItem} ${activeFont === 'handwritten' ? styles.active : ''}`} onClick={() => handleTheme('font', 'handwritten')}>
+                <span className={`${styles.layerContentParameterStyle} font-handwritten`}>Aa</span>
                 <span className={styles.layerContentParameterText}>Handwritten</span>
               </div>
               <div className={styles.layerContentParameterItem}></div>
             </div>
             <h2>Taille de texte</h2>
             <div className={styles.layerContentParameter}>
-              <div className={styles.layerContentParameterItem}>
+              <div className={styles.layerContentParameterItem} onClick={() => handleTheme('size', 'less')}>
                 <span className={styles.layerContentParameterButton}>-</span>
               </div>
-              <div className={styles.layerContentParameterVal}>16</div>
-              <div className={styles.layerContentParameterItem}>
+              <div className={styles.layerContentParameterVal}>{activeSize}</div>
+              <div className={styles.layerContentParameterItem} onClick={() => handleTheme('size', 'more')}>
                 <span className={styles.layerContentParameterButton}>+</span>
               </div>
             </div>
