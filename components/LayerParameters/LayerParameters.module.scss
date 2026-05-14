@@ -11,7 +11,6 @@
     z-index: 10;
 
     &.active {
-        // background: var(--black10);
         -webkit-backdrop-filter: blur(2px);
         backdrop-filter: blur(2px);
         pointer-events: auto;
@@ -28,9 +27,9 @@
         bottom: 0;
         border-radius: 24px 24px 48px 48px;
         background: var(--background);
-        box-shadow: 0 0 8px 0 var(--black10);
+        box-shadow: 0 0 8px 0 var(--black40);
         border: 1px solid var(--grey);
-        transform: translateY(100%);
+        transform: translateY(110%);
         transition: transform .4s ease-in-out, background .4s ease-in-out;
         z-index: 11;
         overflow: hidden;
@@ -90,7 +89,7 @@
         @include wysiwyg();
         
         .container {
-            padding: 1rem var(--padding);
+            padding: 1rem var(--padding) 2rem var(--padding);
         }
 
         h2 {

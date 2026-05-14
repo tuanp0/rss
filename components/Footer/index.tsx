@@ -35,7 +35,6 @@ const index = () => {
 
   return (
     <footer className={styles.footer}>
-        <Container className={styles.footerContainer}>
           <div className={styles.footerButton}>
             {/* {currentStep === 1 && <Button text="Accéder aux paramètres" action={() => {}} icon={'parameter'} />} */}
             {currentStep === 2 && <Button text="Accéder aux catégories" action={() => setCurrentStep(1)} icon={'previous'} />}
@@ -99,7 +98,7 @@ const index = () => {
             {currentStep === 3 && <Button text="Rafraîchir la liste" action={handleRefresh} icon={'refresh'} isRefreshing={refreshing} />}
             {/* {currentStep === 4 && <Button text="Sauvegarder ce post" action={() => setShowAddLayer(true)} icon={'save'} />} */}
           </div>
-        </Container>
+
     </footer>
   )
 }
