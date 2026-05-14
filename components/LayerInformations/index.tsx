@@ -31,7 +31,7 @@ const index = () => {
           </Container>
         </div>
         <div className={styles.layerContent}>
-          <Container>
+          <Container className={styles.container}>
             <p>
               Une <strong>application web légère et pratique</strong> pour rassembler tous vos flux RSS en un seul endroit.<br/>
               Plus besoin de visiter chaque site un par un, retrouvez les articles de vos sources préférées directement sur votre écran, à tout moment.</p>

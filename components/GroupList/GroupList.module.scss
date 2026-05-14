@@ -7,7 +7,7 @@
     height: 100dvh;
     padding-top: var(--headerTop);
     padding-bottom: 6rem;
-    transition: border-radius .2s ease-in-out, transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color 1s ease-in-out;
+    transition: border-radius .2s ease-in-out, transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
     overflow-y: auto;
     
     @media screen and (min-width:992px) {

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { initDB, getTheme, setTheme, Theme } from '@/db/groups'
 import { useLayerContext } from '@/context/LayerContext'
 import Container from '@/components/Container'
+import Button from '@/components/Button'
 
 import styles from './LayerParameters.module.scss'
 
@@ -35,7 +36,6 @@ const index = ({ onThemeChange }: Props) => {
       await setTheme(db, { size_theme: newSize })
     }
 
-    // Notify parent with the fresh theme
     const updated = await getTheme(db)
     if (updated) onThemeChange?.(updated)
   }
@@ -65,11 +65,11 @@ const index = ({ onThemeChange }: Props) => {
           </Container>
         </div>
         <div className={styles.layerContent}>
-          <Container>
+          <Container className={styles.container}>
             <h2>Couleur de fond</h2>
             <div className={styles.layerContentParameter}>
               <div className={`${styles.layerContentParameterItem} ${activeColor === 'auto' ? styles.active : ''}`} onClick={() => handleTheme('color', 'auto')}>
-                <span className={`${styles.layerContentParameterStyle}`}></span>
+                <span className={`${styles.layerContentParameterStyle} ${styles.auto}`}></span>
                 <span className={styles.layerContentParameterText}>Auto</span>
               </div>
               <div className={`${styles.layerContentParameterItem} ${activeColor === 'light' ? styles.active : ''}`} onClick={() => handleTheme('color', 'light')}>
@@ -92,18 +92,22 @@ const index = ({ onThemeChange }: Props) => {
                 <span className={`${styles.layerContentParameterStyle} dark`}></span>
                 <span className={styles.layerContentParameterText}>Dark</span>
               </div>
+            <div className={`${styles.layerContentParameterItem} ${activeColor === 'forest' ? styles.active : ''}`} onClick={() => handleTheme('color', 'forest')}>
+                <span className={`${styles.layerContentParameterStyle} forest`}></span>
+                <span className={styles.layerContentParameterText}>Forest</span>
+              </div>
             </div>
             <h2>Police de texte</h2>
             <div className={styles.layerContentParameter}>
               <div className={`${styles.layerContentParameterItem} ${activeFont === 'default' ? styles.active : ''}`} onClick={() => handleTheme('font', 'default')}>
                 <span className={`${styles.layerContentParameterStyle} font-serif`}>Aa</span>
-                <span className={styles.layerContentParameterText}>Defaut</span>
+                <span className={styles.layerContentParameterText}>Times New Roman</span>
               </div>
               <div className={`${styles.layerContentParameterItem} ${activeFont === 'sansserif' ? styles.active : ''}`} onClick={() => handleTheme('font', 'sansserif')}>
                 <span className={`${styles.layerContentParameterStyle} font-sansserif`}>Aa</span>
-                <span className={styles.layerContentParameterText}>Sans-Serif</span>
+                <span className={styles.layerContentParameterText}>Roboto</span>
               </div>
-              <div className={`${styles.layerContentParameterItem} ${activeFont === 'monospace' ? styles.active : ''}`} onClick={() => handleTheme('font', 'monospace')}>
+              {/*<div className={`${styles.layerContentParameterItem} ${activeFont === 'monospace' ? styles.active : ''}`} onClick={() => handleTheme('font', 'monospace')}>
                 <span className={`${styles.layerContentParameterStyle} font-monospace`}>Aa</span>
                 <span className={styles.layerContentParameterText}>Monospace</span>
               </div>
@@ -111,17 +115,16 @@ const index = ({ onThemeChange }: Props) => {
                 <span className={`${styles.layerContentParameterStyle} font-handwritten`}>Aa</span>
                 <span className={styles.layerContentParameterText}>Handwritten</span>
               </div>
-              <div className={styles.layerContentParameterItem}></div>
+              <div className={`${styles.layerContentParameterItem} ${activeFont === 'script' ? styles.active : ''}`} onClick={() => handleTheme('font', 'script')}>
+                <span className={`${styles.layerContentParameterStyle} font-script`}>Aa</span>
+                <span className={styles.layerContentParameterText}>Script</span>
+              </div>*/}
             </div>
             <h2>Taille de texte</h2>
             <div className={styles.layerContentParameter}>
-              <div className={styles.layerContentParameterItem} onClick={() => handleTheme('size', 'less')}>
-                <span className={styles.layerContentParameterButton}>-</span>
-              </div>
+              <Button text="Réduire la taille" action={() => handleTheme('size', 'less')} icon={'minus'} />
               <div className={styles.layerContentParameterVal}>{activeSize}</div>
-              <div className={styles.layerContentParameterItem} onClick={() => handleTheme('size', 'more')}>
-                <span className={styles.layerContentParameterButton}>+</span>
-              </div>
+              <Button text="Augmenter la taille" action={() => handleTheme('size', 'more')} icon={'add'} />
             </div>
           </Container>
         </div>

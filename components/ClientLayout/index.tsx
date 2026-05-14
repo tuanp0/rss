@@ -11,11 +11,11 @@ import { initDB, getTheme, Theme } from '@/db/groups'
 
 import styles from './ClientLayout.module.scss'
 
-const TIME_CLASSES = ["night", "morning", "day", "afternoon"] as const
+const TIME_CLASSES = ["night", "morning", "day", "afternoon", "forest"] as const
 type TimeOfDay = typeof TIME_CLASSES[number]
 
-const COLOR_CLASSES = ["auto", "light", "night", "morning", "afternoon", "dark"] as const
-const FONT_CLASSES = ["font-default", "font-sansserif", "font-monospace", "font-handwritten"] as const
+const COLOR_CLASSES = ["auto", "light", "night", "morning", "afternoon", "forest", "dark"] as const
+const FONT_CLASSES = ["font-default", "font-sansserif", "font-monospace", "font-handwritten", "font-script"] as const
 
 const getTimeOfDay = (): TimeOfDay => {
   const hour = new Date().getHours()
@@ -30,7 +30,8 @@ const TIME_COLORS: Record<TimeOfDay, string> = {
   "night":     "#2a2a2a",
   "morning":   "#F1F2E4",
   "day":       "#ffffff",
-  "afternoon": "#FFF8E2",
+  "afternoon": "#ffefcb",
+  "forest":    "#A8D19F",
 }
 
 const useTimeOfDay = (): TimeOfDay | null => {
@@ -83,21 +84,21 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
     applyThemeToBody(theme, timeOfDay)
   }, [theme, timeOfDay])
 
-  useEffect(() => {
-    const color = theme?.color_theme
-    const isAuto = !color || color === 'auto'
-    const activeTime = isAuto ? timeOfDay : null
+  // useEffect(() => {
+  //   const color = theme?.color_theme
+  //   const isAuto = !color || color === 'auto'
+  //   const activeTime = isAuto ? timeOfDay : null
 
-    let metaColor = '#ffffff'
-    if (activeTime) metaColor = TIME_COLORS[activeTime]
+  //   let metaColor = '#ffffff'
+  //   if (activeTime) metaColor = TIME_COLORS[activeTime]
 
-    for (const meta of [
-      document.querySelector<HTMLMetaElement>('meta[name="theme-color"]'),
-      document.querySelector<HTMLMetaElement>('meta[name="apple-mobile-web-app-status-bar-style"]'),
-    ]) {
-      if (meta) meta.content = metaColor
-    }
-  }, [theme, timeOfDay])
+  //   for (const meta of [
+  //     document.querySelector<HTMLMetaElement>('meta[name="theme-color"]'),
+  //     document.querySelector<HTMLMetaElement>('meta[name="apple-mobile-web-app-status-bar-style"]'),
+  //   ]) {
+  //     if (meta) meta.content = metaColor
+  //   }
+  // }, [theme, timeOfDay])
 
   return (
     <>

@@ -153,7 +153,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                     </Container>
                 </div>
                 <div className={styles.layerContent}>
-                    <Container>
+                    <Container className={styles.container}>
                         {currentStep === 1 &&
                             <input
                                 type="text"

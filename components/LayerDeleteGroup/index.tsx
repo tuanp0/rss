@@ -51,7 +51,7 @@ const index = ({onGroupDeleted, onSourceDeleted}:LayerTypes) => {
                     </Container>
                 </div>
                 <div className={styles.layerContent}>
-                    <Container>
+                    <Container className={styles.container}>
                         {isGroup && <button type={'button'} className={styles.layerSubmit} onClick={() => handleDeleteGroup()}>Supprimer</button>}
                         {isSource && <button type={'button'} className={styles.layerSubmit} onClick={() => handleDeleteSource()}>Supprimer</button>}
                     </Container>

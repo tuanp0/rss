@@ -1,7 +1,7 @@
 :root {
   --background: rgba(255, 255, 255, 1);
   --text: rgba(0, 0, 0, 1);
-  --header: rgba(240, 240, 240, 1);
+  --header: rgba(40, 40, 40, 1);
   --glass: rgba(170, 170, 170, .4);
   --error: rgba(255, 20, 20, 1);
   --hover: rgba(0, 0, 0, 0.2);
@@ -45,7 +45,7 @@
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
   --glass: rgba(170, 170, 170, .4);
-  --header: rgba(240, 240, 240, 1);
+  --header: rgba(40, 40, 40, 1);
 }
 
 .night {
@@ -56,23 +56,31 @@
   --header: rgba(40, 40, 40, 1);
 }
 .morning {
-  --background: #F1F2E4;
-  --text: rgba(0, 0, 0, 1);
+  --background: #E8F4F9;
+  --text: rgb(7, 5, 5);
   --hover: rgba(0, 0, 0, 0.2);
   --glass: rgba(170, 170, 170, .4);
-  --header: rgba(240, 240, 240, 1);
+  --header: rgba(40, 40, 40, 1);
 }
 .day {
   --background: #ffffff;
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
   --glass: rgba(170, 170, 170, .4);
-  --header: rgba(240, 240, 240, 1);
+  --header: rgba(40, 40, 40, 1);
 }
 .afternoon {
-  --background: #FFF8E2;
+  --background: #ffefcb;
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
   --glass: rgba(170, 170, 170, .4);
-  --header: rgba(240, 240, 240, 1);
+  --header: rgba(40, 40, 40, 1);
+}
+
+.forest {
+  --background: #B7C68B;
+  --text: rgba(0, 0, 0, 1);
+  --hover: rgba(0, 0, 0, 0.2);
+  --glass: rgba(170, 170, 170, .4);
+  --header: rgba(40, 40, 40, 1);
 }

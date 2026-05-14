@@ -34,11 +34,3 @@ a {
   @include roboto();
   line-height: 1.125;
 }
-
-.font-monospace {
-  @include ggsc();
-}
-
-.font-handwritten {
-  @include caveat();
-}

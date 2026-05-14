@@ -49,6 +49,7 @@ const index = () => {
             ${activeFont === 'sansserif' ? `font-sansserif` : ''}
             ${activeFont === 'monospace' ? `font-monospace` : ''}
             ${activeFont === 'handwritten' ? `font-handwritten` : ''}
+            ${activeFont === 'script' ? `font-script` : ''}
           `}
         >
           <a href={currentNews ? currentNews.url : ''} target="_blank" rel="noreferrer">{currentNews ? currentNews.title : ''}</a>
@@ -65,6 +66,7 @@ const index = () => {
             ${activeFont === 'sansserif' ? `font-sansserif` : ''}
             ${activeFont === 'monospace' ? `font-monospace` : ''}
             ${activeFont === 'handwritten' ? `font-handwritten` : ''}
+            ${activeFont === 'script' ? `font-script` : ''}
           `}
           dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.shortDesc.replace(']]>', '').trim() : '' }}
         />
@@ -75,6 +77,7 @@ const index = () => {
               ${activeFont === 'sansserif' ? `font-sansserif` : ''}
               ${activeFont === 'monospace' ? `font-monospace` : ''}
               ${activeFont === 'handwritten' ? `font-handwritten` : ''}
+              ${activeFont === 'script' ? `font-script` : ''}
             `}
             dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.content.replace(']]>', '').trim() : '' }}
           />

@@ -21,6 +21,12 @@ const index = ({text, action, icon, isRefreshing}: Button) => {
           </div>
         }
 
+        {icon === 'minus' &&
+          <div className={`${styles.buttonAdd} ${styles.buttonIcon}`}>
+            <span className={styles.buttonAddLine}></span>
+          </div>
+        }
+
         {icon === 'previous' &&
           <div className={`${styles.buttonPrev} ${styles.buttonIcon}`}>
             <span className={styles.buttonPrevLine}></span>
