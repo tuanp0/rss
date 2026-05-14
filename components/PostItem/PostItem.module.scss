@@ -96,9 +96,22 @@
         color: var(--text);
         font-size: var(--font-size-base);
         text-align: justify;
-        opacity: .7;
         font-style: italic;
         margin-bottom: 2rem;
+
+        &:not(:has(img)) {
+            opacity: .7;
+        }
+
+        div, p {
+            opacity: .7;
+
+            &:has(img),
+            &:has(iframe) {
+                opacity: 1;
+            }
+        }
+        
     }
 
     &Content {

@@ -31,7 +31,7 @@ const TIME_COLORS: Record<TimeOfDay, string> = {
   "morning":   "#F1F2E4",
   "day":       "#ffffff",
   "afternoon": "#ffefcb",
-  "forest":    "#A8D19F",
+  "forest":    "#b9c498",
 }
 
 const useTimeOfDay = (): TimeOfDay | null => {

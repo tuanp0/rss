@@ -57,9 +57,11 @@ const index = () => {
         <time className={styles.postItemDate} dateTime={currentNews ? new Date(currentNews.publishedAt).toISOString() : ''}>
           {formattedTime}
         </time>
+
         {/* {currentNews.thumbnail && (
           <img src={currentNews.thumbnail} alt={currentNews.title} className={styles.postItemThumbnail} />
         )} */}
+        
         <div
           className={`
             ${styles.postItemDesc}
@@ -70,6 +72,7 @@ const index = () => {
           `}
           dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.shortDesc.replace(']]>', '').trim() : '' }}
         />
+
         {currentNews && (currentNews.shortDesc !== currentNews.content) &&
           <div
             className={`
@@ -82,6 +85,7 @@ const index = () => {
             dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.content.replace(']]>', '').trim() : '' }}
           />
         }
+
       </div>
     </section>
   )
