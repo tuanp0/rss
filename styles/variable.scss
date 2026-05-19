@@ -1,8 +1,8 @@
 :root {
-  --background: rgba(255, 255, 255, 1);
+  --background: rgba(240, 240, 240, 1);
   --text: rgba(0, 0, 0, 1);
   --header: rgba(40, 40, 40, 1);
-  --glass: rgba(170, 170, 170, .4);
+  --glass: rgba(210, 210, 210, .4);
   --error: rgba(255, 20, 20, 1);
   --hover: rgba(0, 0, 0, 0.2);
   --grey: rgba(123,123,123, 1);
@@ -37,20 +37,20 @@
   --background: rgba(0, 0, 0, 1);
   --text: rgba(230, 230, 230, 1);
   --hover: rgba(255, 255, 255, .2);
-  --glass: rgba(255, 255, 255, .2);
+  --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
 }
 
 .light {
-  --background: rgba(255, 255, 255, 1);
+  --background: rgba(240, 240, 240, 1);
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
-  --glass: rgba(170, 170, 170, .4);
+  --glass: rgba(210, 210, 210, .4);
   --header: rgba(40, 40, 40, 1);
 }
 
 .night {
-  --background: rgba(42, 42, 42, 1);
+  --background: rgb(65, 65, 65);
   --text: rgba(230, 230, 230, 1);
   --hover: rgba(255, 255, 255, .2);
   --glass: rgba(255, 255, 255, .2);
@@ -60,21 +60,21 @@
   --background: #E8F4F9;
   --text: rgb(7, 5, 5);
   --hover: rgba(0, 0, 0, 0.2);
-  --glass: rgba(170, 170, 170, .4);
+  --glass: rgba(210, 210, 210, .4);
   --header: rgba(40, 40, 40, 1);
 }
 .day {
   --background: #ffffff;
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
-  --glass: rgba(170, 170, 170, .4);
+  --glass: rgba(210, 210, 210, .4);
   --header: rgba(40, 40, 40, 1);
 }
 .afternoon {
   --background: #ffefcb;
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
-  --glass: rgba(170, 170, 170, .4);
+  --glass: rgba(210, 210, 210, .4);
   --header: rgba(40, 40, 40, 1);
 }
 
@@ -82,6 +82,6 @@
   --background: #b9c498;
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
-  --glass: rgba(170, 170, 170, .4);
+  --glass: rgba(210, 210, 210, .4);
   --header: rgba(40, 40, 40, 1);
 }

@@ -27,9 +27,9 @@ const getTimeOfDay = (): TimeOfDay => {
 }
 
 const TIME_COLORS: Record<TimeOfDay, string> = {
-  "night":     "#2a2a2a",
+  "night":     "#414141",
   "morning":   "#F1F2E4",
-  "day":       "#ffffff",
+  "day":       "#f0f0f0",
   "afternoon": "#ffefcb",
   "forest":    "#b9c498",
 }
