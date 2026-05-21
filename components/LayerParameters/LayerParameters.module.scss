@@ -184,5 +184,28 @@
                 align-self: center;
             }
         }
+
+        &Half {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: start;
+
+            .layerContentSize,
+            .layerContentLocation {
+                width: 50%;
+
+                h2 {
+                    text-align: left;;
+                }
+
+                &Input {
+                    font-size: 1rem;
+                    padding: .5em .75rem;
+                    width: 100%;
+                    border-radius: 8px;
+                    margin-bottom: 1rem;
+                }
+            }
+        }
     }
 }

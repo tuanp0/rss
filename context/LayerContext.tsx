@@ -44,6 +44,8 @@ interface LayerContextType {
   setActiveFont: (name: string) => void
   activeSize: number
   setActiveSize: (val: number) => void
+  location: string | null
+  setLocation: (name: string) => void
 }
 
 const LayerContext = createContext<LayerContextType | null>(null)
@@ -70,7 +72,7 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
   const [activeColor, setActiveColor] = useState<string>('auto')
   const [activeFont, setActiveFont] = useState<string>('default')
   const [activeSize, setActiveSize] = useState<number>(16)
-  
+  const [location, setLocation] = useState<string>('')
 
   return (
     <LayerContext.Provider
@@ -115,7 +117,9 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
         activeFont,
         setActiveFont,
         activeSize,
-        setActiveSize
+        setActiveSize,
+        location,
+        setLocation
       }}
     >
       {children}

@@ -15,13 +15,20 @@
   --black10: rgba(0, 0, 0, .1);
   --black20: rgba(0, 0, 0, .2);
   --black40: rgba(0, 0, 0, .4);
+  --carve-color: transparent;
+  --carve-bg: rgba(0, 0, 0, 1);
+  --carve-shadow :#ffffff;
 
   --padding: 1rem;
   --max-width: 1440px;
-  --headerTop: 80px;
+  --headerTop: 75px;
 
   @media screen and (min-width:768px) {
     --padding: 2rem;
+  }
+
+  @media screen and (min-width:768px) {
+    --headerTop: 100px;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -39,6 +46,9 @@
   --hover: rgba(255, 255, 255, .2);
   --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
+  --carve-color: rgba(230, 230, 230, 1);
+  --carve-bg: rgba(230, 230, 230, 1);
+  --carve-shadow: rgba(0, 0, 0, 1);
 }
 
 .light {
@@ -47,14 +57,20 @@
   --hover: rgba(0, 0, 0, 0.2);
   --glass: rgba(210, 210, 210, .4);
   --header: rgba(40, 40, 40, 1);
+  --carve-color: transparent;
+  --carve-bg: rgba(0, 0, 0, 1);
+  --carve-shadow: rgba(240, 240, 240, 1);
 }
 
 .night {
-  --background: rgb(65, 65, 65);
+  --background: rgb(49, 49, 49);
   --text: rgba(230, 230, 230, 1);
   --hover: rgba(255, 255, 255, .2);
   --glass: rgba(255, 255, 255, .2);
   --header: rgba(40, 40, 40, 1);
+  --carve-color: rgba(230, 230, 230, 1);
+  --carve-bg: rgb(0, 0, 0, 1);
+  --carve-shadow: rgb(49, 49, 49);
 }
 .morning {
   --background: #E8F4F9;
@@ -62,6 +78,9 @@
   --hover: rgba(0, 0, 0, 0.2);
   --glass: rgba(210, 210, 210, .4);
   --header: rgba(40, 40, 40, 1);
+  --carve-color: transparent;
+  --carve-bg: rgba(0, 0, 0, 1);
+  --carve-shadow: #E8F4F9;
 }
 .day {
   --background: #ffffff;
@@ -69,6 +88,9 @@
   --hover: rgba(0, 0, 0, 0.2);
   --glass: rgba(210, 210, 210, .4);
   --header: rgba(40, 40, 40, 1);
+  --carve-color: transparent;
+  --carve-bg: rgba(0, 0, 0, 1);
+  --carve-shadow :#ffffff;
 }
 .afternoon {
   --background: #ffefcb;
@@ -76,6 +98,9 @@
   --hover: rgba(0, 0, 0, 0.2);
   --glass: rgba(210, 210, 210, .4);
   --header: rgba(40, 40, 40, 1);
+  --carve-color: transparent;
+  --carve-bg: rgba(0, 0, 0, 1);
+  --carve-shadow :#ffefcb;
 }
 
 .forest {
@@ -84,4 +109,7 @@
   --hover: rgba(0, 0, 0, 0.2);
   --glass: rgba(210, 210, 210, .4);
   --header: rgba(40, 40, 40, 1);
+  --carve-color: transparent;
+  --carve-bg: rgba(0, 0, 0, 1);
+  --carve-shadow: #b9c498;
 }

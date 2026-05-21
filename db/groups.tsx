@@ -445,6 +445,7 @@ export interface Theme {
   color_theme: string;
   font_theme: string;
   size_theme: number;
+  location_theme: string;
 }
 
 const THEME_ID = 1;
@@ -470,7 +471,7 @@ export const setTheme = (
     const getRequest = store.get(THEME_ID);
 
     getRequest.onsuccess = () => {
-      const existing: Theme = getRequest.result ?? { id: THEME_ID, color_theme: '', font_theme: '', size_theme: 16 };
+      const existing: Theme = getRequest.result ?? { id: THEME_ID, color_theme: '', font_theme: '', size_theme: 16, location_theme: '' };
       const putRequest = store.put({ ...existing, ...values });
 
       putRequest.onsuccess = () => resolve();

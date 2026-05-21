@@ -8,9 +8,8 @@ import styles from './LayerParameters.module.scss'
 
 type Props = { onThemeChange?: (theme: Theme) => void }
 
-
 const index = ({ onThemeChange }: Props) => {
-  const { showParametersLayer, setShowParametersLayer, activeColor, setActiveColor, activeFont, setActiveFont, activeSize, setActiveSize } = useLayerContext()
+  const { showParametersLayer, setShowParametersLayer, activeColor, setActiveColor, activeFont, setActiveFont, activeSize, setActiveSize, location, setLocation } = useLayerContext()
   const [db, setDb] = useState<IDBDatabase | null>(null)
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -19,7 +18,7 @@ const index = ({ onThemeChange }: Props) => {
       }
   }
 
-  const handleTheme = async (key: 'color' | 'font' | 'size', val: string) => {
+  const handleTheme = async (key: 'color' | 'font' | 'size' | 'ville', val: string) => {
     if (!db) return
 
     if (key === 'color') {
@@ -36,6 +35,11 @@ const index = ({ onThemeChange }: Props) => {
       await setTheme(db, { size_theme: newSize })
     }
 
+    if (key === 'ville') {
+      setLocation(val)
+      await setTheme(db, { location_theme: val })
+    }
+
     const updated = await getTheme(db)
     if (updated) onThemeChange?.(updated)
   }
@@ -48,6 +52,7 @@ const index = ({ onThemeChange }: Props) => {
         if (theme?.size_theme) setActiveSize(theme.size_theme)
         if (theme?.color_theme) setActiveColor(theme.color_theme)
         if (theme?.font_theme) setActiveFont(theme.font_theme)
+        if (theme?.location_theme) setLocation(theme.location_theme)
       })
     .catch(console.error)
   }, [])
@@ -120,11 +125,25 @@ const index = ({ onThemeChange }: Props) => {
                 <span className={styles.layerContentParameterText}>Script</span>
               </div>*/}
             </div>
-            <h2>Taille de texte</h2>
-            <div className={styles.layerContentParameter}>
-              <Button text="Réduire la taille" action={() => handleTheme('size', 'less')} icon={'minus'} />
-              <div className={styles.layerContentParameterVal}>{activeSize}</div>
-              <Button text="Augmenter la taille" action={() => handleTheme('size', 'more')} icon={'add'} />
+            <div className={styles.layerContentHalf}>
+              <div className={styles.layerContentSize}>
+                <h2>Taille de texte</h2>
+                <div className={styles.layerContentParameter}>
+                  <Button text="Réduire la taille" action={() => handleTheme('size', 'less')} icon={'minus'} />
+                  <div className={styles.layerContentParameterVal}>{activeSize}</div>
+                  <Button text="Augmenter la taille" action={() => handleTheme('size', 'more')} icon={'add'} />
+                </div>
+              </div>
+              <div className={styles.layerContentLocation}>
+                <h2>Localisation Méteo</h2>
+                  <input
+                    type="text"
+                    className={styles.layerContentLocationInput}
+                    defaultValue={location ?? ''}
+                    placeholder={'Ville'}
+                    onBlur={(e) => { handleTheme('ville', e.target.value) }}
+                  />
+              </div>
             </div>
           </Container>
         </div>

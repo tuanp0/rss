@@ -1,48 +1,53 @@
+@use '../../styles/mixin.scss' as *;
+
 .header {
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1;
-
+    
     &Container {
         position: relative;
         padding: .875rem 0;
-        padding-top: 6px;
+        padding-top: 8px;
+        padding-bottom: 8px;
         margin: 0;
         z-index: 1;
 
         @media screen and (min-width:992px) {
-            padding-top: 2rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
         }
     }
 
     &Title {
         position: relative;
         font-weight: bold;
-        font-size: 1.5rem;
+        font-size: 1.75rem;
         color: var(--text);
         width: 100%;
-        height: 70px;
-        overflow: hidden;
+        height: 55px;
 
         &Logo {
-            width: 46px;
+            width: 42px;
             height: auto;
             display: inline-block;
-            margin-right: 1.25rem;
+            margin-right: 1rem;
         }
 
         &Span {
             position: absolute;
             width: auto;
             max-width: calc(100% - 40px);
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
             display: inline-block;
-            padding: .5rem 2.25rem .5rem 1rem;
-            background-color: var(--glass);
-            -webkit-backdrop-filter: blur(2px);
-            backdrop-filter: blur(2px);
-            border-radius: 0 2rem 2rem 0;
-            transition: transform .7s cubic-bezier(0.4, 0, 0.3, 1), opacity .3s cubic-bezier(0.4, 0, 0.3, 1);
+            padding: .5rem 1rem .5rem 1rem;
+            border-radius: 2rem;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1) .4s, color 1s ease-in-out, background 1s ease-in-out, text-shadow 1s ease-in-out;
             white-space: nowrap;
             opacity: 1;
             display: flex;
@@ -50,20 +55,47 @@
             overflow: hidden;
 
             &.past {
-                transform: translateX(-100vw);
                 opacity: 0;
-
-                @media screen and (min-width:768px) {
-                    transform: translateX(-100vw);
-                }
+                transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1), color 1s ease-in-out, background 1s ease-in-out, text-shadow 1s ease-in-out;
+                pointer-events: none;
             }
 
             &.next {
-                transform: translateX(-100vw);
                 opacity: 0;
+                transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1), color 1s ease-in-out, background 1s ease-in-out, text-shadow 1s ease-in-out;
+                pointer-events: none;
+            }
 
-                @media screen and (min-width:768px) {
-                    transform: translateX(-100vw);
+            &Weather {
+                display: flex;
+                align-items: center;
+
+                &.noWeather {
+                    font-size: 1rem;
+                }
+
+                &Infos {
+                    font-size: 1.125rem;
+                    display: flex;
+                    align-items: center;
+                    gap: 1rem;
+                }
+
+                &Info {
+                    display: flex;
+                    align-items: center;
+                }
+
+
+                &Icon {
+                    margin-right: .125rem;
+                }
+
+                &Location {
+                    font-size: .75rem;
+                    font-weight: normal;
+                    display: block;
+                    opacity: .7;
                 }
             }
         }
