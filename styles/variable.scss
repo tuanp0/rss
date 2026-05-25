@@ -4,7 +4,7 @@
   --header: rgba(40, 40, 40, 1);
   --glass: rgba(210, 210, 210, .3);
   --error: rgba(255, 20, 20, 1);
-  --hover: rgba(0, 0, 0, 0.2);
+  --hover: rgba(0, 0, 0, .1);
   --grey: rgba(123,123,123, 1);
   
   --paper: rgba(245, 244, 237, 1);
@@ -36,14 +36,14 @@
     --text: rgba(230, 230, 230, 1);
     --header: rgba(40, 40, 40, 1);
     --glass: rgba(255, 255, 255, .2);
-    --hover: rgba(255, 255, 255, .2);
+    --hover: rgba(255, 255, 255, .1);
   }
 }
 
 .dark {
   --background: rgba(0, 0, 0, 1);
   --text: rgba(230, 230, 230, 1);
-  --hover: rgba(255, 255, 255, .2);
+  --hover: rgba(255, 255, 255, .1);
   --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: rgba(230, 230, 230, 1);
@@ -54,7 +54,7 @@
 .light {
   --background: rgba(240, 240, 240, 1);
   --text: rgba(0, 0, 0, 1);
-  --hover: rgba(0, 0, 0, 0.2);
+  --hover: rgba(0, 0, 0, .1);
   --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;
@@ -65,7 +65,7 @@
 .night {
   --background: rgb(49, 49, 49);
   --text: rgba(230, 230, 230, 1);
-  --hover: rgba(255, 255, 255, .2);
+  --hover: rgba(255, 255, 255, .1);
   --glass: rgba(255, 255, 255, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: rgba(230, 230, 230, 1);
@@ -75,7 +75,7 @@
 .morning {
   --background: #e8f1f9;
   --text: rgb(7, 5, 5);
-  --hover: rgba(0, 0, 0, 0.2);
+  --hover: rgba(0, 0, 0, .1);
   --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;
@@ -85,7 +85,7 @@
 .day {
   --background: #ffffff;
   --text: rgba(0, 0, 0, 1);
-  --hover: rgba(0, 0, 0, 0.2);
+  --hover: rgba(0, 0, 0, .1);
   --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;
@@ -95,7 +95,7 @@
 .afternoon {
   --background: #ffefcb;
   --text: rgba(0, 0, 0, 1);
-  --hover: rgba(0, 0, 0, 0.2);
+  --hover: rgba(0, 0, 0, .1);
   --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;
@@ -106,7 +106,7 @@
 .forest {
   --background: #b9c498;
   --text: rgba(0, 0, 0, 1);
-  --hover: rgba(0, 0, 0, 0.2);
+  --hover: rgba(0, 0, 0, .1);
   --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;

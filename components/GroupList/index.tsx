@@ -17,7 +17,7 @@ interface GroupsTypes {
 }
 
 const GroupList = ({ onReady }: GroupsTypes) => {
-  const { currentStep, showAddLayer } = useLayerContext()
+  const { currentStep, showAddLayer, showDeleteLayer, showParametersLayer, showInformationsLayer } = useLayerContext()
   const [groups, setGroups] = useState<Group[]>([])
   const [sourceCount, setSourceCount] = useState<Group[]>([])
   const [loading, setLoading] = useState<boolean>(true)
@@ -54,7 +54,7 @@ const GroupList = ({ onReady }: GroupsTypes) => {
     <section
       className={`
         ${styles.group}
-        ${showAddLayer ? styles.secondary : ''}
+        ${showAddLayer || showDeleteLayer || showParametersLayer || showInformationsLayer ? styles.secondary : ''}
         ${currentStep === 1 ? styles.active : ''}
         ${currentStep >= 2 ? styles.past : ''}
       `}

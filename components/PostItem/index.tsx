@@ -4,7 +4,7 @@ import { useLayerContext } from '@/context/LayerContext'
 import styles from './PostItem.module.scss'
 
 const index = () => {
-  const { currentStep, currentNews, activeFont } = useLayerContext()
+  const { currentStep, currentNews, activeFont, showParametersLayer, showInformationsLayer } = useLayerContext()
   const postRef = useRef<HTMLDivElement>(null);
   // if (!currentNews) return null
 
@@ -37,6 +37,7 @@ const index = () => {
     <section
       className={`
         ${styles.postItem}
+        ${showParametersLayer || showInformationsLayer ? styles.secondary : ''}
         ${currentStep === 4 ? styles.active : ''}
       `}
      ref={postRef}

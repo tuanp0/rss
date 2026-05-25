@@ -6,7 +6,7 @@ import NewsItem from '@/components/NewsItem'
 import styles from './NewsList.module.scss'
 
 const NewsList = () => {
-  const { currentStep, currentGroup, currentSource, refreshTrigger } = useLayerContext()
+  const { currentStep, currentGroup, currentSource, refreshTrigger, showParametersLayer, showInformationsLayer } = useLayerContext()
   const [posts, setPosts] = useState<Post[]>([])
   const [db, setDb] = useState<IDBDatabase | null>(null)
   const newsRef = useRef<HTMLDivElement>(null);
@@ -83,6 +83,7 @@ const NewsList = () => {
     <section
       className={`
         ${styles.news}
+        ${showParametersLayer || showInformationsLayer ? styles.secondary : ''}
         ${currentStep === 3 ? styles.active : ''}
         ${currentStep >= 4 ? styles.past : ''}
       `}

@@ -22,6 +22,10 @@
     &Button {
         width: 42px;
         pointer-events: auto;
+
+        @media screen and (min-width:992px) {
+            display: none;
+        }
     }
 
     &Action {

@@ -59,6 +59,11 @@
             align-items: center;
             overflow: hidden;
 
+            @media screen and (min-width:992px) {
+                left: 0;
+                transform: translateX(0);
+            }
+
             &.past {
                 opacity: 0;
                 transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1), color 1s ease-in-out, background 1s ease-in-out, text-shadow 1s ease-in-out;
@@ -108,7 +113,7 @@
                     font-size: .75rem;
                     font-weight: normal;
                     display: block;
-                    // opacity: .7;
+                    opacity: .7;
                 }
             }
         }

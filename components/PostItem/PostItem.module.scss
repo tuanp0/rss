@@ -16,6 +16,17 @@
     &.active {
         transform: translate(0);
         overflow-y: auto;
+
+        &.secondary {
+            transform: translate(0) scale(.95);
+            border-radius: 20px;
+            overflow: hidden;
+
+            @media screen and (min-width: 992px) {
+                transform: translate(0) scale(1);
+                border-radius: 0;
+            }
+        }
     }
 
     @media screen and (min-width:992px) {

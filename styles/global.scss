@@ -8,7 +8,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transform: background-color 1s ease-in-out;
+  transition: background-color .8s ease-in-out;
 
   @media screen and (min-width:992px) {
     display: flex;

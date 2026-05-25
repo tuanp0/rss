@@ -18,12 +18,17 @@
 
     &.active {
         transform: translateX(0);
-    }
 
-    &.secondary {
-        transform: scale(.95);
-        border-radius: 20px;
-        overflow: hidden;
+        &.secondary {
+            transform: translateX(0) scale(.95);
+            border-radius: 20px;
+            overflow: hidden;
+
+            @media screen and (min-width: 992px) {
+                transform: translateX(0) scale(1);
+                border-radius: 0;
+            }
+        }
     }
 
     &.past {
@@ -36,6 +41,14 @@
 
     &Content {
         overflow-y: auto;
+
+        .past & {
+            opacity: 0;
+
+            @media screen and (min-width:992px) {
+                opacity: 1;
+            }
+        }
 
         &Text {
             text-align: center;
