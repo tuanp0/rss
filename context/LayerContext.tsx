@@ -17,8 +17,10 @@ interface LayerContextType {
   setCurrentGroup: (val: number) => void
   currentSource: number
   setCurrentSource: (val: number) => void
-  currentNews: Post | null
-  setCurrentNews: (value: Post | null) => void
+  currentNews: number
+  setCurrentNews: (val: number) => void
+  currentNewsObject: Post | null
+  setCurrentNewsObject: (value: Post | null) => void
   showAddLayer: boolean
   setShowAddLayer: (val: boolean) => void
   showDeleteLayer: boolean
@@ -56,9 +58,10 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
   const [selectedSourceId, setSelectedSourceId] = useState<number>(999)
   const [selectedSourceName, setSelectedSourceName] = useState<string>('')
   const [currentStep, setCurrentStep] = useState<number>(1)
-  const [currentGroup, setCurrentGroup] = useState<number>(0)
-  const [currentSource, setCurrentSource] = useState<number>(0)
-  const [currentNews, setCurrentNews] = useState<Post | null>(null)
+  const [currentGroup, setCurrentGroup] = useState<number>(999)
+  const [currentSource, setCurrentSource] = useState<number>(999)
+  const [currentNews, setCurrentNews] = useState<number>(999)
+  const [currentNewsObject, setCurrentNewsObject] = useState<Post | null>(null)
   const [showAddLayer, setShowAddLayer] = useState<boolean>(false)
   const [showDeleteLayer, setShowDeleteLayer] = useState<boolean>(false)
   const [showParametersLayer, setShowParametersLayer] = useState<boolean>(false)
@@ -85,6 +88,8 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
         setCurrentSource,
         currentNews,
         setCurrentNews,
+        currentNewsObject,
+        setCurrentNewsObject,
         showAddLayer,
         setShowAddLayer,
         showDeleteLayer,

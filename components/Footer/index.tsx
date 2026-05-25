@@ -95,7 +95,7 @@ const index = () => {
           <div className={styles.footerAction}>
             {currentStep === 1 && <Button text="Ajouter une catégorie" action={() => setShowAddLayer(true)} icon={'add'} />}
             {currentStep === 2 && <Button text="Ajouter une source" action={()=> setShowAddLayer(true)} icon={'add'} />}
-            {currentStep === 3 && <Button text="Rafraîchir la liste" action={handleRefresh} icon={'refresh'} isRefreshing={refreshing} />}
+            {currentStep >= 3 && <Button text="Rafraîchir la liste" action={handleRefresh} icon={'refresh'} isRefreshing={refreshing} />}
             {/* {currentStep === 4 && <Button text="Sauvegarder ce post" action={() => setShowAddLayer(true)} icon={'save'} />} */}
           </div>
 

@@ -12,7 +12,7 @@ interface SourceItemTypes {
 }
 
 const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
-  const { setCurrentStep, setCurrentSource, setShowDeleteLayer, setIsGroup, setIsSource, setSelectedSourceId, setSelectedSourceName } = useLayerContext()
+  const { setCurrentStep, currentSource, setCurrentSource, setShowDeleteLayer, setIsGroup, setIsSource, setSelectedSourceId, setSelectedSourceName } = useLayerContext()
 
   const handleNextStep = (sourceId: number) => {
     setCurrentStep(3)
@@ -29,7 +29,7 @@ const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
   }
   
   return (
-    <div className={styles.sourceItem} onClick={() => handleNextStep(sourceId)}>
+    <div className={`${styles.sourceItem} ${sourceId === currentSource ? styles.active : ''}`} onClick={() => handleNextStep(sourceId)}>
       <span className={styles.sourceItemIcon}>
         {icon === 'star' ?
           <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.sourceItemIconSvg}>

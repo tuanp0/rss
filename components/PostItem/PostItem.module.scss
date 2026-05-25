@@ -11,7 +11,7 @@
     height: 100dvh;
     padding-top: var(--headerTop);
     transform: translateX(calc(100% + 10px));
-    transition: transform .4s ease-in-out, background-color 1s ease-in-out;
+    transition: transform .4s ease-in-out, background-color .8s ease-in-out;
     
     &.active {
         transform: translate(0);
@@ -32,18 +32,22 @@
     @media screen and (min-width:992px) {
         position: relative;
         width: calc(100% - 900px);
-        padding: var(--headerTop) var(--padding) 8rem var(--padding);
+        height: calc(100vh - var(--headerTop));
+        padding: 1.75rem var(--padding) 8rem var(--padding);
+        margin-top: var(--headerTop);
         transform: translate(0);
+        border-radius: 0 24px 0 0;
         box-shadow: 0 0 10px 0 var(--black20);
+        overflow: hidden;        
     }
 
     &Inner {
-        @include background();
+        // @include background();
         margin-top: 120px;
         opacity: 0;
         padding: 1.5rem calc(var(--padding) + 1rem) 8rem calc(var(--padding) + 1rem);
         pointer-events: none;
-        transition: margin-top .5s cubic-bezier(0.4, 0, 0.3, 1) .3s, opacity .8s cubic-bezier(0.4, 0, 0.3, 1) .3s, background-color 1s ease-in-out;
+        transition: margin-top .5s cubic-bezier(0.4, 0, 0.3, 1) .3s, opacity .8s cubic-bezier(0.4, 0, 0.3, 1) .3s, background-color .8s ease-in-out;
 
         .active & {
             margin-top: 0;
@@ -110,7 +114,7 @@
         margin-bottom: 2rem;
 
         &:not(:has(img)) {
-            opacity: .7;
+            opacity: .6;
         }
 
         div, p {

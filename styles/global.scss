@@ -38,6 +38,7 @@ a {
 .font-gabriela {
   @include gabriela();
   line-height: 1.125;
+  letter-spacing: .5px;
 }
 
 .font-monospace {

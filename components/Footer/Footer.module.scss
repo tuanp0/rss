@@ -14,7 +14,6 @@
     }
 
     &Container {
-       
         width: 100%;
         padding: 0;
     }
@@ -38,6 +37,10 @@
         justify-content: flex-start;
         width: calc(100% - 84px);
         padding: 0 1rem;
+
+        @media screen and (min-width:992px) {
+            width: calc(100% - 42px);
+        }
 
         &Inner {
             gap: .5rem;

@@ -16,6 +16,7 @@
         z-index: 1;
 
         @media screen and (min-width:992px) {
+            max-width: 100%;
             padding-top: 1rem;
             padding-bottom: 1rem;
         }
@@ -23,8 +24,7 @@
 
     &Title {
         @include gabriela();
-        font-style: italic;
-        // letter-spacing: .5px;
+        letter-spacing: .5px;
         position: relative;
         font-weight: bold;
         font-size: 1.75rem;
@@ -40,7 +40,6 @@
         }
 
         &Span {
-            // @include text-carve();
             position: absolute;
             width: auto;
             max-width: calc(100% - 40px);
@@ -59,11 +58,6 @@
             align-items: center;
             overflow: hidden;
 
-            @media screen and (min-width:992px) {
-                left: 0;
-                transform: translateX(0);
-            }
-
             &.past {
                 opacity: 0;
                 transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1), color 1s ease-in-out, background 1s ease-in-out, text-shadow 1s ease-in-out;
@@ -77,6 +71,8 @@
             }
 
             &Weather {
+                @include courierP();
+                letter-spacing: -1px;
                 font-weight: bold;
                 font-style: normal;
                 display: flex;
@@ -91,6 +87,10 @@
                     display: flex;
                     align-items: center;
                     gap: 1rem;
+
+                    @media screen and (min-width: 992px) {
+                        font-size: 1.25rem;
+                    }
 
                     svg {
                         path {
@@ -114,6 +114,10 @@
                     font-weight: normal;
                     display: block;
                     opacity: .7;
+
+                    @media screen and (min-width: 992px) {
+                        font-size: 1rem;
+                    }
                 }
             }
         }

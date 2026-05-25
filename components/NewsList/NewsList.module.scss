@@ -11,7 +11,7 @@
     padding-top: var(--headerTop);
     padding-bottom: 6rem;
     transform: translateX(calc(100% + 10px));
-    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
+    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out, opacity 0s ease-in-out;
 
     &>div {
         margin-top: 100px;
@@ -54,6 +54,7 @@
         transform: translateX(-50%);
         overflow-y: auto;
         opacity: 0;
+        transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out, opacity 0s ease-in-out .6s;
 
         &>div {
             margin-top: 0;
@@ -69,6 +70,9 @@
     @media screen and (min-width:992px) {
         position: relative;
         width: 300px;
+        height: calc(100vh - var(--headerTop));
+        padding-top: 1.75rem;
+        margin-top: var(--headerTop);
         transform: translate(0);
         box-shadow: 0 0 10px 0 var(--black20);
     }

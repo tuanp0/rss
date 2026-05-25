@@ -106,6 +106,7 @@ const NewsList = () => {
                 thumbnail={post.thumbnail}
                 publishedAt={post.publishedAt}
                 post={post}
+                newsId={post.id}
               />
             ))}
           </div>

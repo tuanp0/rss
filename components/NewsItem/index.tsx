@@ -13,6 +13,7 @@ interface NewsItemTypes {
   thumbnail: string
   publishedAt: Date | string
   post: Post
+  newsId: number
 }
 
 const NewsItem = ({
@@ -22,13 +23,15 @@ const NewsItem = ({
   shortDesc,
   publishedAt,
   thumbnail,
-  post
+  post,
+  newsId
 }: NewsItemTypes) => {
-  const { setCurrentStep, currentSource, setCurrentNews } = useLayerContext()
+  const { setCurrentStep, currentSource, currentNews, setCurrentNews, setCurrentNewsObject } = useLayerContext()
 
   const handleNextStep = () => {
     setCurrentStep(4)
-    setCurrentNews(post)
+    setCurrentNews(newsId)
+    setCurrentNewsObject(post)
   }
 
   // Format hour instead of date
@@ -47,7 +50,7 @@ const NewsItem = ({
     title.slice(0, 1)
 
   return (
-    <div className={styles.newsItem} onClick={handleNextStep}>
+    <div className={`${styles.newsItem} ${newsId === currentNews ? styles.active : ''}`} onClick={handleNextStep}>
       <Container className={styles.container}>
         <div className={styles.newsItemThumbnail}>
           {thumbnail ? (

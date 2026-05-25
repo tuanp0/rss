@@ -17,7 +17,7 @@ const index = ({text, action, icon, isRefreshing}: Button) => {
         {icon === 'add' &&
           <div className={`${styles.buttonAdd} ${styles.buttonIcon}`}>
             <span className={styles.buttonAddLine}></span>
-          <span className={styles.buttonAddLine}></span>
+            <span className={styles.buttonAddLine}></span>
           </div>
         }
 

@@ -4,9 +4,8 @@ import { useLayerContext } from '@/context/LayerContext'
 import styles from './PostItem.module.scss'
 
 const index = () => {
-  const { currentStep, currentNews, activeFont, showParametersLayer, showInformationsLayer } = useLayerContext()
+  const { currentStep, currentNewsObject, activeFont, showParametersLayer, showInformationsLayer } = useLayerContext()
   const postRef = useRef<HTMLDivElement>(null);
-  // if (!currentNews) return null
 
   const getSiteName = (url: string): string => {
     try {
@@ -16,14 +15,14 @@ const index = () => {
     }
   }
 
-  const formattedTime = currentNews ?
-    new Date(currentNews.publishedAt).toLocaleDateString('fr-FR', {
+  const formattedTime = currentNewsObject ?
+    new Date(currentNewsObject.publishedAt).toLocaleDateString('fr-FR', {
       day: 'numeric',
       month: 'long',
       year: 'numeric'
     }) +
     ' - ' +
-    new Date(currentNews.publishedAt).toLocaleTimeString('fr-FR', {
+    new Date(currentNewsObject.publishedAt).toLocaleTimeString('fr-FR', {
       hour: '2-digit',
       minute: '2-digit'
     })
@@ -31,7 +30,7 @@ const index = () => {
 
   useEffect(() => {
     postRef.current?.scrollTo(0,0)
-  }, [currentNews])
+  }, [currentNewsObject])
 
   return (
     <section
@@ -43,7 +42,7 @@ const index = () => {
      ref={postRef}
     >
       <div className={styles.postItemInner}>
-        <div className={styles.postItemSource}>{getSiteName(currentNews ? currentNews.url : '')}</div>
+        <div className={styles.postItemSource}>{getSiteName(currentNewsObject ? currentNewsObject.url : '')}</div>
         <div
           className={`
             ${styles.postItemTitle}
@@ -52,14 +51,14 @@ const index = () => {
             ${activeFont === 'monospace' ? `font-monospace` : ''}
           `}
         >
-          <a href={currentNews ? currentNews.url : ''} target="_blank" rel="noreferrer">{currentNews ? currentNews.title : ''}</a>
+          <a href={currentNewsObject ? currentNewsObject.url : ''} target="_blank" rel="noreferrer">{currentNewsObject ? currentNewsObject.title : ''}</a>
         </div>
-        <time className={styles.postItemDate} dateTime={currentNews ? new Date(currentNews.publishedAt).toISOString() : ''}>
+        <time className={styles.postItemDate} dateTime={currentNewsObject ? new Date(currentNewsObject.publishedAt).toISOString() : ''}>
           {formattedTime}
         </time>
 
-        {/* {currentNews.thumbnail && (
-          <img src={currentNews.thumbnail} alt={currentNews.title} className={styles.postItemThumbnail} />
+        {/* {currentNewsObject.thumbnail && (
+          <img src={currentNewsObject.thumbnail} alt={currentNewsObject.title} className={styles.postItemThumbnail} />
         )} */}
         
         <div
@@ -69,10 +68,10 @@ const index = () => {
             ${activeFont === 'gabriela' ? `font-gabriela` : ''}
             ${activeFont === 'monospace' ? `font-monospace` : ''}
           `}
-          dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.shortDesc.replace(']]>', '').trim() : '' }}
+          dangerouslySetInnerHTML={{ __html: currentNewsObject ? currentNewsObject.shortDesc.replace(']]>', '').trim() : '' }}
         />
 
-        {currentNews && (currentNews.shortDesc !== currentNews.content) &&
+        {currentNewsObject && (currentNewsObject.shortDesc !== currentNewsObject.content) &&
           <div
             className={`
               ${styles.postItemContent}
@@ -80,7 +79,7 @@ const index = () => {
               ${activeFont === 'gabriela' ? `font-gabriela` : ''}
               ${activeFont === 'monospace' ? `font-monospace` : ''}
             `}
-            dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.content.replace(']]>', '').trim() : '' }}
+            dangerouslySetInnerHTML={{ __html: currentNewsObject ? currentNewsObject.content.replace(']]>', '').trim() : '' }}
           />
         }
 

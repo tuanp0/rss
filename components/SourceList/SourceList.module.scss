@@ -8,8 +8,7 @@
     width: 100%;
     height: 100vh;
     height: 100dvh;
-    padding-top: calc(var(--headerTop) + .5rem);
-    padding-bottom: 6rem;
+    padding: calc(var(--headerTop) + .5rem) 0 6rem 0;
     transform: translateX(calc(100% + 10px));
     transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
     overflow-y: auto;
@@ -40,13 +39,19 @@
     @media screen and (min-width:992px) {
         position: relative;
         width: 300px;
+        height: calc(100vh - var(--headerTop));
+        padding-top: 2.5rem;
+        margin-top: var(--headerTop);
         transform: translate(0);
         box-shadow: 0 0 10px 0 var(--black20);
     }
 
     &Content {
+        transition: opacity 0s ease-in-out;
+
         .past & {
             opacity: 0;
+            transition: opacity 0s ease-in-out .6s;
 
             @media screen and (min-width:992px) {
                 opacity: 1;

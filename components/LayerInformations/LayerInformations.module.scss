@@ -11,21 +11,24 @@
     z-index: 10;
 
     &.active {
-        -webkit-backdrop-filter: blur(2px);
-        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(3px);
+        backdrop-filter: blur(3px);
         pointer-events: auto;
 
         .layerInner {
-            transform: translateY(calc(0% - .5rem));
+            transform: translateY(0%);
+
+            @media screen and (min-width: 992px) {
+                transform: translateX(-50%);
+            }
         }
     }
 
     &Inner {
         position: absolute;
-        width: calc(100% - 1rem);
-        left: .5rem;
+        width: 100%;
         bottom: 0;
-        border-radius: 24px 24px 48px 48px;
+        border-radius: 24px 24px 0 0;
         border: 1px solid var(--grey);
         background: var(--background);
         box-shadow: 0 0 8px 0 var(--black40);
@@ -33,6 +36,12 @@
         transition: transform .4s ease-in-out, background .4s ease-in-out;
         z-index: 11;
         overflow: hidden;
+
+        @media screen and (min-width: 992px) {
+            width: 620px;
+            left: 50%;
+            transform: translateX(-50%) translateY(110%);
+        }
     }
 
     &Header {

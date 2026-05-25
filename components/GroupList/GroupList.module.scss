@@ -12,7 +12,11 @@
     
     @media screen and (min-width:992px) {
         width: 300px;
+        height: calc(100vh - var(--headerTop));
+        padding-top: 1.75rem;
+        margin-top: var(--headerTop);
         transform: translateX(0);
+        border-radius: 24px 0 0 0;
         box-shadow: 0 0 10px 0 var(--black20);
     }
 
@@ -41,9 +45,11 @@
 
     &Content {
         overflow-y: auto;
+        transition: opacity 0s ease-in-out;
 
         .past & {
             opacity: 0;
+            transition: opacity 0s ease-in-out .6s;
 
             @media screen and (min-width:992px) {
                 opacity: 1;

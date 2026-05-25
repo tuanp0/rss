@@ -2,13 +2,13 @@
     width: 100%;
     display: flex;
     align-items: center;
-    padding: .375rem var(--padding);
+    padding: .5rem var(--padding);
     cursor: pointer;
     background: transparent;
     transition: background .1s ease-in-out;
 
     @media screen and (min-width:768px) {
-        padding: .5rem calc(var(--padding)/2);
+        padding: .625rem calc(var(--padding)/2);
     }
 
     &:hover {
@@ -19,6 +19,10 @@
                 background: var(--hover);
             }
         }
+    }
+
+    &.active {
+        background: var(--hover);
     }
 
     &Icon {

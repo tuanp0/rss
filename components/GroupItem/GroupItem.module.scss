@@ -11,12 +11,16 @@
         background: var(--hover);
     }
 
+    &.active {
+        background: var(--hover);
+    }
+
     @media screen and (min-width:768px) {
         padding: .75rem calc(var(--padding)/2);
     }
 
     &Icon {
-        width: 45px;
+        width: 42px;
 
         svg {
             width: 100%;
@@ -36,7 +40,7 @@
     }
 
     &Text {
-        font-size: 1.125rem;
+        font-size: 1rem;
         font-weight: bold;
         color: var(--text);
         margin-bottom: 0.25rem;
@@ -49,7 +53,7 @@
     }
 
     &Count {
-        font-size: .875rem;
+        font-size: .75rem;
         font-style: italic;
         color: var(--grey);
     }

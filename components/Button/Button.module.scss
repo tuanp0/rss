@@ -7,7 +7,6 @@
     text-align: center;
     background: transparent;
     border: none;
-    transition: all .2s ease-in-out;
 
     &:hover {
         cursor: pointer;
@@ -20,6 +19,15 @@
         align-items: center;
         width: 42px;
         height: 42px;
+        overflow: hidden;
+        
+        @media screen and (min-width: 992px) {
+            transition: background-color .2s ease-in-out;
+
+            &:hover {
+                background-color: var(--hover);
+            }
+        }
 
         svg {
             width: 100%;
@@ -94,6 +102,10 @@
         width: 24px;
         height: 24px;
         margin: 0;
+
+        &:hover {
+            background-color: transparent;
+        }
 
         .buttonIconSvg {
             path {
