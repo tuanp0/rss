@@ -2,7 +2,7 @@
 
 @mixin background() {
     background-color: var(--background);
-    background-image: url('/noise.png');
+    // background-image: url('/noise.png');
     background-repeat: repeat;
     background-size: 250px 250px;
 }

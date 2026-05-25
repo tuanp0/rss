@@ -46,8 +46,6 @@ const Header = () => {
       .catch(() => setError("City not found"))
   }, [location])
 
-  console.log(weather)
-
   const condition = weather ? getWeatherCondition(weather.weather_code) : null
 
   return (

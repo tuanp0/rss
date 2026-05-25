@@ -1,3 +1,4 @@
+@use '../../styles/font.scss' as *;
 @use '../../styles/mixin.scss' as *;
 
 .header {
@@ -21,6 +22,9 @@
     }
 
     &Title {
+        @include gabriela();
+        font-style: italic;
+        // letter-spacing: .5px;
         position: relative;
         font-weight: bold;
         font-size: 1.75rem;
@@ -36,6 +40,7 @@
         }
 
         &Span {
+            // @include text-carve();
             position: absolute;
             width: auto;
             max-width: calc(100% - 40px);
@@ -43,10 +48,10 @@
             transform: translateX(-50%);
             text-align: center;
             display: inline-block;
-            padding: .5rem 1rem .5rem 1rem;
+            padding: .375rem 1.5rem .375rem 1.5rem;
             border-radius: 2rem;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(6px);
+            backdrop-filter: blur(6px);
             transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1) .4s, color 1s ease-in-out, background 1s ease-in-out, text-shadow 1s ease-in-out;
             white-space: nowrap;
             opacity: 1;
@@ -67,6 +72,8 @@
             }
 
             &Weather {
+                font-weight: bold;
+                font-style: normal;
                 display: flex;
                 align-items: center;
 
@@ -79,6 +86,12 @@
                     display: flex;
                     align-items: center;
                     gap: 1rem;
+
+                    svg {
+                        path {
+                            fill: var(--text);
+                        }
+                    }
                 }
 
                 &Info {
@@ -95,7 +108,7 @@
                     font-size: .75rem;
                     font-weight: normal;
                     display: block;
-                    opacity: .7;
+                    // opacity: .7;
                 }
             }
         }

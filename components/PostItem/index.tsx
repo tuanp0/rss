@@ -47,9 +47,8 @@ const index = () => {
           className={`
             ${styles.postItemTitle}
             ${activeFont === 'sansserif' ? `font-sansserif` : ''}
+            ${activeFont === 'gabriela' ? `font-gabriela` : ''}
             ${activeFont === 'monospace' ? `font-monospace` : ''}
-            ${activeFont === 'handwritten' ? `font-handwritten` : ''}
-            ${activeFont === 'script' ? `font-script` : ''}
           `}
         >
           <a href={currentNews ? currentNews.url : ''} target="_blank" rel="noreferrer">{currentNews ? currentNews.title : ''}</a>
@@ -66,9 +65,8 @@ const index = () => {
           className={`
             ${styles.postItemDesc}
             ${activeFont === 'sansserif' ? `font-sansserif` : ''}
+            ${activeFont === 'gabriela' ? `font-gabriela` : ''}
             ${activeFont === 'monospace' ? `font-monospace` : ''}
-            ${activeFont === 'handwritten' ? `font-handwritten` : ''}
-            ${activeFont === 'script' ? `font-script` : ''}
           `}
           dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.shortDesc.replace(']]>', '').trim() : '' }}
         />
@@ -78,9 +76,8 @@ const index = () => {
             className={`
               ${styles.postItemContent}
               ${activeFont === 'sansserif' ? `font-sansserif` : ''}
+              ${activeFont === 'gabriela' ? `font-gabriela` : ''}
               ${activeFont === 'monospace' ? `font-monospace` : ''}
-              ${activeFont === 'handwritten' ? `font-handwritten` : ''}
-              ${activeFont === 'script' ? `font-script` : ''}
             `}
             dangerouslySetInnerHTML={{ __html: currentNews ? currentNews.content.replace(']]>', '').trim() : '' }}
           />

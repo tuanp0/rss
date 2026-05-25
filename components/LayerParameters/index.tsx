@@ -112,18 +112,14 @@ const index = ({ onThemeChange }: Props) => {
                 <span className={`${styles.layerContentParameterStyle} font-sansserif`}>Aa</span>
                 <span className={styles.layerContentParameterText}>Roboto</span>
               </div>
-              {/*<div className={`${styles.layerContentParameterItem} ${activeFont === 'monospace' ? styles.active : ''}`} onClick={() => handleTheme('font', 'monospace')}>
+              <div className={`${styles.layerContentParameterItem} ${activeFont === 'gabriela' ? styles.active : ''}`} onClick={() => handleTheme('font', 'gabriela')}>
+                <span className={`${styles.layerContentParameterStyle} font-gabriela`}>Aa</span>
+                <span className={styles.layerContentParameterText}>Gabriela</span>
+              </div>
+              <div className={`${styles.layerContentParameterItem} ${activeFont === 'monospace' ? styles.active : ''}`} onClick={() => handleTheme('font', 'monospace')}>
                 <span className={`${styles.layerContentParameterStyle} font-monospace`}>Aa</span>
                 <span className={styles.layerContentParameterText}>Monospace</span>
               </div>
-              <div className={`${styles.layerContentParameterItem} ${activeFont === 'handwritten' ? styles.active : ''}`} onClick={() => handleTheme('font', 'handwritten')}>
-                <span className={`${styles.layerContentParameterStyle} font-handwritten`}>Aa</span>
-                <span className={styles.layerContentParameterText}>Handwritten</span>
-              </div>
-              <div className={`${styles.layerContentParameterItem} ${activeFont === 'script' ? styles.active : ''}`} onClick={() => handleTheme('font', 'script')}>
-                <span className={`${styles.layerContentParameterStyle} font-script`}>Aa</span>
-                <span className={styles.layerContentParameterText}>Script</span>
-              </div>*/}
             </div>
             <div className={styles.layerContentHalf}>
               <div className={styles.layerContentSize}>

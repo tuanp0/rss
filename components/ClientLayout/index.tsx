@@ -15,7 +15,7 @@ const TIME_CLASSES = ["night", "morning", "day", "afternoon", "forest"] as const
 type TimeOfDay = typeof TIME_CLASSES[number]
 
 const COLOR_CLASSES = ["auto", "light", "night", "morning", "afternoon", "forest", "dark"] as const
-const FONT_CLASSES = ["font-default", "font-sansserif", "font-monospace", "font-handwritten", "font-script"] as const
+const FONT_CLASSES = ["font-default", "font-sansserif", "font-gabriela", "font-monospace"] as const
 
 const getTimeOfDay = (): TimeOfDay => {
   const hour = new Date().getHours()
@@ -28,7 +28,7 @@ const getTimeOfDay = (): TimeOfDay => {
 
 const TIME_COLORS: Record<TimeOfDay, string> = {
   "night":     "#313131",
-  "morning":   "#F1F2E4",
+  "morning":   "#e8f1f9",
   "day":       "#f0f0f0",
   "afternoon": "#ffefcb",
   "forest":    "#b9c498",

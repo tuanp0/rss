@@ -2,7 +2,7 @@
   --background: rgba(240, 240, 240, 1);
   --text: rgba(0, 0, 0, 1);
   --header: rgba(40, 40, 40, 1);
-  --glass: rgba(210, 210, 210, .4);
+  --glass: rgba(210, 210, 210, .3);
   --error: rgba(255, 20, 20, 1);
   --hover: rgba(0, 0, 0, 0.2);
   --grey: rgba(123,123,123, 1);
@@ -21,7 +21,7 @@
 
   --padding: 1rem;
   --max-width: 1440px;
-  --headerTop: 75px;
+  --headerTop: 80px;
 
   @media screen and (min-width:768px) {
     --padding: 2rem;
@@ -55,7 +55,7 @@
   --background: rgba(240, 240, 240, 1);
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
-  --glass: rgba(210, 210, 210, .4);
+  --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;
   --carve-bg: rgba(0, 0, 0, 1);
@@ -73,20 +73,20 @@
   --carve-shadow: rgb(49, 49, 49);
 }
 .morning {
-  --background: #E8F4F9;
+  --background: #e8f1f9;
   --text: rgb(7, 5, 5);
   --hover: rgba(0, 0, 0, 0.2);
-  --glass: rgba(210, 210, 210, .4);
+  --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;
   --carve-bg: rgba(0, 0, 0, 1);
-  --carve-shadow: #E8F4F9;
+  --carve-shadow: #e8f1f9;
 }
 .day {
   --background: #ffffff;
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
-  --glass: rgba(210, 210, 210, .4);
+  --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;
   --carve-bg: rgba(0, 0, 0, 1);
@@ -96,7 +96,7 @@
   --background: #ffefcb;
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
-  --glass: rgba(210, 210, 210, .4);
+  --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;
   --carve-bg: rgba(0, 0, 0, 1);
@@ -107,7 +107,7 @@
   --background: #b9c498;
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, 0.2);
-  --glass: rgba(210, 210, 210, .4);
+  --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;
   --carve-bg: rgba(0, 0, 0, 1);

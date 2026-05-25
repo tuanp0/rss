@@ -34,3 +34,14 @@ a {
   @include roboto();
   line-height: 1.125;
 }
+
+.font-gabriela {
+  @include gabriela();
+  line-height: 1.125;
+}
+
+.font-monospace {
+  @include courierP();
+  line-height: 1.125;
+  letter-spacing: -1px;
+}
