@@ -10,8 +10,8 @@ const APP_DESCRIPTION = "RSS Reeder"
 
 export const viewport: Viewport = {
   width: 'device-width',
-  initialScale: 1,
-  viewportFit: 'cover'
+  initialScale: 1.0,
+  // viewportFit: 'cover'
 }
 
 export const metadata = {

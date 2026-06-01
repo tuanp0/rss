@@ -24,7 +24,7 @@
 
     &Title {
         @include gabriela();
-        letter-spacing: .5px;
+        // letter-spacing: .5px;
         position: relative;
         font-weight: bold;
         font-size: 1.75rem;
@@ -47,7 +47,7 @@
             transform: translateX(-50%);
             text-align: center;
             display: inline-block;
-            padding: .375rem 1.5rem .375rem 1.5rem;
+            padding: .375rem 1.52rem .375rem 1.25rem;
             border-radius: 2rem;
             -webkit-backdrop-filter: blur(6px);
             backdrop-filter: blur(6px);
@@ -83,7 +83,7 @@
                 }
 
                 &Infos {
-                    font-size: 1.125rem;
+                    font-size: 1rem;
                     display: flex;
                     align-items: center;
                     gap: 1rem;

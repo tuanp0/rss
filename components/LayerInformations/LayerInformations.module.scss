@@ -16,7 +16,7 @@
         pointer-events: auto;
 
         .layerInner {
-            transform: translateY(0%);
+            transform: translateY(calc(0% + 1px));
 
             @media screen and (min-width: 992px) {
                 transform: translateX(-50%);
@@ -103,6 +103,7 @@
         
         h2 {
             font-size: 1.25rem;
+            margin-top: 0;
         }
         
         p {
