@@ -11,7 +11,7 @@
     height: 100dvh;
     padding-top: var(--headerTop);
     transform: translateX(calc(100% + 10px));
-    transition: transform .4s ease-in-out, background-color .8s ease-in-out;
+    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
     
     &.active {
         transform: translate(0);
@@ -33,7 +33,7 @@
         position: relative;
         width: calc(100% - 900px);
         height: calc(100vh - var(--headerTop));
-        padding: 1.75rem var(--padding) 8rem var(--padding);
+        padding: 1.25rem var(--padding) 8rem var(--padding);
         margin-top: var(--headerTop);
         transform: translate(0);
         border-radius: 0 24px 0 0;
@@ -42,17 +42,15 @@
     }
 
     &Inner {
-        // @include background();
-        margin-top: 120px;
-        opacity: 0;
         padding: 1.5rem calc(var(--padding) + 1rem) 8rem calc(var(--padding) + 1rem);
         pointer-events: none;
-        transition: margin-top .5s cubic-bezier(0.4, 0, 0.3, 1) .3s, opacity .8s cubic-bezier(0.4, 0, 0.3, 1) .3s, background-color .8s ease-in-out;
 
         .active & {
-            margin-top: 0;
-            opacity: 1;
             pointer-events: auto;
+        }
+
+        @media screen and (min-width:992px) {
+            padding: 1.5rem calc(var(--padding) - 1.5rem) 8rem calc(var(--padding) - 1.5rem);
         }
     }
     
@@ -63,9 +61,11 @@
         letter-spacing: 1px;
         text-transform: uppercase;
         color: var(--text);
-        margin-bottom: 0.25rem;
         padding-left: 1rem;
-        opacity: 0.6;
+        margin-bottom: 0.25rem;
+        margin-top: 80px;
+        opacity: 0;
+        transition: margin-top .6s cubic-bezier(0.3, 0, 0.06, 1) .2s, opacity .8s ease-in-out .3s;
 
         &::before {
             position: absolute;
@@ -77,6 +77,11 @@
             background: var(--text);
             opacity: 0.6;
         }
+
+        .active & {
+            margin-top: 0;
+            opacity: 0.6;
+        }
     }
 
     &Title {
@@ -86,6 +91,15 @@
         color: var(--text);
         margin-bottom: .25rem;
         max-width: 800px;
+
+        margin-top: 80px;
+        opacity: 0;
+        transition: margin-top .6s cubic-bezier(0.3, 0, 0.06, 1) .3s, opacity .8s ease-in-out .3s;
+
+        .active & {
+            margin-top: 0;
+            opacity: 1;
+        }
     }
 
     &Date {
@@ -95,6 +109,14 @@
         opacity: .5;
         margin-bottom: 1.5rem;
         display: block;
+         margin-top: 80px;
+        opacity: 0;
+        transition: margin-top .6s cubic-bezier(0.3, 0, 0.06, 1) .3s, opacity .8s ease-in-out .3s;
+
+        .active & {
+            margin-top: 0;
+            opacity: 1;
+        }
     }
 
     &Thumbnail {
@@ -103,6 +125,14 @@
         display: block;
         margin-bottom: 1rem;
         max-width: 600px;
+         margin-top: 80px;
+        opacity: 0;
+        transition: margin-top .6s cubic-bezier(0.3, 0, 0.06, 1) .3s, opacity .8s ease-in-out .3s;
+
+        .active & {
+            margin-top: 0;
+            opacity: 1;
+        }
     }
 
     &Desc {
@@ -112,25 +142,40 @@
         text-align: justify;
         font-style: italic;
         margin-bottom: 2rem;
+        margin-top: 80px;
+        opacity: 0;
+        transition: margin-top .6s cubic-bezier(0.3, 0, 0.06, 1) .3s, opacity .8s ease-in-out .3s;
 
-        &:not(:has(img)) {
-            opacity: .6;
-        }
+        .active & {
+            margin-top: 0;
+            opacity: 1;
 
-        div, p {
-            opacity: .7;
+            &:not(:has(img)) {
+                opacity: .6;
+            }
 
-            &:has(img),
-            &:has(iframe) {
-                opacity: 1;
+            div, p {
+                opacity: .7;
+
+                &:has(img),
+                &:has(iframe) {
+                    opacity: 1;
+                }
             }
         }
-        
     }
 
     &Content {
         @include wysiwyg();
         color: var(--text);
         font-size: var(--font-size-base);
+         margin-top: 80px;
+        opacity: 0;
+        transition: margin-top .6s cubic-bezier(0.3, 0, 0.06, 1) .3s, opacity .8s ease-in-out .3s;
+
+        .active & {
+            margin-top: 0;
+            opacity: 1;
+        }
     }
 }

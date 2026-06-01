@@ -11,13 +11,13 @@
     padding-top: var(--headerTop);
     padding-bottom: 6rem;
     transform: translateX(calc(100% + 10px));
-    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out, opacity 0s ease-in-out;
+    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out, opacity .6s ease-in-out;
 
     &>div {
         margin-top: 100px;
         opacity: 0;
         pointer-events: none;
-        transition: margin-top .5s ease-in-out .3s, opacity .8s ease-in-out .3s;
+        transition: margin-top .5s ease-in-out .3s, opacity .6s ease-in-out .3s;
         
         &>div {
             transition: none;
@@ -54,7 +54,6 @@
         transform: translateX(-50%);
         overflow-y: auto;
         opacity: 0;
-        transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out, opacity 0s ease-in-out .6s;
 
         &>div {
             margin-top: 0;
@@ -71,7 +70,7 @@
         position: relative;
         width: 300px;
         height: calc(100vh - var(--headerTop));
-        padding-top: 1.75rem;
+        padding-top: 2rem;
         margin-top: var(--headerTop);
         transform: translate(0);
         box-shadow: 0 0 10px 0 var(--black20);

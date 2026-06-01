@@ -26,7 +26,7 @@ const NewsItem = ({
   post,
   newsId
 }: NewsItemTypes) => {
-  const { setCurrentStep, currentSource, currentNews, setCurrentNews, setCurrentNewsObject } = useLayerContext()
+  const { currentStep, setCurrentStep, currentSource, currentNews, setCurrentNews, setCurrentNewsObject } = useLayerContext()
 
   const handleNextStep = () => {
     setCurrentStep(4)
@@ -50,7 +50,7 @@ const NewsItem = ({
     title.slice(0, 1)
 
   return (
-    <div className={`${styles.newsItem} ${newsId === currentNews ? styles.active : ''}`} onClick={handleNextStep}>
+    <div className={`${styles.newsItem} ${newsId === currentNews && currentStep >= 4 ? styles.active : ''}`} onClick={handleNextStep}>
       <Container className={styles.container}>
         <div className={styles.newsItemThumbnail}>
           {thumbnail ? (
