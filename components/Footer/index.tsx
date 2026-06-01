@@ -8,7 +8,7 @@ import Container from '@/components/Container'
 import styles from "./Footer.module.scss"
 
 const index = () => {
-  const { currentStep, setCurrentStep, setShowAddLayer, setShowDeleteLayer, setShowParametersLayer, setShowInformationsLayer, currentGroup, currentSource, triggerRefresh } = useLayerContext()
+  const { currentStep, setCurrentStep, setShowAddLayer, setShowDeleteLayer, setShowParametersLayer, setShowInformationsLayer, currentGroup, setCurrentGroup, currentSource, setCurrentSource, setCurrentNews, triggerRefresh } = useLayerContext()
     const [refreshing, setRefreshing] = useState(false)
   
     const handleRefresh = async () => {
@@ -37,14 +37,17 @@ const index = () => {
     <footer className={styles.footer}>
           <div className={styles.footerButton}>
             {/* {currentStep === 1 && <Button text="Accéder aux paramètres" action={() => {}} icon={'parameter'} />} */}
-            {currentStep === 2 && <Button text="Accéder aux catégories" action={() => setCurrentStep(1)} icon={'previous'} />}
-            {currentStep === 3 && <Button text="Accéder aux sources" action={() => setCurrentStep(2)} icon={'previous'} />}
-            {currentStep === 4 && <Button text="Accéder aux news" action={() => setCurrentStep(3)} icon={'previous'} />}
+            {currentStep === 2 && <Button text="Accéder aux catégories" action={() => {setCurrentGroup(999); setCurrentStep(1)}} icon={'previous'} />}
+            {currentStep === 3 && <Button text="Accéder aux sources" action={() => {setCurrentSource(999); setCurrentStep(2)}} icon={'previous'} />}
+            {currentStep === 4 && <Button text="Accéder aux news" action={() => {setCurrentNews(999); setCurrentStep(3)}} icon={'previous'} />}
           </div>
 
           <div className={styles.footerContent}>
             <div className={styles.footerContentInner}>
               <button className={styles.footerItem} onClick={() => {
+                setCurrentGroup(999)
+                setCurrentSource(999)
+                setCurrentNews(999)
                 setCurrentStep(1)
                 setShowAddLayer(false)
                 setShowDeleteLayer(false)

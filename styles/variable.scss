@@ -21,13 +21,13 @@
 
   --padding: 1rem;
   --max-width: 1440px;
-  --headerTop: 80px;
+  --headerTop: 95px;
 
   @media screen and (min-width:768px) {
     --padding: 2rem;
   }
 
-  @media screen and (min-width:768px) {
+  @media screen and (min-width:992px) {
     --headerTop: 87px;
   }
 
