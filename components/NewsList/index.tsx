@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { initDB, getPosts, getPostsByGroup, getPostsBySource, Post } from '@/db/groups'
 import { useLayerContext } from '@/context/LayerContext'
 import NewsItem from '@/components/NewsItem'
@@ -93,7 +93,7 @@ const NewsList = () => {
         <p className={styles.newsContentText}>Aucun article à afficher.</p>
       ) : (
         Object.entries(groupedPosts).map(([date, posts]) => (
-          <Fragment key={date}>
+          <div key={date}>
             <div className={styles.newsContentDay}><p>{date}</p></div>
 
             {posts.map((post) => (
@@ -109,7 +109,7 @@ const NewsList = () => {
                 newsId={post.id}
               />
             ))}
-          </Fragment>
+          </div>
         ))
       )}
     </section>

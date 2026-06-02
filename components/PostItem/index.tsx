@@ -71,7 +71,7 @@ const index = () => {
           dangerouslySetInnerHTML={{ __html: currentNewsObject ? currentNewsObject.shortDesc.replace(']]>', '').trim() : '' }}
         />
 
-        {currentNewsObject && (currentNewsObject.shortDesc !== currentNewsObject.content) &&
+        {/* {currentNewsObject && (currentNewsObject.shortDesc !== currentNewsObject.content) && */}
           <div
             className={`
               ${styles.postItemContent}
@@ -81,7 +81,7 @@ const index = () => {
             `}
             dangerouslySetInnerHTML={{ __html: currentNewsObject ? currentNewsObject.content.replace(']]>', '').trim() : '' }}
           />
-        }
+        {/* } */}
 
       </div>
     </section>

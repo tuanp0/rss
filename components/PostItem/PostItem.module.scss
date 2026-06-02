@@ -65,7 +65,7 @@
         margin-bottom: 0.25rem;
         margin-top: 80px;
         opacity: 0;
-        transition: margin-top .6s cubic-bezier(0.3, 0, 0.06, 1) .2s, opacity .8s ease-in-out .3s;
+        transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1), opacity .6s ease-in-out;
 
         &::before {
             position: absolute;
@@ -81,6 +81,7 @@
         .active & {
             margin-top: 0;
             opacity: 0.6;
+            transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .2s, opacity .6s ease-in-out .2s;
         }
     }
 
@@ -91,14 +92,12 @@
         color: var(--text);
         margin-bottom: .25rem;
         max-width: 800px;
-
-        margin-top: 80px;
         opacity: 0;
-        transition: margin-top .6s cubic-bezier(0.3, 0, 0.06, 1) .3s, opacity .8s ease-in-out .3s;
+        transition: opacity .6s ease-in-out;
 
         .active & {
-            margin-top: 0;
             opacity: 1;
+            transition: opacity .6s ease-in-out .2s;
         }
     }
 
@@ -109,13 +108,12 @@
         opacity: .5;
         margin-bottom: 1.5rem;
         display: block;
-         margin-top: 80px;
         opacity: 0;
-        transition: margin-top .6s cubic-bezier(0.3, 0, 0.06, 1) .3s, opacity .8s ease-in-out .3s;
-
+        transition: opacity .6s ease-in-out;
+        
         .active & {
-            margin-top: 0;
             opacity: 1;
+            transition: opacity .6s ease-in-out .2s;
         }
     }
 
@@ -125,13 +123,12 @@
         display: block;
         margin-bottom: 1rem;
         max-width: 600px;
-         margin-top: 80px;
         opacity: 0;
-        transition: margin-top .6s cubic-bezier(0.3, 0, 0.06, 1) .3s, opacity .8s ease-in-out .3s;
+        transition: opacity .6s ease-in-out;
 
         .active & {
-            margin-top: 0;
             opacity: 1;
+            transition: opacity .6s ease-in-out .2s;
         }
     }
 
@@ -144,11 +141,12 @@
         margin-bottom: 2rem;
         margin-top: 80px;
         opacity: 0;
-        transition: margin-top .6s cubic-bezier(0.3, 0, 0.06, 1) .3s, opacity .8s ease-in-out .3s;
-
+        transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1), opacity .6s ease-in-out;
+        
         .active & {
             margin-top: 0;
             opacity: 1;
+            transition: margin-top .6s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .4s;
 
             &:not(:has(img)) {
                 opacity: .6;
@@ -169,13 +167,14 @@
         @include wysiwyg();
         color: var(--text);
         font-size: var(--font-size-base);
-         margin-top: 80px;
+        margin-top: 80px;
         opacity: 0;
-        transition: margin-top .6s cubic-bezier(0.3, 0, 0.06, 1) .3s, opacity .8s ease-in-out .3s;
+        transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1), opacity .6s ease-in-out;
 
         .active & {
             margin-top: 0;
             opacity: 1;
+            transition: margin-top 1s cubic-bezier(0, 0, 0.1, 1) .6s, opacity 1s ease-in-out .6s;
         }
     }
 }

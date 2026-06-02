@@ -47,11 +47,11 @@
     }
 
     &Content {
-        transition: opacity 0s ease-in-out;
+        transition: opacity .6s ease-in-out .2s;
 
         .past & {
             opacity: 0;
-            transition: opacity 0s ease-in-out .6s;
+            transition: opacity .6s ease-in-out .2s;
 
             @media screen and (min-width:992px) {
                 opacity: 1;
