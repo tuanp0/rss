@@ -24,7 +24,7 @@ const index = () => {
         <div className={styles.layerHeader}>
           <Container className={styles.container}>
             <p className={styles.layerTitle}>A propos</p>
-            <button className={styles.layerClose} onClick={() => setShowInformationsLayer(false)}>
+            <button className={styles.layerClose} aria-label={`Fermer`} onClick={() => setShowInformationsLayer(false)}>
               <span className={styles.layerCloseLine}></span>
               <span className={styles.layerCloseLine}></span>
             </button>
@@ -43,8 +43,8 @@ const index = () => {
             <p><i>Une version offline sera prochainement mise en place pour pouvoir consulter les articles déjà chargés sans connexion internet.</i></p>
             <h2>Tuan Phung</h2>
             <p>
-              Site internet : <Link href={`https://tuanphung.com/`}target={`_blank`}>https://tuanphung.com/</Link><br/>
-              Email : <a href={`mailto:${getEmail()}`}>{getEmail()}</a>
+              Site internet : <Link href={`https://tuanphung.com/`} title={`Visiter le portfolio`} target={`_blank`}>https://tuanphung.com/</Link><br/>
+              Email : <a href={`mailto:${getEmail()}`} title={`Envoyer un mail`}>{getEmail()}</a>
             </p>
           </Container>
         </div>

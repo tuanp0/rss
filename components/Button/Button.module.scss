@@ -159,4 +159,20 @@
         color: var(--text);
         font-size: 1.25rem;
     }
+
+    &Offline {
+        width: 38px;
+        height: 38px;
+        padding: 0.25rem;
+
+        .buttonIconSvg {
+            width: 32px;
+            height: auto;
+            display: block;
+            
+            path, circle {
+                fill: var(--error);
+            }
+        }
+    }
 }

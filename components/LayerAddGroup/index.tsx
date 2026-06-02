@@ -146,7 +146,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                             {currentStep === 1 && "Ajouter un groupe"}
                             {currentStep === 2 && "Ajouter une source"}
                         </p>
-                        <button className={styles.layerClose} onClick={() => setShowAddLayer(false)}>
+                        <button className={styles.layerClose} aria-label={`Fermer`} onClick={() => setShowAddLayer(false)}>
                             <span className={styles.layerCloseLine}></span>
                             <span className={styles.layerCloseLine}></span>
                         </button>
@@ -182,6 +182,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                                                 <li key={feed.href} className={styles.layerFeedItem}>
                                                     <button
                                                         type="button"
+                                                         aria-label={feed.title}
                                                         className={styles.layerFeedButton}
                                                         onClick={() => confirmFeed(feed)}
                                                         disabled={loading}
@@ -201,13 +202,13 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                         {error && <p className={styles.layerError}>{error}</p>}
 
                         {currentStep === 1 &&
-                            <button type="button" className={styles.layerSubmit} onClick={handleAddGroup}>
+                            <button type="button" aria-label={`Ajouter`} className={styles.layerSubmit} onClick={handleAddGroup}>
                                 Ajouter
                             </button>
                         }
 
                         {currentStep === 2 && availableFeeds.length === 0 &&
-                            <button type="button" className={styles.layerSubmit} onClick={handleAddSource} disabled={loading}>
+                            <button type="button"  aria-label={`Ajouter`} className={styles.layerSubmit} onClick={handleAddSource} disabled={loading}>
                                 {loading ? "Recherche..." : "Ajouter"}
                             </button>
                         }

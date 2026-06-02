@@ -49,7 +49,7 @@ const Header = () => {
   const condition = weather ? getWeatherCondition(weather.weather_code) : null
 
   return (
-    <header className={styles.header}>
+    <header className={styles.header} role="banner">
       <div className={styles.headerContent}>
         <Container className={styles.headerContainer}>
           <p className={styles.headerTitle}>
@@ -58,7 +58,7 @@ const Header = () => {
               ${currentStep === 1 ? styles.active : ''}
               ${currentStep >= 2 ? styles.past : ''}
             `}>
-              <img src={`./tpreader-logo.png`} className={styles.headerTitleLogo}/>
+              <img src={`./tpreader-logo.png`} alt={`Logo TP Reader`} className={styles.headerTitleLogo}/>
               TP Reader
             </span>
             <span className={`

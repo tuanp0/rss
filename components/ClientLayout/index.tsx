@@ -103,7 +103,7 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Header />
-      <div className={styles.main}>
+      <main className={styles.main} role="main">
         {children}
         <LayerAddGroup
           showAddLayer={showAddLayer}
@@ -125,7 +125,7 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
         />
         <LayerParameters onThemeChange={setTheme} />
         <LayerInformations />
-      </div>
+      </main>
       <Footer />
     </>
   )

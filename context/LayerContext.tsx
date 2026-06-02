@@ -48,6 +48,8 @@ interface LayerContextType {
   setActiveSize: (val: number) => void
   location: string | null
   setLocation: (name: string) => void
+  offlineMessage: boolean
+  setOfflineMessage: (val:boolean) => void
 }
 
 const LayerContext = createContext<LayerContextType | null>(null)
@@ -76,6 +78,7 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
   const [activeFont, setActiveFont] = useState<string>('default')
   const [activeSize, setActiveSize] = useState<number>(16)
   const [location, setLocation] = useState<string>('')
+  const [offlineMessage, setOfflineMessage] = useState<boolean>(false)
 
   return (
     <LayerContext.Provider
@@ -124,7 +127,9 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
         activeSize,
         setActiveSize,
         location,
-        setLocation
+        setLocation,
+        offlineMessage,
+        setOfflineMessage
       }}
     >
       {children}

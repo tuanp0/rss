@@ -44,7 +44,7 @@ const index = ({onGroupDeleted, onSourceDeleted}:LayerTypes) => {
                             {isGroup && (<>Supprimer le groupe "{selectedGroupName}"</>)}
                             {isSource && (<>Supprimer la source "{selectedSourceName}"</>)}
                         </p>
-                        <button className={styles.layerClose} onClick={() => setShowDeleteLayer(false)}>
+                        <button className={styles.layerClose}  aria-label={`Fermer`} onClick={() => setShowDeleteLayer(false)}>
                             <span className={styles.layerCloseLine}></span>
                             <span className={styles.layerCloseLine}></span>
                         </button>
@@ -52,8 +52,8 @@ const index = ({onGroupDeleted, onSourceDeleted}:LayerTypes) => {
                 </div>
                 <div className={styles.layerContent}>
                     <Container className={styles.container}>
-                        {isGroup && <button type={'button'} className={styles.layerSubmit} onClick={() => handleDeleteGroup()}>Supprimer</button>}
-                        {isSource && <button type={'button'} className={styles.layerSubmit} onClick={() => handleDeleteSource()}>Supprimer</button>}
+                        {isGroup && <button type={'button'}  aria-label={`Supprimer`} className={styles.layerSubmit} onClick={() => handleDeleteGroup()}>Supprimer</button>}
+                        {isSource && <button type={'button'}  aria-label={`Supprimer`} className={styles.layerSubmit} onClick={() => handleDeleteSource()}>Supprimer</button>}
                     </Container>
                 </div>
             </div>

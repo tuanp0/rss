@@ -63,7 +63,7 @@ const index = ({ onThemeChange }: Props) => {
         <div className={styles.layerHeader}>
           <Container className={styles.container}>
             <p className={styles.layerTitle}>Paramètres</p>
-            <button className={styles.layerClose} onClick={() => setShowParametersLayer(false)}>
+            <button className={styles.layerClose} aria-label={`Fermer`} onClick={() => setShowParametersLayer(false)}>
               <span className={styles.layerCloseLine}></span>
               <span className={styles.layerCloseLine}></span>
             </button>
@@ -125,9 +125,9 @@ const index = ({ onThemeChange }: Props) => {
               <div className={styles.layerContentSize}>
                 <h2>Taille de texte</h2>
                 <div className={styles.layerContentParameter}>
-                  <Button text="Réduire la taille" action={() => handleTheme('size', 'less')} icon={'minus'} />
+                  <Button text="Réduire la taille"  aria-label={`Réduire la taille de texte`} action={() => handleTheme('size', 'less')} icon={'minus'} />
                   <div className={styles.layerContentParameterVal}>{activeSize}</div>
-                  <Button text="Augmenter la taille" action={() => handleTheme('size', 'more')} icon={'add'} />
+                  <Button text="Augmenter la taille"  aria-label={`Augmenter la taille de texte`} action={() => handleTheme('size', 'more')} icon={'add'} />
                 </div>
               </div>
               <div className={styles.layerContentLocation}>

@@ -1,34 +1,32 @@
-import type { NextConfig } from "next";
+import type { NextConfig } from "next"
+import withSerwistInit from "@serwist/next"
 
 const {
   PHASE_DEVELOPMENT_SERVER,
-  PHASE_PRODUCTION_BUILD,
-} = require("next/constants");
+} = require("next/constants")
 
 module.exports = async (phase: string): Promise<NextConfig> => {
-  let nextConfig: NextConfig = {};
+  const isDev = phase === PHASE_DEVELOPMENT_SERVER
 
-  if (phase === PHASE_DEVELOPMENT_SERVER) {
-    nextConfig = {};
-  } else {
-    nextConfig = {
-      output: "export",
-      basePath: "",
-      assetPrefix: "",
-      images: {
-        unoptimized: true,
-      },
-    };
-  }
+  const nextConfig: NextConfig = isDev
+    ? {}
+    : {
+        output: "export",
+        basePath: "",
+        assetPrefix: "",
+        images: {
+          unoptimized: true,
+        },
+      }
 
-  // if (phase === PHASE_DEVELOPMENT_SERVER || phase === PHASE_PRODUCTION_BUILD) {
-  //   const withSerwist = (await import("@serwist/next")).default({
-  //     swSrc: "app/app-worker.js",
-  //     swDest: "public/sw.js",
-  //     reloadOnOnline: true,
-  //   });
-  //   return withSerwist(nextConfig);
-  // }
+  const withSerwist = withSerwistInit({
+    swSrc: "app/sw.ts",
+    swDest: "public/sw.js",
+    cacheOnNavigation: true,
+    reloadOnOnline: true,
+    disable: isDev,
+    additionalPrecacheEntries: [{ url: "/index.html", revision: null }],
+  })
 
-  return nextConfig;
-};
+  return withSerwist(nextConfig)
+}
