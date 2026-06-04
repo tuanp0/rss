@@ -122,4 +122,40 @@
             }
         }
     }
+
+    &Offline {
+        position: absolute;
+        width: auto;
+        max-width: calc(100% - 40px);
+        top: -120px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-weight: bold;
+        color: var(--error);
+        white-space: nowrap;
+        padding: .375rem 1.52rem .375rem 1.25rem;
+        border-radius: 2rem;
+        background-color: var(--glass);
+        -webkit-backdrop-filter: blur(2px);
+        backdrop-filter: blur(2px);
+        pointer-events: auto;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: top .3s ease-in-out;
+
+        &.active {
+            top: 70px;
+        }
+
+        &Svg {
+            width: 32px;
+            height: auto;
+            display: block;
+
+            path,circle {
+                fill: var(--error);
+            }
+        }
+    }
 }

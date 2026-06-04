@@ -64,7 +64,7 @@
 
 .night {
   --background: rgb(49, 49, 49);
-  --text: rgba(230, 230, 230, 1);
+  --text: rgb(230, 230, 230);
   --hover: rgba(255, 255, 255, .1);
   --glass: rgba(255, 255, 255, .2);
   --header: rgba(40, 40, 40, 1);
@@ -74,7 +74,7 @@
 }
 .morning {
   --background: #e8f1f9;
-  --text: rgb(7, 5, 5);
+  --text: rgb(4, 34, 52);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
@@ -94,7 +94,7 @@
 }
 .afternoon {
   --background: #ece1c7;
-  --text: rgba(0, 0, 0, 1);
+  --text: rgb(55, 35, 4);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);
@@ -105,7 +105,7 @@
 
 .forest {
   --background: #b9c498;
-  --text: rgba(0, 0, 0, 1);
+  --text: rgb(1, 29, 2);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(210, 210, 210, .2);
   --header: rgba(40, 40, 40, 1);

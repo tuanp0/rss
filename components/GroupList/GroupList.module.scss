@@ -7,7 +7,7 @@
     height: 100dvh;
     padding-top: var(--headerTop);
     padding-bottom: 6rem;
-    transition: border-radius .2s ease-in-out, transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
+    transition: width .3s ease-in-out, border-radius .2s ease-in-out, transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
     overflow-y: auto;
     
     @media screen and (min-width:992px) {
@@ -39,7 +39,12 @@
         transform: translateX(-30%);
 
         @media screen and (min-width:992px) {
+            width: 210px;
             transform: translate(0);
+
+            &:hover {
+                width: 300px
+            }
         }
     }
 

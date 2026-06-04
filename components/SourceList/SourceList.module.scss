@@ -10,7 +10,7 @@
     height: 100dvh;
     padding: calc(var(--headerTop) + .5rem) 0 6rem 0;
     transform: translateX(calc(100% + 10px));
-    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
+    transition: width .3s ease-in-out, transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
     overflow-y: auto;
 
     &.active {
@@ -32,6 +32,7 @@
         transform: translateX(-30%);
 
         @media screen and (min-width:992px) {
+            width: 210px;
             transform: translate(0);
         }
     }
@@ -44,6 +45,10 @@
         margin-top: var(--headerTop);
         transform: translate(0);
         box-shadow: 0 0 10px 0 var(--black20);
+
+        &:hover {
+            width: 300px
+        }
     }
 
     &Content {
