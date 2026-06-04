@@ -1,5 +1,5 @@
 'use client'
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useState, useMemo } from 'react'
 import { Post } from '@/db/groups'
 
 interface LayerContextType {
@@ -80,58 +80,66 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
   const [location, setLocation] = useState<string>('')
   const [offlineMessage, setOfflineMessage] = useState<boolean>(false)
 
+  const value = useMemo(() => ({
+    currentStep,
+    setCurrentStep,
+    currentGroup,
+    setCurrentGroup,
+    currentSource,
+    setCurrentSource,
+    currentNews,
+    setCurrentNews,
+    currentNewsObject,
+    setCurrentNewsObject,
+    showAddLayer,
+    setShowAddLayer,
+    showDeleteLayer,
+    setShowDeleteLayer,
+    showParametersLayer,
+    setShowParametersLayer,
+    showInformationsLayer,
+    setShowInformationsLayer,
+    isGroup,
+    setIsGroup,
+    isSource,
+    setIsSource,
+    selectedGroupId,
+    setSelectedGroupId,
+    selectedGroupName,
+    setSelectedGroupName,
+    selectedSourceId,
+    setSelectedSourceId,
+    selectedSourceName,
+    setSelectedSourceName,
+    refreshGroups,
+    setRefreshGroups,
+    refreshSources,
+    setRefreshSources,
+    refreshTrigger,
+    setRefreshTrigger,
+    triggerRefresh,
+    activeColor,
+    setActiveColor,
+    activeFont,
+    setActiveFont,
+    activeSize,
+    setActiveSize,
+    location,
+    setLocation,
+    offlineMessage,
+    setOfflineMessage,
+  }), [
+    currentStep, currentGroup, currentSource, currentNews, currentNewsObject,
+    showAddLayer, showDeleteLayer, showParametersLayer, showInformationsLayer,
+    isGroup, isSource,
+    selectedGroupId, selectedGroupName, selectedSourceId, selectedSourceName,
+    refreshGroups, refreshSources, refreshTrigger,
+    activeColor, activeFont, activeSize,
+    location, offlineMessage,
+  ])
+
   return (
-    <LayerContext.Provider
-      value={{
-        currentStep,
-        setCurrentStep,
-        currentGroup,
-        setCurrentGroup,
-        currentSource,
-        setCurrentSource,
-        currentNews,
-        setCurrentNews,
-        currentNewsObject,
-        setCurrentNewsObject,
-        showAddLayer,
-        setShowAddLayer,
-        showDeleteLayer,
-        setShowDeleteLayer,
-        showParametersLayer,
-        setShowParametersLayer,
-        showInformationsLayer,
-        setShowInformationsLayer,
-        isGroup,
-        setIsGroup,
-        isSource,
-        setIsSource,
-        selectedGroupId,
-        setSelectedGroupId,
-        selectedGroupName,
-        setSelectedGroupName,
-        selectedSourceId,
-        setSelectedSourceId,
-        selectedSourceName,
-        setSelectedSourceName,
-        refreshGroups,
-        setRefreshGroups,
-        refreshSources,
-        setRefreshSources,
-        refreshTrigger,
-        setRefreshTrigger,
-        triggerRefresh,
-        activeColor,
-        setActiveColor,
-        activeFont,
-        setActiveFont,
-        activeSize,
-        setActiveSize,
-        location,
-        setLocation,
-        offlineMessage,
-        setOfflineMessage
-      }}
-    >
+    <LayerContext.Provider value={value}>
       {children}
     </LayerContext.Provider>
   )

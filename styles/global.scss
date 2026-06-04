@@ -50,3 +50,9 @@ a {
   line-height: 1.125;
   letter-spacing: -1px;
 }
+
+.font-typewriter {
+  @include typewriter();
+  line-height: 1.125;
+  // letter-spacing: -1px;
+}

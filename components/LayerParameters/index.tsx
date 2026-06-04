@@ -52,7 +52,7 @@ const index = ({ onThemeChange }: Props) => {
         if (theme?.size_theme) setActiveSize(theme.size_theme)
         if (theme?.color_theme) setActiveColor(theme.color_theme)
         if (theme?.font_theme) setActiveFont(theme.font_theme)
-        if (theme?.location_theme) setLocation(theme.location_theme)
+        if (theme?.location_theme && theme.location_theme !== location) setLocation(theme.location_theme)
       })
     .catch(console.error)
   }, [])
@@ -119,6 +119,10 @@ const index = ({ onThemeChange }: Props) => {
               <div className={`${styles.layerContentParameterItem} ${activeFont === 'monospace' ? styles.active : ''}`} onClick={() => handleTheme('font', 'monospace')}>
                 <span className={`${styles.layerContentParameterStyle} font-monospace`}>Aa</span>
                 <span className={styles.layerContentParameterText}>Monospace</span>
+              </div>
+              <div className={`${styles.layerContentParameterItem} ${activeFont === 'typewriter' ? styles.active : ''}`} onClick={() => handleTheme('font', 'typewriter')}>
+                <span className={`${styles.layerContentParameterStyle} font-typewriter`}>Aa</span>
+                <span className={styles.layerContentParameterText}>Typewriter</span>
               </div>
             </div>
             <div className={styles.layerContentHalf}>

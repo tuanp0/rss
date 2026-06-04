@@ -40,7 +40,7 @@ const Header = () => {
 
   useEffect(() => {
     if (!location?.trim()) return
-    
+    console.log(location)
     fetchWeather(location)
       .then(setWeather)
       .catch(() => setError("City not found"))

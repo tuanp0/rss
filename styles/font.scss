@@ -79,6 +79,34 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'JMH Typewriter';
+    src: url('fonts/JMHTypewriter-Regular.eot');
+    src: url('fonts/JMHTypewriter-Regular.eot?#iefix') format('embedded-opentype'),
+        url('fonts/JMHTypewriter-Regular.woff2') format('woff2'),
+        url('fonts/JMHTypewriter-Regular.woff') format('woff'),
+        url('fonts/JMHTypewriter-Regular.ttf') format('truetype'),
+        url('fonts/JMHTypewriter-Regular.svg#JMHTypewriter-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'JMH Typewriter';
+    src: url('fonts/JMHTypewriter-Bold.eot');
+    src: url('fonts/JMHTypewriter-Bold.eot?#iefix') format('embedded-opentype'),
+        url('fonts/JMHTypewriter-Bold.woff2') format('woff2'),
+        url('fonts/JMHTypewriter-Bold.woff') format('woff'),
+        url('fonts/JMHTypewriter-Bold.ttf') format('truetype'),
+        url('fonts/JMHTypewriter-Bold.svg#JMHTypewriter-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
 @mixin roboto($weight:400) {
     font-family: 'Roboto', Arial, sans-serif;
 }
@@ -89,4 +117,8 @@
 
 @mixin courierP($weight:400) {
     font-family: 'Courier Prime', Arial, sans-serif;
+}
+
+@mixin typewriter($weight:400) {
+    font-family: 'JMH Typewriter', Arial, sans-serif;
 }

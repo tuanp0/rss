@@ -49,6 +49,7 @@ const index = () => {
             ${activeFont === 'sansserif' ? `font-sansserif` : ''}
             ${activeFont === 'gabriela' ? `font-gabriela` : ''}
             ${activeFont === 'monospace' ? `font-monospace` : ''}
+            ${activeFont === 'typewriter' ? `font-typewriter` : ''}
           `}
         >
           <a href={currentNewsObject ? currentNewsObject.url : ''} target="_blank" rel="noreferrer">{currentNewsObject ? currentNewsObject.title : ''}</a>
@@ -67,6 +68,7 @@ const index = () => {
             ${activeFont === 'sansserif' ? `font-sansserif` : ''}
             ${activeFont === 'gabriela' ? `font-gabriela` : ''}
             ${activeFont === 'monospace' ? `font-monospace` : ''}
+            ${activeFont === 'typewriter' ? `font-typewriter` : ''}
           `}
           dangerouslySetInnerHTML={{ __html: currentNewsObject ? currentNewsObject.shortDesc.replace(']]>', '').trim() : '' }}
         />
@@ -78,6 +80,7 @@ const index = () => {
               ${activeFont === 'sansserif' ? `font-sansserif` : ''}
               ${activeFont === 'gabriela' ? `font-gabriela` : ''}
               ${activeFont === 'monospace' ? `font-monospace` : ''}
+              ${activeFont === 'typewriter' ? `font-typewriter` : ''}
             `}
             dangerouslySetInnerHTML={{ __html: currentNewsObject ? currentNewsObject.content.replace(']]>', '').trim() : '' }}
           />

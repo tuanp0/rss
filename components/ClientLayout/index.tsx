@@ -11,27 +11,27 @@ import { initDB, getTheme, Theme } from '@/db/groups'
 
 import styles from './ClientLayout.module.scss'
 
-const TIME_CLASSES = ["night", "morning", "day", "afternoon", "forest"] as const
+const TIME_CLASSES = ['night', 'morning', 'day', 'afternoon', 'forest'] as const
 type TimeOfDay = typeof TIME_CLASSES[number]
 
-const COLOR_CLASSES = ["auto", "light", "night", "morning", "afternoon", "forest", "dark"] as const
-const FONT_CLASSES = ["font-default", "font-sansserif", "font-gabriela", "font-monospace"] as const
+const COLOR_CLASSES = ['auto', 'light', 'night', 'morning', 'afternoon', 'forest', 'dark'] as const
+const FONT_CLASSES = ['font-default', 'font-sansserif', 'font-gabriela', 'font-monospace', 'font-typewriter'] as const
 
 const getTimeOfDay = (): TimeOfDay => {
   const hour = new Date().getHours()
-  if (hour < 6)  return "night"
-  if (hour < 12) return "morning"
-  if (hour < 14) return "day"
-  if (hour < 21) return "afternoon"
-  return "night"
+  if (hour < 6)  return 'night'
+  if (hour < 12) return 'morning'
+  if (hour < 14) return 'day'
+  if (hour < 21) return 'afternoon'
+  return 'night'
 }
 
 const TIME_COLORS: Record<TimeOfDay, string> = {
-  "night":     "#313131",
-  "morning":   "#e8f1f9",
-  "day":       "#f0f0f0",
-  "afternoon": "#ece1c7",
-  "forest":    "#b9c498",
+  'night':     '#313131',
+  'morning':   '#e8f1f9',
+  'day':       '#f0f0f0',
+  'afternoon': '#ece1c7',
+  'forest':    '#b9c498',
 }
 
 const useTimeOfDay = (): TimeOfDay | null => {
