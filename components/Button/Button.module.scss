@@ -41,6 +41,7 @@
     }
 
     &Add {
+        border: 1px solid var(--glass);
         background-color: var(--glass);
         -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
@@ -74,6 +75,7 @@
     }
 
     &Prev {
+        border: 1px solid var(--glass);
         background-color: var(--glass);
         -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);
@@ -125,6 +127,7 @@
         width: 42px;
         height: 42px;
         padding: 0.5rem;
+        border: 1px solid var(--glass);
         background-color: var(--glass);
         -webkit-backdrop-filter: blur(4px);
         backdrop-filter: blur(4px);

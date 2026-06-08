@@ -24,7 +24,6 @@
 
     &Title {
         @include gabriela();
-        // letter-spacing: .5px;
         position: relative;
         font-weight: bold;
         font-size: 1.75rem;
@@ -83,7 +82,7 @@
                 }
 
                 &Infos {
-                    font-size: 1rem;
+                    font-size: .875rem;
                     display: flex;
                     align-items: center;
                     gap: 1rem;
@@ -110,7 +109,7 @@
                 }
 
                 &Location {
-                    font-size: .75rem;
+                    font-size: .625rem;
                     font-weight: normal;
                     display: block;
                     opacity: .7;
@@ -125,6 +124,7 @@
 
     &Offline {
         position: absolute;
+        font-size: .875rem;
         width: auto;
         max-width: calc(100% - 40px);
         top: -120px;
@@ -133,7 +133,7 @@
         font-weight: bold;
         color: var(--error);
         white-space: nowrap;
-        padding: .375rem 1.52rem .375rem 1.25rem;
+        padding: .25rem 1.25rem .25rem 1.25rem;
         border-radius: 2rem;
         background-color: var(--glass);
         -webkit-backdrop-filter: blur(2px);
@@ -141,15 +141,15 @@
         pointer-events: auto;
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: .75rem;
         transition: top .3s ease-in-out;
 
         &.active {
-            top: 70px;
+            top: 58px;
         }
 
         &Svg {
-            width: 32px;
+            width: 26px;
             height: auto;
             display: block;
 

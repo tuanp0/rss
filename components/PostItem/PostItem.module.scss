@@ -11,7 +11,7 @@
     height: 100dvh;
     padding-top: var(--headerTop);
     transform: translateX(calc(100% + 10px));
-    transition: width .4s ease-in-out, transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
+    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
     
     &.active {
         transform: translate(0);
@@ -40,6 +40,7 @@
         border-radius: 0 24px 0 0;
         box-shadow: 0 0 10px 0 var(--black20);
         overflow: hidden;
+        transition: width .4s ease-in-out, transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
     }
 
     &Inner {
@@ -64,7 +65,7 @@
         color: var(--text);
         padding-left: 1rem;
         margin-bottom: 0.25rem;
-        margin-top: 80px;
+        margin-top: 120px;
         opacity: 0;
         transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .4s;
 
@@ -140,14 +141,14 @@
         text-align: justify;
         font-style: italic;
         margin-bottom: 2rem;
-        margin-top: 80px;
+        margin-top: 120px;
         opacity: 0;
         transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .4s;
         
         .active & {
             margin-top: 0;
             opacity: 1;
-            transition: margin-top .6s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .4s;
+            transition: margin-top .6s cubic-bezier(0, 0, 0.1, 1) .3s, opacity .6s ease-in-out .3s;
 
             &:not(:has(img)) {
                 opacity: .6;
@@ -168,14 +169,14 @@
         @include wysiwyg();
         color: var(--text);
         font-size: var(--font-size-base);
-        margin-top: 80px;
+        margin-top: 120px;
         opacity: 0;
         transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .4s;
 
         .active & {
             margin-top: 0;
             opacity: 1;
-            transition: margin-top 1s cubic-bezier(0, 0, 0.1, 1) .6s, opacity 1s ease-in-out .6s;
+            transition: margin-top 1s cubic-bezier(0, 0, 0.1, 1) .5s, opacity 1s ease-in-out .5s;
         }
     }
 }

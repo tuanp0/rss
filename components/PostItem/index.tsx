@@ -54,7 +54,14 @@ const index = () => {
         >
           <a href={currentNewsObject ? currentNewsObject.url : ''} target="_blank" rel="noreferrer">{currentNewsObject ? currentNewsObject.title : ''}</a>
         </div>
-        <time className={styles.postItemDate} dateTime={currentNewsObject ? new Date(currentNewsObject.publishedAt).toISOString() : ''}>
+        <time
+          className={`
+            ${styles.postItemDate}
+            ${activeFont === 'sansserif' ? `font-sansserif` : ''}
+            ${activeFont === 'gabriela' ? `font-gabriela` : ''}
+            ${activeFont === 'monospace' ? `font-monospace` : ''}
+            ${activeFont === 'typewriter' ? `font-typewriter` : ''}
+          `} dateTime={currentNewsObject ? new Date(currentNewsObject.publishedAt).toISOString() : ''}>
           {formattedTime}
         </time>
 

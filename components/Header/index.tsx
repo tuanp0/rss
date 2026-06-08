@@ -40,7 +40,6 @@ const Header = () => {
 
   useEffect(() => {
     if (!location?.trim()) return
-    console.log(location)
     fetchWeather(location)
       .then(setWeather)
       .catch(() => setError("City not found"))
@@ -104,13 +103,13 @@ const Header = () => {
                   <span className={styles.headerTitleSpanWeatheContent}>
                     <span className={styles.headerTitleSpanWeatherInfos}>
                       <span className={styles.headerTitleSpanWeatherInfo}>
-                        {condition ? <Icon icon={`wi:${condition}`} width={32} className={styles.headerTitleSpanWeatherIcon}/> : ''} {weather.apparent_temperature}°C
+                        {condition ? <Icon icon={`wi:${condition}`} width={28} className={styles.headerTitleSpanWeatherIcon}/> : ''} {weather.apparent_temperature}°C
                       </span>
                       <span className={styles.headerTitleSpanWeatherInfo}>
-                        <Icon icon={`wi:humidity`} width={32} className={styles.headerTitleSpanWeatherIcon}/>{weather.humidity}%
+                        <Icon icon={`wi:humidity`} width={28} className={styles.headerTitleSpanWeatherIcon}/>{weather.humidity}%
                       </span>
                       <span className={styles.headerTitleSpanWeatherInfo}>
-                        <Icon icon={`wi:strong-wind`} width={32} className={styles.headerTitleSpanWeatherIcon}/> {weather.wind_speed} km/h
+                        <Icon icon={`wi:strong-wind`} width={28} className={styles.headerTitleSpanWeatherIcon}/> {weather.wind_speed} km/h
                       </span>
                     </span>
                     <span className={styles.headerTitleSpanWeatherLocation}>{weather.city}, {weather.country}</span>

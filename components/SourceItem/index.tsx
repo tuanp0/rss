@@ -17,7 +17,7 @@ const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
   const handleNextStep = (sourceId: number) => {
     setCurrentSource(sourceId)
     setSelectedSourceName(name)
-    setCurrentStep(3)
+    setTimeout(() => {setCurrentStep(3)}, 40)
   }
 
   const handleDeleteSource = () => {

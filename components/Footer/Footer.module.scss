@@ -46,9 +46,10 @@
             gap: .5rem;
             max-width: 550px;
             padding: .25rem .5rem .25rem .5rem;
+            border: 1px solid var(--glass);
             background-color: var(--glass);
-            -webkit-backdrop-filter: blur(2px);
-            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
             border-radius: 32px;
             pointer-events: auto;
         }

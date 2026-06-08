@@ -14,13 +14,12 @@
     transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out, opacity .6s ease-in-out;
 
     &>div {
-        margin-top: 100px;
-        opacity: 0;
         pointer-events: none;
-        transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .4s;
-        
-        &>div {
-            transition: none;
+
+        &:nth-child(-n+16) {
+            margin-top: 120px;
+            opacity: 0;
+            transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .3s, opacity .6s ease-in-out .3s;
         }
 
         @media screen and (min-width:992px) {
@@ -44,9 +43,12 @@
         }
 
         &>div {
-            margin-top: 0;
-            opacity: 1;
             pointer-events: auto;
+
+            &:nth-child(-n+16) {
+                margin-top: 0;
+                opacity: 1;
+            }
         }
     }
 

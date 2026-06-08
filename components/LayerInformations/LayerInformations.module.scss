@@ -26,12 +26,13 @@
 
     &Inner {
         position: absolute;
-        width: 100%;
+        width: calc(100% - 1rem);
+        left: 0.5rem;
         bottom: 0;
         border-radius: 24px 24px 0 0;
         border: 1px solid var(--grey);
         background: var(--background);
-        box-shadow: 0 0 8px 0 var(--black40);
+        box-shadow: 0 0 8px 0 var(--black20);
         transform: translateY(110%);
         transition: transform .4s ease-in-out, background .4s ease-in-out;
         z-index: 11;
