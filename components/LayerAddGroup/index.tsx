@@ -157,6 +157,8 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                         {currentStep === 1 &&
                             <input
                                 type="text"
+                                id={'ajouter un groupe'}
+                                name={'ajouter un groupe'}
                                 className={styles.layerInput}
                                 value={nameInput}
                                 placeholder="Nom du groupe"
@@ -168,6 +170,8 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                             <>
                                 <input
                                     type="url"
+                                    id={'Ajouter une source'}
+                                    name={'Ajouter une source'}
                                     className={styles.layerInput}
                                     value={urlInput}
                                     placeholder="URL de la source"

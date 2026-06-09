@@ -138,6 +138,8 @@ const index = ({ onThemeChange }: Props) => {
                 <h2>Localisation Méteo</h2>
                   <input
                     type="text"
+                    id={'location'}
+                    name={'location'}
                     className={styles.layerContentLocationInput}
                     defaultValue={location ?? ''}
                     placeholder={'Ville'}

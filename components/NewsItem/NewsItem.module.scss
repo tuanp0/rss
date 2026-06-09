@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
-    padding: .375rem var(--padding);
+    padding: .5rem var(--padding);
     cursor: pointer;
     background: transparent;
     transition: background .2s ease-in-out;
@@ -62,7 +62,7 @@
             justify-content: flex-end;
             width: 100%;
             margin-bottom: 0.125rem;
-            margin-top: -2px;
+            margin-top: -1px;
         }
 
         &Site {

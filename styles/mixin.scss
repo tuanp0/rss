@@ -28,7 +28,7 @@
     }
 
     h2 {
-        font-size: 1.5rem;
+        font-size: 1.625rem;
         color: var(--text);
         line-height: 1.25;
         margin: .5rem 0;
@@ -38,7 +38,7 @@
     }
 
     h3 {
-        font-size: 1.25rem;
+        font-size: 1.375rem;
         color: var(--text);
         line-height: 1.25;
         margin: .5rem 0;
@@ -48,18 +48,19 @@
     }
 
     h4 {
-
+        font-size: 1.25rem;
+        color: var(--text);
+        line-height: 1.25;
+        margin: .5rem 0;
+        text-align: center;
+        position: relative;
+        display: inline-block;
     }
 
     p {
-        // font-size: 1rem;
         color: var(--text);
         line-height: 1.25;
-        margin-bottom: 1rem;
-
-        // @media screen and (min-width:768px) {
-        //     font-size: 1rem;
-        // }
+        margin-bottom: 1.25rem;
     }
 
     a {

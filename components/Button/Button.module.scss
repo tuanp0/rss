@@ -17,8 +17,8 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 42px;
-        height: 42px;
+        width: 48px;
+        height: 48px;
         overflow: hidden;
         
         @media screen and (min-width: 992px) {
@@ -117,15 +117,9 @@
         }
     }
 
-    &Parameter {
-        width: 38px;
-        height: 38px;
-        padding: .125rem;
-    }
-
     &Refresh {
-        width: 42px;
-        height: 42px;
+        width: 48px;
+        height: 48px;
         padding: 0.5rem;
         border: 1px solid var(--glass);
         background-color: var(--glass);
