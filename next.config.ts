@@ -25,7 +25,7 @@ module.exports = async (phase: string): Promise<NextConfig> => {
     cacheOnNavigation: true,
     reloadOnOnline: true,
     disable: isDev,
-    additionalPrecacheEntries: [{ url: "/index.html", revision: null }],
+    additionalPrecacheEntries: [{ url: "/index.html", revision: "<build-hash>" }],
   })
 
   return withSerwist(nextConfig)

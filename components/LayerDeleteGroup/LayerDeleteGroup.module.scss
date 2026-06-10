@@ -1,3 +1,5 @@
+@use '../../styles/mixin.scss' as *;
+
 .layer {
     position: fixed;
     width: 100%;
@@ -9,7 +11,7 @@
     z-index: 10;
 
     &.active {
-        background: var(--black20);
+        // background: var(--black20);
         -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
         pointer-events: auto;
@@ -101,12 +103,7 @@
     }
 
     &Input {
-        font-size: 1rem;
-        padding: .5em 1rem;
-        width: 100%;
-        border-radius: 24px;
-        border: 1px solid var(--text);
-        margin-bottom: 1rem;
+        @include input();
     }
 
     &Error {

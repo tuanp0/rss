@@ -74,6 +74,14 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme | null>(null)
 
   useEffect(() => {
+    if (!("serviceWorker" in navigator)) return
+
+    navigator.serviceWorker.addEventListener("controllerchange", () => {
+      if (confirm("New version available! Reload?")) {
+        window.location.reload()
+      }
+    })
+
     initDB()
       .then(db => getTheme(db))
       .then(t => setTheme(t))

@@ -11,7 +11,7 @@
     z-index: 10;
 
     &.active {
-        background: var(--black20);
+        // background: var(--black20);
         -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
         pointer-events: auto;

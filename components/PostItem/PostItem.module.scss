@@ -64,7 +64,7 @@
         text-transform: uppercase;
         color: var(--text);
         padding-left: 1rem;
-        margin-bottom: 0.25rem;
+        margin-bottom: 0.125rem;
         margin-top: 120px;
         opacity: 0;
         transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .4s;
@@ -88,11 +88,11 @@
     }
 
     &Title {
-        font-size: 1.875rem;
+        font-size: 2rem;
         line-height: 1.25;
         font-weight: bold;
         color: var(--text);
-        margin-bottom: .25rem;
+        margin-bottom: .375rem;
         max-width: 800px;
         opacity: 0;
         transition: opacity .6s ease-in-out;

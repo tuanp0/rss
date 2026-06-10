@@ -111,7 +111,15 @@ async function extractWithReadability(
     base.href = postUrl;
     doc.head.prepend(base);
 
-    const article = new Readability(doc).parse();
+    const article = new Readability(
+      doc,
+      {
+        maxElemsToParse: 0,       // no limit — don't cut off long articles
+        nbTopCandidates: 15,      // consider more candidates for complex layouts
+        charThreshold: 200,       // allow short posts to pass (default 500 is too strict)
+        // keepClasses: false,       // strip classes — cleaner output
+      }
+    ).parse();
     if (!article) return empty;
 
     return {
@@ -140,11 +148,14 @@ const xmlParser = new XMLParser({
 
 // ─── Proxies ──────────────────────────────────────────────────────────────────
 
-const CORS_PROXY = "https://api.codetabs.com/v1/proxy?quest=";
+// const CORS_PROXY = "https://api.codetabs.com/v1/proxy?quest=";
+const CORS_PROXY = "https://rss.tuanphung.com/proxy/?url=";
+
 
 const CORS_PROXIES = [
-  (url: string) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-  (url: string) => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`,
+  (url: string) => `https://rss.tuanphung.com/proxy/?url=${encodeURIComponent(url)}`,
+  // (url: string) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+  // (url: string) => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`,
 ];
 
 // ─── Feed types ───────────────────────────────────────────────────────────────
@@ -266,7 +277,7 @@ export async function parseRSSFeed(
     parallel?: boolean;
   } = {}
 ): Promise<{ posts: RSSPost[] }> {
-  const { maxFullContent = 20, parallel = true } = options;
+  const { maxFullContent = 30, parallel = true } = options;
 
   const best = await fetchBestFeed(url);
   const rawPosts = extractRawPosts(best).slice(0, maxFullContent);
@@ -307,7 +318,7 @@ export async function parseRSSFeed(
       });
 
       // Small delay — be a polite scraper
-      await new Promise((r) => setTimeout(r, 300));
+      await new Promise((r) => setTimeout(r, 200));
     }
   }
 

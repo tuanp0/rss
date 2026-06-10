@@ -3,7 +3,7 @@
     bottom: 1.75rem;
     width: 100%;
     text-align: center;
-    padding: 0 var(--padding);
+    padding: 0 1.75rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -11,6 +11,7 @@
 
     @media screen and (min-width:992px) {
         bottom: 1.25rem;
+        padding: 0 var(--padding);
     }
 
     &Container {
@@ -19,7 +20,7 @@
     }
 
     &Button {
-        width: 42px;
+        width: 52px;
         pointer-events: auto;
 
         @media screen and (min-width:992px) {
@@ -28,7 +29,7 @@
     }
 
     &Action {
-        width: 42px;
+        width: 52px;
         pointer-events: auto;
     }
 
@@ -56,7 +57,7 @@
     }
 
     &Item {
-        min-width: 52px;
+        min-width: 54px;
         padding: .375rem .5rem;
         text-align: center;
         background: transparent;
@@ -73,7 +74,7 @@
 
         &Svg {
             width: auto;
-            height: 26px;
+            height: 30px;
             display: block;
             margin: 0 auto auto;
 

@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
-    padding: .5rem var(--padding);
+    padding: .375rem var(--padding);
     cursor: pointer;
     background: transparent;
     transition: background .2s ease-in-out;
@@ -56,12 +56,10 @@
         padding-left: 1rem;
 
         &Info {
-            font-family: 'Times New Roman', serif;
-            font-weight: bold;
             display: flex;
             justify-content: flex-end;
             width: 100%;
-            margin-bottom: 0.125rem;
+            margin-bottom: 0.25rem;
             margin-top: -1px;
         }
 

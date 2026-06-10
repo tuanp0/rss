@@ -70,8 +70,8 @@
             }
 
             &Weather {
-                @include courierP();
-                letter-spacing: -1px;
+                @include gabriela();
+                letter-spacing: 1px;
                 font-weight: bold;
                 font-style: normal;
                 display: flex;
@@ -85,7 +85,7 @@
                     font-size: .875rem;
                     display: flex;
                     align-items: center;
-                    gap: 1rem;
+                    gap: 1.25rem;
 
                     @media screen and (min-width: 992px) {
                         font-size: 1.25rem;
@@ -111,6 +111,7 @@
                 &Location {
                     font-size: .625rem;
                     font-weight: normal;
+                    font-style: italic;
                     display: block;
                     opacity: .7;
 
