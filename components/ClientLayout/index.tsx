@@ -77,7 +77,7 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
     if (!("serviceWorker" in navigator)) return
 
     navigator.serviceWorker.addEventListener("controllerchange", () => {
-      if (confirm("New version available! Reload?")) {
+      if (confirm("Nouvelle version de TP Reader disponible !\nRecharger la page ?")) {
         window.location.reload()
       }
     })

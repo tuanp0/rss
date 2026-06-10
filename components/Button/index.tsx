@@ -6,14 +6,15 @@ interface Button {
     text: string
     action?: () => void
     icon: string
+    small?: boolean
     isRefreshing?: boolean
 }
 
-const index = ({text, action, icon, isRefreshing}: Button) => {
+const index = ({text, action, icon, small, isRefreshing}: Button) => {
   const { setCurrentStep } = useLayerContext()
 
   return (
-    <button className={styles.button} aria-label={icon} onClick={action}>
+    <button className={`${styles.button} ${small ? styles.small : ''}`} aria-label={icon} onClick={action}>
         {icon === 'add' &&
           <div className={`${styles.buttonAdd} ${styles.buttonIcon}`}>
             <span className={styles.buttonAddLine}></span>

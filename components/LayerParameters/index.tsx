@@ -106,7 +106,7 @@ const index = ({ onThemeChange }: Props) => {
             <div className={styles.layerContentParameter}>
               <div className={`${styles.layerContentParameterItem} ${activeFont === 'default' ? styles.active : ''}`} onClick={() => handleTheme('font', 'default')}>
                 <span className={`${styles.layerContentParameterStyle} font-serif`}>Aa</span>
-                <span className={styles.layerContentParameterText}>Times New Roman</span>
+                <span className={styles.layerContentParameterText}>Times</span>
               </div>
               <div className={`${styles.layerContentParameterItem} ${activeFont === 'sansserif' ? styles.active : ''}`} onClick={() => handleTheme('font', 'sansserif')}>
                 <span className={`${styles.layerContentParameterStyle} font-sansserif`}>Aa</span>
@@ -129,9 +129,9 @@ const index = ({ onThemeChange }: Props) => {
               <div className={styles.layerContentSize}>
                 <h2>Taille de texte</h2>
                 <div className={styles.layerContentParameter}>
-                  <Button text="Réduire la taille"  aria-label={`Réduire la taille de texte`} action={() => handleTheme('size', 'less')} icon={'minus'} />
+                  <Button text="Réduire la taille" aria-label={`Réduire la taille de texte`} action={() => handleTheme('size', 'less')} icon={'minus'} small />
                   <div className={styles.layerContentParameterVal}>{activeSize}</div>
-                  <Button text="Augmenter la taille"  aria-label={`Augmenter la taille de texte`} action={() => handleTheme('size', 'more')} icon={'add'} />
+                  <Button text="Augmenter la taille" aria-label={`Augmenter la taille de texte`} action={() => handleTheme('size', 'more')} icon={'add'} small />
                 </div>
               </div>
               <div className={styles.layerContentLocation}>
