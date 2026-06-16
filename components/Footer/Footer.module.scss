@@ -22,11 +22,16 @@
 
     &Button {
         width: 52px;
+        height: 52px;
+        border-radius: 100%;
+        box-shadow: 0 0 2px var(--black20);
         pointer-events: auto;
-        transition: width .4s ease-in-out;
+        transition: width .2s ease-in-out, height .2s ease-in-out, opacity .2s ease-in-out;
 
         &.zero {
             width: 0;
+            height: 0;
+            opacity: 0;
         }
 
         @media screen and (min-width:992px) {
@@ -36,15 +41,21 @@
 
     &Action {
         width: 52px;
+        height: 52px;
         pointer-events: auto;
+        border-radius: 100%;
+        box-shadow: 0 0 2px var(--black20);
     }
 
     &Content {
         display: inline-flex;
         justify-content: flex-start;
-        // width: calc(100% - 104px);
         flex: 1 1 auto;
-        // padding: 0 .75rem;
+        transition: margin-left .2s ease-in-out;
+
+        &.stepOne {
+            margin-left: -.75rem;
+        }
 
         @media screen and (min-width:992px) {
             width: calc(100% - 42px);
@@ -54,12 +65,12 @@
             gap: .5rem;
             max-width: 550px;
             padding: .25rem .5rem .25rem .5rem;
-            border: 1px solid var(--glass);
             background-color: var(--glass);
-            -webkit-backdrop-filter: blur(3px);
-            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
             border-radius: 32px;
             pointer-events: auto;
+            box-shadow: 0 0 2px var(--black20), inset 0 0 2px var(--white40);
         }
     }
 

@@ -7,14 +7,15 @@ interface Button {
     action?: () => void
     icon: string
     small?: boolean
+    shadowInner?: boolean
     isRefreshing?: boolean
 }
 
-const index = ({text, action, icon, small, isRefreshing}: Button) => {
+const index = ({text, action, icon, small, shadowInner, isRefreshing}: Button) => {
   const { setCurrentStep } = useLayerContext()
 
   return (
-    <button className={`${styles.button} ${small ? styles.small : ''}`} aria-label={icon} onClick={action}>
+    <button className={`${styles.button} ${small ? styles.small : ''} ${shadowInner ? styles.shadowInner : ''}`} aria-label={icon} onClick={action}>
         {icon === 'add' &&
           <div className={`${styles.buttonAdd} ${styles.buttonIcon}`}>
             <span className={styles.buttonAddLine}></span>

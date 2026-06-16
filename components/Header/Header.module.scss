@@ -57,6 +57,10 @@
             align-items: center;
             overflow: hidden;
 
+            .scrolled & {
+                box-shadow: 0 0 2px var(--black20), inset 0 0 2px var(--white40);
+            }
+
             &.past {
                 opacity: 0;
                 transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1), color 1s ease-in-out, background 1s ease-in-out, text-shadow 1s ease-in-out;
@@ -82,7 +86,7 @@
                 }
 
                 &Infos {
-                    font-size: .875rem;
+                    font-size: 1rem;
                     display: flex;
                     align-items: center;
                     gap: 1.25rem;
@@ -109,7 +113,7 @@
                 }
 
                 &Location {
-                    font-size: .625rem;
+                    font-size: .75rem;
                     font-weight: normal;
                     font-style: italic;
                     display: block;

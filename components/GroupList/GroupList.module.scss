@@ -49,7 +49,7 @@
     }
 
     &Content {
-        overflow-y: auto;
+        // overflow-y: auto;
         transition: opacity 0s ease-in-out;
 
         .past & {

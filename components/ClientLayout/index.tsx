@@ -77,8 +77,10 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
     if (!("serviceWorker" in navigator)) return
 
     navigator.serviceWorker.addEventListener("controllerchange", () => {
-      if (confirm("Nouvelle version de TP Reader disponible !\nRecharger la page ?")) {
-        window.location.reload()
+      if (confirm("Nouvelle version est disponible !\nRecharger la page ?")) {
+        navigator.serviceWorker.ready.then(() => {
+          window.location.href = window.location.href
+        })
       }
     })
 

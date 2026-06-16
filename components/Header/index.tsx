@@ -1,10 +1,9 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { Icon } from '@iconify/react';
+import { Icon } from '@iconify/react'
 import { fetchWeather, type WeatherData, getWeatherCondition } from '@/lib/weather'
 import { useLayerContext } from '@/context/LayerContext'
 import Container from '@/components/Container'
-import Button from '@/components/Button'
 
 import styles from './Header.module.scss'
 
@@ -13,6 +12,7 @@ const Header = () => {
 
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [error, setError] = useState("")
+  const [isPastHeader, setIsPastHeader] = useState(false)
 
   const truncate = (text: string, maxWidth: number): string => {
     let width = 0
@@ -38,6 +38,23 @@ const Header = () => {
     return result
   }
 
+  const handleScroll = () => {
+    const headerTop = parseFloat(
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--headerTop")
+    );
+    console.log('first')
+    let ticking = false;
+
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        setIsPastHeader(window.scrollY > headerTop);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  };
+
   useEffect(() => {
     if (!location?.trim()) return
     fetchWeather(location)
@@ -45,20 +62,26 @@ const Header = () => {
       .catch(() => setError("City not found"))
   }, [location])
 
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [])
+
   const condition = weather ? getWeatherCondition(weather.weather_code) : null
 
   return (
-    <header className={styles.header} role="banner">
+    <header className={`${styles.header}`} role="banner">
       <div className={styles.headerContent}>
         <Container className={styles.headerContainer}>
-          <p className={styles.headerTitle}>
+          <p className={`${styles.headerTitle} ${isPastHeader ? styles.scrolled : ''}`}>
             <span className={`
               ${styles.headerTitleSpan}
               ${currentStep === 1 ? styles.active : ''}
               ${currentStep >= 2 ? styles.past : ''}
             `}>
               <img src={`./tpreader-logo.png`} alt={`Logo TP Reader`} className={styles.headerTitleLogo}/>
-              TP Reader
+              <span className={`${styles.headerTitleText}`}>TP Reader</span>
             </span>
             <span className={`
               ${styles.headerTitleSpan}

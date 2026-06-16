@@ -17,26 +17,21 @@ const serwist = new Serwist({
   clientsClaim: true,
   navigationPreload: false,
   runtimeCaching: [
-    // ✅ Network-first for Next.js static assets so new hashes are always fetchable
     {
-      matcher: ({ url }) => url.pathname.startsWith("/_next/static/"),
+      matcher: ({ request }) => request.destination === "document",
       handler: new NetworkFirst({
-        cacheName: "next-static-assets",
-        networkTimeoutSeconds: 5, // fall back to cache if offline
+        cacheName: "navigation-cache",
+        networkTimeoutSeconds: 3,
+      }),
+    },
+    {
+      matcher: ({ request }) => request.destination === "image",
+      handler: new CacheFirst({
+        cacheName: "public-images",
       }),
     },
     ...defaultCache,
   ],
-  fallbacks: {
-    entries: [
-      {
-        url: "/index.html",
-        matcher({ request }) {
-          return request.destination === "document"
-        },
-      },
-    ],
-  },
 })
 
 serwist.addEventListeners()

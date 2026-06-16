@@ -129,9 +129,9 @@ const index = ({ onThemeChange }: Props) => {
               <div className={styles.layerContentSize}>
                 <h2>Taille de texte</h2>
                 <div className={styles.layerContentParameter}>
-                  <Button text="Réduire la taille" aria-label={`Réduire la taille de texte`} action={() => handleTheme('size', 'less')} icon={'minus'} small />
+                  <div className={styles.layerContentParameterBtn}><Button text="Réduire la taille" aria-label={`Réduire la taille de texte`} action={() => handleTheme('size', 'less')} icon={'minus'} small shadowInner /></div>
                   <div className={styles.layerContentParameterVal}>{activeSize}</div>
-                  <Button text="Augmenter la taille" aria-label={`Augmenter la taille de texte`} action={() => handleTheme('size', 'more')} icon={'add'} small />
+                  <div className={styles.layerContentParameterBtn}><Button text="Augmenter la taille" aria-label={`Augmenter la taille de texte`} action={() => handleTheme('size', 'more')} icon={'add'} small shadowInner /></div>
                 </div>
               </div>
               <div className={styles.layerContentLocation}>

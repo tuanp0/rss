@@ -22,10 +22,9 @@ module.exports = async (phase: string): Promise<NextConfig> => {
   const withSerwist = withSerwistInit({
     swSrc: "app/sw.ts",
     swDest: "public/sw.js",
-    cacheOnNavigation: true,
+    cacheOnNavigation: false, // let sw.ts NetworkFirst handle this instead
     reloadOnOnline: true,
     disable: isDev,
-    additionalPrecacheEntries: [{ url: "/index.html", revision: "<build-hash>" }],
   })
 
   return withSerwist(nextConfig)
