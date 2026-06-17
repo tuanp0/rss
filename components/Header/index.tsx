@@ -8,11 +8,10 @@ import Container from '@/components/Container'
 import styles from './Header.module.scss'
 
 const Header = () => {
-  const { currentStep, selectedGroupName, selectedSourceName, location, offlineMessage } = useLayerContext()
+  const { currentStep, selectedGroupName, selectedSourceName, location, offlineIcon, setOfflineIcon, offlineAlert, groupIsPastHeader, sourceIsPastHeader, newsIsPastHeader, postIsPastHeader} = useLayerContext()
 
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [error, setError] = useState("")
-  const [isPastHeader, setIsPastHeader] = useState(false)
 
   const truncate = (text: string, maxWidth: number): string => {
     let width = 0
@@ -38,22 +37,29 @@ const Header = () => {
     return result
   }
 
-  const handleScroll = () => {
-    const headerTop = parseFloat(
-      getComputedStyle(document.documentElement)
-        .getPropertyValue("--headerTop")
-    );
-    console.log('first')
-    let ticking = false;
-
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        setIsPastHeader(window.scrollY > headerTop);
-        ticking = false;
-      });
-      ticking = true;
+  const checkOnline = async (): Promise<boolean> => {
+    if (!navigator.onLine) return false
+    try {
+      await fetch("https://www.google.com/favicon.ico", {
+        method: "HEAD",
+        mode: "no-cors",
+        cache: "no-store",
+        signal: AbortSignal.timeout(3000),
+      })
+      return true
+    } catch {
+      return false
     }
-  };
+  }
+
+  const handleOnline = async () => {
+    const online = await checkOnline()
+    if (!online) {
+      setOfflineIcon(true)
+      return
+    }
+
+  }
 
   useEffect(() => {
     if (!location?.trim()) return
@@ -63,9 +69,7 @@ const Header = () => {
   }, [location])
 
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    handleOnline()
   }, [])
 
   const condition = weather ? getWeatherCondition(weather.weather_code) : null
@@ -74,11 +78,12 @@ const Header = () => {
     <header className={`${styles.header}`} role="banner">
       <div className={styles.headerContent}>
         <Container className={styles.headerContainer}>
-          <p className={`${styles.headerTitle} ${isPastHeader ? styles.scrolled : ''}`}>
+          <p className={`${styles.headerTitle}`}>
             <span className={`
               ${styles.headerTitleSpan}
               ${currentStep === 1 ? styles.active : ''}
               ${currentStep >= 2 ? styles.past : ''}
+              ${groupIsPastHeader ? styles.scrolled : ''}
             `}>
               <img src={`./tpreader-logo.png`} alt={`Logo TP Reader`} className={styles.headerTitleLogo}/>
               <span className={`${styles.headerTitleText}`}>TP Reader</span>
@@ -88,6 +93,7 @@ const Header = () => {
               ${currentStep < 2 ? styles.next : ''}
               ${currentStep === 2 ? styles.active : ''}
               ${currentStep > 2 ? styles.past : ''}
+              ${sourceIsPastHeader ? styles.scrolled : ''}
             `}>
               {selectedGroupName ? 
                 truncate(selectedGroupName, 18)
@@ -99,6 +105,7 @@ const Header = () => {
               ${currentStep < 3 ? styles.next : ''}
               ${currentStep === 3 ? styles.active : ''}
               ${currentStep > 3 ? styles.past : ''}
+              ${newsIsPastHeader ? styles.scrolled : ''}
             `}>
               {selectedSourceName ?
                 truncate(selectedSourceName, 18)
@@ -110,6 +117,7 @@ const Header = () => {
               ${styles.headerTitleSpan}
               ${currentStep <= 3 ? styles.next : ''}
               ${currentStep === 4 ? styles.active : ''}
+              ${postIsPastHeader ? styles.scrolled : ''}
             `}>
               {location === '' && !error && !weather ?
                 <>
@@ -144,7 +152,11 @@ const Header = () => {
             </span>
           </p>
 
-          <div className={`${styles.headerOffline} ${offlineMessage ? styles.active : null}`}>
+          <div className={`
+            ${styles.headerOffline}
+            ${offlineIcon ? styles.active : ''}
+            ${offlineAlert ? styles.alert : ''}
+          `}>
             <svg className={styles.headerOfflineSvg} fill="#000000" width="800px" height="800px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="18" cy="29.54" r="3"></circle>
                 <path d="M29.18,17.71l.11-.17a1.51,1.51,0,0,0-.47-2.1A20.57,20.57,0,0,0,18,12.37c-.56,0-1.11,0-1.65.07l3.21,3.21a17.41,17.41,0,0,1,7.6,2.52A1.49,1.49,0,0,0,29.18,17.71Z"></path>
@@ -152,7 +164,6 @@ const Header = () => {
                 <path d="M3,4.75l3.1,3.1A27.28,27.28,0,0,0,3.18,9.42a1.51,1.51,0,0,0-.48,2.11l.11.17a1.49,1.49,0,0,0,2,.46,24.69,24.69,0,0,1,3.67-1.9l3.14,3.14a20.63,20.63,0,0,0-4.53,2.09,1.51,1.51,0,0,0-.46,2.1l.11.17a1.49,1.49,0,0,0,2,.46A17.46,17.46,0,0,1,14.25,16l3.6,3.6a13.39,13.39,0,0,0-6.79,1.93,1.5,1.5,0,0,0-.46,2.09l.1.16a1.52,1.52,0,0,0,2.06.44,10.2,10.2,0,0,1,9-.7L29,30.75l1.41-1.41-26-26Z"></path>
                 <rect x="0" y="0" width="36" height="36" fillOpacity="0"/>
             </svg>
-            Pas de connexion internet
           </div>
 
         </Container>

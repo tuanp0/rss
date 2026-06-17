@@ -4,7 +4,7 @@ import { useLayerContext } from '@/context/LayerContext'
 import styles from './PostItem.module.scss'
 
 const index = () => {
-  const { currentStep, currentNewsObject, activeFont, showParametersLayer, showInformationsLayer } = useLayerContext()
+  const { currentStep, currentNewsObject, activeFont, showParametersLayer, showInformationsLayer, setPostIsPastHeader } = useLayerContext()
   const postRef = useRef<HTMLDivElement>(null);
 
   const getSiteName = (url: string): string => {
@@ -28,9 +28,36 @@ const index = () => {
     })
   : ''
 
+  const handleScroll = () => {
+    const headerTop = parseFloat(
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--headerTop")
+    );
+
+    let ticking = false;
+
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if(postRef.current) {
+          setPostIsPastHeader(postRef.current.scrollTop > headerTop - 30);
+          ticking = false;
+        }
+      });
+      ticking = true;
+    }
+  };
+
   useEffect(() => {
     postRef.current?.scrollTo(0,0)
   }, [currentNewsObject])
+
+  useEffect(() => {
+    const postR = postRef.current;
+    if (!postR) return;
+
+    postR.addEventListener("scroll", handleScroll, { passive: true });
+    return () => postR.removeEventListener("scroll", handleScroll);
+  }, [])
 
   return (
     <section

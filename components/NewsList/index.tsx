@@ -6,10 +6,10 @@ import NewsItem from '@/components/NewsItem'
 import styles from './NewsList.module.scss'
 
 const NewsList = () => {
-  const { currentStep, currentGroup, currentSource, refreshTrigger, showParametersLayer, showInformationsLayer } = useLayerContext()
+  const { currentStep, currentGroup, currentSource, refreshTrigger, showParametersLayer, showInformationsLayer, setNewsIsPastHeader } = useLayerContext()
   const [posts, setPosts] = useState<Post[]>([])
   const [db, setDb] = useState<IDBDatabase | null>(null)
-  const newsRef = useRef<HTMLDivElement>(null);
+  const newsRef = useRef<HTMLDivElement>(null)
 
   const getSiteName = (url: string): string => {
     try {
@@ -19,6 +19,25 @@ const NewsList = () => {
     }
   }
 
+  const handleScroll = () => {
+    const headerTop = parseFloat(
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--headerTop")
+    );
+
+    let ticking = false;
+
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if(newsRef.current) {
+          setNewsIsPastHeader(newsRef.current.scrollTop > headerTop - 20);
+          ticking = false;
+        }
+      });
+      ticking = true;
+    }
+  };
+
   useEffect(() => {
     newsRef.current?.scrollTo(0,0)
   }, [currentSource])
@@ -27,6 +46,12 @@ const NewsList = () => {
     initDB()
       .then((database) => setDb(database))
       .catch(console.error)
+
+    const newsR = newsRef.current;
+    if (!newsR) return;
+
+    newsR.addEventListener("scroll", handleScroll, { passive: true });
+    return () => newsR.removeEventListener("scroll", handleScroll);
   }, [])
 
   const sortPosts = (posts: Post[]) =>

@@ -11,11 +11,10 @@ const index = () => {
   const {
     currentStep, setCurrentStep,
     setShowAddLayer, setShowDeleteLayer, setShowParametersLayer, setShowInformationsLayer,
-    currentGroup, setCurrentGroup,
-    currentSource, setCurrentSource,
-    setCurrentNews,
+    currentGroup,
+    currentSource,
     triggerRefresh,
-    offlineMessage, setOfflineMessage
+    setOfflineAlert
   } = useLayerContext()
   const [refreshing, setRefreshing] = useState(false)
   
@@ -35,8 +34,9 @@ const index = () => {
   }
 
   const showOfflineBanner = () => {
-    setOfflineMessage(true)
-    setTimeout(() => setOfflineMessage(false), 2000)
+    console.log('really offline')
+    setOfflineAlert(true)
+    setTimeout(() => setOfflineAlert(false), 4000)
   }
 
   const handleRefresh = async () => {

@@ -48,8 +48,18 @@ interface LayerContextType {
   setActiveSize: (val: number) => void
   location: string | null
   setLocation: (name: string) => void
-  offlineMessage: boolean
-  setOfflineMessage: (val:boolean) => void
+  offlineIcon: boolean
+  setOfflineIcon: (val:boolean) => void
+  offlineAlert: boolean
+  setOfflineAlert: (val:boolean) => void
+  groupIsPastHeader: boolean
+  setGroupIsPastHeader: (val:boolean) => void
+  sourceIsPastHeader: boolean
+  setSourceIsPastHeader: (val:boolean) => void
+  newsIsPastHeader: boolean
+  setNewsIsPastHeader: (val:boolean) => void
+  postIsPastHeader: boolean
+  setPostIsPastHeader: (val:boolean) => void
 }
 
 const LayerContext = createContext<LayerContextType | null>(null)
@@ -78,7 +88,12 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
   const [activeFont, setActiveFont] = useState<string>('default')
   const [activeSize, setActiveSize] = useState<number>(16)
   const [location, setLocation] = useState<string>('')
-  const [offlineMessage, setOfflineMessage] = useState<boolean>(false)
+  const [offlineIcon, setOfflineIcon] = useState<boolean>(false)
+  const [offlineAlert, setOfflineAlert] = useState<boolean>(false)
+  const [groupIsPastHeader, setGroupIsPastHeader] = useState<boolean>(false)
+  const [sourceIsPastHeader, setSourceIsPastHeader] = useState<boolean>(false)
+  const [newsIsPastHeader, setNewsIsPastHeader] = useState<boolean>(false)
+  const [postIsPastHeader, setPostIsPastHeader] = useState<boolean>(false)
 
   const value = useMemo(() => ({
     currentStep,
@@ -126,8 +141,18 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
     setActiveSize,
     location,
     setLocation,
-    offlineMessage,
-    setOfflineMessage,
+    offlineIcon,
+    setOfflineIcon,
+    offlineAlert,
+    setOfflineAlert,
+    groupIsPastHeader,
+    setGroupIsPastHeader,
+    sourceIsPastHeader,
+    setSourceIsPastHeader,
+    newsIsPastHeader,
+    setNewsIsPastHeader,
+    postIsPastHeader,
+    setPostIsPastHeader
   }), [
     currentStep, currentGroup, currentSource, currentNews, currentNewsObject,
     showAddLayer, showDeleteLayer, showParametersLayer, showInformationsLayer,
@@ -135,7 +160,8 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
     selectedGroupId, selectedGroupName, selectedSourceId, selectedSourceName,
     refreshGroups, refreshSources, refreshTrigger,
     activeColor, activeFont, activeSize,
-    location, offlineMessage,
+    location, offlineIcon, offlineAlert,
+    groupIsPastHeader, sourceIsPastHeader, newsIsPastHeader, postIsPastHeader
   ])
 
   return (

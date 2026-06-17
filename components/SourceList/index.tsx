@@ -19,10 +19,12 @@ interface SourcesTypes {
 }
 
 const SourceList = ({ onReady }: SourcesTypes) => {
-  const { currentStep, currentGroup, showAddLayer, showDeleteLayer, showParametersLayer, showInformationsLayer } = useLayerContext()
+  const { currentStep, currentGroup, showAddLayer, showDeleteLayer, showParametersLayer, showInformationsLayer, setSourceIsPastHeader } = useLayerContext()
   const [sources, setSources] = useState<Source[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [db, setDb] = useState<IDBDatabase | null>(null)
+
+  const sourceRef = useRef<HTMLDivElement>(null)
 
   const fetchSources = (dbInstance: IDBDatabase) => {
     getSourcesByGroup(dbInstance, currentGroup)
@@ -40,6 +42,25 @@ const SourceList = ({ onReady }: SourcesTypes) => {
       return url;
     }
   }
+
+  const handleScroll = () => {
+    const headerTop = parseFloat(
+      getComputedStyle(document.documentElement)
+        .getPropertyValue("--headerTop")
+    );
+
+    let ticking = false;
+
+    if (!ticking) {
+      requestAnimationFrame(() => {
+        if(sourceRef.current) {
+          setSourceIsPastHeader(sourceRef.current.scrollTop > headerTop - 20);
+          ticking = false;
+        }
+      });
+      ticking = true;
+    }
+  };
 
   useEffect(() => {
     initDB()
@@ -59,6 +80,12 @@ const SourceList = ({ onReady }: SourcesTypes) => {
         onReady(() => fetchSources(dbInstance))
       })
       .catch(console.error)
+
+    const sourceR = sourceRef.current;
+    if (!sourceR) return;
+
+    sourceR.addEventListener("scroll", handleScroll, { passive: true });
+    return () => sourceR.removeEventListener("scroll", handleScroll);
   }, [])
 
   return (
@@ -69,6 +96,7 @@ const SourceList = ({ onReady }: SourcesTypes) => {
         ${currentStep === 2 ? styles.active : ''}
         ${currentStep >= 3 ? styles.past : ''}
       `}
+      ref={sourceRef}
     >
       <div className={styles.sourceContent}>
         {loading && <p className={styles.sourceContentText}>Chargement...</p>}
