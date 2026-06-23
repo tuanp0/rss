@@ -70,6 +70,7 @@
         color: var(--text);
         line-height: 1.25;
         margin-bottom: 1.25rem;
+        word-wrap: break-word;
     }
 
     a {
@@ -145,5 +146,33 @@
 
     iframe {
         max-width: 100%;
+    }
+
+    code {
+        white-space: initial;
+    }
+
+    table {
+        border-spacing: 0;
+        margin-bottom: 1.25rem;
+
+        thead {
+            th {
+                padding: .375rem;
+            }
+        }
+
+        tbody {
+            tr {
+                &:nth-child(odd) {
+                    background: var(--black10);
+                }
+            }
+
+            td {
+                vertical-align: top;
+                padding: .375rem;
+            }
+        }
     }
 }

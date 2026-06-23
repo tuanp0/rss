@@ -54,7 +54,7 @@ const SourceList = ({ onReady }: SourcesTypes) => {
     if (!ticking) {
       requestAnimationFrame(() => {
         if(sourceRef.current) {
-          setSourceIsPastHeader(sourceRef.current.scrollTop > headerTop - 20);
+          setSourceIsPastHeader(sourceRef.current.scrollTop > headerTop - 60);
           ticking = false;
         }
       });

@@ -39,7 +39,7 @@ const index = () => {
     if (!ticking) {
       requestAnimationFrame(() => {
         if(postRef.current) {
-          setPostIsPastHeader(postRef.current.scrollTop > headerTop - 30);
+          setPostIsPastHeader(postRef.current.scrollTop > headerTop - 60);
           ticking = false;
         }
       });

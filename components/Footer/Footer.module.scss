@@ -24,14 +24,15 @@
         width: 54px;
         height: 54px;
         border-radius: 100%;
-        box-shadow: 0 0 3px var(--black20);
+        box-shadow: 0 0 3px var(--black30);
         pointer-events: auto;
-        transition: width .2s ease-in-out, height .2s ease-in-out, opacity .2s ease-in-out;
+        transition: width .2s ease-in-out, height .2s ease-in-out, opacity .2s ease-in-out, box-shadow .2s ease-in-out;
 
         &.zero {
             width: 0;
             height: 0;
             opacity: 0;
+            box-shadow: none;
         }
 
         @media screen and (min-width:992px) {
@@ -44,7 +45,7 @@
         height: 54px;
         pointer-events: auto;
         border-radius: 100%;
-        box-shadow: 0 0 3px var(--black20);
+        box-shadow: 0 0 3px var(--black30);
     }
 
     &Content {
@@ -64,19 +65,18 @@
         &Inner {
             gap: .5rem;
             max-width: 550px;
-            padding: .375rem .75rem .375rem .75rem;
-            // background-color: var(--glass);
-            -webkit-backdrop-filter: blur(2px);
-            backdrop-filter: blur(2px);
+            padding: .375rem .5rem .375rem .5rem;
+            -webkit-backdrop-filter: blur(3px);
+            backdrop-filter: blur(3px);
             border-radius: 32px;
             pointer-events: auto;
-            box-shadow: 0 0 3px var(--black20), inset 0 0 4px var(--white40);
+            box-shadow: 0 0 3px var(--black30), inset 0 0 4px var(--white40);
         }
     }
 
     &Item {
         min-width: 54px;
-        padding: .375rem .5rem;
+        padding: .375rem .75rem;
         text-align: center;
         background: transparent;
         border: none;

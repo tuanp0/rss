@@ -40,7 +40,9 @@ const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
         : name.slice(0, 1)
         }
       </span>
-      <p className={styles.sourceItemName}>{name}</p>
+      <p className={styles.sourceItemName}>
+          {new DOMParser().parseFromString(name, 'text/html').documentElement.textContent}
+      </p>
       {name !== "Toutes les sources" &&
         <div className={styles.groupItemDelete} onClick={(e) => e.stopPropagation()}>
           <Button

@@ -31,7 +31,7 @@
         bottom: .75rem;
         border-radius: 24px 24px 48px 48px;
         background: var(--white40);
-        box-shadow: 0 0 8px 0 var(--black20);
+        box-shadow: 0 0 8px 0 var(--black20), inset 0 0 8px var(--white40);
         border: 1px solid var(--glass);
         transform: translateY(calc(105% + .75rem));
         transition: transform .4s ease-in-out, background .4s ease-in-out;
@@ -41,6 +41,7 @@
         @media screen and (min-width: 992px) {
             width: 620px;
             left: 50%;
+            border-radius: 24px;
             transform: translateX(-50%) translateY(110%);
         }
     }
@@ -50,7 +51,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: .75rem var(--padding);
+            padding: .75rem 1rem;
         }
     }
 
@@ -98,7 +99,9 @@
         @include wysiwyg();
         
         .container {
-            padding: 1rem var(--padding) 2rem var(--padding);
+            padding: 1rem 1rem 2rem 1rem;
+
+
         }
 
         h2 {
@@ -202,6 +205,7 @@
                 &Input {
                     @include input();
                     margin-bottom: 0;
+                    box-shadow: 0 0 3px var(--black30);
                 }
             }
         }

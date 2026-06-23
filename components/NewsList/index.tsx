@@ -30,7 +30,7 @@ const NewsList = () => {
     if (!ticking) {
       requestAnimationFrame(() => {
         if(newsRef.current) {
-          setNewsIsPastHeader(newsRef.current.scrollTop > headerTop - 20);
+          setNewsIsPastHeader(newsRef.current.scrollTop > headerTop - 60);
           ticking = false;
         }
       });

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { initDB, addGroup, addSource, getSourcesByGroup, addPost } from '@/db/groups'
 import { parseRSSFeed } from "@/lib/parse-rss";
 import { findRSSFeeds } from "@/lib/find-rss";
@@ -32,11 +32,26 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
     const [loading, setLoading] = useState<boolean>(false)
     const [availableFeeds, setAvailableFeeds] = useState<Feed[]>([])
 
+    const groupInputRef = useRef<HTMLInputElement>(null)
+    const sourceInputRef = useRef<HTMLInputElement>(null)
+
     useEffect(() => {
         initDB()
             .then((db) => setDb(db))
             .catch(console.error)
     }, [])
+
+    useEffect(() => {
+        if(showAddLayer === true) {
+            if(currentStep === 1) {
+                groupInputRef.current?.focus()
+            }
+
+            if(currentStep === 2) {
+                sourceInputRef.current?.focus()
+            }
+        }
+    }, [showAddLayer])
 
     const handleAddGroup = async () => {
         if (!db) return
@@ -163,6 +178,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                                 value={nameInput}
                                 placeholder="Nom du groupe"
                                 onChange={(e) => { setNameInput(e.target.value); setError(null) }}
+                                ref={groupInputRef}
                             />
                         }
 
@@ -176,6 +192,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                                     value={urlInput}
                                     placeholder="URL de la source"
                                     onChange={(e) => { setUrlInput(e.target.value); setError(null); setAvailableFeeds([]) }}
+                                    ref={sourceInputRef}
                                 />
 
                                 {availableFeeds.length > 1 && (

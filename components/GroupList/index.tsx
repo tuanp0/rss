@@ -53,7 +53,7 @@ const GroupList = ({ onReady }: GroupsTypes) => {
     if (!ticking) {
       requestAnimationFrame(() => {
         if(groupRef.current) {
-          setGroupIsPastHeader(groupRef.current.scrollTop > headerTop - 20);
+          setGroupIsPastHeader(groupRef.current.scrollTop > headerTop - 60);
           ticking = false;
         }
       });
