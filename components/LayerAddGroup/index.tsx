@@ -43,6 +43,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
 
     useEffect(() => {
         if(showAddLayer === true) {
+            console.log(currentStep)
             if(currentStep === 1) {
                 groupInputRef.current?.focus()
             }
@@ -50,6 +51,9 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
             if(currentStep === 2) {
                 sourceInputRef.current?.focus()
             }
+        } else {
+            groupInputRef.current?.blur()
+            sourceInputRef.current?.blur()            
         }
     }, [showAddLayer])
 
@@ -229,7 +233,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                         }
 
                         {currentStep === 2 && availableFeeds.length === 0 &&
-                            <button type="button"  aria-label={`Ajouter`} className={styles.layerSubmit} onClick={handleAddSource} disabled={loading}>
+                            <button type="button"  aria-label={`Ajouter`} className={`${styles.layerSubmit} ${loading ? styles.disable : ''}`} onClick={handleAddSource} disabled={loading}>
                                 {loading ? "Recherche..." : "Ajouter"}
                             </button>
                         }

@@ -30,7 +30,7 @@ const TIME_COLORS: Record<TimeOfDay, string> = {
   'night':     '#313131',
   'morning':   '#e8f1f9',
   'day':       '#f0f0f0',
-  'afternoon': '#ece1c7',
+  'afternoon': '#ede5d4',
   'forest':    '#b9c498',
 }
 

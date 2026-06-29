@@ -27,7 +27,7 @@
 
   --padding: 1rem;
   --max-width: 1440px;
-  --headerTop: 95px;
+  --headerTop: 100px;
 
   @media screen and (min-width:768px) {
     --padding: 2rem;
@@ -99,14 +99,14 @@
   --carve-shadow :#ffffff;
 }
 .afternoon {
-  --background: #ece1c7;
+  --background: #ede5d4;
   --text: rgb(55, 35, 4);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(210, 210, 210, .1);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;
   --carve-bg: rgba(0, 0, 0, 1);
-  --carve-shadow :#ece1c7;
+  --carve-shadow :#ede5d4;
 }
 
 .forest {

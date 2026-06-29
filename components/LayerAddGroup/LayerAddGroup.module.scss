@@ -167,5 +167,9 @@
         &:hover {
             background: var(--black20);
         }
+
+        &.disable {
+            pointer-events: none;
+        }
     }
 }

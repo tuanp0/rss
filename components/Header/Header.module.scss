@@ -10,8 +10,8 @@
     &Container {
         position: relative;
         padding: .875rem 0;
-        padding-top: 8px;
-        padding-bottom: 8px;
+        padding-top: 12px;
+        padding-bottom: 12px;
         margin: 0;
         z-index: 1;
 
@@ -26,7 +26,6 @@
         @include gabriela();
         position: relative;
         font-weight: bold;
-        font-size: 1.75rem;
         color: var(--text);
         width: 100%;
         height: 55px;
@@ -36,9 +35,17 @@
             height: auto;
             display: inline-block;
             margin-right: 1rem;
+            transition: width .4s ease-in-out;
+
+            .scrolled & {
+                @media screen and (max-width: 767px) {
+                    width: 38px;
+                }
+            }
         }
 
         &Span {
+            font-size: 1.75rem;
             position: absolute;
             width: auto;
             max-width: calc(100% - 40px);
@@ -55,6 +62,7 @@
                 color 1s ease-in-out,
                 background 1s ease-in-out,
                 text-shadow 1s ease-in-out,
+                font-size .4s ease-in-out,
                 box-shadow .4s ease-in-out;
             white-space: nowrap;
             opacity: 1;
@@ -64,6 +72,7 @@
 
             &.scrolled {
                 @media screen and (max-width: 767px) {
+                    font-size: 1.375rem;
                     box-shadow: 0 0 6px var(--black30), inset 0 0 4px var(--white40);
                 }
             }
