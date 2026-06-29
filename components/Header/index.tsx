@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Icon } from '@iconify/react'
 import { fetchWeather, type WeatherData, getWeatherCondition } from '@/lib/weather'
 import { useLayerContext } from '@/context/LayerContext'
@@ -8,10 +8,15 @@ import Container from '@/components/Container'
 import styles from './Header.module.scss'
 
 const Header = () => {
-  const { currentStep, selectedGroupName, selectedSourceName, location, offlineIcon, setOfflineIcon, offlineAlert, groupIsPastHeader, sourceIsPastHeader, newsIsPastHeader, postIsPastHeader} = useLayerContext()
+  const { currentStep, selectedGroupName, selectedSourceName, location, offlineIcon, setOfflineIcon, offlineAlert} = useLayerContext()
 
   const [weather, setWeather] = useState<WeatherData | null>(null)
   const [error, setError] = useState("")
+  const [groupIsPastHeader, setGroupIsPastHeader] = useState(false)
+  const [sourceIsPastHeader, setSourceIsPastHeader] = useState(false)
+  const [newsIsPastHeader, setNewsIsPastHeader] = useState(false)
+  const [postIsPastHeader, setPostIsPastHeader] = useState(false)
+  const headerTopRef = useRef<number>(0)
 
   const truncate = (text: string, maxWidth: number): string => {
     let width = 0
@@ -70,6 +75,38 @@ const Header = () => {
 
   useEffect(() => {
     handleOnline()
+
+    headerTopRef.current = parseFloat(
+      getComputedStyle(document.documentElement).getPropertyValue('--headerTop')
+    )
+
+    const scrollMap: [string, (v: boolean) => void][] = [
+      ['group', setGroupIsPastHeader],
+      ['source', setSourceIsPastHeader],
+      ['news', setNewsIsPastHeader],
+      ['post', setPostIsPastHeader],
+    ]
+
+    const cleanups = scrollMap.map(([key, setter]) => {
+      const el = document.querySelector(`[data-scroll="${key}"]`) as HTMLElement | null
+      if (!el) return () => {}
+
+      let ticking = false
+      const handler = () => {
+        if (!ticking) {
+          ticking = true
+          requestAnimationFrame(() => {
+            setter(el.scrollTop > headerTopRef.current - 60)
+            ticking = false
+          })
+        }
+      }
+
+      el.addEventListener('scroll', handler, { passive: true })
+      return () => el.removeEventListener('scroll', handler)
+    })
+
+    return () => cleanups.forEach(cleanup => cleanup())
   }, [])
 
   const condition = weather ? getWeatherCondition(weather.weather_code) : null
@@ -130,7 +167,6 @@ const Header = () => {
               {error && weather === null ? <span>{error}</span> : null}
               {weather ?
                 <span className={styles.headerTitleSpanWeather}>
-                  {/* <img src={`./tpreader-logo.png`} className={styles.headerTitleLogo}/> */}
                   <span className={styles.headerTitleSpanWeatheContent}>
                     <span className={styles.headerTitleSpanWeatherInfos}>
                       <span className={styles.headerTitleSpanWeatherInfo}>

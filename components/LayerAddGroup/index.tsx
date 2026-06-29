@@ -43,7 +43,6 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
 
     useEffect(() => {
         if(showAddLayer === true) {
-            console.log(currentStep)
             if(currentStep === 1) {
                 groupInputRef.current?.focus()
             }

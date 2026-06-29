@@ -34,7 +34,6 @@ const index = () => {
   }
 
   const showOfflineBanner = () => {
-    console.log('really offline')
     setOfflineAlert(true)
     setTimeout(() => setOfflineAlert(false), 4000)
   }

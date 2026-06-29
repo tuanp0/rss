@@ -56,12 +56,6 @@ function applyThemeToBody(theme: Theme | null, timeOfDay: TimeOfDay | null) {
     document.body.classList.add(color)
   }
 
-  // document.body.classList.remove(...FONT_CLASSES)
-  // const font = theme?.font_theme
-  // if (font && font !== 'default') {
-  //   document.body.classList.add(`font-${font}`)
-  // }
-
   const size = theme?.size_theme
   if (size) {
     document.body.style.setProperty('--font-size-base', `${size}px`)
@@ -93,22 +87,6 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     applyThemeToBody(theme, timeOfDay)
   }, [theme, timeOfDay])
-
-  // useEffect(() => {
-  //   const color = theme?.color_theme
-  //   const isAuto = !color || color === 'auto'
-  //   const activeTime = isAuto ? timeOfDay : null
-
-  //   let metaColor = '#ffffff'
-  //   if (activeTime) metaColor = TIME_COLORS[activeTime]
-
-  //   for (const meta of [
-  //     document.querySelector<HTMLMetaElement>('meta[name="theme-color"]'),
-  //     document.querySelector<HTMLMetaElement>('meta[name="apple-mobile-web-app-status-bar-style"]'),
-  //   ]) {
-  //     if (meta) meta.content = metaColor
-  //   }
-  // }, [theme, timeOfDay])
 
   return (
     <>

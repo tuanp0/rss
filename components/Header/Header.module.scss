@@ -106,6 +106,14 @@
                     display: flex;
                     align-items: center;
                     gap: 1.25rem;
+                    transition: font-size .4s ease-in-out, gap .4s ease-in-out;
+
+                    .scrolled & {
+                        @media screen and (max-width: 767px) {
+                            font-size: .75rem;
+                            gap: .875rem;
+                        }
+                    }
 
                     @media screen and (min-width: 992px) {
                         font-size: 1rem;
@@ -123,7 +131,6 @@
                     align-items: center;
                 }
 
-
                 &Icon {
                     margin-right: .125rem;
                 }
@@ -134,6 +141,13 @@
                     font-style: italic;
                     display: block;
                     opacity: .7;
+                    transition: font-size .4s ease-in-out;
+
+                    .scrolled & {
+                        @media screen and (max-width: 767px) {
+                            font-size: .5rem;
+                        }
+                    }
 
                     @media screen and (min-width: 992px) {
                         font-size: .75rem;

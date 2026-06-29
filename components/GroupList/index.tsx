@@ -17,9 +17,8 @@ interface GroupsTypes {
 }
 
 const GroupList = ({ onReady }: GroupsTypes) => {
-  const { currentStep, showAddLayer, showDeleteLayer, showParametersLayer, showInformationsLayer, setGroupIsPastHeader } = useLayerContext()
+  const { currentStep, showAddLayer, showDeleteLayer, showParametersLayer, showInformationsLayer } = useLayerContext()
   const [groups, setGroups] = useState<Group[]>([])
-  const [sourceCount, setSourceCount] = useState<Group[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [db, setDb] = useState<IDBDatabase | null>(null)
 
@@ -42,25 +41,6 @@ const GroupList = ({ onReady }: GroupsTypes) => {
       .catch(console.error)
   }
 
-  const handleScroll = () => {
-    const headerTop = parseFloat(
-      getComputedStyle(document.documentElement)
-        .getPropertyValue("--headerTop")
-    );
-
-    let ticking = false;
-
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        if(groupRef.current) {
-          setGroupIsPastHeader(groupRef.current.scrollTop > headerTop - 60);
-          ticking = false;
-        }
-      });
-      ticking = true;
-    }
-  };
-
   useEffect(() => {
     initDB()
       .then((dbInstance) => {
@@ -69,12 +49,6 @@ const GroupList = ({ onReady }: GroupsTypes) => {
         onReady(() => fetchGroups(dbInstance))
       })
       .catch(console.error)
-
-    const groupR = groupRef.current;
-    if (!groupR) return;
-
-    groupR.addEventListener("scroll", handleScroll, { passive: true });
-    return () => groupR.removeEventListener("scroll", handleScroll);
   }, [])
 
   return (
@@ -85,6 +59,7 @@ const GroupList = ({ onReady }: GroupsTypes) => {
         ${currentStep === 1 ? styles.active : ''}
         ${currentStep >= 2 ? styles.past : ''}
       `}
+      data-scroll="group"
       ref={groupRef}
     >
       <div className={styles.groupContent}>
