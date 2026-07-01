@@ -24,8 +24,9 @@
         width: 54px;
         height: 54px;
         border-radius: 100%;
-        box-shadow: 0 0 3px var(--black30);
+        box-shadow: 0 0 3px var(--black50);
         pointer-events: auto;
+        overflow: hidden;
         transition: width .2s ease-in-out, height .2s ease-in-out, opacity .2s ease-in-out, box-shadow .2s ease-in-out;
 
         &.zero {
@@ -45,7 +46,8 @@
         height: 54px;
         pointer-events: auto;
         border-radius: 100%;
-        box-shadow: 0 0 3px var(--black30);
+        box-shadow: 0 0 3px var(--black50);
+        overflow: hidden;
     }
 
     &Content {
@@ -62,15 +64,25 @@
             width: calc(100% - 42px);
         }
 
+        &Glass {
+            display: none;
+        }
+
         &Inner {
             gap: .5rem;
             max-width: 550px;
             padding: .375rem .5rem .375rem .5rem;
-            -webkit-backdrop-filter: blur(3px);
-            backdrop-filter: blur(3px);
             border-radius: 32px;
             pointer-events: auto;
-            box-shadow: 0 0 3px var(--black30), inset 0 0 4px var(--white40);
+            box-shadow: 0 0 3px var(--black50), inset 0 0 2px var(--white40);
+            background: var(--glass);
+
+            @supports not (background: -webkit-named-image(i)) {
+                backdrop-filter: url(#footermenu-filter);
+            }
+            @supports (background: -webkit-named-image(i)) {
+                backdrop-filter: blur(1px);
+            }
         }
     }
 

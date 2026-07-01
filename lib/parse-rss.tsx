@@ -143,7 +143,7 @@ const xmlParser = new XMLParser({
   cdataPropName: "__cdata",
   htmlEntities: true,
   isArray: (tagName) =>
-    ["item", "category", "media:content"].includes(tagName),
+    ["item", "entry", "category", "media:content"].includes(tagName),
 });
 
 // ─── Proxies ──────────────────────────────────────────────────────────────────
@@ -190,8 +190,9 @@ async function fetchBestFeed(url: string): Promise<FeedResult> {
         }
 
         const parsed = xmlParser.parse(text);
-        const channel = parsed?.rss?.channel;
-        const items = toArray(channel?.item);
+        const rssItems = toArray(parsed?.rss?.channel?.item);
+        const atomEntries = toArray(parsed?.feed?.entry);
+        const items = rssItems.length ? rssItems : atomEntries;
 
         results.push({ type: "xml", data: text, itemCount: items.length });
       } catch (err) {
@@ -240,21 +241,52 @@ function extractRawPosts(result: FeedResult): RawPost[] {
     });
   }
 
-  // XML
+  // XML — could be RSS 2.0 or Atom
   const parsed = xmlParser.parse(result.data);
-  const channel = parsed?.rss?.channel;
-  const items = toArray(channel?.item);
 
-  return items.map((raw): RawPost => {
-    const content = extractText(raw["content:encoded"]);
+  const rssItems = toArray(parsed?.rss?.channel?.item);
+  if (rssItems.length) {
+    return rssItems.map((raw): RawPost => {
+      const content = extractText(raw["content:encoded"]);
+      return {
+        title: extractText(raw.title),
+        postUrl: extractText(raw.link),
+        publishedAt: new Date(extractText(raw.pubDate)).toISOString(),
+        shortDesc: extractText(raw.description),
+        fallbackThumbnail: getThumbnail(raw, content),
+      };
+    });
+  }
+
+  const atomEntries = toArray(parsed?.feed?.entry);
+  return atomEntries.map((raw): RawPost => {
+    const content = extractText(raw.content) || extractText(raw.summary);
+    const dateStr = extractText(raw.published) || extractText(raw.updated);
     return {
       title: extractText(raw.title),
-      postUrl: extractText(raw.link),
-      publishedAt: new Date(extractText(raw.pubDate)).toISOString(),
-      shortDesc: extractText(raw.description),
+      postUrl: extractAtomLink(raw),
+      publishedAt: new Date(dateStr || Date.now()).toISOString(),
+      shortDesc: extractText(raw.summary) || content.slice(0, 300),
       fallbackThumbnail: getThumbnail(raw, content),
     };
   });
+}
+
+function extractAtomLink(raw: Record<string, unknown>): string {
+  const link = raw.link;
+  if (!link) return "";
+
+  const links = toArray(link) as Array<Record<string, unknown> | string>;
+
+  // Prefer rel="alternate" (or no rel, which defaults to alternate), else take the first
+  const preferred =
+    links.find((l) => typeof l === "object" && ((l as any)["@_rel"] === "alternate" || !("@_rel" in (l as any)))) ??
+    links[0];
+
+  if (typeof preferred === "object" && preferred !== null) {
+    return String((preferred as any)["@_href"] ?? "");
+  }
+  return extractText(preferred);
 }
 
 // ─── MAIN FUNCTION ────────────────────────────────────────────────────────────

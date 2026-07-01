@@ -33,14 +33,18 @@ const index = () => {
         <div className={styles.layerContent}>
           <Container className={styles.container}>
             <p>
-              Une <strong>application web légère et pratique</strong> pour rassembler tous vos flux RSS en un seul endroit.<br/>
-              Plus besoin de visiter chaque site un par un, retrouvez les articles de vos sources préférées directement sur votre écran, à tout moment.</p>
+              Une <strong>application web légère et pratique</strong> pour rassembler toutes vos news et articles en un seul endroit.<br/>
+              Plus besoin de visiter chaque site un par un, retrouvez les articles de vos sources préférées directement sur votre écran, à tout moment.<br/>
+              Entrez l'URL du site et si un flux RSS/ATOM est disponible, les entrées seront récupérées.</p>
             <p>
               <strong>Aucune donnée personelle n'est collectée</strong>. Les flux RSS et articles sont sauvegardés sur le device utilisé.<br/>
               C'est votre espace de lecture personnel. Rapide, privé, et à jour lorsque vous le souhaitez.
             </p>
 
-            <p><i>Une version offline sera prochainement mise en place pour pouvoir consulter les articles déjà chargés sans connexion internet.</i></p>
+            <p>
+              <i>Une version offline est en place pour pouvoir consulter les articles déjà chargés sans connexion internet.<br/>
+              Il suffit d'ajouter cette application web sur l'acran d'accueil de votre téléphone.</i>
+            </p>
             <h2>Tuan Phung</h2>
             <p>
               Site internet : <Link href={`https://tuanphung.com/`} title={`Visiter le portfolio`} target={`_blank`}>https://tuanphung.com/</Link><br/>

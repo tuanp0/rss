@@ -204,6 +204,42 @@ const Header = () => {
 
         </Container>
       </div>
+      <svg className={styles.headerGlass} colorInterpolationFilters="sRGB">
+        <defs>
+          <filter id="header-filter">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="1" result="blurred_source" />
+            <feImage
+              href="/displacement-map-yiydeb.png"
+              x="0" y="0"
+              width="294" height="59"
+              result="displacement_map"
+              preserveAspectRatio="none"
+            />
+            <feDisplacementMap
+              in="blurred_source"
+              in2="displacement_map"
+              scale="80" 
+              xChannelSelector="R"
+              yChannelSelector="G"
+              result="displaced"
+            />
+            <feColorMatrix in="displaced" type="saturate" result="displaced_saturated" values="1" />
+            <feImage
+              href="/specular-map-yiydeb.png"
+              x="0" y="0"
+              width="294" height="59"
+              result="specular_layer"
+              preserveAspectRatio="none"
+            />
+            <feComposite in="displaced_saturated" in2="specular_layer" operator="in" result="specular_saturated" />
+            <feComponentTransfer in="specular_layer" result="specular_faded">
+              <feFuncA type="linear" slope="0.2" />
+            </feComponentTransfer>
+            <feBlend in="specular_saturated" in2="displaced" mode="normal" result="withSaturation" />
+            <feBlend in="specular_faded" in2="withSaturation" mode="normal" />
+          </filter>
+        </defs>
+      </svg>
     </header>
   )
 }

@@ -47,6 +47,7 @@ const index = () => {
         <div
           className={`
             ${styles.postItemTitle}
+            ${activeFont === 'default' ? `font-serif` : ''}
             ${activeFont === 'sansserif' ? `font-sansserif` : ''}
             ${activeFont === 'gabriela' ? `font-gabriela` : ''}
             ${activeFont === 'monospace' ? `font-monospace` : ''}
@@ -58,6 +59,7 @@ const index = () => {
         <time
           className={`
             ${styles.postItemDate}
+            ${activeFont === 'default' ? `font-serif` : ''}
             ${activeFont === 'sansserif' ? `font-sansserif` : ''}
             ${activeFont === 'gabriela' ? `font-gabriela` : ''}
             ${activeFont === 'monospace' ? `font-monospace` : ''}
@@ -73,6 +75,7 @@ const index = () => {
         <div
           className={`
             ${styles.postItemDesc}
+            ${activeFont === 'default' ? `font-serif` : ''}
             ${activeFont === 'sansserif' ? `font-sansserif` : ''}
             ${activeFont === 'gabriela' ? `font-gabriela` : ''}
             ${activeFont === 'monospace' ? `font-monospace` : ''}
@@ -85,6 +88,7 @@ const index = () => {
           <div
             className={`
               ${styles.postItemContent}
+              ${activeFont === 'default' ? `font-serif` : ''}
               ${activeFont === 'sansserif' ? `font-sansserif` : ''}
               ${activeFont === 'gabriela' ? `font-gabriela` : ''}
               ${activeFont === 'monospace' ? `font-monospace` : ''}

@@ -55,13 +55,10 @@
             display: inline-block;
             padding: .625rem 1.5rem .625rem 1.5rem;
             border-radius: 2rem;
-            -webkit-backdrop-filter: blur(6px);
-            backdrop-filter: blur(6px);
             transition:
                 opacity .3s cubic-bezier(0.4, 0, 0.3, 1) .4s,
                 color 1s ease-in-out,
-                background 1s ease-in-out,
-                text-shadow 1s ease-in-out,
+                background .1s ease-in-out,
                 font-size .4s ease-in-out,
                 box-shadow .4s ease-in-out;
             white-space: nowrap;
@@ -73,19 +70,33 @@
             &.scrolled {
                 @media screen and (max-width: 767px) {
                     font-size: 1.375rem;
-                    box-shadow: 0 0 6px var(--black30), inset 0 0 4px var(--white40);
+                    box-shadow: 0 0 6px var(--black50), inset 0 0 3px var(--white40);
+                    background: var(--glass);
+                    transition:
+                        opacity .3s cubic-bezier(0.4, 0, 0.3, 1) .4s,
+                        color 1s ease-in-out,
+                        background .4s ease-in-out .2s,
+                        font-size .4s ease-in-out,
+                        box-shadow .4s ease-in-out;
+                    
+                    @supports not (background: -webkit-named-image(i)) {
+                        backdrop-filter: url(#header-filter);
+                    }
+                    @supports (background: -webkit-named-image(i)) {
+                        backdrop-filter: blur(3px);
+                    }
                 }
             }
 
             &.past {
                 opacity: 0;
-                transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1), color 1s ease-in-out, background 1s ease-in-out, text-shadow 1s ease-in-out;
+                transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1), color 1s ease-in-out, background 1s ease-in-out;
                 pointer-events: none;
             }
 
             &.next {
                 opacity: 0;
-                transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1), color 1s ease-in-out, background 1s ease-in-out, text-shadow 1s ease-in-out;
+                transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1), color 1s ease-in-out, background 1s ease-in-out;
                 pointer-events: none;
             }
 
@@ -201,5 +212,9 @@
                 }
             }
         }
+    }
+
+    &Glass {
+        display: none;
     }
 }

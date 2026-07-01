@@ -84,7 +84,25 @@ const index = () => {
           </div>
 
           <div className={`${styles.footerContent} ${currentStep === 1 ? styles.stepOne : ''}`}>
+            <svg className={styles.footerContentGlass} colorInterpolationFilters="sRGB">
+              <defs>
+                <filter id="footermenu-filter">
+                  <feGaussianBlur in="SourceGraphic" stdDeviation="1" result="blurred_source"></feGaussianBlur>
+                  <feImage href="/displacement-map-yiydeb.png" x="0" y="0" width="178" height="54" result="displacement_map" preserveAspectRatio="none"></feImage>
+                  <feDisplacementMap in="blurred_source" in2="displacement_map" scale="80" xChannelSelector="R" yChannelSelector="G" result="displaced"></feDisplacementMap>
+                  <feColorMatrix in="displaced" type="saturate" result="displaced_saturated" values="1"></feColorMatrix>
+                  <feImage href="/specular-map-yiydeb.png" x="0" y="0" width="178" height="54" result="specular_layer" preserveAspectRatio="none"></feImage>
+                  <feComposite in="displaced_saturated" in2="specular_layer" operator="in" result="specular_saturated"></feComposite>
+                  <feComponentTransfer in="specular_layer" result="specular_faded">
+                    <feFuncA type="linear" slope="0.2"></feFuncA>
+                  </feComponentTransfer>
+                  <feBlend in="specular_saturated" in2="displaced" mode="normal" result="withSaturation"></feBlend>
+                  <feBlend in="specular_faded" in2="withSaturation" mode="normal"></feBlend>
+                </filter>
+              </defs>
+            </svg>
             <div className={styles.footerContentInner}>
+
               <button className={styles.footerItem} onClick={() => {
                 setCurrentStep(1)
                 setShowAddLayer(false)
