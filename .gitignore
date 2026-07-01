@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+/proxy
+.htaccess
 
 # next.js
 /.next/
