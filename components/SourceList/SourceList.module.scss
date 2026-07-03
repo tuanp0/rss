@@ -1,3 +1,4 @@
+@use '../../styles/font.scss' as *;
 @use '../../styles/mixin.scss' as *;
 
 .source {
@@ -10,7 +11,7 @@
     height: 100dvh;
     padding: calc(var(--headerTop) + .5rem) 0 6rem 0;
     transform: translateX(calc(100% + 10px));
-    transition: width .3s ease-in-out, transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
+    transition: width .3s ease-in-out, transform .4s cubic-bezier(0.4, 0, 0.3, 1), background .8s ease-in-out;
     overflow-y: auto;
 
     &.active {
@@ -64,10 +65,16 @@
         }
 
         &Text {
+            @include gloria();
             text-align: center;
             font-size: 1rem;
             color: var(--text);
+            padding: 0 2rem;
             margin-top: 1rem;
+
+            @media screen and (min-width:992px) {
+                margin-top: .375rem;
+            }
         }
 
         &Count {

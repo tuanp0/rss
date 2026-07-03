@@ -1,10 +1,10 @@
 @use './font.scss' as *;
 
 @mixin background() {
-    background-color: var(--background);
+    background: var(--background);
     // background-image: url('/noise.png');
-    background-repeat: repeat;
-    background-size: 250px 250px;
+    background-repeat: no-repeat;
+    // background-size: 250px 250px;
 }
 
 @mixin text-carve() {

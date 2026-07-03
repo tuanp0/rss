@@ -38,7 +38,7 @@
             transition: width .4s ease-in-out;
 
             .scrolled & {
-                @media screen and (max-width: 767px) {
+                @media screen and (max-width: 991px) {
                     width: 38px;
                 }
             }
@@ -68,7 +68,7 @@
             overflow: hidden;
 
             &.scrolled {
-                @media screen and (max-width: 767px) {
+                @media screen and (max-width: 991px) {
                     font-size: 1.375rem;
                     box-shadow: 0 0 6px var(--black50), inset 0 0 3px var(--white40);
                     background: var(--glass);
@@ -120,7 +120,7 @@
                     transition: font-size .4s ease-in-out, gap .4s ease-in-out;
 
                     .scrolled & {
-                        @media screen and (max-width: 767px) {
+                        @media screen and (max-width: 991px) {
                             font-size: .75rem;
                             gap: .875rem;
                         }
@@ -153,12 +153,6 @@
                     display: block;
                     opacity: .7;
                     transition: font-size .4s ease-in-out;
-
-                    .scrolled & {
-                        @media screen and (max-width: 767px) {
-                            font-size: .5rem;
-                        }
-                    }
 
                     @media screen and (min-width: 992px) {
                         font-size: .75rem;

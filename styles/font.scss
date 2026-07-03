@@ -105,6 +105,19 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Gloria Hallelujah';
+    src: url('fonts/GloriaHallelujah.eot');
+    src: url('fonts/GloriaHallelujah.eot?#iefix') format('embedded-opentype'),
+        url('fonts/GloriaHallelujah.woff2') format('woff2'),
+        url('fonts/GloriaHallelujah.woff') format('woff'),
+        url('fonts/GloriaHallelujah.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
 
 
 @mixin roboto($weight:400) {
@@ -116,9 +129,13 @@
 }
 
 @mixin courierP($weight:400) {
-    font-family: 'Courier Prime', Arial, sans-serif;
+    font-family: 'Courier Prime', Arial, serif;
 }
 
 @mixin typewriter($weight:400) {
-    font-family: 'JMH Typewriter', Arial, sans-serif;
+    font-family: 'JMH Typewriter', Arial, serif;
+}
+
+@mixin gloria($weight:400) {
+    font-family: 'Gloria Hallelujah', Arial, sans-serif;
 }

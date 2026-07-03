@@ -72,57 +72,65 @@ const index = ({ onThemeChange }: Props) => {
         <div className={styles.layerContent}>
           <Container className={styles.container}>
             <h2>Couleur de fond</h2>
-            <div className={styles.layerContentParameter}>
-              <div className={`${styles.layerContentParameterItem} ${activeColor === 'auto' ? styles.active : ''}`} onClick={() => handleTheme('color', 'auto')}>
-                <span className={`${styles.layerContentParameterStyle} ${styles.auto}`}></span>
-                <span className={styles.layerContentParameterText}>Auto</span>
-              </div>
-              <div className={`${styles.layerContentParameterItem} ${activeColor === 'light' ? styles.active : ''}`} onClick={() => handleTheme('color', 'light')}>
-                <span className={`${styles.layerContentParameterStyle} light`}></span>
-                <span className={styles.layerContentParameterText}>Light</span>
-              </div>
-              <div className={`${styles.layerContentParameterItem} ${activeColor === 'night' ? styles.active : ''}`} onClick={() => handleTheme('color', 'night')}>
-                <span className={`${styles.layerContentParameterStyle} night`}></span>
-                <span className={styles.layerContentParameterText}>Night</span>
-              </div>
-              <div className={`${styles.layerContentParameterItem} ${activeColor === 'morning' ? styles.active : ''}`} onClick={() => handleTheme('color', 'morning')}>
-                <span className={`${styles.layerContentParameterStyle} morning`}></span>
-                <span className={styles.layerContentParameterText}>Morning</span>
-              </div>
-              <div className={`${styles.layerContentParameterItem} ${activeColor === 'afternoon' ? styles.active : ''}`} onClick={() => handleTheme('color', 'afternoon')}>
-                <span className={`${styles.layerContentParameterStyle} afternoon`}></span>
-                <span className={styles.layerContentParameterText}>Afternoon</span>
-              </div>
-              <div className={`${styles.layerContentParameterItem} ${activeColor === 'dark' ? styles.active : ''}`} onClick={() => handleTheme('color', 'dark')}>
-                <span className={`${styles.layerContentParameterStyle} dark`}></span>
-                <span className={styles.layerContentParameterText}>Dark</span>
-              </div>
-            <div className={`${styles.layerContentParameterItem} ${activeColor === 'forest' ? styles.active : ''}`} onClick={() => handleTheme('color', 'forest')}>
-                <span className={`${styles.layerContentParameterStyle} forest`}></span>
-                <span className={styles.layerContentParameterText}>Forest</span>
+            <div className={styles.layerContentScroll}>
+              <div className={styles.layerContentParameter}>
+                <div className={`${styles.layerContentParameterItem} ${activeColor === 'auto' ? styles.active : ''}`} onClick={() => handleTheme('color', 'auto')}>
+                  <span className={`${styles.layerContentParameterStyle} ${styles.auto}`}></span>
+                  <span className={styles.layerContentParameterText}>Auto</span>
+                </div>
+                <div className={`${styles.layerContentParameterItem} ${activeColor === 'light' ? styles.active : ''}`} onClick={() => handleTheme('color', 'light')}>
+                  <span className={`${styles.layerContentParameterStyle} light`}></span>
+                  <span className={styles.layerContentParameterText}>Light</span>
+                </div>
+                <div className={`${styles.layerContentParameterItem} ${activeColor === 'night' ? styles.active : ''}`} onClick={() => handleTheme('color', 'night')}>
+                  <span className={`${styles.layerContentParameterStyle} night`}></span>
+                  <span className={styles.layerContentParameterText}>Night</span>
+                </div>
+                <div className={`${styles.layerContentParameterItem} ${activeColor === 'morning' ? styles.active : ''}`} onClick={() => handleTheme('color', 'morning')}>
+                  <span className={`${styles.layerContentParameterStyle} morning`}></span>
+                  <span className={styles.layerContentParameterText}>Morning</span>
+                </div>
+                <div className={`${styles.layerContentParameterItem} ${activeColor === 'afternoon' ? styles.active : ''}`} onClick={() => handleTheme('color', 'afternoon')}>
+                  <span className={`${styles.layerContentParameterStyle} afternoon`}></span>
+                  <span className={styles.layerContentParameterText}>Afternoon</span>
+                </div>
+                <div className={`${styles.layerContentParameterItem} ${activeColor === 'dark' ? styles.active : ''}`} onClick={() => handleTheme('color', 'dark')}>
+                  <span className={`${styles.layerContentParameterStyle} dark`}></span>
+                  <span className={styles.layerContentParameterText}>Dark</span>
+                </div>
+                <div className={`${styles.layerContentParameterItem} ${activeColor === 'forest' ? styles.active : ''}`} onClick={() => handleTheme('color', 'forest')}>
+                  <span className={`${styles.layerContentParameterStyle} forest`}></span>
+                  <span className={styles.layerContentParameterText}>Forest</span>
+                </div>
+                <div className={`${styles.layerContentParameterItem} ${activeColor === 'winter-gradient' ? styles.active : ''}`} onClick={() => handleTheme('color', 'winter-gradient')}>
+                  <span className={`${styles.layerContentParameterStyle} winter-gradient`}></span>
+                  <span className={styles.layerContentParameterText}>Winter gradient</span>
+                </div>
               </div>
             </div>
             <h2>Police de texte</h2>
-            <div className={styles.layerContentParameter}>
-              <div className={`${styles.layerContentParameterItem} ${activeFont === 'default' ? styles.active : ''}`} onClick={() => handleTheme('font', 'default')}>
-                <span className={`${styles.layerContentParameterStyle} font-serif`}>Aa</span>
-                <span className={styles.layerContentParameterText}>Times</span>
-              </div>
-              <div className={`${styles.layerContentParameterItem} ${activeFont === 'sansserif' ? styles.active : ''}`} onClick={() => handleTheme('font', 'sansserif')}>
-                <span className={`${styles.layerContentParameterStyle} font-sansserif`}>Aa</span>
-                <span className={styles.layerContentParameterText}>Roboto</span>
-              </div>
-              <div className={`${styles.layerContentParameterItem} ${activeFont === 'gabriela' ? styles.active : ''}`} onClick={() => handleTheme('font', 'gabriela')}>
-                <span className={`${styles.layerContentParameterStyle} font-gabriela`}>Aa</span>
-                <span className={styles.layerContentParameterText}>Gabriela</span>
-              </div>
-              <div className={`${styles.layerContentParameterItem} ${activeFont === 'monospace' ? styles.active : ''}`} onClick={() => handleTheme('font', 'monospace')}>
-                <span className={`${styles.layerContentParameterStyle} font-monospace`}>Aa</span>
-                <span className={styles.layerContentParameterText}>Monospace</span>
-              </div>
-              <div className={`${styles.layerContentParameterItem} ${activeFont === 'typewriter' ? styles.active : ''}`} onClick={() => handleTheme('font', 'typewriter')}>
-                <span className={`${styles.layerContentParameterStyle} font-typewriter`}>Aa</span>
-                <span className={styles.layerContentParameterText}>Typewriter</span>
+            <div className={styles.layerContentScroll}>
+              <div className={styles.layerContentParameter}>
+                <div className={`${styles.layerContentParameterItem} ${activeFont === 'default' ? styles.active : ''}`} onClick={() => handleTheme('font', 'default')}>
+                  <span className={`${styles.layerContentParameterStyle} font-serif`}>Aa</span>
+                  <span className={styles.layerContentParameterText}>Times</span>
+                </div>
+                <div className={`${styles.layerContentParameterItem} ${activeFont === 'sansserif' ? styles.active : ''}`} onClick={() => handleTheme('font', 'sansserif')}>
+                  <span className={`${styles.layerContentParameterStyle} font-sansserif`}>Aa</span>
+                  <span className={styles.layerContentParameterText}>Roboto</span>
+                </div>
+                <div className={`${styles.layerContentParameterItem} ${activeFont === 'gabriela' ? styles.active : ''}`} onClick={() => handleTheme('font', 'gabriela')}>
+                  <span className={`${styles.layerContentParameterStyle} font-gabriela`}>Aa</span>
+                  <span className={styles.layerContentParameterText}>Gabriela</span>
+                </div>
+                <div className={`${styles.layerContentParameterItem} ${activeFont === 'monospace' ? styles.active : ''}`} onClick={() => handleTheme('font', 'monospace')}>
+                  <span className={`${styles.layerContentParameterStyle} font-monospace`}>Aa</span>
+                  <span className={styles.layerContentParameterText}>Monospace</span>
+                </div>
+                <div className={`${styles.layerContentParameterItem} ${activeFont === 'typewriter' ? styles.active : ''}`} onClick={() => handleTheme('font', 'typewriter')}>
+                  <span className={`${styles.layerContentParameterStyle} font-typewriter`}>Aa</span>
+                  <span className={styles.layerContentParameterText}>Typewriter</span>
+                </div>
               </div>
             </div>
             <div className={styles.layerContentHalf}>

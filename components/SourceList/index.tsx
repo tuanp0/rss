@@ -76,7 +76,13 @@ const SourceList = ({ onReady }: SourcesTypes) => {
     >
       <div className={styles.sourceContent}>
         {loading && <p className={styles.sourceContentText}>Chargement...</p>}
-        {!loading && sources.length === 0 && <p className={styles.sourceContentText}>Aucune source</p>}
+        {!loading && sources.length === 0 && currentStep == 2 &&
+          <p className={styles.sourceContentText}>
+            <strong>Ajouter une source en cliquant sur l'icône "+"<br/>
+            en bas à droite.</strong><br/>
+            (ex: https://fujixweekly.com)
+          </p>
+        }
         {!loading && sources.length > 0 && (
           <div className={styles.sourceList}>
             <div className={styles.sourceListAll}>

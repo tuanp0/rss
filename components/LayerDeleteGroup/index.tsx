@@ -40,8 +40,8 @@ const index = ({onGroupDeleted, onSourceDeleted}:LayerTypes) => {
             <div className={styles.layerInner}>
                 <div className={styles.layerHeader}>
                     <Container className={styles.container}>
-                        {isGroup && <p className={styles.layerTitle}>{new DOMParser().parseFromString(selectedGroupName ?? '', 'text/html').documentElement.textContent}</p>}
-                        {isSource && <p className={styles.layerTitle}>{new DOMParser().parseFromString(selectedSourceName ?? '', 'text/html').documentElement.textContent}</p>}
+                        {isGroup && <p className={styles.layerTitle}>Supprimer le groupe "{new DOMParser().parseFromString(selectedGroupName ?? '', 'text/html').documentElement.textContent}"</p>}
+                        {isSource && <p className={styles.layerTitle}>Supprimer la source "{new DOMParser().parseFromString(selectedSourceName ?? '', 'text/html').documentElement.textContent}"</p>}
                         <button className={styles.layerClose}  aria-label={`Fermer`} onClick={() => setShowDeleteLayer(false)}>
                             <span className={styles.layerCloseLine}></span>
                             <span className={styles.layerCloseLine}></span>

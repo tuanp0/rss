@@ -4,15 +4,15 @@
     align-items: center;
     padding: .75rem var(--padding);
     cursor: pointer;
-    background: transparent;
-    transition: background .1s ease-in-out;
+    background-color: transparent;
+    transition: background-color .1s ease-in-out;
 
     &:hover {
-        background: var(--hover);
+        background-color: var(--hover);
     }
 
     &.active {
-        background: var(--hover);
+        background-color: var(--hover);
     }
 
     @media screen and (min-width:768px) {

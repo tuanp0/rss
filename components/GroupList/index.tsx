@@ -64,7 +64,13 @@ const GroupList = ({ onReady }: GroupsTypes) => {
     >
       <div className={styles.groupContent}>
         {loading && <p className={styles.groupContentText}>Chargement...</p>}
-        {!loading && groups.length === 0 && <p className={styles.groupContentText}>Aucun groupe</p>}
+        {!loading && groups.length === 0 && currentStep == 1 &&
+          <p className={styles.groupContentText}>
+            <strong>Créez un groupe en cliquant sur l'icône "+"<br/>
+            en bas à droite.</strong><br/>
+            (ex: News, Tech, Dev...)
+          </p>
+        }
         {!loading && groups.length > 0 && (
           <div className={styles.groupList}>
             {groups.map((group) => (

@@ -91,7 +91,7 @@ const NewsList = () => {
       ref={newsRef}
     >
       {posts.length === 0 ? (
-        <p className={styles.newsContentText}>Aucun article à afficher.</p>
+        currentStep == 2 && <p className={styles.newsContentText}>Aucun article à afficher.</p>
       ) : (
         Object.entries(groupedPosts).map(([date, posts]) => (
           <div key={date}>

@@ -12,7 +12,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  transition: background-color .8s ease-in-out;
+  transition: background .8s ease-in-out;
 
   @media screen and (min-width:992px) {
     display: flex;
@@ -38,22 +38,23 @@ a {
 .font-sansserif {
   @include roboto();
   line-height: 1.125;
+  letter-spacing: .25px;
 }
 
 .font-gabriela {
   @include gabriela();
   line-height: 1.125;
-  letter-spacing: .5px;
+  letter-spacing: .75px;
 }
 
 .font-monospace {
   @include courierP();
-  line-height: 1.125;
-  letter-spacing: -1px;
+  line-height: 1.25;
+  letter-spacing: -.25px;
 }
 
 .font-typewriter {
   @include typewriter();
-  line-height: 1.375;
-  letter-spacing: 1.25px;
+  line-height: 1.5;
+  letter-spacing: 1.375px;
 }

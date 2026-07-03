@@ -1,3 +1,4 @@
+@use '../../styles/font.scss' as *;
 @use '../../styles/mixin.scss' as *;
 
 .news {
@@ -11,7 +12,7 @@
     padding-top: calc(var(--headerTop) - .125rem);
     padding-bottom: 6rem;
     transform: translateX(calc(100% + 10px));
-    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out, opacity .6s ease-in-out;
+    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background .8s ease-in-out, opacity .6s ease-in-out;
 
     &>div {
         pointer-events: none;
@@ -80,6 +81,7 @@
 
     &Content {
         &Text {
+            @include gloria();
             text-align: center;
             font-size: 1rem;
             color: var(--text);

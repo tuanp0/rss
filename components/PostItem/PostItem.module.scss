@@ -11,7 +11,7 @@
     height: 100dvh;
     padding-top: var(--headerTop);
     transform: translateX(calc(100% + 10px));
-    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background-color .8s ease-in-out;
+    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background .8s ease-in-out;
     
     &.active {
         transform: translate(0);
