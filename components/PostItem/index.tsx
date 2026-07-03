@@ -4,7 +4,7 @@ import { useLayerContext } from '@/context/LayerContext'
 import styles from './PostItem.module.scss'
 
 const index = () => {
-  const { currentStep, currentNewsObject, activeFont, showParametersLayer, showInformationsLayer } = useLayerContext()
+  const { currentStep, setCurrentStep, currentNewsObject, activeFont, showParametersLayer, showInformationsLayer } = useLayerContext()
   const postRef = useRef<HTMLDivElement>(null);
 
   const getSiteName = (url: string): string => {
@@ -42,7 +42,9 @@ const index = () => {
       data-scroll="post"
       ref={postRef}
     >
+      
       <div className={styles.postItemInner}>
+        <span className={styles.postItemPrev} onClick={() => setCurrentStep(3)}></span>
         <div className={styles.postItemSource}>{getSiteName(currentNewsObject ? currentNewsObject.url : '')}</div>
         <div
           className={`

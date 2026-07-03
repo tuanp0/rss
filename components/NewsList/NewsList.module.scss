@@ -14,20 +14,6 @@
     transform: translateX(calc(100% + 10px));
     transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background .8s ease-in-out, opacity .6s ease-in-out;
 
-    &>div {
-        pointer-events: none;
-
-        &:nth-child(-n+16) {
-            margin-top: 120px;
-            opacity: 0;
-            transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .3s, opacity .6s ease-in-out .3s;
-        }
-
-        @media screen and (min-width:992px) {
-            pointer-events: auto;
-        }
-    }
-
     &.active {
         transform: translateX(0);
         overflow-y: auto;
@@ -42,26 +28,12 @@
                 border-radius: 0;
             }
         }
-
-        &>div {
-            pointer-events: auto;
-
-            &:nth-child(-n+16) {
-                margin-top: 0;
-                opacity: 1;
-            }
-        }
     }
 
     &.past {
         transform: translateX(-50%);
         overflow-y: auto;
         opacity: 0;
-
-        &>div {
-            margin-top: 0;
-            opacity: 1;
-        }
 
         @media screen and (min-width:992px) {
             transform: translate(0);
@@ -79,13 +51,56 @@
         box-shadow: 0 0 10px 0 var(--black20);
     }
 
+    &Text {
+        @include gloria();
+        text-align: center;
+        font-size: 1rem;
+        color: var(--text);
+        margin-top: 1rem;
+    }
+
     &Content {
-        &Text {
-            @include gloria();
-            text-align: center;
-            font-size: 1rem;
-            color: var(--text);
-            margin-top: 1rem;
+        position: relative;
+        padding: 0 var(--padding);
+
+        &>div {
+            pointer-events: none;
+
+            &:nth-child(-n+16) {
+                margin-top: 120px;
+                opacity: 0;
+                transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .3s, opacity .6s ease-in-out .3s;
+            }
+
+            @media screen and (min-width:992px) {
+                pointer-events: auto;
+            }
+        }
+
+        .active & {
+            &>div {
+                pointer-events: auto;
+
+                &:nth-child(-n+16) {
+                    margin-top: 0;
+                    opacity: 1;
+                }
+            }
+        }
+
+        .past & {
+            &>div {
+                margin-top: 0;
+                opacity: 1;
+            }
+        }
+
+        &Prev {
+            position: absolute;
+            width: 1rem;
+            height: 100%;
+            left: 0;
+            top: 0;
         }
 
         &Day {

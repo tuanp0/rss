@@ -52,7 +52,18 @@
         }
     }
 
+    &Prev {
+        position: absolute;
+        width: 1rem;
+        height: 100%;
+        left: 0;
+        top: 0;
+    }
+
     &Content {
+        min-height: 100%;
+        position: relative;
+        padding: 0 var(--padding);
         transition: opacity .6s ease-in-out .2s;
 
         .past & {

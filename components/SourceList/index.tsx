@@ -19,7 +19,7 @@ interface SourcesTypes {
 }
 
 const SourceList = ({ onReady }: SourcesTypes) => {
-  const { currentStep, currentGroup, showAddLayer, showDeleteLayer, showParametersLayer, showInformationsLayer } = useLayerContext()
+  const { currentStep, setCurrentStep, currentGroup, showAddLayer, showDeleteLayer, showParametersLayer, showInformationsLayer } = useLayerContext()
   const [sources, setSources] = useState<Source[]>([])
   const [loading, setLoading] = useState<boolean>(true)
   const [db, setDb] = useState<IDBDatabase | null>(null)
@@ -74,6 +74,7 @@ const SourceList = ({ onReady }: SourcesTypes) => {
       data-scroll="source"
       ref={sourceRef}
     >
+      
       <div className={styles.sourceContent}>
         {loading && <p className={styles.sourceContentText}>Chargement...</p>}
         {!loading && sources.length === 0 && currentStep == 2 &&
@@ -83,6 +84,7 @@ const SourceList = ({ onReady }: SourcesTypes) => {
             (ex: https://fujixweekly.com)
           </p>
         }
+        <span className={styles.sourcePrev} onClick={() => setCurrentStep(1)}></span>
         {!loading && sources.length > 0 && (
           <div className={styles.sourceList}>
             <div className={styles.sourceListAll}>

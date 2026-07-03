@@ -6,7 +6,7 @@ import NewsItem from '@/components/NewsItem'
 import styles from './NewsList.module.scss'
 
 const NewsList = () => {
-  const { currentStep, currentGroup, currentSource, refreshTrigger, showParametersLayer, showInformationsLayer} = useLayerContext()
+  const { currentStep, setCurrentStep, currentGroup, currentSource, refreshTrigger, showParametersLayer, showInformationsLayer} = useLayerContext()
   const [posts, setPosts] = useState<Post[]>([])
   const [db, setDb] = useState<IDBDatabase | null>(null)
   const newsRef = useRef<HTMLDivElement>(null)
@@ -90,28 +90,32 @@ const NewsList = () => {
       data-scroll="news"
       ref={newsRef}
     >
+      
       {posts.length === 0 ? (
-        currentStep == 2 && <p className={styles.newsContentText}>Aucun article à afficher.</p>
+        currentStep == 2 && <p className={styles.newsText}>Aucun article à afficher.</p>
       ) : (
-        Object.entries(groupedPosts).map(([date, posts]) => (
-          <div key={date}>
-            <div className={styles.newsContentDay}><p>{date}</p></div>
+        <div className={styles.newsContent}>
+          <span className={styles.newsContentPrev} onClick={() => setCurrentStep(2)}></span>
+          {Object.entries(groupedPosts).map(([date, posts]) => (
+            <div key={date}>
+              <div className={styles.newsContentDay}><p>{date}</p></div>
 
-            {posts.map((post) => (
-              <NewsItem
-                key={post.id}
-                title={post.title}
-                shortDesc={post.shortDesc}
-                content={post.content}
-                url={getSiteName(post.url)}
-                thumbnail={post.thumbnail}
-                publishedAt={post.publishedAt}
-                post={post}
-                newsId={post.id}
-              />
-            ))}
-          </div>
-        ))
+              {posts.map((post) => (
+                <NewsItem
+                  key={post.id}
+                  title={post.title}
+                  shortDesc={post.shortDesc}
+                  content={post.content}
+                  url={getSiteName(post.url)}
+                  thumbnail={post.thumbnail}
+                  publishedAt={post.publishedAt}
+                  post={post}
+                  newsId={post.id}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
       )}
     </section>
   )
