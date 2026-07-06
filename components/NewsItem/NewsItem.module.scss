@@ -2,7 +2,7 @@
     width: 100%;
     display: flex;
     align-items: flex-start;
-    padding: .375rem calc(var(--padding) / 2);
+    padding: .375rem;
     border-radius: 6px;
     cursor: pointer;
     background: transparent;
@@ -28,8 +28,8 @@
     }
 
     &Thumbnail {
-        width: 55px;
-        height: 55px;
+        width: 52px;
+        height: 52px;
         display: block;
 
         &Img {
@@ -53,7 +53,7 @@
     }
 
     &Content {
-        width: calc(100% - 55px);
+        width: calc(100% - 52px);
         padding-left: .75rem;
 
         &Info {
@@ -61,7 +61,7 @@
             justify-content: flex-end;
             width: 100%;
             margin-bottom: 0.125rem;
-            margin-top: -1px;
+            margin-top: -2px;
         }
 
         &Site {

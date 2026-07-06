@@ -2,7 +2,7 @@
 @use '../../styles/mixin.scss' as *;
 
 .group {
-    @include background();
+    // @include background();
     width: 100%;
     height: 100vh;
     height: 100dvh;
@@ -51,11 +51,12 @@
 
     &Content {
         // overflow-y: auto;
-        transition: opacity 0s ease-in-out;
+        padding: 0 var(--padding);
+        transition: opacity .3s ease-in-out;
 
         .past & {
             opacity: 0;
-            transition: opacity 0s ease-in-out .6s;
+            transition: opacity .3s ease-in-out;
 
             @media screen and (min-width:992px) {
                 opacity: 1;

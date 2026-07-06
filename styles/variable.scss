@@ -49,7 +49,7 @@
 
 .dark {
   --background: rgba(0, 0, 0, 1);
-  --text: rgba(230, 230, 230, 1);
+  --text: rgba(220, 220, 220, 1);
   --hover: rgba(255, 255, 255, .1);
   --glass: rgba(0, 0, 0, .2);
   --header: rgba(40, 40, 40, 1);
@@ -70,15 +70,16 @@
 }
 
 .night {
-  --background: rgb(42, 42, 42);
-  --text: rgb(230, 230, 230);
+  --background: #363636;
+  --text: rgb(240, 240, 240);
   --hover: rgba(255, 255, 255, .1);
   --glass: rgba(0, 0, 0, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: rgba(230, 230, 230, 1);
   --carve-bg: rgb(0, 0, 0, 1);
-  --carve-shadow: rgb(49, 49, 49);
+  --carve-shadow: #363636;
 }
+
 .morning {
   --background: #e8f1f9;
   --text: rgb(4, 34, 52);
@@ -89,25 +90,16 @@
   --carve-bg: rgba(0, 0, 0, 1);
   --carve-shadow: #e8f1f9;
 }
-.day {
-  --background: #ffffff;
-  --text: rgba(0, 0, 0, 1);
-  --hover: rgba(0, 0, 0, .1);
-  --glass: rgba(255, 255, 255, .2);
-  --header: rgba(40, 40, 40, 1);
-  --carve-color: transparent;
-  --carve-bg: rgba(0, 0, 0, 1);
-  --carve-shadow :#ffffff;
-}
+
 .afternoon {
-  --background: #ede5d4;
+  --background: #ebe7db;
   --text: rgb(55, 35, 4);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;
   --carve-bg: rgba(0, 0, 0, 1);
-  --carve-shadow :#ede5d4;
+  --carve-shadow :#ebe7db;
 }
 
 .forest {
@@ -130,4 +122,15 @@
   --carve-color: transparent;
   --carve-bg: rgba(0, 0, 0, 1);
   --carve-shadow :#F6EEE5;
+}
+
+.bedtime {
+  --background: radial-gradient(circle at center bottom, rgb(255, 214, 153), rgb(120, 88, 76), rgb(20, 18, 24));
+  --text: rgb(255, 255, 255);
+  --hover: rgba(0, 0, 0, .1);
+  --glass: rgba(255, 255, 255, .2);
+  --header: rgba(40, 40, 40, 1);
+  --carve-color: transparent;
+  --carve-bg: rgba(0, 0, 0, 1);
+  --carve-shadow: #141218;
 }

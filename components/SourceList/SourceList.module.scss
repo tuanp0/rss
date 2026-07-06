@@ -2,7 +2,7 @@
 @use '../../styles/mixin.scss' as *;
 
 .source {
-    @include background();
+    // @include background();
     position: absolute;
     top: 0;
     left: 0;
@@ -64,11 +64,11 @@
         min-height: 100%;
         position: relative;
         padding: 0 var(--padding);
-        transition: opacity .6s ease-in-out .2s;
+        transition: opacity .3s ease-in-out;
 
         .past & {
             opacity: 0;
-            transition: opacity .6s ease-in-out .2s;
+            transition: opacity .3s ease-in-out;
 
             @media screen and (min-width:992px) {
                 opacity: 1;
@@ -101,7 +101,7 @@
 
     &List {
         &All {
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
         }
     }
 }

@@ -1,7 +1,7 @@
 @use '../../styles/mixin.scss' as *;
 
 .postItem {
-    @include background();
+    // @include background();
     font-family: 'Times New Roman', sans-serif;
     position: absolute;
     top: 0;
