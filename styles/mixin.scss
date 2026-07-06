@@ -32,7 +32,7 @@
         color: var(--text);
         line-height: 1.25;
         margin: .75rem 0;
-        text-align: center;
+        // text-align: center;
         position: relative;
         display: inline-block;
     }
@@ -42,7 +42,7 @@
         color: var(--text);
         line-height: 1.25;
         margin: .5rem 0;
-        text-align: center;
+        // text-align: center;
         position: relative;
         display: inline-block;
     }
@@ -52,7 +52,7 @@
         color: var(--text);
         line-height: 1.25;
         margin: .5rem 0;
-        text-align: center;
+        // text-align: center;
         position: relative;
         display: inline-block;
     }
@@ -62,7 +62,7 @@
         color: var(--text);
         line-height: 1.25;
         margin: .5rem 0;
-        text-align: center;
+        // text-align: center;
         position: relative;
         display: inline-block;
     }
@@ -72,11 +72,19 @@
         // line-height: 1.25;
         margin-bottom: 1.25rem;
         word-wrap: break-word;
+
+        &:has(> br:only-child) {
+            display: none;
+        }
     }
 
     a {
         color: var(--text);
         text-decoration: underline;
+
+        &[href*="#top"] {
+            display: none;
+        }
     }
 
     ul,
@@ -101,7 +109,9 @@
     }
 
     hr {
-        background: var(--grey);
+        display: block;
+        // color: var(--text);
+        margin: .5rem 0;
     }
 
     blockquote {
@@ -113,14 +123,6 @@
         height: auto;
         margin: 0 auto .75rem 0;
         display: block;
-    }
-
-    figcaption {
-        font-size: .875rem;
-        // text-align: center;
-        margin-top: .125rem;
-        margin-bottom: .75rem;
-        opacity: .5;
     }
 
     figure {
@@ -143,6 +145,19 @@
             max-height: 600px;
             border: none;
         }
+
+        img {
+            margin-bottom: 0;
+        }
+    }
+
+    figcaption {
+        font-size: .875rem;
+        font-style: italic;
+        // text-align: center;
+        margin-top: .125rem;
+        margin-bottom: .75rem;
+        opacity: .6;
     }
 
     iframe {
