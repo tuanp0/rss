@@ -149,12 +149,15 @@
         img {
             margin-bottom: 0;
         }
+
+        &:has(> img:only-child) {
+            margin: 0 auto .75rem 0;
+        }
     }
 
     figcaption {
         font-size: .875rem;
         font-style: italic;
-        // text-align: center;
         margin-top: .125rem;
         margin-bottom: .75rem;
         opacity: .6;

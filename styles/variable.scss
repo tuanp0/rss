@@ -5,7 +5,7 @@
   --glass: rgba(210, 210, 210, .3);
   --error: rgb(218, 0, 0);
   --hover: rgba(0, 0, 0, .1);
-  --grey: rgba(123,123,123, 1);
+  --grey: rgb(139, 139, 139);
   
   --paper: rgba(245, 244, 237, 1);
 
@@ -125,12 +125,12 @@
 }
 
 .bedtime {
-  --background: radial-gradient(circle at center bottom, rgb(255, 214, 153), rgb(120, 88, 76), rgb(20, 18, 24));
-  --text: rgb(255, 255, 255);
+  --background: #3f3123;
+  --text: rgb(225, 217, 195);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .2);
   --header: rgba(40, 40, 40, 1);
   --carve-color: transparent;
   --carve-bg: rgba(0, 0, 0, 1);
-  --carve-shadow: #141218;
+  --carve-shadow: #454344;
 }

@@ -78,11 +78,19 @@ const SourceList = ({ onReady }: SourcesTypes) => {
       <div className={styles.sourceContent}>
         {loading && <p className={styles.sourceContentText}>Chargement...</p>}
         {!loading && sources.length === 0 && currentStep == 2 &&
-          <p className={styles.sourceContentText}>
-            <strong>Ajouter une source en cliquant sur l'icône "+"<br/>
-            en bas à droite.</strong><br/>
-            (ex: https://fujixweekly.com)
-          </p>
+          <>
+            <p className={styles.sourceContentText}>
+              <strong>Ajouter une source en cliquant sur l'icône "+"<br/>
+              en bas à droite.</strong><br/>
+              (ex: https://fujixweekly.com)
+            </p>
+            <br/>
+            <p className={styles.sourceContentText}>
+              <strong>Toucher la tranche gauche de l'écran<br/>
+              ou cliquez sur la flèche gauche<br/>
+              pour revenir à l'étape précédente</strong>
+            </p>
+          </>
         }
         <span className={styles.sourcePrev} onClick={() => setCurrentStep(1)}></span>
         {!loading && sources.length > 0 && (

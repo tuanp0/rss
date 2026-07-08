@@ -94,6 +94,10 @@ const index = ({ onThemeChange }: Props) => {
                   <span className={`${styles.layerContentParameterStyle} afternoon`}></span>
                   <span className={styles.layerContentParameterText}>Afternoon</span>
                 </div>
+                <div className={`${styles.layerContentParameterItem} ${activeColor === 'bedtime' ? styles.active : ''}`} onClick={() => handleTheme('color', 'bedtime')}>
+                  <span className={`${styles.layerContentParameterStyle} bedtime`}></span>
+                  <span className={styles.layerContentParameterText}>Bedtime</span>
+                </div>
                 <div className={`${styles.layerContentParameterItem} ${activeColor === 'dark' ? styles.active : ''}`} onClick={() => handleTheme('color', 'dark')}>
                   <span className={`${styles.layerContentParameterStyle} dark`}></span>
                   <span className={styles.layerContentParameterText}>Dark</span>
@@ -105,10 +109,6 @@ const index = ({ onThemeChange }: Props) => {
                 <div className={`${styles.layerContentParameterItem} ${activeColor === 'winter-gradient' ? styles.active : ''}`} onClick={() => handleTheme('color', 'winter-gradient')}>
                   <span className={`${styles.layerContentParameterStyle} winter-gradient`}></span>
                   <span className={styles.layerContentParameterText}>Winter gradient</span>
-                </div>
-                <div className={`${styles.layerContentParameterItem} ${activeColor === 'bedtime' ? styles.active : ''}`} onClick={() => handleTheme('color', 'bedtime')}>
-                  <span className={`${styles.layerContentParameterStyle} bedtime`}></span>
-                  <span className={styles.layerContentParameterText}>Bedtime</span>
                 </div>
               </div>
             </div>
