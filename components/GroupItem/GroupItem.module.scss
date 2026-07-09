@@ -37,9 +37,7 @@
 
     &Content {
         width: calc(100% - 70px);
-        padding-left: 1rem;
-        pointer-events: none;
-    }
+        padding-left: 1rem;    }
 
     &Text {
         font-size: 1.125rem;
@@ -51,7 +49,19 @@
     }
 
     &Delete {
-        width: 24px;
+        width: 0;
+        transition: width .2s ease-in-out, margin-right .2s ease-in-out;
+
+        svg {
+            path {
+                fill: var(--error);
+            }
+        }
+
+        .settings & {
+            width: 20px;
+            margin-right: 1.25rem;
+        }
     }
 
     &Count {

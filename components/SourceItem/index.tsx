@@ -1,4 +1,4 @@
-import React from 'react'
+import { useState } from 'react'
 import { useLayerContext } from '@/context/LayerContext'
 import Button from '@/components/Button'
 
@@ -13,6 +13,33 @@ interface SourceItemTypes {
 
 const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
   const { currentStep, setCurrentStep, currentSource, setCurrentSource, setCurrentNews, setShowDeleteLayer, setIsGroup, setIsSource, setSelectedSourceId, setSelectedSourceName } = useLayerContext()
+
+  const [touchStart, setTouchStart] = useState<number | null>(null)
+  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+  const [sourceSettings, setSourceSettings] = useState<boolean | false>(false)
+  const minSwipeDistance = 20
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const onTouchMove = (e :React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+    if(isRightSwipe) {
+      setSourceSettings(true)
+    }
+    if(isLeftSwipe) {
+      setSourceSettings(false)
+    }
+  }
 
   const handleNextStep = (sourceId: number) => {
     setCurrentSource(sourceId)
@@ -29,7 +56,26 @@ const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
   }
   
   return (
-    <div className={`${styles.sourceItem} ${sourceId === currentSource && currentStep >= 3 ? styles.active : ''}`} onClick={() => handleNextStep(sourceId)}>
+    <div
+      className={`
+        ${styles.sourceItem}
+        ${sourceId === currentSource && currentStep >= 3 ? styles.active : ''}
+        ${sourceSettings ? styles.settings : ''}
+      `}
+      onClick={() => handleNextStep(sourceId)}
+      onTouchStart={(e) => onTouchStart(e)}
+      onTouchMove={(e) => onTouchMove(e)}
+      onTouchEnd={(e) => onTouchEnd()}
+    >
+      {name !== "Toutes les sources" &&
+        <div className={styles.sourceItemDelete} onClick={(e) => e.stopPropagation()}>
+          <Button
+            text="Supprimer la catégorie"
+            action={() => handleDeleteSource()}
+            icon={'delete'}
+          />
+        </div>
+      }
       <span className={styles.sourceItemIcon}>
         {icon === 'star' ?
           <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.sourceItemIconSvg}>
@@ -43,15 +89,6 @@ const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
       <p className={styles.sourceItemName}>
           {new DOMParser().parseFromString(name, 'text/html').documentElement.textContent}
       </p>
-      {name !== "Toutes les sources" &&
-        <div className={styles.groupItemDelete} onClick={(e) => e.stopPropagation()}>
-          <Button
-            text="Supprimer la catégorie"
-            action={() => handleDeleteSource()}
-            icon={'delete'}
-          />
-        </div>
-      }
     </div>
   )
 }

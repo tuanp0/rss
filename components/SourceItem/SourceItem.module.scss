@@ -26,6 +26,22 @@
         background: var(--hover);
     }
 
+    &Delete {
+        width: 0;
+        transition: width .2s ease-in-out, margin-right .2s ease-in-out;
+
+        svg {
+            path {
+                fill: var(--error);
+            }
+        }
+
+        .settings & {
+            width: 20px;
+            margin-right: 1.25rem;
+        }
+    }
+
     &Icon {
         display: flex;
         justify-content: center;

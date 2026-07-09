@@ -87,7 +87,7 @@ const SourceList = ({ onReady }: SourcesTypes) => {
             <br/>
             <p className={styles.sourceContentText}>
               <strong>Toucher la tranche gauche de l'écran<br/>
-              ou cliquez sur la flèche gauche<br/>
+              ou cliquer sur la flèche gauche<br/>
               pour revenir à l'étape précédente</strong>
             </p>
           </>

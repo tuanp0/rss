@@ -65,11 +65,18 @@ const GroupList = ({ onReady }: GroupsTypes) => {
       <div className={styles.groupContent}>
         {loading && <p className={styles.groupContentText}>Chargement...</p>}
         {!loading && groups.length === 0 && currentStep == 1 &&
-          <p className={styles.groupContentText}>
-            <strong>Créez un groupe en cliquant sur l'icône "+"<br/>
-            en bas à droite.</strong><br/>
-            (ex: News, Tech, Dev...)
-          </p>
+          <>
+            <p className={styles.groupContentText}>
+              <strong>Créer un groupe en cliquant sur l'icône "+"<br/>
+              en bas à droite.</strong><br/>
+              (ex: News, Tech, Dev...)
+            </p>
+            <br/>
+            <p className={styles.groupContentText}>
+              <strong>Swiper vers la droite<br/>
+              pour supprimer une groupe créé.</strong>
+            </p>
+          </>
         }
         {!loading && groups.length > 0 && (
           <div className={styles.groupList}>
