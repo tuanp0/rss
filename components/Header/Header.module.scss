@@ -10,7 +10,7 @@
     &Container {
         position: relative;
         padding: .875rem 0;
-        padding-top: 12px;
+        padding-top: 14px;
         padding-bottom: 12px;
         margin: 0;
         z-index: 1;
@@ -69,9 +69,10 @@
 
             &.scrolled {
                 @media screen and (max-width: 991px) {
+                    @include glassContainer();
                     font-size: 1.375rem;
-                    box-shadow: 0 0 6px var(--black50), inset 0 0 3px var(--white40);
-                    background: var(--glass);
+                    // box-shadow: 0 0 6px var(--black50), inset 0 0 3px var(--white40);
+                    // background: var(--glass);
                     transition:
                         opacity .3s cubic-bezier(0.4, 0, 0.3, 1) .4s,
                         color 1s ease-in-out,
@@ -83,7 +84,7 @@
                         backdrop-filter: url(#header-filter);
                     }
                     @supports (background: -webkit-named-image(i)) {
-                        backdrop-filter: blur(3px);
+                        backdrop-filter: blur(3px) saturate(var(--saturation));
                     }
                 }
             }

@@ -34,6 +34,8 @@
         height: 28px;
         background: var(--white);
         pointer-events: none;
+        border-radius: 3px;
+        overflow: hidden;
 
         &Svg {
             width: 100%;

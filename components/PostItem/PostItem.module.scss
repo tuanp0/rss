@@ -11,7 +11,7 @@
     height: 100dvh;
     padding-top: var(--headerTop);
     transform: translateX(calc(100% + 10px));
-    transition: transform .4s cubic-bezier(0.4, 0, 0.3, 1), background .8s ease-in-out;
+    transition: transform .3s cubic-bezier(0.4, 0, 0.3, 1), background .8s ease-in-out;
     
     &.active {
         transform: translate(0);
@@ -76,7 +76,7 @@
         margin-bottom: 0.125rem;
         margin-top: 120px;
         opacity: 0;
-        transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .4s;
+        transition: margin-top .3s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .3s;
 
         &::before {
             position: absolute;
@@ -92,7 +92,7 @@
         .active & {
             margin-top: 0;
             opacity: 0.6;
-            transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .2s, opacity .6s ease-in-out .2s;
+            transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .2s, opacity .6s ease-in-out .3s;
         }
     }
 
@@ -104,11 +104,11 @@
         margin-bottom: .375rem;
         max-width: 800px;
         opacity: 0;
-        transition: opacity .6s ease-in-out;
+        transition: opacity .6s ease-in-out, color .4s ease-in-out;
 
         .active & {
             opacity: 1;
-            transition: opacity .6s ease-in-out .2s;
+            transition: opacity .6s ease-in-out .2s, color .4s ease-in-out;
         }
     }
 
@@ -120,11 +120,11 @@
         margin-bottom: 1.5rem;
         display: block;
         opacity: 0;
-        transition: opacity .6s ease-in-out;
+        transition: opacity .6s ease-in-out, color .4s ease-in-out;
         
         .active & {
             opacity: 1;
-            transition: opacity .6s ease-in-out .2s;
+            transition: opacity .6s ease-in-out .2s, color .4s ease-in-out;
         }
     }
 
@@ -152,12 +152,12 @@
         margin-bottom: 2rem;
         margin-top: 120px;
         opacity: 0;
-        transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .4s;
+        transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .4s, color .4s ease-in-out;
         
         .active & {
             margin-top: 0;
             opacity: 1;
-            transition: margin-top .6s cubic-bezier(0, 0, 0.1, 1) .3s, opacity .6s ease-in-out .3s;
+            transition: margin-top .6s cubic-bezier(0, 0, 0.1, 1) .3s, opacity .6s ease-in-out .3s, color .4s ease-in-out;
 
             &:not(:has(img)) {
                 opacity: .6;
@@ -180,12 +180,12 @@
         font-size: var(--font-size-base);
         margin-top: 120px;
         opacity: 0;
-        transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .4s;
+        transition: margin-top .4s cubic-bezier(0, 0, 0.1, 1) .4s, opacity .6s ease-in-out .4s, color .4s ease-in-out;
 
         .active & {
             margin-top: 0;
             opacity: 1;
-            transition: margin-top 1s cubic-bezier(0, 0, 0.1, 1) .5s, opacity 1s ease-in-out .5s;
+            transition: margin-top 1s cubic-bezier(0, 0, 0.1, 1) .5s, opacity 1s ease-in-out .5s, color .4s ease-in-out;
         }
     }
 }

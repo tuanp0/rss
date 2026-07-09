@@ -89,7 +89,7 @@ const index = () => {
                 <filter id="footermenu-filter">
                   <feGaussianBlur in="SourceGraphic" stdDeviation="1" result="blurred_source"></feGaussianBlur>
                   <feImage href="/displacement-map-yiydeb.png" x="0" y="0" width="178" height="54" result="displacement_map" preserveAspectRatio="none"></feImage>
-                  <feDisplacementMap in="blurred_source" in2="displacement_map" scale="80" xChannelSelector="R" yChannelSelector="G" result="displaced"></feDisplacementMap>
+                  <feDisplacementMap in="blurred_source" in2="displacement_map" scale="100" xChannelSelector="R" yChannelSelector="G" result="displaced"></feDisplacementMap>
                   <feColorMatrix in="displaced" type="saturate" result="displaced_saturated" values="1"></feColorMatrix>
                   <feImage href="/specular-map-yiydeb.png" x="0" y="0" width="178" height="54" result="specular_layer" preserveAspectRatio="none"></feImage>
                   <feComposite in="displaced_saturated" in2="specular_layer" operator="in" result="specular_saturated"></feComposite>

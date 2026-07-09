@@ -37,24 +37,22 @@ a {
 
 .font-sansserif {
   @include roboto();
-  line-height: 1.125;
   letter-spacing: .25px;
 }
 
 .font-gabriela {
   @include gabriela();
-  line-height: 1.125;
   letter-spacing: .75px;
 }
 
 .font-monospace {
   @include courierP();
-  line-height: 1.25;
+  line-height: 1.125;
   letter-spacing: -.25px;
 }
 
 .font-typewriter {
   @include typewriter();
-  line-height: 1.5;
+  line-height: 1.375;
   letter-spacing: 1.375px;
 }

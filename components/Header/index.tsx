@@ -218,7 +218,7 @@ const Header = () => {
             <feDisplacementMap
               in="blurred_source"
               in2="displacement_map"
-              scale="80" 
+              scale="100" 
               xChannelSelector="R"
               yChannelSelector="G"
               result="displaced"

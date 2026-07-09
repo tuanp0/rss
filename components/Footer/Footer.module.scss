@@ -1,3 +1,5 @@
+@use '../../styles/mixin.scss' as *;
+
 .footer {
     position: fixed;
     bottom: 1.75rem;
@@ -21,10 +23,9 @@
     }
 
     &Button {
-        width: 48px;
-        height: 48px;
+        width: 52px;
+        height: 52px;
         border-radius: 100%;
-        box-shadow: 0 0 3px var(--black50);
         pointer-events: auto;
         overflow: hidden;
         transition: width .2s ease-in-out, height .2s ease-in-out, opacity .2s ease-in-out, box-shadow .2s ease-in-out;
@@ -42,11 +43,10 @@
     }
 
     &Action {
-        width: 48px;
-        height: 48px;
+        width: 52px;
+        height: 52px;
         pointer-events: auto;
         border-radius: 100%;
-        box-shadow: 0 0 3px var(--black50);
         overflow: hidden;
     }
 
@@ -69,26 +69,25 @@
         }
 
         &Inner {
+            @include glassContainer();
             gap: .5rem;
             max-width: 550px;
-            padding: .375rem .5rem .375rem .5rem;
+            padding: .25rem .5rem;
             border-radius: 32px;
             pointer-events: auto;
-            box-shadow: 0 0 3px var(--black50), inset 0 0 2px var(--white40);
-            background: var(--glass);
 
             @supports not (background: -webkit-named-image(i)) {
                 backdrop-filter: url(#footermenu-filter);
             }
             @supports (background: -webkit-named-image(i)) {
-                backdrop-filter: blur(1px);
+                backdrop-filter: blur(1px) saturate(var(--saturation));
             }
         }
     }
 
     &Item {
         min-width: 54px;
-        padding: .375rem .75rem;
+        padding: .5rem .75rem;
         text-align: center;
         background: transparent;
         border: none;
@@ -104,12 +103,12 @@
 
         &Svg {
             width: auto;
-            height: 30px;
+            height: 28px;
             display: block;
             margin: 0 auto auto;
 
             path {
-                fill: var(--text);
+                fill: var(--icons);
             }
         }
 
