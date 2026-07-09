@@ -13,11 +13,14 @@ const index = () => {
     setShowAddLayer, setShowDeleteLayer, setShowParametersLayer, setShowInformationsLayer,
     currentGroup,
     currentSource,
+    currentNewsObject,
     triggerRefresh,
     setOfflineAlert
   } = useLayerContext()
+
   const [refreshing, setRefreshing] = useState(false)
-  
+  const [urlCopied, setUrlCopied] = useState(false)
+
   const checkOnline = async (): Promise<boolean> => {
     if (!navigator.onLine) return false
     try {
@@ -73,6 +76,51 @@ const index = () => {
     }
 
     setShowAddLayer(true)
+  }
+
+  const copyClipboard = async () => {
+    const text = currentNewsObject?.url
+
+    if (!text) {
+      console.warn("No URL to copy")
+      return false
+    }
+
+    if (navigator.clipboard && window.isSecureContext) {
+      try {
+        await navigator.clipboard.writeText(text)
+        setUrlCopied(true)
+        setTimeout(() => {
+          setUrlCopied(false)
+        }, 2500)
+
+        return true
+      } catch (err) {}
+    }
+
+    const textArea = document.createElement("textarea")
+    textArea.value = text
+
+    textArea.style.position = "fixed"
+    textArea.style.left = "-9999px"
+    textArea.style.top = "0"
+    document.body.appendChild(textArea)
+    textArea.focus()
+    textArea.select()
+
+    let success = false
+    try {
+      success = document.execCommand("copy")
+      if(success) setUrlCopied(true)
+      setTimeout(() => {
+        setUrlCopied(false)
+      }, 2500)
+    } catch (err) {
+      success = false
+    }
+
+    document.body.removeChild(textArea)
+    return success
   }
 
   return (
@@ -154,8 +202,15 @@ const index = () => {
           <div className={styles.footerAction}>
             {currentStep === 1 && <Button text="Ajouter une catégorie" action={() => setShowAddLayer(true)} icon={'add'} shadowInner />}
             {currentStep === 2 && <Button text="Ajouter une source" action={handleAddLayer} icon={'add'} shadowInner />}
-            {currentStep >= 3 && <Button text="Rafraîchir la liste" action={handleRefresh} icon={'refresh'} isRefreshing={refreshing} shadowInner />}
-            {/* {currentStep === 4 && <Button text="Sauvegarder ce post" action={() => setShowAddLayer(true)} icon={'save'} />} */}
+            {currentStep === 3 && <Button text="Rafraîchir la liste" action={handleRefresh} icon={'refresh'} isRefreshing={refreshing} shadowInner />}
+            {currentStep === 4 && (
+              !urlCopied ? (
+                <Button text="Sauvegarder ce post" action={copyClipboard} icon={'share'} />
+              ) : (
+                <Button text="Sauvegarder ce post" icon={'check'} />
+              )
+            )}
+            <span className={`${styles.footerActionText} ${urlCopied ? styles.show : ''}`}>Lien copié</span>
           </div>
     </footer>
   )

@@ -44,6 +44,7 @@ const GroupItem = ({ groupId, text, itemCount, onDelete }: GroupItemTypes) => {
     setCurrentGroup(groupId)
     setSelectedGroupName(name)
     setCurrentStep(2)
+    setGroupSettings(false)
   }
   
   const handleDeleteGroup = (groupId: number, name: string) => {

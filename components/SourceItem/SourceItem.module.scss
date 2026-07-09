@@ -27,18 +27,13 @@
     }
 
     &Delete {
-        width: 0;
-        transition: width .2s ease-in-out, margin-right .2s ease-in-out;
-
-        svg {
-            path {
-                fill: var(--error);
-            }
-        }
+        flex: 0 0 0;
+        overflow: hidden;
+        transition: flex .2s ease-in-out, margin .2s ease-in-out;
 
         .settings & {
-            width: 20px;
-            margin-right: 1.25rem;
+            flex: 0 0 20px;
+            margin: 0 1rem 0 .25rem;
         }
     }
 
@@ -46,12 +41,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 28px;
+        flex: 0 0 28px;
         height: 28px;
         background: var(--white);
         pointer-events: none;
         border-radius: 3px;
-        overflow: hidden;
 
         &Svg {
             width: 100%;
@@ -70,6 +64,7 @@
     }
 
     &Name {
+        flex: 1 1 auto;
         position: relative;
         font-weight: bold;
         font-size: 1rem;
@@ -78,8 +73,6 @@
         color: var(--text);
         padding-left: .75rem;
         padding-right: 1rem;
-        margin-right: 1rem;
-        width: calc(100% - 68px);
         white-space: nowrap;
         overflow: hidden;
         pointer-events: none;

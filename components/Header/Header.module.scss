@@ -134,6 +134,7 @@
                     svg {
                         path {
                             fill: var(--text);
+                            transition: fill 1s ease-in-out;
                         }
                     }
                 }

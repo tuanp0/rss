@@ -70,6 +70,23 @@ const index = ({text, action, icon, small, shadowInner, isRefreshing}: Button) =
           </svg>
         </div>
       }
+
+      {icon === 'share' &&
+        <div className={`${styles.buttonShare} ${styles.buttonIcon}`}>
+          <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className={styles.buttonIconSvg}>
+            <path id="Vector" d="M9 6L12 3M12 3L15 6M12 3V13M7.00023 10C6.06835 10 5.60241 10 5.23486 10.1522C4.74481 10.3552 4.35523 10.7448 4.15224 11.2349C4 11.6024 4 12.0681 4 13V17.8C4 18.9201 4 19.4798 4.21799 19.9076C4.40973 20.2839 4.71547 20.5905 5.0918 20.7822C5.5192 21 6.07899 21 7.19691 21H16.8036C17.9215 21 18.4805 21 18.9079 20.7822C19.2842 20.5905 19.5905 20.2839 19.7822 19.9076C20 19.4802 20 18.921 20 17.8031V13C20 12.0681 19.9999 11.6024 19.8477 11.2349C19.6447 10.7448 19.2554 10.3552 18.7654 10.1522C18.3978 10 17.9319 10 17 10" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </div>
+      }
+
+      {icon === 'check' &&
+        <div className={`${styles.buttonCheck} ${styles.buttonIcon}`}>
+          <svg width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none" className={styles.buttonIconSvg}>
+            <path stroke="#000000" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 5L8 15l-5-4"/>
+          </svg>
+        </div>
+      }
+
       {icon === 'offline' &&
         <div className={`${styles.buttonOffline} ${styles.buttonIcon}`}>
           <svg className={styles.buttonIconSvg} fill="#000000" width="800px" height="800px" viewBox="0 0 36 36" version="1.1"  preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">

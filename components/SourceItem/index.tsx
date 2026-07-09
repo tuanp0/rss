@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useLayerContext } from '@/context/LayerContext'
 import Button from '@/components/Button'
 
@@ -54,6 +54,10 @@ const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
     setIsSource(true)
     setShowDeleteLayer(true)
   }
+
+  useEffect(() => {
+    setSourceSettings(false)
+  }, [currentStep])
   
   return (
     <div

@@ -43,11 +43,42 @@
     }
 
     &Action {
+        position: relative;
         width: 52px;
         height: 52px;
         pointer-events: auto;
         border-radius: 100%;
-        overflow: hidden;
+
+        &Text {
+            @include glassContainer();
+            position: absolute;
+            color: transparent;
+            white-space: nowrap;
+            background: transparent;
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            padding: .5rem 1rem;
+            border-radius: 16px;
+            width: auto;
+            right: 0;
+            bottom: 80%;
+            transform: scale(0);
+            transform-origin: calc(100% - 24px) 100%;
+            transition:
+                color .3s cubic-bezier(0.86, 0, 0.33, 0.32),
+                transform .4s cubic-bezier(0.86, 0, 0.33, 0.32),
+                bottom .4s cubic-bezier(0.86, 0, 0.33, 0.32),
+                background .4s cubic-bezier(0.86, 0, 0.33, 0.32);
+            z-index: -1;
+
+            &.show {
+                color: var(--text);
+                z-index: 0;
+                bottom: calc(100% + .75rem);
+                background: var(--glass);
+                transform: scale(1);
+            }
+        }
     }
 
     &Content {
