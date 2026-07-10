@@ -9,7 +9,7 @@ import styles from './LayerParameters.module.scss'
 type Props = { onThemeChange?: (theme: Theme) => void }
 
 const index = ({ onThemeChange }: Props) => {
-  const { showParametersLayer, setShowParametersLayer, activeColor, setActiveColor, activeFont, setActiveFont, activeSize, setActiveSize, location, setLocation } = useLayerContext()
+  const { currentStep, showParametersLayer, setShowParametersLayer, activeColor, setActiveColor, activeFont, setActiveFont, activeSize, setActiveSize, location, setLocation } = useLayerContext()
   const [db, setDb] = useState<IDBDatabase | null>(null)
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -59,7 +59,7 @@ const index = ({ onThemeChange }: Props) => {
 
   return (
     <div className={`${styles.layer} ${showParametersLayer ? styles.active : ''}`} onClick={handleOverlayClick}>
-      <div className={styles.layerInner}>
+      <div className={`${styles.layerInner} ${currentStep >= 2 ? styles.step2up : ''}`}>
         <div className={styles.layerHeader}>
           <Container className={styles.container}>
             <p className={styles.layerTitle}>Paramètres</p>

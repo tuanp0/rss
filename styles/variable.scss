@@ -26,7 +26,7 @@
   --black40: rgba(0, 0, 0, .4);
   --black50: rgba(0, 0, 0, .5);
 
-  --liquid-light: rgba(255, 255, 255, .8);
+  --liquid-light: rgba(255, 255, 255, .9);
   --liquid-dark: rgba(0, 0, 0, .6);
   --liquid-reflex-dark: 1;
   --liquid-reflex-light: .8;
@@ -62,23 +62,23 @@
   --background: rgba(0, 0, 0, 1);
   --text: rgba(220, 220, 220, 1);
   --hover: rgba(255, 255, 255, .1);
-  --glass: rgba(0, 0, 0, .3);
+  --glass: rgba(16, 15, 46, 0.3);
   --icons: rgba(255, 255, 255, 1);
 }
 
 .light {
-  --background: rgba(240, 240, 240, 1);
+  --background: rgb(255, 255, 255);
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .3);
-  --icons: rgba(0, 0, 0, 1);
+  --icons: rgb(255, 255, 255);
 }
 
 .night {
   --background: #363636;
   --text: rgb(240, 240, 240);
   --hover: rgba(255, 255, 255, .1);
-  --glass: rgba(0, 0, 0, .3);
+  --glass: rgba(16, 15, 46, 0.3);
   --icons: rgba(255, 255, 255, 1);
 }
 
@@ -87,7 +87,7 @@
   --text: rgb(4, 34, 52);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .3);
-  --icons: rgb(4, 34, 52);
+  --icons: rgb(255, 255, 255);
 }
 
 .afternoon {
@@ -95,7 +95,7 @@
   --text: rgb(55, 35, 4);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .3);
-  --icons: rgb(55, 35, 4);
+  --icons: rgb(255, 255, 255);
 }
 
 .forest {
@@ -103,7 +103,7 @@
   --text: rgb(1, 29, 2);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .3);
-  --icons: rgb(1, 29, 2);
+  --icons: rgb(255, 255, 255);
 }
 
 .winter-gradient {

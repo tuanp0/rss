@@ -6,7 +6,7 @@ import Container from '@/components/Container'
 import styles from './LayerInformations.module.scss'
 
 const index = () => {
-  const { showInformationsLayer, setShowInformationsLayer } = useLayerContext()
+  const { currentStep, showInformationsLayer, setShowInformationsLayer } = useLayerContext()
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === e.currentTarget) {
@@ -20,7 +20,7 @@ const index = () => {
 
   return (
     <div className={`${styles.layer} ${showInformationsLayer ? styles.active : ''}`} onClick={handleOverlayClick}>
-      <div className={styles.layerInner}>
+      <div className={`${styles.layerInner} ${currentStep >= 2 ? styles.step2up : ''}`}>
         <div className={styles.layerHeader}>
           <Container className={styles.container}>
             <p className={styles.layerTitle}>A propos</p>

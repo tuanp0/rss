@@ -53,6 +53,10 @@
 
             path {
                 fill: var(--icons);
+
+                @media screen and (min-width: 992px) {
+                    fill: var(--text);
+                }
             }
         }
     }
@@ -77,6 +81,14 @@
             transition: transform .2s ease-in-out;
             border-radius: 2px;
 
+            .small &  {
+                background: var(--text);
+            }
+
+            @media screen and (min-width: 992px) {
+                background: var(--text);
+            }
+
             .small & {
                 width: 16px;
             }
@@ -93,6 +105,10 @@
 
             path {
                 fill: var(--icons);
+
+                @media screen and (min-width: 992px) {
+                    fill: var(--text);
+                }
             }
         }
     }
@@ -111,6 +127,10 @@
             transform: translate(-50%, -50%) rotate(-45deg);
             transform-origin: center;
             transition: transform .2s ease-in-out;
+
+            @media screen and (min-width: 992px) {
+                background: var(--text);
+            }
 
             .small & {
                 width: 14px;
@@ -173,6 +193,10 @@
             path {
                 stroke: var(--icons);
                 fill: transparent;
+
+                @media screen and (min-width: 992px) {
+                    stroke: var(--text);
+                }
             }
         }
     }
@@ -192,6 +216,10 @@
             path {
                 fill: transparent;
                 stroke: var(--icons);
+
+                @media screen and (min-width: 992px) {
+                    stroke: var(--text);
+                }
             }
         }
     }
@@ -210,6 +238,10 @@
             path {
                 fill: transparent;
                 stroke: var(--icons);
+
+                @media screen and (min-width: 992px) {
+                    stroke: var(--text);
+                }
             }
         }
     }
@@ -219,7 +251,7 @@
         height: 100%;
         padding: 0.5rem;
         border-radius: 100%;
-        background: var(--valid30);
+        background: var(--glass);
 
         .buttonIconSvg {
             width: 28px;

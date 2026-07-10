@@ -6,3 +6,48 @@
     transform: rotate(360deg);
   }
 }
+
+@keyframes popTransform {
+  0% {
+    transform: scale(0);
+  }
+  85% {
+    transform: scale(1.15);
+  }
+  95% {
+    transform: scale(.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes burstTransform {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes popSoftTransform {
+  0% {
+    transform: scale(0);
+  }
+  45% {
+    transform: scale(1.02);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes burstSoftTransform {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
+}

@@ -35,8 +35,8 @@
         overflow: hidden;
 
         .active & {
-            -webkit-backdrop-filter: blur(12px);
-            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
         }
 
         @media screen and (min-width: 992px) {

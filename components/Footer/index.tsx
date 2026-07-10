@@ -92,7 +92,7 @@ const index = () => {
         setUrlCopied(true)
         setTimeout(() => {
           setUrlCopied(false)
-        }, 2500)
+        }, 3500)
 
         return true
       } catch (err) {}
@@ -114,7 +114,7 @@ const index = () => {
       if(success) setUrlCopied(true)
       setTimeout(() => {
         setUrlCopied(false)
-      }, 2500)
+      }, 3500)
     } catch (err) {
       success = false
     }
@@ -136,10 +136,10 @@ const index = () => {
               <defs>
                 <filter id="footermenu-filter">
                   <feGaussianBlur in="SourceGraphic" stdDeviation="1" result="blurred_source"></feGaussianBlur>
-                  <feImage href="/displacement-map-yiydeb.png" x="0" y="0" width="178" height="54" result="displacement_map" preserveAspectRatio="none"></feImage>
+                  <feImage href="/displacement-map-yiydeb_footer.png" x="0" y="0" width="178" height="52" result="displacement_map" preserveAspectRatio="none"></feImage>
                   <feDisplacementMap in="blurred_source" in2="displacement_map" scale="100" xChannelSelector="R" yChannelSelector="G" result="displaced"></feDisplacementMap>
                   <feColorMatrix in="displaced" type="saturate" result="displaced_saturated" values="1"></feColorMatrix>
-                  <feImage href="/specular-map-yiydeb.png" x="0" y="0" width="178" height="54" result="specular_layer" preserveAspectRatio="none"></feImage>
+                  <feImage href="/specular-map-yiydeb_footer.png" x="0" y="0" width="178" height="52" result="specular_layer" preserveAspectRatio="none"></feImage>
                   <feComposite in="displaced_saturated" in2="specular_layer" operator="in" result="specular_saturated"></feComposite>
                   <feComponentTransfer in="specular_layer" result="specular_faded">
                     <feFuncA type="linear" slope="0.2"></feFuncA>
