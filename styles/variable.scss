@@ -25,11 +25,12 @@
   --black30: rgba(0, 0, 0, .3);
   --black40: rgba(0, 0, 0, .4);
   --black50: rgba(0, 0, 0, .5);
+  --black60: rgba(0, 0, 0, .6);
 
   --liquid-light: rgba(255, 255, 255, .9);
   --liquid-dark: rgba(0, 0, 0, .6);
   --liquid-reflex-dark: 1;
-  --liquid-reflex-light: .8;
+  --liquid-reflex-light: .7;
   --saturation: 150%;
 
   --padding: 1rem;
@@ -62,7 +63,7 @@
   --background: rgba(0, 0, 0, 1);
   --text: rgba(220, 220, 220, 1);
   --hover: rgba(255, 255, 255, .1);
-  --glass: rgba(16, 15, 46, 0.3);
+  --glass: rgba(19, 19, 19, 0.3);
   --icons: rgba(255, 255, 255, 1);
 }
 
@@ -75,10 +76,10 @@
 }
 
 .night {
-  --background: #363636;
+  --background: #282828;
   --text: rgb(240, 240, 240);
   --hover: rgba(255, 255, 255, .1);
-  --glass: rgba(16, 15, 46, 0.3);
+  --glass: rgba(19, 19, 19, 0.3);
   --icons: rgba(255, 255, 255, 1);
 }
 

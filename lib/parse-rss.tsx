@@ -41,11 +41,23 @@ function extractText(val: unknown): string {
   return "";
 }
 
+/** Strip tags to get a rough plain-text length, used to compare content quality. */
+function stripHtml(html: string): string {
+  if (!html) return "";
+  return html
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 const NON_IMAGE_URL_PATTERNS = [
   /youtu\.be/i,
   /youtube\.com/i,
   /vimeo\.com/i,
   /dailymotion\.com/i,
+  /gravatar\.com/i, // avatar images aren't post thumbnails
 ];
 
 function isValidImageUrl(url: string): boolean {
@@ -61,12 +73,21 @@ function extractFirstImage(html: string): string | null {
 
 function getThumbnail(raw: Record<string, unknown>, content: string): string {
   const enclosure = raw["enclosure"] as { "@_url"?: string } | undefined;
-  const mediaContent = raw["media:content"] as { "@_url"?: string } | undefined;
+
+  // media:content is forced into an array (see xmlParser isArray config below),
+  // so pick the first entry that looks like an actual image, not the avatar.
+  const mediaContentList = toArray(
+    raw["media:content"] as Record<string, unknown> | Record<string, unknown>[] | undefined
+  );
+  const mediaContentUrl = mediaContentList
+    .map((m) => (m as any)?.["@_url"] as string | undefined)
+    .find((url) => url && isValidImageUrl(url));
+
   const mediaThumb = raw["media:thumbnail"] as { "@_url"?: string } | undefined;
 
   const candidates = [
     enclosure?.["@_url"],
-    mediaContent?.["@_url"],
+    mediaContentUrl,
     mediaThumb?.["@_url"],
     extractFirstImage(content),
   ];
@@ -111,15 +132,11 @@ async function extractWithReadability(
     base.href = postUrl;
     doc.head.prepend(base);
 
-    const article = new Readability(
-      doc,
-      {
-        maxElemsToParse: 0,       // no limit — don't cut off long articles
-        nbTopCandidates: 15,      // consider more candidates for complex layouts
-        charThreshold: 200,       // allow short posts to pass (default 500 is too strict)
-        // keepClasses: false,       // strip classes — cleaner output
-      }
-    ).parse();
+    const article = new Readability(doc, {
+      maxElemsToParse: 0, // no limit — don't cut off long articles
+      nbTopCandidates: 15, // consider more candidates for complex layouts
+      charThreshold: 200, // allow short posts to pass (default 500 is too strict)
+    }).parse();
     if (!article) return empty;
 
     return {
@@ -148,14 +165,10 @@ const xmlParser = new XMLParser({
 
 // ─── Proxies ──────────────────────────────────────────────────────────────────
 
-// const CORS_PROXY = "https://api.codetabs.com/v1/proxy?quest=";
 const CORS_PROXY = "https://rss.tuanphung.com/proxy/?url=";
-
 
 const CORS_PROXIES = [
   (url: string) => `https://rss.tuanphung.com/proxy/?url=${encodeURIComponent(url)}`,
-  // (url: string) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
-  // (url: string) => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`,
 ];
 
 // ─── Feed types ───────────────────────────────────────────────────────────────
@@ -209,7 +222,7 @@ async function fetchBestFeed(url: string): Promise<FeedResult> {
   return results[0];
 }
 
-// ─── Raw post extraction (metadata + URLs only) ───────────────────────────────
+// ─── Raw post extraction (metadata + URLs + feed's own content) ──────────────
 
 interface RawPost {
   title: string;
@@ -217,6 +230,8 @@ interface RawPost {
   publishedAt: string;
   shortDesc: string;
   fallbackThumbnail: string;
+  /** Full HTML content already present in the feed itself (content:encoded / atom content) */
+  feedContent: string;
 }
 
 function extractRawPosts(result: FeedResult): RawPost[] {
@@ -225,6 +240,7 @@ function extractRawPosts(result: FeedResult): RawPost[] {
 
     return items.map((item: any): RawPost => {
       const desc = item.description ?? "";
+      const feedContent = item.content ?? "";
       return {
         title: item.title ?? "",
         postUrl: item.link ?? "",
@@ -234,9 +250,10 @@ function extractRawPosts(result: FeedResult): RawPost[] {
           [
             item.thumbnail,
             item.enclosure?.link,
-            extractFirstImage(item.content ?? ""),
+            extractFirstImage(feedContent),
             extractFirstImage(desc),
           ].find((url) => url && isValidImageUrl(url)) ?? "",
+        feedContent,
       };
     });
   }
@@ -247,27 +264,29 @@ function extractRawPosts(result: FeedResult): RawPost[] {
   const rssItems = toArray(parsed?.rss?.channel?.item);
   if (rssItems.length) {
     return rssItems.map((raw): RawPost => {
-      const content = extractText(raw["content:encoded"]);
+      const feedContent = extractText(raw["content:encoded"]);
       return {
         title: extractText(raw.title),
         postUrl: extractText(raw.link),
         publishedAt: new Date(extractText(raw.pubDate)).toISOString(),
         shortDesc: extractText(raw.description),
-        fallbackThumbnail: getThumbnail(raw, content),
+        fallbackThumbnail: getThumbnail(raw, feedContent),
+        feedContent,
       };
     });
   }
 
   const atomEntries = toArray(parsed?.feed?.entry);
   return atomEntries.map((raw): RawPost => {
-    const content = extractText(raw.content) || extractText(raw.summary);
+    const feedContent = extractText(raw.content) || extractText(raw.summary);
     const dateStr = extractText(raw.published) || extractText(raw.updated);
     return {
       title: extractText(raw.title),
       postUrl: extractAtomLink(raw),
       publishedAt: new Date(dateStr || Date.now()).toISOString(),
-      shortDesc: extractText(raw.summary) || content.slice(0, 300),
-      fallbackThumbnail: getThumbnail(raw, content),
+      shortDesc: extractText(raw.summary) || feedContent.slice(0, 300),
+      fallbackThumbnail: getThumbnail(raw, feedContent),
+      feedContent,
     };
   });
 }
@@ -289,6 +308,72 @@ function extractAtomLink(raw: Record<string, unknown>): string {
   return extractText(preferred);
 }
 
+// ─── Merge live-fetched Readability content with the feed's own content ──────
+
+/**
+ * Some posts (photo-blog / gallery style) have almost no body text, so
+ * Readability's charThreshold rejects them and returns an empty article —
+ * even though the feed's own content:encoded already had everything we need
+ * (images, captions, etc). This picks whichever source actually has more
+ * usable content instead of blindly trusting the live fetch.
+ */
+function resolveContent(
+  readability: { content: string; textContent: string; thumbnail: string; byline: string; siteName: string },
+  raw: RawPost
+): { content: string; textContent: string; thumbnail: string; byline: string; siteName: string } {
+  const readabilityTextLen = stripHtml(readability.content).length;
+  const feedTextLen = stripHtml(raw.feedContent).length;
+
+  // Feed content wins if Readability came back empty/too short, or if the
+  // feed's own content is meaningfully richer (e.g. galleries where the live
+  // page's real content isn't the dominant text block Readability picks).
+  const feedIsBetter =
+    !readability.content || feedTextLen > readabilityTextLen * 1.5 - 0 || readabilityTextLen < 50;
+
+  if (feedIsBetter && raw.feedContent) {
+    return {
+      content: raw.feedContent,
+      textContent: stripHtml(raw.feedContent),
+      thumbnail: readability.thumbnail || extractFirstImage(raw.feedContent) || raw.fallbackThumbnail,
+      byline: readability.byline,
+      siteName: readability.siteName,
+    };
+  }
+
+  return {
+    ...readability,
+    thumbnail: readability.thumbnail || raw.fallbackThumbnail,
+  };
+}
+
+/**
+ * Runs `fn` over `items` with at most `limit` in flight at once.
+ * Firing off many concurrent requests at the same domain (e.g. all posts
+ * from one Substack) is a common way to get silently rate-limited or
+ * blocked by the target site / CORS proxy — every request "succeeds" from
+ * fetch()'s point of view but comes back empty, which quietly wipes out
+ * most of your posts' content. Capping concurrency avoids that.
+ */
+async function mapWithConcurrency<T, R>(
+  items: T[],
+  limit: number,
+  fn: (item: T) => Promise<R>
+): Promise<R[]> {
+  const results: R[] = new Array(items.length);
+  let nextIndex = 0;
+
+  async function worker() {
+    while (nextIndex < items.length) {
+      const current = nextIndex++;
+      results[current] = await fn(items[current]);
+    }
+  }
+
+  const workers = Array.from({ length: Math.min(limit, items.length) }, worker);
+  await Promise.all(workers);
+  return results;
+}
+
 // ─── MAIN FUNCTION ────────────────────────────────────────────────────────────
 
 export async function parseRSSFeed(
@@ -297,58 +382,58 @@ export async function parseRSSFeed(
     /**
      * How many posts to fully extract with Readability.
      * Keep this low (5–10) to avoid hammering the target site and the proxy.
-     * Defaults to 10.
+     * Defaults to 30.
      */
     maxFullContent?: number;
 
     /**
-     * If true, all posts are fetched in parallel (faster but heavier on the proxy).
-     * If false, posts are fetched sequentially with a 300ms delay (gentler).
-     * Defaults to false.
+     * If true, posts are fetched with limited concurrency (see `concurrency`).
+     * If false, posts are fetched one at a time with a 300ms delay (gentlest,
+     * best for sites that rate-limit aggressively).
+     * Defaults to true.
      */
     parallel?: boolean;
+
+    /**
+     * Max simultaneous live-page fetches when `parallel` is true. Keep this
+     * modest (3–5) — many sites (Substack included) will throttle or block
+     * a burst of requests hitting the same domain at once, which silently
+     * empties out content for most posts even though nothing "throws".
+     * Defaults to 4.
+     */
+    concurrency?: number;
   } = {}
 ): Promise<{ posts: RSSPost[] }> {
-  const { maxFullContent = 30, parallel = true } = options;
+  const { maxFullContent = 30, parallel = true, concurrency = 4 } = options;
 
   const best = await fetchBestFeed(url);
   const rawPosts = extractRawPosts(best).slice(0, maxFullContent);
 
+  const buildPost = async (raw: RawPost): Promise<RSSPost> => {
+    const readability = await extractWithReadability(raw.postUrl, CORS_PROXY);
+    const resolved = resolveContent(readability, raw);
+
+    return {
+      title: raw.title,
+      postUrl: raw.postUrl,
+      publishedAt: raw.publishedAt,
+      shortDesc: raw.shortDesc,
+      content: resolved.content,
+      textContent: resolved.textContent,
+      thumbnail: resolved.thumbnail,
+      byline: resolved.byline,
+      siteName: resolved.siteName,
+    };
+  };
+
   let posts: RSSPost[];
 
   if (parallel) {
-    posts = await Promise.all(
-      rawPosts.map(async (raw): Promise<RSSPost> => {
-        const readability = await extractWithReadability(raw.postUrl, CORS_PROXY);
-        return {
-          title: raw.title,
-          postUrl: raw.postUrl,
-          publishedAt: raw.publishedAt,
-          shortDesc: raw.shortDesc,
-          content: readability.content,
-          textContent: readability.textContent,
-          thumbnail: readability.thumbnail || raw.fallbackThumbnail,
-          byline: readability.byline,
-          siteName: readability.siteName,
-        };
-      })
-    );
+    posts = await mapWithConcurrency(rawPosts, concurrency, buildPost);
   } else {
     posts = [];
     for (const raw of rawPosts) {
-      const readability = await extractWithReadability(raw.postUrl, CORS_PROXY);
-      posts.push({
-        title: raw.title,
-        postUrl: raw.postUrl,
-        publishedAt: raw.publishedAt,
-        shortDesc: raw.shortDesc,
-        content: readability.content,
-        textContent: readability.textContent,
-        thumbnail: readability.thumbnail || raw.fallbackThumbnail,
-        byline: readability.byline,
-        siteName: readability.siteName,
-      });
-
+      posts.push(await buildPost(raw));
       // Small delay — be a polite scraper
       await new Promise((r) => setTimeout(r, 200));
     }

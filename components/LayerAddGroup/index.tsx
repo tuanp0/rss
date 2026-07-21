@@ -20,7 +20,7 @@ interface LayerTypes {
     onGroupAdded: () => void
 }
 
-const DAYS_LIMIT = 180
+const DAYS_LIMIT = 520
 
 const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
     const { currentStep, currentGroup } = useLayerContext()

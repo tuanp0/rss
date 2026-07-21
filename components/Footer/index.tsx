@@ -19,6 +19,7 @@ const index = () => {
   } = useLayerContext()
 
   const [refreshing, setRefreshing] = useState(false)
+  const [feedRefreshed, setFeedRefreshed] = useState(false)
   const [urlCopied, setUrlCopied] = useState(false)
 
   const checkOnline = async (): Promise<boolean> => {
@@ -60,6 +61,11 @@ const index = () => {
         await refreshSource(db, currentSource, currentGroup)
       }
       
+      setFeedRefreshed(true)
+      setTimeout(() => {
+        setFeedRefreshed(false)
+      }, 3500)
+
       triggerRefresh()
     } catch (err) {
       console.error(err)
@@ -202,15 +208,27 @@ const index = () => {
           <div className={styles.footerAction}>
             {currentStep === 1 && <Button text="Ajouter une catégorie" action={() => setShowAddLayer(true)} icon={'add'} shadowInner />}
             {currentStep === 2 && <Button text="Ajouter une source" action={handleAddLayer} icon={'add'} shadowInner />}
-            {currentStep === 3 && <Button text="Rafraîchir la liste" action={handleRefresh} icon={'refresh'} isRefreshing={refreshing} shadowInner />}
-            {currentStep === 4 && (
-              !urlCopied ? (
-                <Button text="Sauvegarder ce post" action={copyClipboard} icon={'share'} />
+            {currentStep === 3 && (
+              !feedRefreshed ? (
+                <Button text="Rafraîchir la liste" action={handleRefresh} icon={'refresh'} isRefreshing={refreshing} shadowInner />
               ) : (
-                <Button text="Sauvegarder ce post" icon={'check'} />
+                <>
+                  <Button text="Liste rafraîchie" icon={'check'} />
+                  <span className={`${styles.footerActionText} ${feedRefreshed ? styles.show : ''}`}>Mis à jour</span>
+                </>
               )
             )}
-            <span className={`${styles.footerActionText} ${urlCopied ? styles.show : ''}`}>Lien copié</span>
+            {currentStep === 4 && (
+              !urlCopied ? (
+                <Button text="Partager ce post" action={copyClipboard} icon={'share'} />
+              ) : (
+                <>
+                  <Button text="Lien copié" icon={'check'} />
+                  <span className={`${styles.footerActionText} ${urlCopied ? styles.show : ''}`}>Lien copié</span>
+                </>
+              )
+            )}
+            
           </div>
     </footer>
   )

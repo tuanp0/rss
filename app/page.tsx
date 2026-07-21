@@ -23,12 +23,6 @@ export default function Home() {
       />
       <NewsList />
       <PostItem />
-      {/*
-        <LayerParameters
-          showParametersLayer={showParametersLayer}
-          setShowParametersLayer={setShowParametersLayer}
-        />
-      */}
     </>
   );
 }

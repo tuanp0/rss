@@ -155,10 +155,6 @@
             border: none;
         }
 
-        img {
-            margin-bottom: 0;
-        }
-
         &:has(> img:only-child) {
             margin: 0 auto .75rem 0;
         }

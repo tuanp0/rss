@@ -28,7 +28,7 @@
         backdrop-filter: blur(8px);
         transform: scale(0);
         transform-origin: 6rem 100%;
-        transition: bottom .2s ease-in-out, background .4s ease-in-out, transform .2s ease-in-out;
+        transition: bottom .15s ease-in-out, background .4s ease-in-out, transform .2s ease-in-out;
         z-index: 11;
         overflow: hidden;
 
@@ -40,7 +40,7 @@
             bottom: 5.5rem;
             transform: scale(1);
             transition: bottom .2s ease-in-out, background .4s ease-in-out;
-            animation: popSoftTransform .4s ease-in-out;
+            animation: popTransform .4s ease-in-out;
         }
 
         @media screen and (min-width: 992px) {
