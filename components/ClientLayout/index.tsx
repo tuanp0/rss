@@ -42,10 +42,10 @@ function applyThemeToBody(theme: Theme | null, timeOfDay: TimeOfDay | null) {
   document.body.classList.remove(...COLOR_CLASSES, ...TIME_CLASSES)
 
   const color = theme?.color_theme
-  if (!color || color === 'auto') {
-    if (timeOfDay) document.body.classList.add(timeOfDay)
-  } else {
+  if (color && color !== 'auto') {
     document.body.classList.add(color)
+  } else {
+    if (timeOfDay) document.body.classList.add(timeOfDay)
   }
 
   const size = theme?.size_theme
@@ -63,7 +63,7 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
     if (!("serviceWorker" in navigator)) return
 
     navigator.serviceWorker.addEventListener("controllerchange", () => {
-      if (confirm("Nouvelle version est disponible !\nRecharger la page ?")) {
+      if (confirm("Une nouvelle version est disponible !\nRecharger la page ?")) {
         navigator.serviceWorker.ready.then(() => {
           window.location.href = window.location.href
         })
