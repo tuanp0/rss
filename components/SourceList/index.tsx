@@ -85,6 +85,11 @@ const SourceList = ({ onReady }: SourcesTypes) => {
               (ex: https://fujixweekly.com)
             </p>
             <br/>
+            <p className={styles.groupContentText}>
+              <strong>Swiper la source vers la droite<br/>
+              pour la supprimer.</strong>
+            </p>
+            <br/>
             <p className={styles.sourceContentText}>
               <strong>Toucher la tranche gauche de l'écran<br/>
               ou cliquer sur la flèche gauche<br/>
@@ -96,10 +101,21 @@ const SourceList = ({ onReady }: SourcesTypes) => {
         {!loading && sources.length > 0 && (
           <div className={styles.sourceList}>
             <div className={styles.sourceListAll}>
-              <SourceItem name={'Toutes les sources'} icon={'star'} sourceId={0} onDelete={() => db && fetchSources(db)}/>
+              <SourceItem
+                name={'Toutes les sources'}
+                icon={'star'}
+                sourceId={0}
+                onDelete={() => db && fetchSources(db)}
+              />
             </div>
             {sources.map((source, key) => (
-              <SourceItem icon={source.favicon} name={getSiteName(source.name)} key={key} sourceId={source.id} onDelete={() => db && fetchSources(db)} />
+              <SourceItem
+                icon={source.favicon}
+                name={getSiteName(source.name)}
+                key={source.id}
+                sourceId={source.id}
+                onDelete={() => db && fetchSources(db)}
+              />
             ))}
             <span className={styles.sourceContentCount}>{sources.length} {sources.length <= 1 ? 'source' : 'sources'}</span>
           </div>

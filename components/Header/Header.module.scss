@@ -46,6 +46,7 @@
 
         &Span {
             font-size: 1.75rem;
+            line-height: 1.5;
             position: absolute;
             width: auto;
             max-width: calc(100% - 40px);
@@ -53,7 +54,7 @@
             transform: translateX(-50%);
             text-align: center;
             display: inline-block;
-            padding: .625rem 1.5rem .625rem 1.5rem;
+            padding: .375rem 1.5rem .5rem 1.5rem;
             border-radius: 2rem;
             transition:
                 opacity .3s cubic-bezier(0.4, 0, 0.3, 1) .4s,
@@ -71,8 +72,6 @@
                 @media screen and (max-width: 991px) {
                     @include glassContainer();
                     font-size: 1.375rem;
-                    // box-shadow: 0 0 6px var(--black50), inset 0 0 3px var(--white40);
-                    // background: var(--glass);
                     transition:
                         opacity .3s cubic-bezier(0.4, 0, 0.3, 1) .4s,
                         color 1s ease-in-out,
@@ -103,6 +102,7 @@
 
             &Weather {
                 @include gabriela();
+                line-height: 1.25;
                 letter-spacing: 1px;
                 font-weight: bold;
                 font-style: normal;
@@ -123,7 +123,7 @@
                     .scrolled & {
                         @media screen and (max-width: 991px) {
                             font-size: .75rem;
-                            gap: .875rem;
+                            gap: .75rem;
                         }
                     }
 
@@ -146,6 +146,14 @@
 
                 &Icon {
                     margin-right: .125rem;
+                    transition: width .4s ease-in-out, margin-right .4s ease-in-out;
+
+                    .scrolled & {
+                        @media screen and (max-width: 991px) {
+                            width: 22px;
+                            margin-right: .125rem;
+                        }
+                    }
                 }
 
                 &Location {

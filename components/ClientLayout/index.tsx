@@ -14,12 +14,12 @@ import styles from './ClientLayout.module.scss'
 const TIME_CLASSES = ['night', 'morning', 'light', 'afternoon', 'bedtime'] as const
 type TimeOfDay = typeof TIME_CLASSES[number]
 
-const COLOR_CLASSES = ['auto', 'light', 'night', 'morning', 'afternoon', 'bedtime', 'forest', 'dark', 'winter-gradient'] as const
+const COLOR_CLASSES = ['auto', 'light', 'night', 'morning', 'afternoon', 'bedtime', 'forest', 'dark', 'wood'] as const
 
 const getTimeOfDay = (): TimeOfDay => {
   const hour = new Date().getHours()
   if (hour < 6)  return 'night'
-  if (hour < 9) return 'morning'
+  if (hour < 10) return 'morning'
   if (hour < 15) return 'light'
   if (hour < 19) return 'afternoon'
   if (hour < 23) return 'bedtime'

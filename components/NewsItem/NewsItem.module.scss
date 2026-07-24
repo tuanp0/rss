@@ -12,6 +12,10 @@
         padding: .5rem calc(var(--padding)/2);
     }
 
+    @media screen and (min-width:992px) {
+        border-radius: 0;
+    }
+
     &:hover {
         background: var(--hover);
     }

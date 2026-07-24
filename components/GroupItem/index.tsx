@@ -11,7 +11,7 @@ interface GroupItemTypes {
 }
 
 const GroupItem = ({ groupId, text, itemCount, onDelete }: GroupItemTypes) => {
-  const { currentStep, setCurrentStep, currentGroup, setCurrentGroup, setCurrentSource, setShowDeleteLayer, setIsGroup, setIsSource, setSelectedGroupId, setSelectedGroupName } = useLayerContext()
+  const { currentStep, setCurrentStep, currentGroup, setCurrentGroup, setShowDeleteLayer, setIsGroup, setIsSource, setSelectedGroupId, setSelectedGroupName } = useLayerContext()
 
   const [touchStart, setTouchStart] = useState<number | null>(null)
   const [touchEnd, setTouchEnd] = useState<number | null>(null)

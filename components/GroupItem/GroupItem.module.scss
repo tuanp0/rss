@@ -9,6 +9,10 @@
     background-color: transparent;
     transition: background-color .1s ease-in-out;
 
+    @media screen and (min-width:992px) {
+        border-radius: 0;
+    }
+
     &:hover {
         background-color: var(--hover);
     }

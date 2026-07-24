@@ -208,27 +208,23 @@ const index = () => {
           <div className={styles.footerAction}>
             {currentStep === 1 && <Button text="Ajouter une catégorie" action={() => setShowAddLayer(true)} icon={'add'} shadowInner />}
             {currentStep === 2 && <Button text="Ajouter une source" action={handleAddLayer} icon={'add'} shadowInner />}
-            {currentStep === 3 && (
+            {/* {currentStep === 3 && (
               !feedRefreshed ? (
                 <Button text="Rafraîchir la liste" action={handleRefresh} icon={'refresh'} isRefreshing={refreshing} shadowInner />
               ) : (
-                <>
                   <Button text="Liste rafraîchie" icon={'check'} />
-                  <span className={`${styles.footerActionText} ${feedRefreshed ? styles.show : ''}`}>Mis à jour</span>
-                </>
               )
-            )}
+              
+            )} */}
             {currentStep === 4 && (
               !urlCopied ? (
                 <Button text="Partager ce post" action={copyClipboard} icon={'share'} />
               ) : (
-                <>
                   <Button text="Lien copié" icon={'check'} />
-                  <span className={`${styles.footerActionText} ${urlCopied ? styles.show : ''}`}>Lien copié</span>
-                </>
               )
             )}
-            
+            <span className={`${styles.footerActionText} ${feedRefreshed ? styles.show : ''}`}>Mis à jour</span>
+            <span className={`${styles.footerActionText} ${urlCopied ? styles.show : ''}`}>Lien copié</span>
           </div>
     </footer>
   )

@@ -286,7 +286,7 @@ export const refreshSource = async (db: IDBDatabase, sourceId: number, groupId: 
 
     try {
       await addPost(db, groupId, sourceId, post.title, post.postUrl, post.shortDesc, post.content, post.thumbnail, publishedDate.toISOString())
-    } catch {}
+    } catch (err) {}
   }
 }
 

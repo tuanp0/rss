@@ -106,9 +106,9 @@ const index = ({ onThemeChange }: Props) => {
                   <span className={`${styles.layerContentParameterStyle} forest`}></span>
                   <span className={styles.layerContentParameterText}>Forest</span>
                 </div>
-                <div className={`${styles.layerContentParameterItem} ${activeColor === 'winter-gradient' ? styles.active : ''}`} onClick={() => handleTheme('color', 'winter-gradient')}>
-                  <span className={`${styles.layerContentParameterStyle} winter-gradient`}></span>
-                  <span className={styles.layerContentParameterText}>Winter gradient</span>
+                <div className={`${styles.layerContentParameterItem} ${activeColor === 'wood' ? styles.active : ''}`} onClick={() => handleTheme('color', 'wood')}>
+                  <span className={`${styles.layerContentParameterStyle} wood`}></span>
+                  <span className={styles.layerContentParameterText}>Wood</span>
                 </div>
               </div>
             </div>

@@ -69,12 +69,12 @@ const GroupList = ({ onReady }: GroupsTypes) => {
             <p className={styles.groupContentText}>
               <strong>Créer un groupe en cliquant sur l'icône "+"<br/>
               en bas à droite.</strong><br/>
-              (ex: News, Tech, Dev...)
+              (ex: Tech, Dev, News...)
             </p>
             <br/>
             <p className={styles.groupContentText}>
-              <strong>Swiper vers la droite<br/>
-              pour supprimer une groupe créé.</strong>
+              <strong>Swiper le groupe vers la droite<br/>
+              pour le supprimer.</strong>
             </p>
           </>
         }
