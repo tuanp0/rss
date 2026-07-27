@@ -85,7 +85,7 @@ const SourceList = ({ onReady }: SourcesTypes) => {
               (ex: https://fujixweekly.com)
             </p>
             <br/>
-            <p className={styles.groupContentText}>
+            <p className={styles.sourceContentText}>
               <strong>Swiper la source vers la droite<br/>
               pour la supprimer.</strong>
             </p>

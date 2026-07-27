@@ -268,7 +268,7 @@ export const updateSource = (
 export const refreshSource = async (db: IDBDatabase, sourceId: number, groupId: number): Promise<void> => {
   const { parseRSSFeed } = await import('@/lib/parse-rss')
 
-  const DAYS_LIMIT = 90
+  const DAYS_LIMIT = 15
 
   const sources = await getSourcesByGroup(db, groupId)
   const source = sources.find(s => s.id === sourceId)

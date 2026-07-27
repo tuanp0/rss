@@ -58,7 +58,7 @@
     }
 
     &Title {
-        font-size: 1.5rem;
+        font-size: 1.375rem;
         color: var(--text);
         line-height: 1.25;
         font-weight: bold;
@@ -98,18 +98,17 @@
     }
     
     &Content {
-        @include wysiwyg();
-        
         .container {
-            padding: 1rem 1rem 2rem 1rem;
-
-
+            padding: 1rem;
         }
 
-        h2 {
+        &Title {
             font-size: 1rem;
+            font-weight: bold;
+            color: var(--text);
             margin-top: 0;
             margin-bottom: 0.5rem;
+            display: block;
         }
         
         p {
@@ -223,11 +222,12 @@
                 width: 50%;
 
                 h2 {
-                    text-align: left;;
+                    text-align: left;
                 }
 
                 &Input {
                     @include input();
+                    background-color: color-mix(in srgb, var(--glass) 100%, transparent);
                     margin-bottom: 0;
                 }
             }

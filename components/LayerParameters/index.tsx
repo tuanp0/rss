@@ -71,7 +71,7 @@ const index = ({ onThemeChange }: Props) => {
         </div>
         <div className={styles.layerContent}>
           <Container className={styles.container}>
-            <h2>Couleur de fond</h2>
+            <h2 className={styles.layerContentTitle}>Couleur de fond</h2>
             <div className={styles.layerContentScroll}>
               <div className={styles.layerContentParameter}>
                 <div className={`${styles.layerContentParameterItem} ${activeColor === 'auto' ? styles.active : ''}`} onClick={() => handleTheme('color', 'auto')}>
@@ -112,7 +112,7 @@ const index = ({ onThemeChange }: Props) => {
                 </div>
               </div>
             </div>
-            <h2>Police de texte</h2>
+            <h2 className={styles.layerContentTitle}>Police de texte</h2>
             <div className={styles.layerContentScroll}>
               <div className={styles.layerContentParameter}>
                 <div className={`${styles.layerContentParameterItem} ${activeFont === 'default' ? styles.active : ''}`} onClick={() => handleTheme('font', 'default')}>
@@ -139,7 +139,7 @@ const index = ({ onThemeChange }: Props) => {
             </div>
             <div className={styles.layerContentHalf}>
               <div className={styles.layerContentSize}>
-                <h2>Taille de texte</h2>
+                <h2 className={styles.layerContentTitle}>Taille de texte</h2>
                 <div className={styles.layerContentParameter}>
                   <div className={styles.layerContentParameterBtn}><Button text="Réduire la taille" aria-label={`Réduire la taille de texte`} action={() => handleTheme('size', 'less')} icon={'minus'} small /></div>
                   <div className={styles.layerContentParameterVal}>{activeSize}</div>
@@ -147,16 +147,16 @@ const index = ({ onThemeChange }: Props) => {
                 </div>
               </div>
               <div className={styles.layerContentLocation}>
-                <h2>Localisation Méteo</h2>
-                  <input
-                    type="text"
-                    id={'location'}
-                    name={'location'}
-                    className={styles.layerContentLocationInput}
-                    defaultValue={location ?? ''}
-                    placeholder={'Ville'}
-                    onBlur={(e) => { handleTheme('ville', e.target.value) }}
-                  />
+                <label className={styles.layerContentTitle} htmlFor={'location'}>Localisation Méteo</label>
+                <input
+                  type="text"
+                  id={'location'}
+                  name={'location'}
+                  className={styles.layerContentLocationInput}
+                  defaultValue={location ?? ''}
+                  placeholder={'Ville'}
+                  onBlur={(e) => { handleTheme('ville', e.target.value) }}
+                />
               </div>
             </div>
           </Container>

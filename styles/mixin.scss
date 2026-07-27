@@ -33,6 +33,19 @@
     border: none;
     margin-bottom: 1rem;
     background: var(--white10);
+
+    &::-webkit-input-placeholder {
+        opacity: .7;
+    }
+    &::-moz-placeholder {
+        opacity: .7;
+    }
+    &:-ms-input-placeholder {
+        opacity: .7;
+    }
+    &:-moz-placeholder {
+        opacity: .7;
+    }
 }
 
 @mixin wysiwyg() {
@@ -78,7 +91,6 @@
 
     p {
         color: var(--text);
-        // line-height: 1.25;
         margin-bottom: 1.25rem;
         word-wrap: break-word;
 
@@ -139,11 +151,6 @@
         max-width: 100%;
         width: 100%;
 
-        a[href^="https://play.google.com/"],
-        a[href^="https://apps.apple.com/"] {
-            display: none;
-        }
-
         iframe {
             top: 0;
             left: 0;
@@ -197,6 +204,17 @@
                 vertical-align: top;
                 padding: .375rem;
             }
+        }
+    }
+
+    sup {
+        font-size: .75rem;
+    }
+
+    div {
+        &:has(> table) {
+            max-width: calc(100% + var(--padding) + 1rem);
+            overflow-x: auto;
         }
     }
 }

@@ -57,12 +57,42 @@ const NON_IMAGE_URL_PATTERNS = [
   /youtube\.com/i,
   /vimeo\.com/i,
   /dailymotion\.com/i,
-  /gravatar\.com/i, // avatar images aren't post thumbnails
+  /gravatar\.com/i,
 ];
 
 function isValidImageUrl(url: string): boolean {
   if (!url) return false;
   return !NON_IMAGE_URL_PATTERNS.some((pattern) => pattern.test(url));
+}
+
+function stripStoreBadgeLinks(html: string): string {
+  if (!html) return html;
+
+  try {
+    const doc = new DOMParser().parseFromString(html, "text/html");
+    const badgeLinks = doc.querySelectorAll('a[href^="https://play.google.com/"], a[href^="https://apps.apple.com/"]');
+
+    badgeLinks.forEach((a) => {
+      const parent = a.parentElement;
+      a.remove();
+
+      // Clean up an emptied wrapper, but only if it's now genuinely empty
+      // (no text, no other images/links left inside it).
+      if (
+        parent &&
+        parent !== doc.body &&
+        !parent.textContent?.trim() &&
+        !parent.querySelector("img, a")
+      ) {
+        parent.remove();
+      }
+    });
+
+    return doc.body.innerHTML;
+  } catch (err) {
+    console.warn("Failed to strip store badge links:", err);
+    return html;
+  }
 }
 
 function extractFirstImage(html: string): string | null {
@@ -404,7 +434,7 @@ export async function parseRSSFeed(
     concurrency?: number;
   } = {}
 ): Promise<{ posts: RSSPost[] }> {
-  const { maxFullContent = 30, parallel = true, concurrency = 4 } = options;
+  const { maxFullContent = 20, parallel = true, concurrency = 3 } = options;
 
   const best = await fetchBestFeed(url);
   const rawPosts = extractRawPosts(best).slice(0, maxFullContent);
@@ -413,13 +443,15 @@ export async function parseRSSFeed(
     const readability = await extractWithReadability(raw.postUrl, CORS_PROXY);
     const resolved = resolveContent(readability, raw);
 
+    const cleanedContent = stripStoreBadgeLinks(resolved.content);
+
     return {
       title: raw.title,
       postUrl: raw.postUrl,
       publishedAt: raw.publishedAt,
       shortDesc: raw.shortDesc,
-      content: resolved.content,
-      textContent: resolved.textContent,
+      content: cleanedContent,
+      textContent: stripHtml(cleanedContent),
       thumbnail: resolved.thumbnail,
       byline: resolved.byline,
       siteName: resolved.siteName,

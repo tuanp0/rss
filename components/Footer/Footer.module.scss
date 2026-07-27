@@ -6,13 +6,13 @@
     bottom: 0;
     width: 100%;
     text-align: center;
-    padding: 1rem 1.25rem 1.5rem;
+    padding: 0 1.25rem 1.25rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: .75rem;
     pointer-events: none;
-    background: linear-gradient(to top, var(--black50) 0%, transparent 100%); 
+    background: linear-gradient(to top, var(--black60) 0%, transparent 100%); 
 
     @media screen and (min-width:992px) {
         padding: 0 var(--padding) 1.5rem;

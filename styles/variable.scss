@@ -30,7 +30,7 @@
   --liquid-light: rgba(255, 255, 255, .9);
   --liquid-dark: rgba(0, 0, 0, .6);
   --liquid-reflex-dark: 1;
-  --liquid-reflex-light: .7;
+  --liquid-reflex-light: .9;
   --saturation: 150%;
 
   --padding: 1rem;
@@ -54,7 +54,7 @@
     --liquid-light: rgba(255, 255, 255, .8);
     --liquid-dark: rgba(0, 0, 0, .6);
     --liquid-reflex-dark: 2;
-    --liquid-reflex-light: .5;
+    --liquid-reflex-light: .7;
     --saturation: 200%;
   }
 }
@@ -63,7 +63,7 @@
   --background: rgba(0, 0, 0, 1);
   --text: rgba(220, 220, 220, 1);
   --hover: rgba(255, 255, 255, .1);
-  --glass: rgba(19, 19, 19, 0.3);
+  --glass: rgba(19, 19, 19, 0.4);
   --icons: rgba(255, 255, 255, 1);
 }
 
@@ -79,7 +79,7 @@
   --background: #282828;
   --text: rgb(240, 240, 240);
   --hover: rgba(255, 255, 255, .1);
-  --glass: rgba(19, 19, 19, 0.3);
+  --glass: rgba(19, 19, 19, 0.4);
   --icons: rgba(255, 255, 255, 1);
 }
 
@@ -108,17 +108,17 @@
 }
 
 .wood {
-  --background: #483520;
+  --background: #443727;
   --text: rgb(229, 221, 199);
   --hover: rgba(0, 0, 0, .1);
-  --glass: rgba(0, 0, 0, .3);
+  --glass: rgba(0, 0, 0, .4);
   --icons: rgba(255, 255, 255, 1);
 }
 
 .bedtime {
-  --background: #232e3f;
+  --background: #242f3f;
   --text: rgb(227, 222, 207);
   --hover: rgba(0, 0, 0, .1);
-  --glass: rgba(0, 0, 0, .3);
+  --glass: rgba(0, 0, 0, .4);
   --icons: rgba(255, 255, 255, 1);
 }

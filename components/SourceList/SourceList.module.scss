@@ -83,12 +83,13 @@
             @include gloria();
             text-align: center;
             font-size: 1rem;
+            line-height: 1.375;
             color: var(--text);
             padding: 0 2rem;
-            margin-top: 1rem;
+            margin-top: 1.25rem;
 
             @media screen and (min-width:992px) {
-                margin-top: .375rem;
+                margin-top: .75rem;
             }
         }
 

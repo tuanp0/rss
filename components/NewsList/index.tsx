@@ -17,6 +17,7 @@ const NewsList = () => {
   const [db, setDb] = useState<IDBDatabase | null>(null)
   const minSwipeDistance = 100
 
+  const touchStartRef = useRef<number | null>(null)
   const newsRef = useRef<HTMLDivElement>(null)
 
   const getSiteName = (url: string): string => {
@@ -28,33 +29,35 @@ const NewsList = () => {
   }
 
   const onTouchStart = (e: React.TouchEvent) => {
-    setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientY)
+    if (refreshing) return
+    touchStartRef.current = e.targetTouches[0].clientY
   }
 
   const onTouchMove = (e :React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientY)
-    
-    if(touchStart && touchEnd) {
-      const distance = touchStart - touchEnd
-      setRefreshHeight(Math.min(Math.abs((distance / minSwipeDistance) * 1), 1))
-    }
+    if (touchStartRef.current === null || refreshing) return
 
-    if(refreshHeight && refreshHeight >= 1) {
-      setRefreshingActive(true)
+    const currentY = e.targetTouches[0].clientY
+    const distance = currentY - touchStartRef.current
+    const scrollTop = e.currentTarget.scrollTop
+
+    if (scrollTop === 0 && distance > 0) {
+      const height = Math.min(distance / minSwipeDistance, 1)
+      setRefreshHeight(height)
+      setRefreshingActive(height >= 1)
+    } else {
+      setRefreshHeight(0)
+      setRefreshingActive(false)
     }
   }
 
   const onTouchEnd = (e: React.TouchEvent) => {
-    if (!touchStart || !touchEnd) return
-    const distance = touchStart - touchEnd
-    const isTopSwipe = distance < -minSwipeDistance
-    const scrollIsTop = e.currentTarget.scrollTop
-    if(isTopSwipe && scrollIsTop === 0) {
+    touchStartRef.current = null
+
+    if (refreshingActive) {
       handleRefresh()
-    }
-    if(refreshHeight && refreshHeight < 1) {
+    } else {
       setRefreshHeight(0)
+      setRefreshingActive(false)
     }
   }
 
@@ -79,32 +82,32 @@ const NewsList = () => {
   }
 
   const handleRefresh = async () => {
-      const online = await checkOnline()
-      if (!online) {
-        showOfflineBanner()
-        return
+    const online = await checkOnline()
+    if (!online) {
+      showOfflineBanner()
+      return
+    }
+
+    const db = await initDB()
+    if (!db || currentSource === null || currentGroup === null) return
+
+    setRefreshing(true)
+    try {
+      if (currentSource === null || currentSource === 0) {
+        await refreshAllSources(db, currentGroup)
+      } else {
+        await refreshSource(db, currentSource, currentGroup)
       }
 
-      const db = await initDB()
-      if (!db || currentSource === null || currentGroup === null) return
-  
-      setRefreshing(true)
-      try {
-        if (currentSource === null || currentSource === 0) {
-          await refreshAllSources(db, currentGroup)
-        } else {
-          await refreshSource(db, currentSource, currentGroup)
-        }
-  
-        triggerRefresh()
-      } catch (err) {
-        console.error(err)
-      } finally {
-        setRefreshing(false)
-        setRefreshingActive(false)
-        setRefreshHeight(0)
-      }
+      triggerRefresh()
+    } catch (err) {
+      console.error(err)
+    } finally {
+      setRefreshing(false)
+      setRefreshingActive(false)
+      setRefreshHeight(0)
     }
+  }
 
   useEffect(() => {
     newsRef.current?.scrollTo(0,0)
