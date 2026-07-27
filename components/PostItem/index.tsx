@@ -56,7 +56,7 @@ const index = () => {
             ${activeFont === 'typewriter' ? `font-typewriter` : ''}
           `}
         >
-          <a href={currentNewsObject ? currentNewsObject.url : ''} target="_blank" rel="noreferrer">{currentNewsObject ? currentNewsObject.title : ''}</a>
+          <a href={currentNewsObject ? currentNewsObject.url : ''} target="_blank" aria-label="Tuan Phung Portfolio" rel="noreferrer">{currentNewsObject ? currentNewsObject.title : ''}</a>
         </div>
         <time
           className={`

@@ -16,6 +16,17 @@ type TimeOfDay = typeof TIME_CLASSES[number]
 
 const COLOR_CLASSES = ['auto', 'light', 'night', 'morning', 'afternoon', 'bedtime', 'forest', 'dark', 'wood'] as const
 
+const THEME_COLORS: Record<Exclude<typeof COLOR_CLASSES[number], 'auto'>, string> = {
+  dark: '#000000',
+  light: '#ffffff',
+  night: '#282828',
+  morning: '#d7e9f8',
+  afternoon: '#ebe7db',
+  forest: '#C2D4B4',
+  wood: '#443727',
+  bedtime: '#242f3f',
+}
+
 const getTimeOfDay = (): TimeOfDay => {
   const hour = new Date().getHours()
   if (hour < 6)  return 'night'
@@ -38,14 +49,37 @@ const useTimeOfDay = (): TimeOfDay | null => {
   return timeOfDay
 }
 
+function setMetaThemeColor(colorKey: string) {
+  const color = THEME_COLORS[colorKey as keyof typeof THEME_COLORS]
+  if (!color) return
+
+  let meta = document.querySelector('meta[name="theme-color"]')
+  if (!meta) {
+    meta = document.createElement('meta')
+    meta.setAttribute('name', 'theme-color')
+    document.head.appendChild(meta)
+  }
+  meta.setAttribute('content', color)
+}
+
 function applyThemeToBody(theme: Theme | null, timeOfDay: TimeOfDay | null) {
   document.body.classList.remove(...COLOR_CLASSES, ...TIME_CLASSES)
 
   const color = theme?.color_theme
+  let activeColorKey: string | null = null
+
   if (color && color !== 'auto') {
     document.body.classList.add(color)
+    activeColorKey = color
   } else {
-    if (timeOfDay) document.body.classList.add(timeOfDay)
+    if (timeOfDay) {
+      document.body.classList.add(timeOfDay)
+      activeColorKey = timeOfDay
+    }
+  }
+
+  if (activeColorKey) {
+    setMetaThemeColor(activeColorKey)
   }
 
   const size = theme?.size_theme

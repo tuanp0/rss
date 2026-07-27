@@ -3,10 +3,10 @@ import ClientLayout from '@/components/ClientLayout'
 
 import '../styles/global.scss'
  
-const APP_NAME = "Reader"
-const APP_DEFAULT_TITLE = "Reader"
+const APP_NAME = "TP Reader"
+const APP_DEFAULT_TITLE = "TP Reader"
 const APP_TITLE_TEMPLATE = "%s - TP"
-const APP_DESCRIPTION = "RSS Reeder"
+const APP_DESCRIPTION = "Application web légère et pratique pour rassembler toutes vos news et articles en un seul endroit."
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -56,8 +56,10 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <head>
-        {/* <meta name="theme-color" content="#000000" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" /> */}
+        <meta name="theme-color" content="#000000" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+        {/* <meta name="apple-mobile-web-app-status-bar-style" content="default" /> */}
       </head>
       <body>
           <ClientLayout>

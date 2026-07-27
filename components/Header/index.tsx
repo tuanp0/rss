@@ -158,7 +158,7 @@ const Header = () => {
             `}>
               {location === '' && !error && !weather ?
                 <>
-                  <img src={`./tpreader-logo.png`} className={styles.headerTitleLogo}/>
+                  <img src={`./tpreader-logo.png`} className={styles.headerTitleLogo} alt={`TP reader`}/>
                   TP Reader
                 </>
               :

@@ -157,7 +157,7 @@ const index = () => {
             </svg>
             <div className={styles.footerContentInner}>
 
-              <button className={styles.footerItem} onClick={() => {
+              <button className={styles.footerItem} aria-label="Accueil" onClick={() => {
                 setCurrentStep(1)
                 setShowAddLayer(false)
                 setShowDeleteLayer(false)
@@ -169,7 +169,7 @@ const index = () => {
                 </svg>
                 <span className={styles.footerItemText}>Home</span>
               </button>
-              <button className={styles.footerItem} onClick={() => {
+              <button className={styles.footerItem} aria-label="Paramètres" onClick={() => {
                   setShowAddLayer(false)
                   setShowDeleteLayer(false)
                   setShowInformationsLayer(false)
@@ -190,6 +190,7 @@ const index = () => {
               </button>
               <button
                 className={styles.footerItem}
+                aria-label="Informations"
                 onClick={() => {
                   setShowInformationsLayer(true)
                   setShowAddLayer(false)
