@@ -122,7 +122,7 @@ const Header = () => {
               ${currentStep >= 2 ? styles.past : ''}
               ${groupIsPastHeader ? styles.scrolled : ''}
             `}>
-              <img src={`./tpreader-logo.png`} alt={`Logo TP Reader`} className={styles.headerTitleLogo}/>
+              <img src={`./tpreader-logo.png`} alt={`Logo TP Reader`} className={styles.headerTitleLogo} width={42} height={31} />
               <span className={`${styles.headerTitleText}`}>TP Reader</span>
             </span>
             <span className={`
@@ -158,7 +158,7 @@ const Header = () => {
             `}>
               {location === '' && !error && !weather ?
                 <>
-                  <img src={`./tpreader-logo.png`} className={styles.headerTitleLogo} alt={`TP reader`}/>
+                  <img src={`./tpreader-logo.png`} alt={`TP reader`} className={styles.headerTitleLogo} width={42} height={31} />
                   TP Reader
                 </>
               :
