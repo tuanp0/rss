@@ -11,14 +11,14 @@
 
     @media screen and (min-width:992px) {
         border-radius: 0;
-    }
 
-    &:hover {
-        background-color: var(--hover);
-    }
+        &:hover {
+            background-color: var(--hover);
+        }
 
-    &.active {
-        background-color: var(--hover);
+        &.active {
+            background-color: var(--hover);
+        }
     }
 
     @media screen and (min-width:768px) {

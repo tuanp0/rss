@@ -48,7 +48,7 @@ const index = () => {
             <h2>Tuan Phung</h2>
             <p>
               Site internet : <Link href={`https://tuanphung.com/`} title={`Visiter le portfolio`} target={`_blank`}>https://tuanphung.com/</Link><br/>
-              Email : <a href={`mailto:${getEmail()}`} title={`Envoyer un mail`}>{getEmail()}</a>
+              {/* Email : <a href={`mailto:${getEmail()}`} title={`Envoyer un mail`}>{getEmail()}</a> */}
             </p>
           </Container>
         </div>

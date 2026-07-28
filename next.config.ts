@@ -8,8 +8,10 @@ const {
 module.exports = async (phase: string): Promise<NextConfig> => {
   const isDev = phase === PHASE_DEVELOPMENT_SERVER
 
-  const nextConfig: NextConfig = isDev
-    ? {}
+  const nextConfig: NextConfig = isDev ?
+    {
+      allowedDevOrigins: ['local.dev', '*.local.dev'],
+    }
     : {
         output: "export",
         basePath: "",

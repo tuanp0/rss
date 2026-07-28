@@ -65,12 +65,14 @@ function isValidImageUrl(url: string): boolean {
   return !NON_IMAGE_URL_PATTERNS.some((pattern) => pattern.test(url));
 }
 
-function stripStoreBadgeLinks(html: string): string {
+function stripUnwantedLinks(html: string, postUrl:string): string {
   if (!html) return html;
 
   try {
     const doc = new DOMParser().parseFromString(html, "text/html");
-    const badgeLinks = doc.querySelectorAll('a[href^="https://play.google.com/"], a[href^="https://apps.apple.com/"]');
+    const badgeLinks = doc.querySelectorAll(
+      `header, a[href^="${postUrl}"], a[href^="https://play.google.com/"], a[href^="https://apps.apple.com/"], a[href^="https://www.facebook.com/sharer/"], a[href^="https://x.com/intent/tweet?"]`,
+    );
 
     badgeLinks.forEach((a) => {
       const parent = a.parentElement;
@@ -443,7 +445,7 @@ export async function parseRSSFeed(
     const readability = await extractWithReadability(raw.postUrl, CORS_PROXY);
     const resolved = resolveContent(readability, raw);
 
-    const cleanedContent = stripStoreBadgeLinks(resolved.content);
+    const cleanedContent = stripUnwantedLinks(resolved.content, raw.postUrl);
 
     return {
       title: raw.title,

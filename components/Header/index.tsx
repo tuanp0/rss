@@ -1,6 +1,7 @@
 'use client'
 import { useState, useEffect, useRef } from 'react'
 import { Icon } from '@iconify/react'
+import { checkOnline } from '@/lib/check-online'
 import { fetchWeather, type WeatherData, getWeatherCondition } from '@/lib/weather'
 import { useLayerContext } from '@/context/LayerContext'
 import Container from '@/components/Container'
@@ -40,21 +41,6 @@ const Header = () => {
     }
 
     return result
-  }
-
-  const checkOnline = async (): Promise<boolean> => {
-    if (!navigator.onLine) return false
-    try {
-      await fetch("https://www.google.com/favicon.ico", {
-        method: "HEAD",
-        mode: "no-cors",
-        cache: "no-store",
-        signal: AbortSignal.timeout(3000),
-      })
-      return true
-    } catch {
-      return false
-    }
   }
 
   const handleOnline = async () => {

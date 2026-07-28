@@ -10,7 +10,7 @@
     &Container {
         position: relative;
         padding: .875rem 0;
-        padding-top: 14px;
+        padding-top: 12px;
         padding-bottom: 12px;
         margin: 0;
         z-index: 1;
@@ -35,17 +35,18 @@
             height: auto;
             display: inline-block;
             margin-right: 1rem;
-            transition: width .4s ease-in-out;
+            transition: width .4s ease-in-out, margin-right .4s ease-in-out;
 
             .scrolled & {
                 @media screen and (max-width: 991px) {
-                    width: 38px;
+                    width: 34px;
+                    margin-right: .75rem;
                 }
             }
         }
 
         &Span {
-            font-size: 1.75rem;
+            font-size: 1.625rem;
             line-height: 1.5;
             position: absolute;
             width: auto;
@@ -54,7 +55,7 @@
             transform: translateX(-50%);
             text-align: center;
             display: inline-block;
-            padding: .375rem 1.5rem .5rem 1.5rem;
+            padding: .375rem 1.25rem .5rem 1.25rem;
             border-radius: 2rem;
             transition:
                 opacity .3s cubic-bezier(0.4, 0, 0.3, 1) .4s,
@@ -71,7 +72,7 @@
             &.scrolled {
                 @media screen and (max-width: 991px) {
                     @include glassContainer();
-                    font-size: 1.375rem;
+                    font-size: 1.25rem;
                     transition:
                         opacity .3s cubic-bezier(0.4, 0, 0.3, 1) .4s,
                         color 1s ease-in-out,
@@ -123,7 +124,7 @@
                     .scrolled & {
                         @media screen and (max-width: 991px) {
                             font-size: .75rem;
-                            gap: .75rem;
+                            gap: .875rem;
                         }
                     }
 
@@ -145,12 +146,15 @@
                 }
 
                 &Icon {
+                    width: 28px;
+                    height: 28px;
                     margin-right: .125rem;
-                    transition: width .4s ease-in-out, margin-right .4s ease-in-out;
+                    transition: width .4s ease-in-out, height .4s ease-in-out, margin-right .4s ease-in-out;
 
                     .scrolled & {
                         @media screen and (max-width: 991px) {
-                            width: 22px;
+                            width: 21px;
+                            height: 21px;
                             margin-right: .125rem;
                         }
                     }

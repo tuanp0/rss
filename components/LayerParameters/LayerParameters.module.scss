@@ -227,7 +227,6 @@
 
                 &Input {
                     @include input();
-                    background-color: color-mix(in srgb, var(--glass) 100%, transparent);
                     margin-bottom: 0;
                 }
             }

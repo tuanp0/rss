@@ -2,6 +2,7 @@
 import React, {useState} from 'react'
 import { useLayerContext } from '@/context/LayerContext'
 import { initDB, refreshSource, refreshAllSources } from '@/db/groups'
+import { checkOnline } from '@/lib/check-online'
 import Button from '@/components/Button'
 import Container from '@/components/Container'
 
@@ -21,21 +22,6 @@ const index = () => {
   const [refreshing, setRefreshing] = useState(false)
   const [feedRefreshed, setFeedRefreshed] = useState(false)
   const [urlCopied, setUrlCopied] = useState(false)
-
-  const checkOnline = async (): Promise<boolean> => {
-    if (!navigator.onLine) return false
-    try {
-      await fetch("https://www.google.com/favicon.ico", {
-        method: "HEAD",
-        mode: "no-cors",
-        cache: "no-store",
-        signal: AbortSignal.timeout(3000),
-      })
-      return true
-    } catch {
-      return false
-    }
-  }
 
   const showOfflineBanner = () => {
     setOfflineAlert(true)
