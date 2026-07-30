@@ -9,8 +9,11 @@
     
     &Container {
         position: relative;
-        padding: .875rem 0;
-        padding-top: 12px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding: .875rem 1.25rem;
+        padding-top: 14px;
         padding-bottom: 12px;
         margin: 0;
         z-index: 1;
@@ -22,12 +25,17 @@
         }
     }
 
+    &Button {
+        position: relative;
+        width: 52px;
+    }
+
     &Title {
         @include gabriela();
         position: relative;
         font-weight: bold;
         color: var(--text);
-        width: 100%;
+        flex: auto;
         height: 55px;
 
         &Logo {
@@ -50,7 +58,7 @@
             line-height: 1.5;
             position: absolute;
             width: auto;
-            max-width: calc(100% - 40px);
+            max-width: 100%;
             left: 50%;
             transform: translateX(-50%);
             text-align: center;
@@ -93,12 +101,14 @@
                 opacity: 0;
                 transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1), color 1s ease-in-out, background 1s ease-in-out;
                 pointer-events: none;
+                touch-action: none;
             }
 
             &.next {
                 opacity: 0;
                 transition: opacity .3s cubic-bezier(0.4, 0, 0.3, 1), color 1s ease-in-out, background 1s ease-in-out;
                 pointer-events: none;
+                touch-action: none;
             }
 
             &Weather {
@@ -177,16 +187,16 @@
     }
 
     &Offline {
-        position: absolute;
-        width: auto;
-        top: var(--padding);
-        right: var(--padding);
+        position: relative;
+        width: 52px;
+        text-align: right;
         color: var(--text);
         padding: .25rem;
         border-radius: 100%;
         -webkit-backdrop-filter: blur(2px);
         backdrop-filter: blur(2px);
         pointer-events: none;
+        touch-action: none;
         display: flex;
         align-items: center;
         opacity: 0;

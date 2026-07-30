@@ -29,9 +29,9 @@ const NewsItem = ({
   const { currentStep, setCurrentStep, currentSource, currentNews, setCurrentNews, setCurrentNewsObject } = useLayerContext()
 
   const handleNextStep = () => {
-    setCurrentStep(4)
     setCurrentNews(newsId)
     setCurrentNewsObject(post)
+    setTimeout(() => {setCurrentStep(4)}, 40)
   }
 
   // Format hour instead of date

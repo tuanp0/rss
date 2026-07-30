@@ -42,67 +42,67 @@ const index = () => {
       data-scroll="post"
       ref={postRef}
     >
-      
-      <div className={styles.postItemInner}>
-        <span className={styles.postItemPrev} onClick={() => setCurrentStep(3)}></span>
-        <div className={styles.postItemSource}>{getSiteName(currentNewsObject ? currentNewsObject.url : '')}</div>
-        <div
-          className={`
-            ${styles.postItemTitle}
-            ${activeFont === 'default' ? `font-serif` : ''}
-            ${activeFont === 'sansserif' ? `font-sansserif` : ''}
-            ${activeFont === 'gabriela' ? `font-gabriela` : ''}
-            ${activeFont === 'monospace' ? `font-monospace` : ''}
-            ${activeFont === 'typewriter' ? `font-typewriter` : ''}
-          `}
-        >
-          <a href={currentNewsObject ? currentNewsObject.url : ''} target="_blank" aria-label={currentNewsObject ? currentNewsObject.title : ''} rel="noreferrer">
-            {currentNewsObject ? currentNewsObject.title : ''}
-          </a>
-        </div>
-        <time
-          className={`
-            ${styles.postItemDate}
-            ${activeFont === 'default' ? `font-serif` : ''}
-            ${activeFont === 'sansserif' ? `font-sansserif` : ''}
-            ${activeFont === 'gabriela' ? `font-gabriela` : ''}
-            ${activeFont === 'monospace' ? `font-monospace` : ''}
-            ${activeFont === 'typewriter' ? `font-typewriter` : ''}
-          `} dateTime={currentNewsObject ? new Date(currentNewsObject.publishedAt).toISOString() : ''}>
-          {formattedTime}
-        </time>
-
-        {/* {currentNewsObject.thumbnail && (
-          <img src={currentNewsObject.thumbnail} alt={currentNewsObject.title} className={styles.postItemThumbnail} />
-        )} */}
-        
-        <div
-          className={`
-            ${styles.postItemDesc}
-            ${activeFont === 'default' ? `font-serif` : ''}
-            ${activeFont === 'sansserif' ? `font-sansserif` : ''}
-            ${activeFont === 'gabriela' ? `font-gabriela` : ''}
-            ${activeFont === 'monospace' ? `font-monospace` : ''}
-            ${activeFont === 'typewriter' ? `font-typewriter` : ''}
-          `}
-          dangerouslySetInnerHTML={{ __html: currentNewsObject ? currentNewsObject.shortDesc.replace(']]>', '').trim() : '' }}
-        />
-
-        {/* {currentNewsObject && (currentNewsObject.shortDesc !== currentNewsObject.content) && */}
+      {currentNewsObject &&
+        <div className={styles.postItemInner}>
+          <span className={styles.postItemPrev} onClick={() => setCurrentStep(3)}></span>
+          <div className={styles.postItemSource}>{getSiteName(currentNewsObject ? currentNewsObject.url : '')}</div>
           <div
             className={`
-              ${styles.postItemContent}
+              ${styles.postItemTitle}
               ${activeFont === 'default' ? `font-serif` : ''}
               ${activeFont === 'sansserif' ? `font-sansserif` : ''}
               ${activeFont === 'gabriela' ? `font-gabriela` : ''}
               ${activeFont === 'monospace' ? `font-monospace` : ''}
               ${activeFont === 'typewriter' ? `font-typewriter` : ''}
             `}
-            dangerouslySetInnerHTML={{ __html: currentNewsObject ? currentNewsObject.content.replace(']]>', '').trim() : '' }}
-          />
-        {/* } */}
+          >
+            <a href={currentNewsObject ? currentNewsObject.url : ''} target="_blank" aria-label={currentNewsObject ? currentNewsObject.title : ''} rel="noreferrer">
+              {currentNewsObject ? currentNewsObject.title : ''}
+            </a>
+          </div>
+          <time
+            className={`
+              ${styles.postItemDate}
+              ${activeFont === 'default' ? `font-serif` : ''}
+              ${activeFont === 'sansserif' ? `font-sansserif` : ''}
+              ${activeFont === 'gabriela' ? `font-gabriela` : ''}
+              ${activeFont === 'monospace' ? `font-monospace` : ''}
+              ${activeFont === 'typewriter' ? `font-typewriter` : ''}
+            `} dateTime={currentNewsObject ? new Date(currentNewsObject.publishedAt).toISOString() : ''}>
+            {formattedTime}
+          </time>
 
-      </div>
+          {/* {currentNewsObject.thumbnail && (
+            <img src={currentNewsObject.thumbnail} alt={currentNewsObject.title} className={styles.postItemThumbnail} />
+          )} */}
+          
+          <div
+            className={`
+              ${styles.postItemDesc}
+              ${activeFont === 'default' ? `font-serif` : ''}
+              ${activeFont === 'sansserif' ? `font-sansserif` : ''}
+              ${activeFont === 'gabriela' ? `font-gabriela` : ''}
+              ${activeFont === 'monospace' ? `font-monospace` : ''}
+              ${activeFont === 'typewriter' ? `font-typewriter` : ''}
+            `}
+            dangerouslySetInnerHTML={{ __html: currentNewsObject ? currentNewsObject.shortDesc.replace(']]>', '').trim() : '' }}
+          />
+
+          {/* {currentNewsObject && (currentNewsObject.shortDesc !== currentNewsObject.content) && */}
+            <div
+              className={`
+                ${styles.postItemContent}
+                ${activeFont === 'default' ? `font-serif` : ''}
+                ${activeFont === 'sansserif' ? `font-sansserif` : ''}
+                ${activeFont === 'gabriela' ? `font-gabriela` : ''}
+                ${activeFont === 'monospace' ? `font-monospace` : ''}
+                ${activeFont === 'typewriter' ? `font-typewriter` : ''}
+              `}
+              dangerouslySetInnerHTML={{ __html: currentNewsObject ? currentNewsObject.content.replace(']]>', '').trim() : '' }}
+            />
+          {/* } */}
+        </div>
+      }
     </section>
   )
 }

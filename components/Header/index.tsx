@@ -101,6 +101,7 @@ const Header = () => {
     <header className={`${styles.header}`} role="banner">
       <div className={styles.headerContent}>
         <Container className={styles.headerContainer}>
+          <div className={`${styles.headerButton}`}></div>
           <p className={`${styles.headerTitle}`}>
             <span className={`
               ${styles.headerTitleSpan}
@@ -108,7 +109,7 @@ const Header = () => {
               ${currentStep >= 2 ? styles.past : ''}
               ${groupIsPastHeader ? styles.scrolled : ''}
             `}>
-              <img src={`./tpreader-logo.png`} alt={`Logo TP Reader`} className={styles.headerTitleLogo} width={42} height={31} />
+              <img src={`./tpreader-logo.webp`} alt={`Logo TP Reader`} className={styles.headerTitleLogo} width={42} height={31} />
               <span className={`${styles.headerTitleText}`}>TP Reader</span>
             </span>
             <span className={`
@@ -144,7 +145,7 @@ const Header = () => {
             `}>
               {location === '' && !error && !weather ?
                 <>
-                  <img src={`./tpreader-logo.png`} alt={`TP reader`} className={styles.headerTitleLogo} width={42} height={31} />
+                  <img src={`./tpreader-logo.webp`} alt={`TP reader`} className={styles.headerTitleLogo} width={42} height={31} />
                   TP Reader
                 </>
               :

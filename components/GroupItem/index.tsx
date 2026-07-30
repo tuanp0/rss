@@ -13,29 +13,43 @@ interface GroupItemTypes {
 const GroupItem = ({ groupId, text, itemCount, onDelete }: GroupItemTypes) => {
   const { currentStep, setCurrentStep, currentGroup, setCurrentGroup, setShowDeleteLayer, setIsGroup, setIsSource, setSelectedGroupId, setSelectedGroupName } = useLayerContext()
 
-  const [touchStart, setTouchStart] = useState<number | null>(null)
-  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null)
+  const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(null)
   const [groupSettings, setGroupSettings] = useState<boolean | false>(false)
   const minSwipeDistance = 20
+  const maxVerticalRatio = 0.3
 
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientX)
+    setTouchStart({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY,
+    })
   }
 
   const onTouchMove = (e :React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
+    setTouchEnd({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY,
+    })
   }
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > minSwipeDistance
-    const isRightSwipe = distance < -minSwipeDistance
-    if(isRightSwipe) {
+    const distanceX = touchStart.x - touchEnd.x
+    const distanceY = touchStart.y - touchEnd.y
+    const absX = Math.abs(distanceX)
+    const absY = Math.abs(distanceY)
+
+    if (absY > absX * maxVerticalRatio) return
+
+    const isLeftSwipe = distanceX > minSwipeDistance
+    const isRightSwipe = distanceX < -minSwipeDistance
+
+    if (isRightSwipe) {
       setGroupSettings(true)
     }
-    if(isLeftSwipe) {
+    if (isLeftSwipe) {
       setGroupSettings(false)
     }
   }
@@ -43,8 +57,8 @@ const GroupItem = ({ groupId, text, itemCount, onDelete }: GroupItemTypes) => {
   const handleNextStep = (groupId: number, name: string) => {
     setCurrentGroup(groupId)
     setSelectedGroupName(name)
-    setCurrentStep(2)
     setGroupSettings(false)
+    setTimeout(() => {setCurrentStep(2)}, 40)
   }
   
   const handleDeleteGroup = (groupId: number, name: string) => {

@@ -10,6 +10,10 @@
     pointer-events: none;
     z-index: 10;
 
+    @media screen and (min-width: 992px) {
+        bottom: -1rem;
+    }
+
     &.active {
         pointer-events: auto;
 

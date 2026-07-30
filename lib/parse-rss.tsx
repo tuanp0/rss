@@ -436,7 +436,7 @@ export async function parseRSSFeed(
     concurrency?: number;
   } = {}
 ): Promise<{ posts: RSSPost[] }> {
-  const { maxFullContent = 20, parallel = true, concurrency = 3 } = options;
+  const { maxFullContent = 15, parallel = false, concurrency = 2 } = options;
 
   const best = await fetchBestFeed(url);
   const rawPosts = extractRawPosts(best).slice(0, maxFullContent);
@@ -469,7 +469,7 @@ export async function parseRSSFeed(
     for (const raw of rawPosts) {
       posts.push(await buildPost(raw));
       // Small delay — be a polite scraper
-      await new Promise((r) => setTimeout(r, 200));
+      await new Promise((r) => setTimeout(r, 300));
     }
   }
 

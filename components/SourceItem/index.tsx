@@ -14,29 +14,43 @@ interface SourceItemTypes {
 const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
   const { currentStep, setCurrentStep, currentSource, setCurrentSource, setCurrentNews, setShowDeleteLayer, setIsGroup, setIsSource, setSelectedSourceId, setSelectedSourceName } = useLayerContext()
 
-  const [touchStart, setTouchStart] = useState<number | null>(null)
-  const [touchEnd, setTouchEnd] = useState<number | null>(null)
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null)
+  const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(null)
   const [sourceSettings, setSourceSettings] = useState<boolean | false>(false)
   const minSwipeDistance = 20
+  const maxVerticalRatio = 0.3
 
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null)
-    setTouchStart(e.targetTouches[0].clientX)
+    setTouchStart({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY,
+    })
   }
 
   const onTouchMove = (e :React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX)
+    setTouchEnd({
+      x: e.targetTouches[0].clientX,
+      y: e.targetTouches[0].clientY,
+    })
   }
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return
-    const distance = touchStart - touchEnd
-    const isLeftSwipe = distance > minSwipeDistance
-    const isRightSwipe = distance < -minSwipeDistance
-    if(isRightSwipe) {
+    const distanceX = touchStart.x - touchEnd.x
+    const distanceY = touchStart.y - touchEnd.y
+    const absX = Math.abs(distanceX)
+    const absY = Math.abs(distanceY)
+
+    if (absY > absX * maxVerticalRatio) return
+
+    const isLeftSwipe = distanceX > minSwipeDistance
+    const isRightSwipe = distanceX < -minSwipeDistance
+
+    if (isRightSwipe) {
       setSourceSettings(true)
     }
-    if(isLeftSwipe) {
+    if (isLeftSwipe) {
       setSourceSettings(false)
     }
   }

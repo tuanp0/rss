@@ -49,6 +49,7 @@
         height: 28px;
         background: var(--white);
         pointer-events: none;
+        touch-action: none;
         border-radius: 3px;
 
         &Svg {
@@ -80,5 +81,6 @@
         white-space: nowrap;
         overflow: hidden;
         pointer-events: none;
+        touch-action: none;
     }
 }
