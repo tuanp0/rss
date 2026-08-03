@@ -20,10 +20,6 @@ const index = () => {
     return atob("aGVsbG9AdHVhbnBodW5nLmNvbQ==");
   };
 
-
-
-
-  // Get Cache Storage size (PWA app shell: precached JS/CSS/images/fonts)
   const getCacheStorageSize = async (): Promise<number> => {
     if (!('caches' in window)) return 0
 
@@ -46,8 +42,6 @@ const index = () => {
     return total
   }
 
-  // Get IndexedDB size, preferring the Chromium usageDetails breakdown,
-  // falling back to the total storage estimate on other browsers
   const getIndexedDBSize = async (): Promise<number> => {
     if (!('storage' in navigator) || !navigator.storage.estimate) return 0
 
@@ -57,7 +51,6 @@ const index = () => {
       return estimate.usageDetails.indexedDB
     }
 
-    // Fallback: not precise (includes caches too), but better than nothing
     return estimate.usage ?? 0
   }
 
@@ -80,12 +73,6 @@ const index = () => {
       loadSizes()
     }
   }, [showInformationsLayer])
-
-
-
-
-
-
 
   return (
     <div className={`${styles.layer} ${showInformationsLayer ? styles.active : ''}`} onClick={handleOverlayClick}>
