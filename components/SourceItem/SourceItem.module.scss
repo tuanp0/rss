@@ -83,4 +83,12 @@
         pointer-events: none;
         touch-action: none;
     }
+
+    &Count {
+        color: var(--text);
+        font-size: .75rem;
+        font-style: italic;
+        padding-left: 0.5rem;
+        opacity: .5;
+    }
 }

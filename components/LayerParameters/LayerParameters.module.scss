@@ -126,7 +126,9 @@
                 height: 100%;
                 top: 0;
                 right: 0;
-                mask-image: linear-gradient(to left, var(--background), transparent);
+                background: linear-gradient(to left, var(--layergradient), transparent);
+                pointer-events: none;
+                transition: background .4s ease-in-out;
             }
         }
 
@@ -142,10 +144,6 @@
             &Item {
                 cursor: pointer;
                 min-width: 90px;
-
-                &:last-child {
-                    margin-right: 30px;
-                }
 
                 &.active {
                     .layerContentParameterStyle {

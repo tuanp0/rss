@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState, useRef } from 'react'
-import { initDB, getSourcesByGroup } from '@/db/groups'
+import { initDB, getSourcesByGroup, getPostsCountBySource } from '@/db/groups'
 import { useLayerContext } from '@/context/LayerContext'
 import SourceItem from '@/components/SourceItem'
 
@@ -11,7 +11,8 @@ interface Source {
   groupId: number
   name: string
   url: string
-  favicon: string  
+  favicon: string
+  postsCount: number
 }
 
 interface SourcesTypes {
@@ -28,8 +29,14 @@ const SourceList = ({ onReady }: SourcesTypes) => {
 
   const fetchSources = (dbInstance: IDBDatabase) => {
     getSourcesByGroup(dbInstance, currentGroup)
-      .then((sources) => {
-        setSources(sources)
+      .then(async (sources) => {
+        const sourcesWithCounts = await Promise.all(
+          sources.map(async (source) => ({
+            ...source,
+            postsCount: await getPostsCountBySource(dbInstance, source.id)
+          }))
+        )
+        setSources(sourcesWithCounts)
         setLoading(false)
       })
       .catch(console.error)
@@ -105,6 +112,7 @@ const SourceList = ({ onReady }: SourcesTypes) => {
                 name={'Toutes les sources'}
                 icon={'star'}
                 sourceId={0}
+                postsCount={sources.reduce((sum, s) => sum + s.postsCount, 0)}
                 onDelete={() => db && fetchSources(db)}
               />
             </div>
@@ -114,6 +122,7 @@ const SourceList = ({ onReady }: SourcesTypes) => {
                 name={getSiteName(source.name)}
                 key={source.id}
                 sourceId={source.id}
+                postsCount={source.postsCount}
                 onDelete={() => db && fetchSources(db)}
               />
             ))}

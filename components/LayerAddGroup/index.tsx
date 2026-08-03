@@ -20,7 +20,7 @@ interface LayerTypes {
     onGroupAdded: () => void
 }
 
-const DAYS_LIMIT = 365
+const POSTS_LIMIT = 20
 
 const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
     const { currentStep, currentGroup } = useLayerContext()
@@ -100,7 +100,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
 
         setLoading(true)
         setError(null)
-        
+
         try {
             const { posts } = await parseRSSFeed(feed.href)
 
@@ -114,14 +114,13 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
             const savedSource = sources.find((s) => s.url === feed.href)
             if (!savedSource) throw new Error("Source introuvable après ajout.")
 
-            const cutoff = new Date()
-            cutoff.setDate(cutoff.getDate() - DAYS_LIMIT)
+            let count = 0
 
             for (const post of posts) {
-                const publishedDate = post.publishedAt ? new Date(post.publishedAt) : null
+                if (count >= POSTS_LIMIT) break
 
+                const publishedDate = post.publishedAt ? new Date(post.publishedAt) : null
                 if (!publishedDate || isNaN(publishedDate.getTime())) continue
-                if (publishedDate < cutoff) continue
 
                 try {
                     await addPost(
@@ -135,6 +134,7 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                         post.thumbnail,
                         publishedDate.toISOString()
                     )
+                    count++
                 } catch {
                     // Silently skip duplicate posts (same URL already stored)
                 }

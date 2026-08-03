@@ -8,17 +8,18 @@ interface SourceItemTypes {
     name: string
     icon?: string
     sourceId: number
+    postsCount: number
     onDelete: () => void
 }
 
-const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
+const index = ({name, icon, sourceId, postsCount, onDelete}:SourceItemTypes) => {
   const { currentStep, setCurrentStep, currentSource, setCurrentSource, setCurrentNews, setShowDeleteLayer, setIsGroup, setIsSource, setSelectedSourceId, setSelectedSourceName } = useLayerContext()
 
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null)
   const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(null)
   const [sourceSettings, setSourceSettings] = useState<boolean | false>(false)
   const minSwipeDistance = 20
-  const maxVerticalRatio = 0.3
+  const maxVerticalRatio = 0.2
 
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null)
@@ -107,6 +108,7 @@ const index = ({name, icon, sourceId, onDelete}:SourceItemTypes) => {
       <p className={styles.sourceItemName}>
           {new DOMParser().parseFromString(name, 'text/html').documentElement.textContent}
       </p>
+      <p className={styles.sourceItemCount}>{postsCount}</p>
     </div>
   )
 }

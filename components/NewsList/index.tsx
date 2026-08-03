@@ -16,7 +16,7 @@ const NewsList = () => {
   const [refreshingActive, setRefreshingActive] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [db, setDb] = useState<IDBDatabase | null>(null)
-  const minSwipeDistance = 100
+  const minSwipeDistance = 150
 
   const touchStartRef = useRef<number | null>(null)
   const newsRef = useRef<HTMLDivElement>(null)

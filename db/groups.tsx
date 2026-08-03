@@ -268,7 +268,7 @@ export const updateSource = (
 export const refreshSource = async (db: IDBDatabase, sourceId: number, groupId: number): Promise<void> => {
   const { parseRSSFeed } = await import('@/lib/parse-rss')
 
-  const DAYS_LIMIT = 15
+  const DAYS_LIMIT = 7
 
   const sources = await getSourcesByGroup(db, groupId)
   const source = sources.find(s => s.id === sourceId)
@@ -351,6 +351,18 @@ export const getPostsBySource = (db: IDBDatabase, sourceId: number): Promise<Pos
 
     getRequest.onsuccess = () => resolve(getRequest.result);
     getRequest.onerror = () => reject(getRequest.error);
+  });
+};
+
+export const getPostsCountBySource = (db: IDBDatabase, sourceId: number): Promise<number> => {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction('post', 'readonly');
+    const store = transaction.objectStore('post');
+    const index = store.index('sourceId');
+    const countRequest = index.count(sourceId);
+
+    countRequest.onsuccess = () => resolve(countRequest.result);
+    countRequest.onerror = () => reject(countRequest.error);
   });
 };
 

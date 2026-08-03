@@ -17,7 +17,7 @@ const GroupItem = ({ groupId, text, itemCount, onDelete }: GroupItemTypes) => {
   const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(null)
   const [groupSettings, setGroupSettings] = useState<boolean | false>(false)
   const minSwipeDistance = 20
-  const maxVerticalRatio = 0.3
+  const maxVerticalRatio = 0.2
 
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null)

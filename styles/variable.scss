@@ -64,6 +64,7 @@
   --text: rgba(220, 220, 220, 1);
   --hover: rgba(255, 255, 255, .1);
   --glass: rgba(19, 19, 19, 0.4);
+  --layergradient: #010101;
   --icons: rgba(255, 255, 255, 1);
 }
 
@@ -72,6 +73,7 @@
   --text: rgba(0, 0, 0, 1);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .3);
+  --layergradient: rgb(255, 255, 255);
   --icons: rgb(255, 255, 255);
 }
 
@@ -80,6 +82,7 @@
   --text: rgb(240, 240, 240);
   --hover: rgba(255, 255, 255, .1);
   --glass: rgba(19, 19, 19, 0.4);
+  --layergradient: rgb(34, 34, 34);
   --icons: rgba(255, 255, 255, 1);
 }
 
@@ -88,6 +91,7 @@
   --text: rgb(4, 34, 52);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .3);
+  --layergradient: rgb(226, 237, 243);
   --icons: rgb(255, 255, 255);
 }
 
@@ -96,6 +100,7 @@
   --text: rgb(55, 35, 4);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .3);
+  --layergradient: rgb(239, 237, 226);
   --icons: rgb(255, 255, 255);
 }
 
@@ -104,6 +109,7 @@
   --text: rgb(1, 29, 2);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .3);
+  --layergradient: #D5E1CB;
   --icons: rgb(255, 255, 255);
 }
 
@@ -112,6 +118,7 @@
   --text: rgb(229, 221, 199);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(0, 0, 0, .4);
+  --layergradient: #31271A;
   --icons: rgba(255, 255, 255, 1);
 }
 
@@ -120,5 +127,6 @@
   --text: rgb(227, 222, 207);
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(0, 0, 0, .4);
+  --layergradient: #19202D;
   --icons: rgba(255, 255, 255, 1);
 }
