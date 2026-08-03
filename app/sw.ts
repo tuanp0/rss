@@ -16,6 +16,10 @@ const serwist = new Serwist({
   skipWaiting: true,
   clientsClaim: true,
   navigationPreload: false,
+  precacheOptions: {
+    cleanupOutdatedCaches: true,
+    concurrency: 3,
+  },
   runtimeCaching: [
     {
       matcher: ({ request }) => request.destination === "document",

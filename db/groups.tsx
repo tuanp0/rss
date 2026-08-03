@@ -366,6 +366,39 @@ export const getPostsCountBySource = (db: IDBDatabase, sourceId: number): Promis
   });
 };
 
+// export const addPost = (
+//   db: IDBDatabase,
+//   groupId: number,
+//   sourceId: number,
+//   title: string,
+//   url: string,
+//   shortDesc: string,
+//   content: string,
+//   thumbnail: string | null,
+//   publishedAt: Date | string
+// ): Promise<void> => {
+//   return new Promise((resolve, reject) => {
+//     const transaction = db.transaction('post', 'readwrite');
+//     const store = transaction.objectStore('post');
+//     const index = store.index('url');
+
+//     const getExistingRequest = index.get(url);
+//     getExistingRequest.onsuccess = () => {
+//       if (getExistingRequest.result) {
+//         reject(new Error('Un post avec cette URL existe déjà'));
+//         return;
+//       }
+
+//       const addRequest = store.add({ groupId, sourceId, title, url, shortDesc, content, thumbnail, publishedAt });
+
+//       addRequest.onsuccess = () => resolve();
+//       addRequest.onerror = () => reject(addRequest.error);
+//     };
+
+//     getExistingRequest.onerror = () => reject(getExistingRequest.error);
+//   });
+// };
+
 export const addPost = (
   db: IDBDatabase,
   groupId: number,
@@ -374,28 +407,32 @@ export const addPost = (
   url: string,
   shortDesc: string,
   content: string,
-  thumbnail: string | null,
-  publishedAt: Date | string
+  thumbnail: string,
+  publishedAt: string
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction('post', 'readwrite');
     const store = transaction.objectStore('post');
-    const index = store.index('url');
+    const urlIndex = store.index('url');
 
-    const getExistingRequest = index.get(url);
-    getExistingRequest.onsuccess = () => {
-      if (getExistingRequest.result) {
-        reject(new Error('Un post avec cette URL existe déjà'));
+    const checkRequest = urlIndex.get(url);
+
+    checkRequest.onsuccess = () => {
+      const existingPost = checkRequest.result;
+
+      if (existingPost) {
+        resolve(); 
         return;
       }
 
-      const addRequest = store.add({ groupId, sourceId, title, url, shortDesc, content, thumbnail, publishedAt });
+      const postData = { groupId, sourceId, title, url, shortDesc, content, thumbnail, publishedAt };
+      const addRequest = store.add(postData);
 
       addRequest.onsuccess = () => resolve();
       addRequest.onerror = () => reject(addRequest.error);
     };
 
-    getExistingRequest.onerror = () => reject(getExistingRequest.error);
+    checkRequest.onerror = () => reject(checkRequest.error);
   });
 };
 

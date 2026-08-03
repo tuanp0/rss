@@ -101,18 +101,18 @@
         .container {
             padding: 1rem;
         }
-
-        &Title {
-            font-size: 1rem;
-            font-weight: bold;
-            color: var(--text);
-            margin-top: 0;
-            margin-bottom: 0.5rem;
-            display: block;
-        }
         
         p {
             font-size: .75rem;
+
+            &.layerContentTitle {
+                font-size: 1rem;
+                font-weight: bold;
+                color: var(--text);
+                margin-top: 0;
+                margin-bottom: 0.5rem;
+                display: block;
+            }
         }
 
         &Scroll {

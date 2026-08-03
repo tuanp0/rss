@@ -7,8 +7,8 @@ import styles from './LayerInformations.module.scss'
 
 const index = () => {
   const { currentStep, showInformationsLayer, setShowInformationsLayer } = useLayerContext()
-  const [appSize, setAppSize] = useState<number | null>(null)
-  const [indexedDBSize, setIndexedDBSize] = useState<number | null>(null)
+  const [appSize, setAppSize] = useState<string | null>(null)
+  const [indexedDBSize, setIndexedDBSize] = useState<string | null>(null)
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === e.currentTarget) {
@@ -46,12 +46,22 @@ const index = () => {
     if (!('storage' in navigator) || !navigator.storage.estimate) return 0
 
     const estimate: any = await navigator.storage.estimate()
-
     if (estimate.usageDetails?.indexedDB !== undefined) {
       return estimate.usageDetails.indexedDB
     }
 
     return estimate.usage ?? 0
+  }
+
+  function formatSize(bytes:number) {
+    const kb = bytes / 1024;
+    const mb = kb / 1024;
+
+    if (mb >= 1) {
+      return `${mb.toFixed(1)} MB`; // e.g. 1.2 MB
+    }
+
+    return `${Math.round(kb)} KB`; // e.g. 532 KB
   }
 
   useEffect(() => {
@@ -62,8 +72,8 @@ const index = () => {
           getIndexedDBSize(),
         ])
 
-        setAppSize(Math.round(cacheBytes / 1024))
-        setIndexedDBSize(Math.round(idbBytes / 1024))
+        setAppSize(formatSize(cacheBytes))
+        setIndexedDBSize(formatSize(idbBytes))
       } catch (err) {
         console.error('Failed to compute storage sizes', err)
       }
@@ -88,13 +98,13 @@ const index = () => {
         </div>
         <div className={styles.layerContent}>
           <Container className={styles.container}>
-            <div className={styles.layerContentData}>
+            {/* <div className={styles.layerContentData}>
               <p>
-                Application : {appSize}kb
+                Application : {appSize}
                 <br/>
-                Données : {indexedDBSize}kb
+                Données : {indexedDBSize}
               </p>
-            </div>
+            </div> */}
             <div className={styles.layerContentInformations}>
               <p>
                 Une <strong>application web légère et pratique</strong> pour rassembler toutes vos news et articles en un seul endroit.<br/>
@@ -109,7 +119,7 @@ const index = () => {
                 <i>Une version offline est en place pour pouvoir consulter les articles déjà chargés sans connexion internet.<br/>
                 Il suffit d'ajouter cette application web sur l'écran d'accueil de votre téléphone.</i>
               </p>
-              <h2>Tuan Phung</h2>
+              <p className={styles.layerContentTitle}>Tuan Phung</p>
               <p>
                 Site internet : <Link href={`https://tuanphung.com/`} title={`Visiter le portfolio`} target={`_blank`}>https://tuanphung.com/</Link><br/>
                 {/* Email : <a href={`mailto:${getEmail()}`} title={`Envoyer un mail`}>{getEmail()}</a> */}

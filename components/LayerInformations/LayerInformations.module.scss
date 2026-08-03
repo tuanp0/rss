@@ -124,18 +124,19 @@
             }
         }
         
-        h2 {
-            font-size: 1.25rem;
-            line-height: 1.25;
-            color: var(--text);
-            margin-top: 0;
-        }
-        
         p {
             font-size: 1rem;
             color: var(--text);
             margin-bottom: 1.25rem;
             word-wrap: break-word;
+
+            &.layerContentTitle {
+                font-size: 1.25rem;
+                line-height: 1.25;
+                font-weight: bold;
+                color: var(--text);
+                margin-top: 0;
+            }
 
             &:last-child {
                 margin-bottom: 0;

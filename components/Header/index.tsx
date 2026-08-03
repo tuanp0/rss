@@ -102,7 +102,7 @@ const Header = () => {
       <div className={styles.headerContent}>
         <Container className={styles.headerContainer}>
           <div className={`${styles.headerButton}`}></div>
-          <p className={`${styles.headerTitle}`}>
+          <div className={`${styles.headerTitle}`}>
             <span className={`
               ${styles.headerTitleSpan}
               ${currentStep === 1 ? styles.active : ''}
@@ -110,7 +110,7 @@ const Header = () => {
               ${groupIsPastHeader ? styles.scrolled : ''}
             `}>
               <img src={`./tpreader-logo.webp`} alt={`Logo TP Reader`} className={styles.headerTitleLogo} width={42} height={31} />
-              <span className={`${styles.headerTitleText}`}>TP Reader</span>
+              <h1 className={`${styles.headerTitleText}`}>TP Reader</h1>
             </span>
             <span className={`
               ${styles.headerTitleSpan}
@@ -173,7 +173,7 @@ const Header = () => {
                 null
               }
             </span>
-          </p>
+          </div>
 
           <div className={`
             ${styles.headerOffline}

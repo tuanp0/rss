@@ -53,6 +53,11 @@
             }
         }
 
+        &Text {
+            font-size: inherit;
+            margin: 0;
+        }
+
         &Span {
             font-size: 1.625rem;
             line-height: 1.5;
