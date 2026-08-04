@@ -16,12 +16,8 @@
 
 @font-face {
     font-family: 'Gabriela';
-    src: url('fonts/Gabriela-Regular.eot');
-    src: url('fonts/Gabriela-Regular.eot?#iefix') format('embedded-opentype'),
-        url('fonts/Gabriela-Regular.woff2') format('woff2'),
-        url('fonts/Gabriela-Regular.woff') format('woff'),
-        url('fonts/Gabriela-Regular.ttf') format('truetype'),
-        url('fonts/Gabriela-Regular.svg#Gabriela-Regular') format('svg');
+    src: url('fonts/Gabriela-Regular.woff2') format('woff2'),
+        url('fonts/Gabriela-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -29,12 +25,8 @@
 
 @font-face {
     font-family: 'Courier Prime';
-    src: url('fonts/CourierPrime-Italic.eot');
-    src: url('fonts/CourierPrime-Italic.eot?#iefix') format('embedded-opentype'),
-        url('fonts/CourierPrime-Italic.woff2') format('woff2'),
-        url('fonts/CourierPrime-Italic.woff') format('woff'),
-        url('fonts/CourierPrime-Italic.ttf') format('truetype'),
-        url('fonts/CourierPrime-Italic.svg#CourierPrime-Italic') format('svg');
+    src: url('fonts/CourierPrime-Italic.woff2') format('woff2'),
+        url('fonts/CourierPrime-Italic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
@@ -42,12 +34,8 @@
 
 @font-face {
     font-family: 'Courier Prime';
-    src: url('fonts/CourierPrime-Bold.eot');
-    src: url('fonts/CourierPrime-Bold.eot?#iefix') format('embedded-opentype'),
-        url('fonts/CourierPrime-Bold.woff2') format('woff2'),
-        url('fonts/CourierPrime-Bold.woff') format('woff'),
-        url('fonts/CourierPrime-Bold.ttf') format('truetype'),
-        url('fonts/CourierPrime-Bold.svg#CourierPrime-Bold') format('svg');
+    src: url('fonts/CourierPrime-Bold.woff2') format('woff2'),
+        url('fonts/CourierPrime-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -55,12 +43,8 @@
 
 @font-face {
     font-family: 'Courier Prime';
-    src: url('fonts/CourierPrime-BoldItalic.eot');
-    src: url('fonts/CourierPrime-BoldItalic.eot?#iefix') format('embedded-opentype'),
-        url('fonts/CourierPrime-BoldItalic.woff2') format('woff2'),
-        url('fonts/CourierPrime-BoldItalic.woff') format('woff'),
-        url('fonts/CourierPrime-BoldItalic.ttf') format('truetype'),
-        url('fonts/CourierPrime-BoldItalic.svg#CourierPrime-BoldItalic') format('svg');
+    src: url('fonts/CourierPrime-BoldItalic.woff2') format('woff2'),
+        url('fonts/CourierPrime-BoldItalic.woff') format('woff');
     font-weight: bold;
     font-style: italic;
     font-display: swap;
@@ -68,12 +52,8 @@
 
 @font-face {
     font-family: 'Courier Prime';
-    src: url('fonts/CourierPrime-Regular.eot');
-    src: url('fonts/CourierPrime-Regular.eot?#iefix') format('embedded-opentype'),
-        url('fonts/CourierPrime-Regular.woff2') format('woff2'),
-        url('fonts/CourierPrime-Regular.woff') format('woff'),
-        url('fonts/CourierPrime-Regular.ttf') format('truetype'),
-        url('fonts/CourierPrime-Regular.svg#CourierPrime-Regular') format('svg');
+    src: url('fonts/CourierPrime-Regular.woff2') format('woff2'),
+        url('fonts/CourierPrime-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -81,12 +61,8 @@
 
 @font-face {
     font-family: 'JMH Typewriter';
-    src: url('fonts/JMHTypewriter-Regular.eot');
-    src: url('fonts/JMHTypewriter-Regular.eot?#iefix') format('embedded-opentype'),
-        url('fonts/JMHTypewriter-Regular.woff2') format('woff2'),
-        url('fonts/JMHTypewriter-Regular.woff') format('woff'),
-        url('fonts/JMHTypewriter-Regular.ttf') format('truetype'),
-        url('fonts/JMHTypewriter-Regular.svg#JMHTypewriter-Regular') format('svg');
+    src: url('fonts/JMHTypewriter-Regular.woff2') format('woff2'),
+        url('fonts/JMHTypewriter-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
@@ -94,12 +70,8 @@
 
 @font-face {
     font-family: 'JMH Typewriter';
-    src: url('fonts/JMHTypewriter-Bold.eot');
-    src: url('fonts/JMHTypewriter-Bold.eot?#iefix') format('embedded-opentype'),
-        url('fonts/JMHTypewriter-Bold.woff2') format('woff2'),
-        url('fonts/JMHTypewriter-Bold.woff') format('woff'),
-        url('fonts/JMHTypewriter-Bold.ttf') format('truetype'),
-        url('fonts/JMHTypewriter-Bold.svg#JMHTypewriter-Bold') format('svg');
+    src: url('fonts/JMHTypewriter-Bold.woff2') format('woff2'),
+        url('fonts/JMHTypewriter-Bold.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
@@ -107,18 +79,12 @@
 
 @font-face {
     font-family: 'Gloria Hallelujah';
-    src: url('fonts/GloriaHallelujah.eot');
-    src: url('fonts/GloriaHallelujah.eot?#iefix') format('embedded-opentype'),
-        url('fonts/GloriaHallelujah.woff2') format('woff2'),
-        url('fonts/GloriaHallelujah.woff') format('woff'),
-        url('fonts/GloriaHallelujah.ttf') format('truetype');
+    src: url('fonts/GloriaHallelujah.woff2') format('woff2'),
+        url('fonts/GloriaHallelujah.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
-
-
-
 
 @mixin roboto($weight:400) {
     font-family: 'Roboto', Arial, sans-serif;

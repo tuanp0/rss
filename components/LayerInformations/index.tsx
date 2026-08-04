@@ -43,25 +43,75 @@ const index = () => {
   }
 
   const getIndexedDBSize = async (): Promise<number> => {
-    if (!('storage' in navigator) || !navigator.storage.estimate) return 0
+    const databases = await indexedDB.databases();
 
-    const estimate: any = await navigator.storage.estimate()
-    if (estimate.usageDetails?.indexedDB !== undefined) {
-      return estimate.usageDetails.indexedDB
+    if (!databases.length) {
+      console.log("No IndexedDB databases found.");
+      return 0;
     }
 
-    return estimate.usage ?? 0
-  }
+    let grandTotal = 0;
+
+    for (const { name } of databases) {
+      if (!name) continue;
+
+      const db = await new Promise<IDBDatabase>((resolve, reject) => {
+        const req = indexedDB.open(name);
+        req.onsuccess = () => resolve(req.result);
+        req.onerror = () => reject(req.error);
+      });
+
+      for (const storeName of db.objectStoreNames) {
+        const tx = db.transaction(storeName, "readonly");
+        const store = tx.objectStore(storeName);
+
+        await new Promise<void>((resolve, reject) => {
+          const req = store.openCursor();
+
+          req.onsuccess = (e) => {
+            const cursor = (e.target as IDBRequest<IDBCursorWithValue | null>).result;
+
+            if (!cursor) {
+              resolve();
+              return;
+            }
+
+            const value = cursor.value;
+
+            try {
+              if (value instanceof Blob) {
+                grandTotal += value.size;
+              } else if (value instanceof ArrayBuffer) {
+                grandTotal += value.byteLength;
+              } else if (ArrayBuffer.isView(value)) {
+                grandTotal += value.byteLength;
+              } else {
+                grandTotal += new Blob([JSON.stringify(value)]).size;
+              }
+            } catch {}
+
+            cursor.continue();
+          };
+
+          req.onerror = () => reject(req.error);
+        });
+      }
+
+      db.close();
+    }
+
+    return grandTotal;
+  };
 
   function formatSize(bytes:number) {
     const kb = bytes / 1024;
     const mb = kb / 1024;
 
     if (mb >= 1) {
-      return `${mb.toFixed(1)} MB`; // e.g. 1.2 MB
+      return `${mb.toFixed(2)} MB`;
     }
 
-    return `${Math.round(kb)} KB`; // e.g. 532 KB
+    return `${Math.round(kb)} KB`;
   }
 
   useEffect(() => {
@@ -98,13 +148,13 @@ const index = () => {
         </div>
         <div className={styles.layerContent}>
           <Container className={styles.container}>
-            {/* <div className={styles.layerContentData}>
+            <div className={styles.layerContentData}>
               <p>
-                Application : {appSize}
-                <br/>
-                Données : {indexedDBSize}
+                {/* App Cache : {appSize}
+                <br/> */}
+                Données sur device : {indexedDBSize}
               </p>
-            </div> */}
+            </div>
             <div className={styles.layerContentInformations}>
               <p>
                 Une <strong>application web légère et pratique</strong> pour rassembler toutes vos news et articles en un seul endroit.<br/>

@@ -1,5 +1,5 @@
 const DB_NAME = 'tprssDB';
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 
 export const initDB = (): Promise<IDBDatabase> => {
   return new Promise((resolve, reject) => {
@@ -12,6 +12,8 @@ export const initDB = (): Promise<IDBDatabase> => {
 
     request.onupgradeneeded = (event) => {
       const db = (event.target as IDBOpenDBRequest).result;
+      const transaction = (event.target as IDBOpenDBRequest).transaction!;
+      const oldVersion = event.oldVersion;
 
       if (!db.objectStoreNames.contains('group')) {
         const groupsStore = db.createObjectStore('group', { keyPath: 'id', autoIncrement: true });
@@ -32,6 +34,26 @@ export const initDB = (): Promise<IDBDatabase> => {
 
       if (!db.objectStoreNames.contains('theme')) {
         db.createObjectStore('theme', { keyPath: 'id' });
+      }
+
+      // ─── Migration: backfill `read` on existing posts ───
+      if (oldVersion < 2) {
+        const postStore = transaction.objectStore('post');
+        const cursorRequest = postStore.openCursor();
+
+        cursorRequest.onsuccess = () => {
+          const cursor = cursorRequest.result;
+          if (cursor) {
+            const post = cursor.value;
+            if (post.readStatus === undefined) {
+              post.readStatus = 0;
+              cursor.update(post);
+            }
+            cursor.continue();
+          }
+        };
+
+        cursorRequest.onerror = () => reject(cursorRequest.error);
       }
     };
 
@@ -285,7 +307,7 @@ export const refreshSource = async (db: IDBDatabase, sourceId: number, groupId: 
     if (publishedDate < cutoff) continue
 
     try {
-      await addPost(db, groupId, sourceId, post.title, post.postUrl, post.shortDesc, post.content, post.thumbnail, publishedDate.toISOString())
+      await addPost(db, groupId, sourceId, post.title, post.postUrl, post.shortDesc, post.content, post.thumbnail, publishedDate.toISOString(), 0)
     } catch (err) {}
   }
 }
@@ -317,6 +339,7 @@ export interface Post {
   content: string
   thumbnail: string
   publishedAt: Date | string
+  readStatus: number
 }
 
 export const getPosts = (db: IDBDatabase): Promise<Post[]> => {
@@ -408,7 +431,8 @@ export const addPost = (
   shortDesc: string,
   content: string,
   thumbnail: string,
-  publishedAt: string
+  publishedAt: string,
+  readStatus: number
 ): Promise<void> => {
   return new Promise((resolve, reject) => {
     const transaction = db.transaction('post', 'readwrite');
@@ -425,7 +449,7 @@ export const addPost = (
         return;
       }
 
-      const postData = { groupId, sourceId, title, url, shortDesc, content, thumbnail, publishedAt };
+      const postData = { groupId, sourceId, title, url, shortDesc, content, thumbnail, publishedAt, readStatus };
       const addRequest = store.add(postData);
 
       addRequest.onsuccess = () => resolve();
@@ -433,6 +457,38 @@ export const addPost = (
     };
 
     checkRequest.onerror = () => reject(checkRequest.error);
+  });
+};
+
+export const setPostReadStatus = (
+  db: IDBDatabase,
+  id: number,
+  status: 0 | 1 | 2
+): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction('post', 'readwrite');
+    const store = transaction.objectStore('post');
+
+    const getRequest = store.get(id);
+
+    getRequest.onsuccess = () => {
+      const existing: Post = getRequest.result;
+      if (!existing) {
+        reject(new Error('Post introuvable'));
+        return;
+      }
+
+      if ((existing as any).readStatus >= status) {
+        resolve();
+        return;
+      }
+
+      const putRequest = store.put({ ...existing, readStatus: status });
+      putRequest.onsuccess = () => resolve();
+      putRequest.onerror = () => reject(putRequest.error);
+    };
+
+    getRequest.onerror = () => reject(getRequest.error);
   });
 };
 

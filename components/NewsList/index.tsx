@@ -14,7 +14,7 @@ const NewsList = () => {
   const [touchEnd, setTouchEnd] = useState<number | null>(null)
   const [refreshHeight, setRefreshHeight] = useState<number | null>(0)
   const [refreshingActive, setRefreshingActive] = useState(false)
-  const [refreshing, setRefreshing] = useState(false)
+  const [refreshing, setRefreshing] = useState<boolean | false>(false)
   const [db, setDb] = useState<IDBDatabase | null>(null)
   const minSwipeDistance = 150
 
@@ -136,6 +136,10 @@ const NewsList = () => {
     fetchData()
   }, [db, currentGroup, currentSource, refreshTrigger])
 
+  useEffect(() => {
+    if(currentStep === 3) triggerRefresh()
+  }, [currentStep])
+
   const groupPostsByDate = (posts: Post[]) => {
     return posts.reduce((groups: Record<string, Post[]>, post) => {
       const dateKey = new Date(post.publishedAt).toLocaleDateString('fr-FR', {
@@ -194,8 +198,10 @@ const NewsList = () => {
                   publishedAt={post.publishedAt}
                   post={post}
                   newsId={post.id}
+                  readStatus={post.readStatus}
                 />
-              ))}
+                )
+              )}
             </div>
           ))}
         </div>

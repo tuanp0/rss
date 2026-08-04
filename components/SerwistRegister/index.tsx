@@ -9,7 +9,6 @@ export default function SerwistRegister() {
           const newSW = reg.installing
           newSW?.addEventListener("statechange", () => {
             if (newSW.state === "installed" && navigator.serviceWorker.controller) {
-              // show a toast/banner here
               console.log("New version available — reload to update")
             }
           })

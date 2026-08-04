@@ -14,6 +14,7 @@ interface NewsItemTypes {
   publishedAt: Date | string
   post: Post
   newsId: number
+  readStatus: number
 }
 
 const NewsItem = ({
@@ -24,7 +25,8 @@ const NewsItem = ({
   publishedAt,
   thumbnail,
   post,
-  newsId
+  newsId,
+  readStatus
 }: NewsItemTypes) => {
   const { currentStep, setCurrentStep, currentSource, currentNews, setCurrentNews, setCurrentNewsObject } = useLayerContext()
 
@@ -50,31 +52,39 @@ const NewsItem = ({
     title.slice(0, 1)
 
   const truncate = (text: string, maxWidth: number): string => {
-      let width = 0
-      let result = ''
-  
-      for (const char of text) {
-        const code = char.codePointAt(0) ?? 0
-        const isFullWidth = (
-          (code >= 0x1100 && code <= 0x115F) ||
-          (code >= 0x2E80 && code <= 0x303F) ||
-          (code >= 0x3040 && code <= 0x33FF) ||
-          (code >= 0xAC00 && code <= 0xD7AF) ||
-          (code >= 0xF900 && code <= 0xFAFF) ||
-          (code >= 0xFF01 && code <= 0xFF60) ||
-          (code >= 0xFFE0 && code <= 0xFFE6) ||
-          (code >= 0x20000 && code <= 0x2FA1F)
-        )
-        width += isFullWidth ? 2 : 1
-        if (width > maxWidth) return result + '...'
-        result += char
-      }
-  
-      return result
+    let width = 0
+    let result = ''
+
+    for (const char of text) {
+      const code = char.codePointAt(0) ?? 0
+      const isFullWidth = (
+        (code >= 0x1100 && code <= 0x115F) ||
+        (code >= 0x2E80 && code <= 0x303F) ||
+        (code >= 0x3040 && code <= 0x33FF) ||
+        (code >= 0xAC00 && code <= 0xD7AF) ||
+        (code >= 0xF900 && code <= 0xFAFF) ||
+        (code >= 0xFF01 && code <= 0xFF60) ||
+        (code >= 0xFFE0 && code <= 0xFFE6) ||
+        (code >= 0x20000 && code <= 0x2FA1F)
+      )
+      width += isFullWidth ? 2 : 1
+      if (width > maxWidth) return result + '...'
+      result += char
     }
 
+    return result
+  }
+
   return (
-    <div className={`${styles.newsItem} ${newsId === currentNews && currentStep >= 4 ? styles.active : ''}`} onClick={handleNextStep}>
+    <div
+      className={`
+        ${styles.newsItem}
+        ${newsId === currentNews && currentStep >= 4 ? styles.active : ''}
+        ${readStatus === 1 ? styles.reading : ''}
+        ${readStatus === 2 ? styles.finished : ''}
+      `}
+      onClick={handleNextStep}
+    >
       <Container className={styles.container}>
         <div className={styles.newsItemThumbnail}>
           {thumbnail ? (

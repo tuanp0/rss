@@ -1,11 +1,14 @@
-import React, {useEffect, useRef} from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import { initDB, setPostReadStatus } from '@/db/groups'
 import { useLayerContext } from '@/context/LayerContext'
 
 import styles from './PostItem.module.scss'
 
 const index = () => {
-  const { currentStep, setCurrentStep, currentNewsObject, activeFont, showParametersLayer, showInformationsLayer } = useLayerContext()
+  const { currentStep, setCurrentStep, currentNewsObject, activeFont, showParametersLayer, showInformationsLayer, triggerRefresh } = useLayerContext()
   const postRef = useRef<HTMLDivElement>(null);
+  const [progressNews, setProgressNews]= useState<number | 0>(0)
+  const hasMarkedFullyRead = useRef(false);
 
   const getSiteName = (url: string): string => {
     try {
@@ -29,7 +32,43 @@ const index = () => {
   : ''
 
   useEffect(() => {
-    postRef.current?.scrollTo(0,0)
+    setTimeout(() => {
+      postRef.current?.scrollTo(0, 0)
+    }, 10)
+
+    hasMarkedFullyRead.current = false
+
+    if (currentNewsObject?.id != null && currentNewsObject?.readStatus != 2) {
+      initDB()
+        .then((db) => setPostReadStatus(db, currentNewsObject.id, 1))
+        .catch((err) => console.error('Failed to mark post as opened', err))
+    }
+  }, [currentNewsObject])
+
+  const handleScroll = useCallback(() => {
+    if (!postRef.current || !currentNewsObject?.id) return
+
+    const el = postRef.current
+    const maxScroll = el.scrollHeight - el.clientHeight
+
+    if (maxScroll <= 0) {
+      hasMarkedFullyRead.current = true
+      initDB()
+        .then((db) => setPostReadStatus(db, currentNewsObject.id, 2))
+        .catch((err) => console.error('Failed to mark post as fully read', err))
+      return
+    }
+
+    const progress = Math.min((el.scrollTop / maxScroll) * 100 + 2, 100)
+    setProgressNews(progress)
+    const reachedEnd = progress >= 100
+
+    if (reachedEnd) {
+      hasMarkedFullyRead.current = true
+      initDB()
+        .then((db) => setPostReadStatus(db, currentNewsObject.id, 2))
+        .catch((err) => console.error('Failed to mark post as fully read', err))
+    }
   }, [currentNewsObject])
 
   return (
@@ -41,10 +80,14 @@ const index = () => {
       `}
       data-scroll="post"
       ref={postRef}
+      onScroll={handleScroll}
     >
       {currentNewsObject &&
         <div className={styles.postItemInner}>
-          <span className={styles.postItemPrev} onClick={() => setCurrentStep(3)}></span>
+          <span className={styles.postItemPrev}
+            onClick={() => {
+              setCurrentStep(3)
+            }}></span>
           <div className={styles.postItemSource}>{getSiteName(currentNewsObject ? currentNewsObject.url : '')}</div>
           <div
             className={`
@@ -101,8 +144,13 @@ const index = () => {
               dangerouslySetInnerHTML={{ __html: currentNewsObject ? currentNewsObject.content.replace(']]>', '').trim() : '' }}
             />
           {/* } */}
+          
         </div>
+        
       }
+      <div className={styles.postItemBar}>
+        <span style={{ width: `${progressNews}%` }}></span>
+      </div>
     </section>
   )
 }

@@ -132,7 +132,8 @@ const index = ({ showAddLayer, setShowAddLayer, onGroupAdded }: LayerTypes) => {
                         post.shortDesc,
                         post.content,
                         post.thumbnail,
-                        publishedDate.toISOString()
+                        publishedDate.toISOString(),
+                        0
                     )
                     count++
                 } catch {

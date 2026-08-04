@@ -12,11 +12,11 @@ const Header = () => {
   const { currentStep, selectedGroupName, selectedSourceName, location, offlineIcon, setOfflineIcon, offlineAlert} = useLayerContext()
 
   const [weather, setWeather] = useState<WeatherData | null>(null)
-  const [error, setError] = useState("")
-  const [groupIsPastHeader, setGroupIsPastHeader] = useState(false)
-  const [sourceIsPastHeader, setSourceIsPastHeader] = useState(false)
-  const [newsIsPastHeader, setNewsIsPastHeader] = useState(false)
-  const [postIsPastHeader, setPostIsPastHeader] = useState(false)
+  const [error, setError] = useState<string | ''>('')
+  const [groupIsPastHeader, setGroupIsPastHeader] = useState<boolean | false>(false)
+  const [sourceIsPastHeader, setSourceIsPastHeader] = useState<boolean | false>(false)
+  const [newsIsPastHeader, setNewsIsPastHeader] = useState<boolean | false>(false)
+  const [postIsPastHeader, setPostIsPastHeader] = useState<boolean | false>(false)
   const headerTopRef = useRef<number>(0)
 
   const truncate = (text: string, maxWidth: number): string => {

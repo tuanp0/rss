@@ -19,9 +19,9 @@ const index = () => {
     setOfflineAlert
   } = useLayerContext()
 
-  const [refreshing, setRefreshing] = useState(false)
-  const [feedRefreshed, setFeedRefreshed] = useState(false)
-  const [urlCopied, setUrlCopied] = useState(false)
+  const [refreshing, setRefreshing] = useState<boolean>(false)
+  const [feedRefreshed, setFeedRefreshed] = useState<boolean>(false)
+  const [urlCopied, setUrlCopied] = useState<boolean>(false)
 
   const showOfflineBanner = () => {
     setOfflineAlert(true)

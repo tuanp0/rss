@@ -97,7 +97,7 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
     if (!("serviceWorker" in navigator)) return
 
     navigator.serviceWorker.addEventListener("controllerchange", () => {
-      if (confirm("Une nouvelle version est disponible !\nRecharger la page ?")) {
+      if (confirm("Une nouvelle version est disponible. \nRecharger la page ?")) {
         navigator.serviceWorker.ready.then(() => {
           window.location.href = window.location.href
         })

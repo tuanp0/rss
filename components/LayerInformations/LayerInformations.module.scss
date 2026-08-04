@@ -102,7 +102,7 @@
         }
 
         &Data {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
         }
 
         &Informations {
@@ -136,6 +136,7 @@
                 font-weight: bold;
                 color: var(--text);
                 margin-top: 0;
+                margin-bottom: .5rem;
             }
 
             &:last-child {

@@ -1,6 +1,12 @@
 @use '../../styles/animation.scss' as *;
 @use '../../styles/mixin.scss' as *;
 
+@property --fade-color {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: transparent;
+}
+
 .layer {
     position: fixed;
     width: 100%;
@@ -23,7 +29,7 @@
         left: 0.75rem;
         bottom: 3.5rem;
         border-radius: 24px;
-        background: var(--glass);
+        // background: var(--glass);
         -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
         transform: scale(0);
@@ -101,18 +107,14 @@
         .container {
             padding: 1rem;
         }
-        
-        p {
-            font-size: .75rem;
 
-            &.layerContentTitle {
-                font-size: 1rem;
-                font-weight: bold;
-                color: var(--text);
-                margin-top: 0;
-                margin-bottom: 0.5rem;
-                display: block;
-            }
+        &Title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: var(--text);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            display: block;
         }
 
         &Scroll {
@@ -120,15 +122,17 @@
             margin-bottom: 1rem;
 
             &::after {
+                --fade-color: var(--layergradient);
+                
                 position: absolute;
                 content: '';
                 width: 30px;
                 height: 100%;
                 top: 0;
                 right: 0;
-                background: linear-gradient(to left, var(--layergradient), transparent);
+                background: linear-gradient(to left, var(--fade-color), transparent);
                 pointer-events: none;
-                transition: background .4s ease-in-out;
+                transition: --fade-color .8s ease-in-out;
             }
         }
 
@@ -145,6 +149,10 @@
                 cursor: pointer;
                 min-width: 90px;
 
+                &:last-child {
+                    margin-right: 30px;
+                }
+
                 &.active {
                     .layerContentParameterStyle {
                         border: 2px solid var(--text);
@@ -155,8 +163,6 @@
                     }
                 }
             }
-
-            
 
             &Style {
                 @include background();
