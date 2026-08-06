@@ -8,10 +8,15 @@ import Container from '@/components/Container'
 
 import styles from "./Footer.module.scss"
 
-const index = () => {
+interface FooterProps {
+  setShowParametersLayer: (value: boolean) => void
+  setShowInformationsLayer: (value: boolean) => void
+}
+
+const index = ({setShowParametersLayer, setShowInformationsLayer}:FooterProps) => {
   const {
     currentStep, setCurrentStep,
-    setShowAddLayer, setShowDeleteLayer, setShowParametersLayer, setShowInformationsLayer,
+    setShowAddLayer, setShowDeleteLayer,
     currentGroup,
     currentSource,
     currentNewsObject,
@@ -195,14 +200,14 @@ const index = () => {
           <div className={styles.footerAction}>
             {currentStep === 1 && <Button text="Ajouter une catégorie" action={() => setShowAddLayer(true)} icon={'add'} shadowInner />}
             {currentStep === 2 && <Button text="Ajouter une source" action={handleAddLayer} icon={'add'} shadowInner />}
-            {/* {currentStep === 3 && (
+            {currentStep === 3 && (
               !feedRefreshed ? (
                 <Button text="Rafraîchir la liste" action={handleRefresh} icon={'refresh'} isRefreshing={refreshing} shadowInner />
               ) : (
                   <Button text="Liste rafraîchie" icon={'check'} />
               )
               
-            )} */}
+            )}
             {currentStep === 4 && (
               !urlCopied ? (
                 <Button text="Partager ce post" action={copyClipboard} icon={'share'} />

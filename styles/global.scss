@@ -16,6 +16,10 @@ body {
 
   @media screen and (min-width:992px) {
     display: flex;
+    flex-wrap: wrap;
+    // background: url('/desktop-bg.jpg');
+    // background-size: cover;
+    // background-repeat: none;
   }
 }
 

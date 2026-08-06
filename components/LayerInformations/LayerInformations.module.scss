@@ -20,24 +20,25 @@
         position: absolute;
         width: calc(100% - 1.5rem);
         left: 0.75rem;
-        bottom: 3.5rem;
+        bottom: 4.5rem;
         border-radius: 24px;
         -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
         transform: scale(0);
         transform-origin: 10rem 100%;
-        transition: bottom .15s ease-in-out, background .4s ease-in-out, transform .2s ease-in-out;
+        transition: bottom .1s ease-in-out, background .4s ease-in-out, transform .2s ease-in-out;
         z-index: 11;
         overflow: hidden;
 
-        &.step2up {
+        &.open {
             transform-origin: 14rem 100%;
         }
 
         .active & {
             bottom: 5.5rem;
             transform: scale(1);
-            animation: popTransform .4s ease-in-out;
+            // transition: bottom .1s ease-in-out, background .4s ease-in-out, transform .2s ease-in-out;
+            animation: popTransform .25s ease-in-out;
         }
 
         @media screen and (min-width: 992px) {

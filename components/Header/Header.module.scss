@@ -6,6 +6,10 @@
     width: 100%;
     top: 0;
     z-index: 1;
+
+    @media screen and (min-width:992px) {
+        position: static;
+    }
     
     &Container {
         position: relative;
@@ -27,7 +31,7 @@
 
     &Button {
         position: relative;
-        width: 52px;
+        width: 42px;
     }
 
     &Title {
@@ -130,16 +134,15 @@
                 }
 
                 &Infos {
-                    font-size: .875rem;
+                    font-size: .75rem;
                     display: flex;
                     align-items: center;
-                    gap: 1.25rem;
+                    gap: .5rem;
                     transition: font-size .4s ease-in-out, gap .4s ease-in-out;
 
                     .scrolled & {
                         @media screen and (max-width: 991px) {
-                            font-size: .75rem;
-                            gap: .875rem;
+                            font-size: .625rem;
                         }
                     }
 
@@ -183,6 +186,10 @@
                     opacity: .7;
                     transition: font-size .4s ease-in-out;
 
+                    .scrolled & {
+                        font-size: .5rem;
+                    }
+
                     @media screen and (min-width: 992px) {
                         font-size: .75rem;
                     }
@@ -193,7 +200,7 @@
 
     &Offline {
         position: relative;
-        width: 52px;
+        width: 42px;
         text-align: right;
         color: var(--text);
         padding: .25rem;

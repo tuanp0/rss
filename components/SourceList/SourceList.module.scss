@@ -33,8 +33,9 @@
         overflow: hidden;
 
         @media screen and (min-width:992px) {
-            width: 210px;
+            width: 140px;
             transform: translate(0);
+            overflow-y: auto;
         }
     }
 
@@ -42,10 +43,8 @@
         position: relative;
         width: 300px;
         height: calc(100vh - var(--headerTop));
-        padding-top: 2.5rem;
-        margin-top: var(--headerTop);
+        padding-top: 1.25rem;
         transform: translate(0);
-        box-shadow: 0 0 10px 0 var(--black20);
 
         &:hover {
             width: 300px

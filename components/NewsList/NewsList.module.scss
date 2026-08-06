@@ -9,7 +9,7 @@
     width: 100%;
     height: 100vh;
     height: 100dvh;
-    padding-top: calc(var(--headerTop) - .5rem);
+    padding-top: calc(var(--headerTop) + .75rem);
     padding-bottom: 6rem;
     transform: translateX(calc(100% + 10px));
     transition: transform .3s cubic-bezier(0.4, 0, 0.3, 1), background .8s ease-in-out, opacity .2s ease-in-out;
@@ -38,6 +38,7 @@
         @media screen and (min-width:992px) {
             transform: translate(0);
             opacity: 1;
+            overflow-y: auto;
         }
     }
 
@@ -45,10 +46,8 @@
         position: relative;
         width: 320px;
         height: calc(100vh - var(--headerTop));
-        padding-top: 2rem;
-        margin-top: var(--headerTop);
+        padding-top: 1.25rem;
         transform: translate(0);
-        box-shadow: 0 0 10px 0 var(--black20);
     }
 
     &Text {
@@ -104,6 +103,7 @@
 
         &>div {
             pointer-events: none;
+            margin-bottom: 1.5rem;
 
             &:nth-child(-n+16) {
                 margin-top: 120px;
@@ -148,7 +148,7 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: .5px;
-            padding: .875rem 0 .25rem .375rem;
+            padding: 0 0 .25rem .375rem;
 
             p {
                 position: relative;

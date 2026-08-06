@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { initDB, setPostReadStatus } from '@/db/groups'
 import { useLayerContext } from '@/context/LayerContext'
+import ProgressBar from '@/components/ProgressBar'
 
 import styles from './PostItem.module.scss'
 
 const index = () => {
-  const { currentStep, setCurrentStep, currentNewsObject, activeFont, showParametersLayer, showInformationsLayer, triggerRefresh } = useLayerContext()
+  const { currentStep, setCurrentStep, currentNewsObject, activeFont, triggerRefresh } = useLayerContext()
   const postRef = useRef<HTMLDivElement>(null);
   const [progressNews, setProgressNews]= useState<number | 0>(0)
   const hasMarkedFullyRead = useRef(false);
@@ -60,7 +61,7 @@ const index = () => {
     }
 
     const progress = Math.min((el.scrollTop / maxScroll) * 100 + 2, 100)
-    setProgressNews(progress)
+    // setProgressNews(progress)
     const reachedEnd = progress >= 100
 
     if (reachedEnd) {
@@ -75,7 +76,6 @@ const index = () => {
     <section
       className={`
         ${styles.postItem}
-        ${showParametersLayer || showInformationsLayer ? styles.secondary : ''}
         ${currentStep === 4 ? styles.active : ''}
       `}
       data-scroll="post"
@@ -148,9 +148,7 @@ const index = () => {
         </div>
         
       }
-      <div className={styles.postItemBar}>
-        <span style={{ width: `${progressNews}%` }}></span>
-      </div>
+      {/* <ProgressBar width={progressNews} /> */}
     </section>
   )
 }

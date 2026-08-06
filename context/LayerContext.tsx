@@ -25,10 +25,6 @@ interface LayerContextType {
   setShowAddLayer: (val: boolean) => void
   showDeleteLayer: boolean
   setShowDeleteLayer: (val: boolean) => void
-  showParametersLayer: boolean
-  setShowParametersLayer: (val: boolean) => void
-  showInformationsLayer: boolean
-  setShowInformationsLayer: (val: boolean) => void
   isGroup: boolean
   setIsGroup: (val: boolean) => void
   isSource: boolean
@@ -76,8 +72,6 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
   const [currentNewsObject, setCurrentNewsObject] = useState<Post | null>(null)
   const [showAddLayer, setShowAddLayer] = useState<boolean>(false)
   const [showDeleteLayer, setShowDeleteLayer] = useState<boolean>(false)
-  const [showParametersLayer, setShowParametersLayer] = useState<boolean>(false)
-  const [showInformationsLayer, setShowInformationsLayer] = useState<boolean>(false)
   const [isGroup, setIsGroup] = useState<boolean>(false)
   const [isSource, setIsSource] = useState<boolean>(false)
   const [refreshGroups, setRefreshGroups] = useState<(() => void) | null>(null)
@@ -110,10 +104,6 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
     setShowAddLayer,
     showDeleteLayer,
     setShowDeleteLayer,
-    showParametersLayer,
-    setShowParametersLayer,
-    showInformationsLayer,
-    setShowInformationsLayer,
     isGroup,
     setIsGroup,
     isSource,
@@ -155,7 +145,7 @@ export function LayerProvider({ children }: { children: React.ReactNode }) {
     // setPostIsPastHeader
   }), [
     currentStep, currentGroup, currentSource, currentNews, currentNewsObject,
-    showAddLayer, showDeleteLayer, showParametersLayer, showInformationsLayer,
+    showAddLayer, showDeleteLayer,
     isGroup, isSource,
     selectedGroupId, selectedGroupName, selectedSourceId, selectedSourceName,
     refreshGroups, refreshSources, refreshTrigger,

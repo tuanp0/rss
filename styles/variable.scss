@@ -42,7 +42,7 @@
   }
 
   @media screen and (min-width:992px) {
-    --headerTop: 87px;
+    --headerTop: 103px;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -74,7 +74,7 @@
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .3);
   --layergradient: #FFFFFF;
-  --icons: rgb(255, 255, 255);
+  --icons: rgb(0, 0, 0);
 }
 
 .night {
@@ -92,7 +92,7 @@
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .3);
   --layergradient: #E2ECF5;
-  --icons: rgb(255, 255, 255);
+  --icons: rgb(0, 0, 0);
 }
 
 .afternoon {
@@ -101,7 +101,7 @@
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .3);
   --layergradient: #EFECE2;
-  --icons: rgb(255, 255, 255);
+  --icons: rgb(0, 0, 0);
 }
 
 .forest {
@@ -110,7 +110,7 @@
   --hover: rgba(0, 0, 0, .1);
   --glass: rgba(255, 255, 255, .3);
   --layergradient: #CFDDC4;
-  --icons: rgb(255, 255, 255);
+  --icons: rgb(0, 0, 0);
 }
 
 .wood {

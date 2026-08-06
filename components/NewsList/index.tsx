@@ -7,7 +7,7 @@ import NewsItem from '@/components/NewsItem'
 import styles from './NewsList.module.scss'
 
 const NewsList = () => {
-  const { currentStep, setCurrentStep, currentGroup, currentSource, refreshTrigger, showParametersLayer, showInformationsLayer, triggerRefresh, setOfflineAlert} = useLayerContext()
+  const { currentStep, setCurrentStep, currentGroup, currentSource, refreshTrigger, triggerRefresh, setOfflineAlert} = useLayerContext()
 
   const [posts, setPosts] = useState<Post[]>([])
   const [touchStart, setTouchStart] = useState<number | null>(null)
@@ -163,7 +163,6 @@ const NewsList = () => {
     <section
       className={`
         ${styles.news}
-        ${showParametersLayer || showInformationsLayer ? styles.secondary : ''}
         ${currentStep === 3 ? styles.active : ''}
         ${currentStep >= 4 ? styles.past : ''}
       `}

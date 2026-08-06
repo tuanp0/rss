@@ -5,8 +5,13 @@ import Container from '@/components/Container'
 
 import styles from './LayerInformations.module.scss'
 
-const index = () => {
-  const { currentStep, showInformationsLayer, setShowInformationsLayer } = useLayerContext()
+type LayerInformationsTypes = {
+  showInformationsLayer: boolean
+  setShowInformationsLayer: (value: boolean) => void
+}
+
+const index = ({showInformationsLayer, setShowInformationsLayer}: LayerInformationsTypes) => {
+  const { currentStep } = useLayerContext()
   const [appSize, setAppSize] = useState<string | null>(null)
   const [indexedDBSize, setIndexedDBSize] = useState<string | null>(null)
 
@@ -136,7 +141,7 @@ const index = () => {
 
   return (
     <div className={`${styles.layer} ${showInformationsLayer ? styles.active : ''}`} onClick={handleOverlayClick}>
-      <div className={`${styles.layerInner} ${currentStep >= 2 ? styles.step2up : ''}`}>
+      <div className={`${styles.layerInner} ${currentStep >= 2 ? styles.open : ''}`}>
         <div className={styles.layerHeader}>
           <Container className={styles.container}>
             <p className={styles.layerTitle}>A propos</p>
@@ -150,8 +155,8 @@ const index = () => {
           <Container className={styles.container}>
             <div className={styles.layerContentData}>
               <p>
-                {/* App Cache : {appSize}
-                <br/> */}
+                App Cache : {appSize}
+                <br/>
                 Données sur device : {indexedDBSize}
               </p>
             </div>

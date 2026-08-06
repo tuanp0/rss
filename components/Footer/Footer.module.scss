@@ -12,7 +12,7 @@
     align-items: center;
     gap: .75rem;
     pointer-events: none;
-    background: linear-gradient(to top, var(--black50) 0%, transparent 90%); 
+    background: linear-gradient(to top, var(--black60) 0%, transparent 100%); 
 
     @media screen and (min-width:992px) {
         padding: 0 var(--padding) 1.5rem;
@@ -89,7 +89,7 @@
                 color .2s cubic-bezier(0.86, 0, 0.33, 0.32) .1s,
                 bottom .1s cubic-bezier(0.86, 0, 0.33, 0.32),
                 background .2s cubic-bezier(0.86, 0, 0.33, 0.32);
-                animation: popTransform .4s ease-in-out;
+                animation: popTransform .3s ease-in-out;
             }
         }
     }

@@ -13,11 +13,9 @@
     @media screen and (min-width:992px) {
         width: 300px;
         height: calc(100vh - var(--headerTop));
-        padding-top: 1.75rem;
-        margin-top: var(--headerTop);
+        padding-top: 1.25rem;
         transform: translateX(0);
         border-radius: 24px 0 0 0;
-        box-shadow: 0 0 10px 0 var(--black20);
     }
 
     &.active {
@@ -40,8 +38,9 @@
         overflow: hidden;
 
         @media screen and (min-width:992px) {
-            width: 210px;
+            width: 140px;
             transform: translate(0);
+            overflow-y: auto;
 
             &:hover {
                 width: 300px

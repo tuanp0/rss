@@ -92,6 +92,8 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
   const { showAddLayer, setShowAddLayer, refreshGroups, refreshSources } = useLayerContext()
   const timeOfDay = useTimeOfDay()
   const [theme, setTheme] = useState<Theme | null>(null)
+  const [showParametersLayer, setShowParametersLayer] = useState<boolean | false>(false)
+  const [showInformationsLayer, setShowInformationsLayer] = useState<boolean | false>(false)
 
   useEffect(() => {
     if (!("serviceWorker" in navigator)) return
@@ -137,10 +139,19 @@ function LayoutInner({ children }: { children: React.ReactNode }) {
             refreshSources && refreshSources()
           }}
         />
-        <LayerParameters onThemeChange={setTheme} />
-        <LayerInformations />
+        <LayerParameters
+          showParametersLayer={showParametersLayer}
+          setShowParametersLayer={setShowParametersLayer}
+          onThemeChange={setTheme} />
+        <LayerInformations 
+          showInformationsLayer={showInformationsLayer}
+          setShowInformationsLayer={setShowInformationsLayer}
+        />
       </main>
-      <Footer />
+      <Footer
+        setShowParametersLayer={setShowParametersLayer}
+        setShowInformationsLayer={setShowInformationsLayer}
+      />
     </>
   )
 }
