@@ -17,9 +17,6 @@ body {
   @media screen and (min-width:992px) {
     display: flex;
     flex-wrap: wrap;
-    // background: url('/desktop-bg.jpg');
-    // background-size: cover;
-    // background-repeat: none;
   }
 }
 
@@ -27,36 +24,4 @@ body {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-.font-serif {
-  font-family: 'Times New Roman', Arial, sans-serif;
-  line-height: 1.25;
-}
-
-.font-sansserif {
-  @include roboto();
-  letter-spacing: .25px;
-}
-
-.font-gabriela {
-  @include gabriela();
-  letter-spacing: .75px;
-}
-
-.font-monospace {
-  @include courierP();
-  line-height: 1.125;
-  letter-spacing: -.25px;
-}
-
-.font-typewriter {
-  @include typewriter();
-  line-height: 1.375;
-  letter-spacing: 1.375px;
 }
