@@ -389,39 +389,6 @@ export const getPostsCountBySource = (db: IDBDatabase, sourceId: number): Promis
   });
 };
 
-// export const addPost = (
-//   db: IDBDatabase,
-//   groupId: number,
-//   sourceId: number,
-//   title: string,
-//   url: string,
-//   shortDesc: string,
-//   content: string,
-//   thumbnail: string | null,
-//   publishedAt: Date | string
-// ): Promise<void> => {
-//   return new Promise((resolve, reject) => {
-//     const transaction = db.transaction('post', 'readwrite');
-//     const store = transaction.objectStore('post');
-//     const index = store.index('url');
-
-//     const getExistingRequest = index.get(url);
-//     getExistingRequest.onsuccess = () => {
-//       if (getExistingRequest.result) {
-//         reject(new Error('Un post avec cette URL existe déjà'));
-//         return;
-//       }
-
-//       const addRequest = store.add({ groupId, sourceId, title, url, shortDesc, content, thumbnail, publishedAt });
-
-//       addRequest.onsuccess = () => resolve();
-//       addRequest.onerror = () => reject(addRequest.error);
-//     };
-
-//     getExistingRequest.onerror = () => reject(getExistingRequest.error);
-//   });
-// };
-
 export const addPost = (
   db: IDBDatabase,
   groupId: number,
@@ -540,6 +507,17 @@ export const deletePostsByGroup = (db: IDBDatabase, groupId: number): Promise<vo
     getRequest.onerror = () => reject(getRequest.error);
     transaction.oncomplete = () => resolve();
     transaction.onerror = () => reject(transaction.error);
+  });
+};
+
+export const deleteAllPosts = (db: IDBDatabase): Promise<void> => {
+  return new Promise((resolve, reject) => {
+    const transaction = db.transaction('post', 'readwrite');
+    const store = transaction.objectStore('post');
+    const clearRequest = store.clear();
+
+    clearRequest.onsuccess = () => resolve();
+    clearRequest.onerror = () => reject(clearRequest.error);
   });
 };
 

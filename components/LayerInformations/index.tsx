@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { initDB, deleteAllPosts } from '@/db/groups'
+
 import { useLayerContext } from '@/context/LayerContext'
 import Container from '@/components/Container'
 
@@ -12,8 +14,17 @@ type LayerInformationsTypes = {
 
 const index = ({showInformationsLayer, setShowInformationsLayer}: LayerInformationsTypes) => {
   const { currentStep } = useLayerContext()
+  const [db, setDb] = useState<IDBDatabase | null>(null)
+  const [dataDeleteError, setDataDeleteError] = useState<string | null>(null)
+  const [dataDeleteSuccess, setDataDeleteSuccess] = useState<string | null>(null)
   const [appSize, setAppSize] = useState<string | null>(null)
   const [indexedDBSize, setIndexedDBSize] = useState<string | null>(null)
+
+  useEffect(() => {
+      initDB()
+          .then((db) => setDb(db))
+          .catch(console.error)
+  }, [])
 
   const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
       if (e.target === e.currentTarget) {
@@ -24,6 +35,17 @@ const index = ({showInformationsLayer, setShowInformationsLayer}: LayerInformati
   const getEmail = () => {
     return atob("aGVsbG9AdHVhbnBodW5nLmNvbQ==");
   };
+
+  const handleDeletePosts = async () => {
+    if (!db) return
+
+    try {
+        await deleteAllPosts(db)
+        setDataDeleteSuccess('Données effacées')
+    } catch (err: unknown) {
+        if (err instanceof Error) setDataDeleteError(err.message)
+    }
+  }
 
   const getCacheStorageSize = async (): Promise<number> => {
     if (!('caches' in window)) return 0
@@ -154,11 +176,18 @@ const index = ({showInformationsLayer, setShowInformationsLayer}: LayerInformati
         <div className={styles.layerContent}>
           <Container className={styles.container}>
             <div className={styles.layerContentData}>
-              <p>
+              <p className={styles.layerContentDataText}>
                 App Cache : {appSize}
                 <br/>
                 Données sur device : {indexedDBSize}
               </p>
+              <div className={styles.layerContentDataDelete}>
+                <button type="button" aria-label={`Supprimer les données`}  className={styles.layerContentDataDeleteBtn} onClick={handleDeletePosts}>
+                    Supprimer les données
+                </button>
+                {dataDeleteSuccess&& <p className={styles.layerSuccess}>{dataDeleteSuccess}</p>}
+                {dataDeleteError && <p className={styles.layerError}>{dataDeleteError}</p>}
+              </div>
             </div>
             <div className={styles.layerContentInformations}>
               <p>

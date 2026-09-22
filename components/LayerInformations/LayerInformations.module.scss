@@ -15,6 +15,14 @@
         pointer-events: auto;
     }
 
+    &Success {
+        margin-top: 0.5rem;
+    }
+
+    &Error {
+        margin-top: 0.5rem;
+    }
+
     &Inner {
         @include glassContainer();
         position: absolute;
@@ -103,7 +111,40 @@
         }
 
         &Data {
+            display: flex;
+            align-items: center;
             margin-bottom: 1.5rem;
+
+            p.layerContentDataText {
+                width: 50%;
+                margin-bottom: 0;
+            }
+
+            &Delete {
+                width: 50%;
+                text-align: right;
+
+                &Btn {
+                    font-size: .75rem;
+                    color: var(--text);
+                    background: var(--background);
+                    border: 2px solid var(--error);
+                    box-shadow: 0 0 2px var(--black);
+                    padding: .5rem .75rem;
+                    display: inline-block;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    transition: background .2s ease-in-out;
+
+                    &:hover {
+                        background: var(--black20);
+                    }
+
+                    &.disable {
+                        pointer-events: none;
+                    }
+                }
+            }
         }
 
         &Informations {

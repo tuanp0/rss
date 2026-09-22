@@ -48,6 +48,10 @@
         height: calc(100vh - var(--headerTop));
         padding-top: 1.25rem;
         transform: translate(0);
+
+        &:hover {
+            width: 300px
+        }
     }
 
     &Text {
